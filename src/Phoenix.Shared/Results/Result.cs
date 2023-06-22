@@ -13,12 +13,12 @@
 
       public static Result Success()
       {
-         return new Result(true, string.Empty);
+         return new(true, string.Empty);
       }
 
       public static Result Error(string message)
       {
-         return new Result(false, message);
+         return new(false, message);
       }
    }
 }
