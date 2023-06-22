@@ -3,6 +3,18 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.0.31903.59
 MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{182FEA1E-D406-4958-98E0-DCB52F5EB2C2}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Phoenix.Shared", "src\Phoenix.Shared\Phoenix.Shared.csproj", "{A66B3BB7-6D09-4C18-8878-B209FFD902E5}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Phoenix.Entities", "src\Phoenix.Entities\Phoenix.Entities.csproj", "{E145BB64-DFE0-4DFB-A834-F4E5DE8D88D1}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Phoenix.Models", "src\Phoenix.Models\Phoenix.Models.csproj", "{110B0855-EBC4-4778-B649-A1A1A79ED114}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Phoenix.Validators", "src\Phoenix.Validators\Phoenix.Validators.csproj", "{AEB90285-ED56-4C2A-A3B9-3682885CA22B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Phoenix.Services", "src\Phoenix.Services\Phoenix.Services.csproj", "{DE39B70A-DAAD-4114-912A-3C21B3FA08D1}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -10,5 +22,34 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{A66B3BB7-6D09-4C18-8878-B209FFD902E5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A66B3BB7-6D09-4C18-8878-B209FFD902E5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A66B3BB7-6D09-4C18-8878-B209FFD902E5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A66B3BB7-6D09-4C18-8878-B209FFD902E5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E145BB64-DFE0-4DFB-A834-F4E5DE8D88D1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E145BB64-DFE0-4DFB-A834-F4E5DE8D88D1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E145BB64-DFE0-4DFB-A834-F4E5DE8D88D1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E145BB64-DFE0-4DFB-A834-F4E5DE8D88D1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{110B0855-EBC4-4778-B649-A1A1A79ED114}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{110B0855-EBC4-4778-B649-A1A1A79ED114}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{110B0855-EBC4-4778-B649-A1A1A79ED114}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{110B0855-EBC4-4778-B649-A1A1A79ED114}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AEB90285-ED56-4C2A-A3B9-3682885CA22B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AEB90285-ED56-4C2A-A3B9-3682885CA22B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AEB90285-ED56-4C2A-A3B9-3682885CA22B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AEB90285-ED56-4C2A-A3B9-3682885CA22B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DE39B70A-DAAD-4114-912A-3C21B3FA08D1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DE39B70A-DAAD-4114-912A-3C21B3FA08D1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DE39B70A-DAAD-4114-912A-3C21B3FA08D1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DE39B70A-DAAD-4114-912A-3C21B3FA08D1}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{A66B3BB7-6D09-4C18-8878-B209FFD902E5} = {182FEA1E-D406-4958-98E0-DCB52F5EB2C2}
+		{E145BB64-DFE0-4DFB-A834-F4E5DE8D88D1} = {182FEA1E-D406-4958-98E0-DCB52F5EB2C2}
+		{110B0855-EBC4-4778-B649-A1A1A79ED114} = {182FEA1E-D406-4958-98E0-DCB52F5EB2C2}
+		{AEB90285-ED56-4C2A-A3B9-3682885CA22B} = {182FEA1E-D406-4958-98E0-DCB52F5EB2C2}
+		{DE39B70A-DAAD-4114-912A-3C21B3FA08D1} = {182FEA1E-D406-4958-98E0-DCB52F5EB2C2}
 	EndGlobalSection
 EndGlobal
