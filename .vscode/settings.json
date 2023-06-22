@@ -1,5 +1,5 @@
 {
-   "[csharp]": { "editor.defaultFormatter": "ms-dotnettools.csdevkit" },
+   "[csharp]": { "editor.defaultFormatter": "ms-dotnettools.csharp" },
    "diffEditor.diffAlgorithm": "advanced",
    "diffEditor.ignoreTrimWhitespace": false,
    "dotnetAcquisitionExtension.enableTelemetry": false,
