@@ -13,8 +13,6 @@ namespace Phoenix.Entities.Roles
 
       public void Update(string name, bool isActive)
       {
-         UpdateVersion();
-
          Name = name;
          IsActive = isActive;
       }

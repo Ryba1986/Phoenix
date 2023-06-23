@@ -1,22 +1,17 @@
-using Phoenix.Shared.Helpers;
+using System;
 
 namespace Phoenix.Entities.Base
 {
    public abstract class MetricBase : EntityBase
    {
       public bool IsActive { get; protected set; }
-      public short Version { get; private set; }
+      public byte[] Version { get; private set; }
 
       public MetricBase(bool isActive)
       {
-         UpdateVersion();
+         Version = Array.Empty<byte>();
 
          IsActive = isActive;
-      }
-
-      protected void UpdateVersion()
-      {
-         Version = RandomHelper.NewShort();
       }
    }
 }

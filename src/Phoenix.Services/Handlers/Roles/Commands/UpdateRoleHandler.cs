@@ -1,3 +1,4 @@
+using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using MediatR;
@@ -42,7 +43,7 @@ namespace Phoenix.Services.Handlers.Roles.Commands
          {
             return Result.Error(Translations.Role_NotExists);
          }
-         if (role.Version != request.Version)
+         if (!role.Version.SequenceEqual(request.Version))
          {
             return Result.Error(Translations.Validator_Version_Invalid);
          }
