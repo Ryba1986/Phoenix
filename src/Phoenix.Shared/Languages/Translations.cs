@@ -7,6 +7,9 @@ namespace Phoenix.Shared.Languages
    {
       // Entities
 
+      public static string RolePermission_Exists => Get(eng: "Permission exists.", pol: "Uprawnienie już istnieje.");
+      public static string RolePermission_NotExists => Get(eng: "Permission not exists.", pol: "Uprawnienie nie istnieje.");
+
       public static string Role_Exists => Get(eng: "Role exists.", pol: "Rola już istnieje.");
       public static string Role_NotExists => Get(eng: "Role not exists.", pol: "Rola nie istnieje.");
 
@@ -25,8 +28,11 @@ namespace Phoenix.Shared.Languages
 
       // Validators
 
+      public static string Validator_AccessLevel_Invalid => Get(eng: "Access level is invaild.", pol: "Poziom dostępu jest nieprawidłowy.");
       public static string Validator_Id_Invalid => Get(eng: "Id is invaild.", pol: "Identyfikator jest nieprawidłowy.");
       public static string Validator_Name_Invalid => Get(eng: "Name is invaild.", pol: "Nazwa jest nieprawidłowa.");
+      public static string Validator_Permission_Invalid => Get(eng: "Permission is invaild.", pol: "Uprawnienie jest nieprawidłowe.");
+      public static string Validator_RoleId_Invalid => Get(eng: "Role is invaild.", pol: "Rola jest nieprawidłowa.");
       public static string Validator_Version_Invalid => Get(eng: "The object has been modified.", pol: "Obiekt został zmodyfikowany.");
 
       // Languages
