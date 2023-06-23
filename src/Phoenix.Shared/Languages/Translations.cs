@@ -5,6 +5,11 @@ namespace Phoenix.Shared.Languages
 {
    public static class Translations
    {
+      // Entities
+
+      public static string Role_Exists => Get(eng: "Role exists.", pol: "Rola już istnieje.");
+      public static string Role_NotExists => Get(eng: "Role not exists.", pol: "Rola nie istnieje.");
+
       // Enums
 
       public static string RoleAccessLevel_None => Get(eng: "None", pol: "Brak");
@@ -17,6 +22,12 @@ namespace Phoenix.Shared.Languages
       public static string RolePermission_Report => Get(eng: "Reports", pol: "Raporty");
       public static string RolePermission_Role => Get(eng: "Roles", pol: "Role");
       public static string RolePermission_User => Get(eng: "Users", pol: "Użytkownicy");
+
+      // Validators
+
+      public static string Validator_Id_Invalid => Get(eng: "Id is invaild.", pol: "Identyfikator jest nieprawidłowy.");
+      public static string Validator_Name_Invalid => Get(eng: "Name is invaild.", pol: "Nazwa jest nieprawidłowa.");
+      public static string Validator_Version_Invalid => Get(eng: "The object has been modified.", pol: "Obiekt został zmodyfikowany.");
 
       // Languages
 
