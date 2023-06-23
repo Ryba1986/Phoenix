@@ -1,0 +1,29 @@
+{
+   "version": "2.0.0",
+   "tasks": [
+      {
+         "label": "Api.Client",
+         "command": "dotnet",
+         "type": "process",
+         "args": [
+            "build",
+            "${workspaceFolder}/src/Phoenix.Api.Client/Phoenix.Api.Client.csproj",
+            "/property:GenerateFullPaths=true",
+            "/consoleloggerparameters:NoSummary"
+         ],
+         "problemMatcher": "$msCompile"
+      },
+      {
+         "label": "Api.Web",
+         "command": "dotnet",
+         "type": "process",
+         "args": [
+            "build",
+            "${workspaceFolder}/src/Phoenix.Api.Web/Phoenix.Api.Web.csproj",
+            "/property:GenerateFullPaths=true",
+            "/consoleloggerparameters:NoSummary"
+         ],
+         "problemMatcher": "$msCompile"
+      }
+   ]
+}

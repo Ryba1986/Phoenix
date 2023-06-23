@@ -1,0 +1,31 @@
+{
+   "version": "0.2.0",
+   "configurations": [
+      {
+         "name": "Api.Client",
+         "type": "coreclr",
+         "request": "launch",
+         "preLaunchTask": "Api.Client",
+         "program": "${workspaceFolder}/src/Phoenix.Api.Client/bin/Debug/net8.0/Phoenix.Api.Client.dll",
+         "args": [],
+         "cwd": "${workspaceFolder}/src/Phoenix.Api.Client",
+         "stopAtEntry": false,
+         "env": {
+            "ASPNETCORE_ENVIRONMENT": "Development"
+         }
+      },
+      {
+         "name": "Api.Web",
+         "type": "coreclr",
+         "request": "launch",
+         "preLaunchTask": "Api.Web",
+         "program": "${workspaceFolder}/src/Phoenix.Api.Web/bin/Debug/net8.0/Phoenix.Api.Web.dll",
+         "args": [],
+         "cwd": "${workspaceFolder}/src/Phoenix.Api.Web",
+         "stopAtEntry": false,
+         "env": {
+            "ASPNETCORE_ENVIRONMENT": "Development"
+         }
+      }
+   ]
+}
