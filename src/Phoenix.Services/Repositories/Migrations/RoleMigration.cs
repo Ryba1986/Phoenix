@@ -13,10 +13,10 @@ namespace Phoenix.Services.Repositories.Migrations
             name: nameof(Role),
             columns: table => new
             {
-               Id = table.Column<int>(),
-               Name = table.Column<string>(maxLength: 50),
-               IsActive = table.Column<bool>(),
-               Version = table.Column<byte[]>(rowVersion: true),
+               Id = table.Column<int>(name: nameof(Role.Id)),
+               Name = table.Column<string>(name: nameof(Role.Name), maxLength: 50),
+               IsActive = table.Column<bool>(name: nameof(Role.IsActive)),
+               Version = table.Column<byte[]>(name: nameof(Role.Version), rowVersion: true),
             },
             constraints: table =>
             {
