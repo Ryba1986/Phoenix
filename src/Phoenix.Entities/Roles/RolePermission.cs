@@ -16,10 +16,9 @@ namespace Phoenix.Entities.Roles
          AccessLevel = accessLevel;
       }
 
-      public void Update(AccessLevel accessLevel, bool isActive)
+      public void Update(AccessLevel accessLevel)
       {
          AccessLevel = accessLevel;
-         IsActive = isActive;
       }
    }
 }
