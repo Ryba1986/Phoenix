@@ -1,10 +1,11 @@
 using Microsoft.EntityFrameworkCore.Migrations;
 using Phoenix.Entities.Roles;
+using Phoenix.Services.Repositories.Migrations.Base;
 
 namespace Phoenix.Services.Repositories.Migrations
 {
    [Migration("202306231737_CreateRoles")]
-   internal sealed class RoleMigration : Migration
+   internal sealed class RoleMigration : DbMigration
    {
       protected override void Up(MigrationBuilder migrationBuilder)
       {
@@ -12,10 +13,10 @@ namespace Phoenix.Services.Repositories.Migrations
             name: nameof(Role),
             columns: table => new
             {
-               Id = table.Column<int>(nameof(Role.Id)),
-               Name = table.Column<string>(nameof(Role.Name), maxLength: 50),
-               IsActive = table.Column<bool>(nameof(Role.IsActive)),
-               Version = table.Column<byte[]>(nameof(Role.Version), rowVersion: true),
+               Id = table.Column<int>(),
+               Name = table.Column<string>(maxLength: 50),
+               IsActive = table.Column<bool>(),
+               Version = table.Column<byte[]>(rowVersion: true),
             },
             constraints: table =>
             {
