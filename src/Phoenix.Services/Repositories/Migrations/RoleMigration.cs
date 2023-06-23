@@ -14,8 +14,8 @@ namespace Phoenix.Services.Repositories.Migrations
             columns: table => new
             {
                Id = table.Column<int>(name: nameof(Role.Id)),
-               Name = table.Column<string>(name: nameof(Role.Name), maxLength: 50),
-               IsActive = table.Column<bool>(name: nameof(Role.IsActive)),
+               Name = table.Column<string>(name: nameof(Role.Name), maxLength: 50, defaultValue: string.Empty),
+               IsActive = table.Column<bool>(name: nameof(Role.IsActive), defaultValue: default(bool)),
                Version = table.Column<byte[]>(name: nameof(Role.Version), rowVersion: true),
             },
             constraints: table =>
