@@ -24,6 +24,13 @@ namespace Phoenix.Api.Web.Controllers
       }
 
       [HttpGet]
+      [Authorization(Permission.User, AccessLevel.Read)]
+      public async Task<IActionResult> GetUserHistory([FromQuery] GetUserHistoryQuery request)
+      {
+         return await HandleAsync(request);
+      }
+
+      [HttpGet]
       public async Task<IActionResult> GetUserDictionary()
       {
          return await HandleAsync(new GetUserDictionaryQuery());

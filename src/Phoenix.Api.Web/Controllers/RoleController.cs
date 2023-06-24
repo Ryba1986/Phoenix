@@ -23,6 +23,13 @@ namespace Phoenix.Api.Web.Controllers
       }
 
       [HttpGet]
+      [Authorization(Permission.Role, AccessLevel.Read)]
+      public async Task<IActionResult> GetRoleHistory([FromQuery] GetRoleHistoryQuery request)
+      {
+         return await HandleAsync(request);
+      }
+
+      [HttpGet]
       public async Task<IActionResult> GetRoleDictionary()
       {
          return await HandleAsync(new GetRoleDictionaryQuery());
