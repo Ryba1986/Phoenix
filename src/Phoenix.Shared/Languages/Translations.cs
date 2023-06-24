@@ -13,6 +13,9 @@ namespace Phoenix.Shared.Languages
       public static string Role_Exists => Get(eng: "Role exists.", pol: "Rola już istnieje.");
       public static string Role_NotExists => Get(eng: "Role not exists.", pol: "Rola nie istnieje.");
 
+      public static string User_Exists => Get(eng: "User exists.", pol: "Użytkownik już istnieje.");
+      public static string User_NotExists => Get(eng: "User not exists.", pol: "Użytkownik nie istnieje.");
+
       // Enums
 
       public static string RoleAccessLevel_None => Get(eng: "None", pol: "Brak");
@@ -29,10 +32,14 @@ namespace Phoenix.Shared.Languages
       // Validators
 
       public static string Validator_AccessLevel_Invalid => Get(eng: "Access level is invaild.", pol: "Poziom dostępu jest nieprawidłowy.");
+      public static string Validator_CurrentPassword_Invalid => Get(eng: "Current password is invaild.", pol: "Aktualne hasło jest nieprawidłowe.");
+      public static string Validator_Email_Invalid => Get(eng: "Email is invaild.", pol: "Email jest nieprawidłowy.");
       public static string Validator_Id_Invalid => Get(eng: "Id is invaild.", pol: "Identyfikator jest nieprawidłowy.");
       public static string Validator_Name_Invalid => Get(eng: "Name is invaild.", pol: "Nazwa jest nieprawidłowa.");
+      public static string Validator_NewPassword_Invalid => Get(eng: "New password is invaild.", pol: "Nowe hasło jest nieprawidłowe.");
       public static string Validator_Permission_Invalid => Get(eng: "Permission is invaild.", pol: "Uprawnienie jest nieprawidłowe.");
       public static string Validator_RoleId_Invalid => Get(eng: "Role is invaild.", pol: "Rola jest nieprawidłowa.");
+      public static string Validator_UserId_Invalid => Get(eng: "User is invaild.", pol: "Użytkownik jest nieprawidłowy.");
       public static string Validator_Version_Invalid => Get(eng: "The object has been modified.", pol: "Obiekt został zmodyfikowany.");
 
       // Languages
