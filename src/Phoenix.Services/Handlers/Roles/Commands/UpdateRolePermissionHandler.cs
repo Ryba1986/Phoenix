@@ -20,11 +20,10 @@ namespace Phoenix.Services.Handlers.Roles.Commands
 
       public async Task<Result> Handle(UpdateRolePermissionCommand request, CancellationToken cancellationToken)
       {
-         // TODO: check user
-         // if (!await IsUserExistsAsync(request.ModifiedById, cancellationToken))
-         // {
-         //    return Result.Error(Translations.User_Active_NotExists);
-         // }
+         if (!await IsActiveUserExistsAsync(request.ModifiedById, cancellationToken))
+         {
+            return Result.Error(Translations.User_Active_NotExists);
+         }
 
          RolePermission? rolePermission = await _uow.RolePermission.FirstOrDefaultAsync(x => x.Id == request.Id, cancellationToken);
          if (rolePermission is null)

@@ -20,11 +20,10 @@ namespace Phoenix.Services.Handlers.Roles.Commands
 
       public async Task<Result> Handle(UpdateRoleCommand request, CancellationToken cancellationToken)
       {
-         // TODO: check user
-         // if (!await IsUserExistsAsync(request.ModifiedById, cancellationToken))
-         // {
-         //    return Result.Error(Translations.User_Active_NotExists);
-         // }
+         if (!await IsActiveUserExistsAsync(request.ModifiedById, cancellationToken))
+         {
+            return Result.Error(Translations.User_Active_NotExists);
+         }
 
          bool otherExists = await _uow.Role
             .AsNoTracking()

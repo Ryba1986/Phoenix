@@ -19,11 +19,10 @@ namespace Phoenix.Services.Handlers.Roles.Commands
 
       public async Task<Result> Handle(CreateRolePermissionCommand request, CancellationToken cancellationToken)
       {
-         // TODO: check user
-         // if (!await IsUserExistsAsync(request.CreatedById, cancellationToken))
-         // {
-         //    return Result.Error(Translations.User_Active_NotExists);
-         // }
+         if (!await IsActiveUserExistsAsync(request.CreatedById, cancellationToken))
+         {
+            return Result.Error(Translations.User_Active_NotExists);
+         }
 
          bool roleExists = await _uow.Role
             .AsNoTracking()

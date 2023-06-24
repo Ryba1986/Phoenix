@@ -13,6 +13,7 @@ namespace Phoenix.Shared.Languages
       public static string Role_Exists => Get(eng: "Role exists.", pol: "Rola już istnieje.");
       public static string Role_NotExists => Get(eng: "Role not exists.", pol: "Rola nie istnieje.");
 
+      public static string User_Active_NotExists => Get(eng: "Cannot find an active user.", pol: "Nie można znaleźć aktywnego użytkownika.");
       public static string User_Exists => Get(eng: "User exists.", pol: "Użytkownik już istnieje.");
       public static string User_NotExists => Get(eng: "User not exists.", pol: "Użytkownik nie istnieje.");
 
