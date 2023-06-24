@@ -23,7 +23,8 @@ namespace Phoenix.Services.Handlers.Roles.Queries
       {
          return await _uow.Role
             .AsNoTracking()
-            .OrderBy(x => x.Name)
+            .OrderByDescending(x => x.IsActive)
+            .ThenBy(x => x.Name)
             .ProjectTo<RoleDto>(_mapper.ConfigurationProvider)
             .ToArrayAsync(cancellationToken);
       }
