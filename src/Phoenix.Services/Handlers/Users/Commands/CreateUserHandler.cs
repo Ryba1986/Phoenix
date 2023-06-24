@@ -53,7 +53,16 @@ namespace Phoenix.Services.Handlers.Users.Commands
             IsActive = request.IsActive,
          };
 
-         _uow.Add(newUser);
+         _uow.User.Add(newUser);
+         _uow.UserHistory.Add(new()
+         {
+            User = newUser,
+            RoleId = request.RoleId,
+            Name = request.Name,
+            Email = request.Email,
+            IsActive = request.IsActive,
+            CreatedById = request.CreatedById,
+         });
 
          await _uow.SaveChangesAsync(cancellationToken);
          return Result.Success();

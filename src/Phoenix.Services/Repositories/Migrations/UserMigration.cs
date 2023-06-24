@@ -25,7 +25,7 @@ namespace Phoenix.Services.Repositories.Migrations
             constraints: table =>
             {
                table.PrimaryKey($"PK_{nameof(User)}_{nameof(User.Id)}", x => x.Id);
-               table.ForeignKey($"FK_{nameof(User)}_{nameof(User.RoleId)}", x => x.RoleId, nameof(Role), principalColumn: nameof(Role.Id));
+               table.ForeignKey($"FK_{nameof(User)}_{nameof(User.Role)}", x => x.RoleId, nameof(Role), principalColumn: nameof(Role.Id));
                table.UniqueConstraint($"UK_{nameof(User)}_{nameof(User.Email)}", x => x.Email);
             }
          );

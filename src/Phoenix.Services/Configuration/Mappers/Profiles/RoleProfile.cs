@@ -9,6 +9,7 @@ namespace Phoenix.Services.Configuration.Mappers.Profiles
       public RoleProfile()
       {
          CreateProjection<Role, RoleDto>();
+         CreateProjection<RoleHistory, RoleHistoryDto>();
 
          CreateProjection<RolePermission, RolePermissionDto>();
       }

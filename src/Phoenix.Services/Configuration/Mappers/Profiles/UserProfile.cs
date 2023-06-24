@@ -9,6 +9,7 @@ namespace Phoenix.Services.Configuration.Mappers.Profiles
       public UserProfile()
       {
          CreateProjection<User, UserDto>();
+         CreateProjection<UserHistory, UserHistoryDto>();
       }
    }
 }

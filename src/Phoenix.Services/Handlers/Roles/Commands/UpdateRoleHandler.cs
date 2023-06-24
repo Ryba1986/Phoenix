@@ -46,6 +46,18 @@ namespace Phoenix.Services.Handlers.Roles.Commands
          {
             return Result.Error(Translations.Validator_Version_Invalid);
          }
+         if (role.Name == request.Name && role.IsActive == request.IsActive)
+         {
+            return Result.Success();
+         }
+
+         _uow.RoleHistory.Add(new()
+         {
+            RoleId = role.Id,
+            Name = role.Name != request.Name ? request.Name : string.Empty,
+            IsActive = request.IsActive,
+            CreatedById = request.ModifiedById,
+         });
 
          role.Name = request.Name;
          role.IsActive = request.IsActive;

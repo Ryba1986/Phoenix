@@ -55,6 +55,20 @@ namespace Phoenix.Services.Handlers.Users.Commands
          {
             return Result.Error(Translations.Validator_Version_Invalid);
          }
+         if (user.Name == request.Name && user.Email == request.Email && user.RoleId == request.RoleId && user.IsActive == request.IsActive)
+         {
+            return Result.Success();
+         }
+
+         _uow.UserHistory.Add(new()
+         {
+            UserId = user.Id,
+            Name = user.Name != request.Name ? request.Name : string.Empty,
+            Email = user.Email != request.Email ? request.Email : string.Empty,
+            RoleId = request.RoleId,
+            IsActive = request.IsActive,
+            CreatedById = request.ModifiedById,
+         });
 
          user.Name = request.Name;
          user.Email = request.Email;

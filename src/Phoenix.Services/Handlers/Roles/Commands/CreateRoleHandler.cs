@@ -40,6 +40,13 @@ namespace Phoenix.Services.Handlers.Roles.Commands
          };
 
          _uow.Role.Add(newRole);
+         _uow.RoleHistory.Add(new()
+         {
+            Role = newRole,
+            Name = request.Name,
+            IsActive = request.IsActive,
+            CreatedById = request.CreatedById,
+         });
 
          await _uow.SaveChangesAsync(cancellationToken);
          return Result.Success();

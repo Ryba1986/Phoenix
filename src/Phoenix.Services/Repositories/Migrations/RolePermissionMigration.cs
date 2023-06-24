@@ -24,8 +24,8 @@ namespace Phoenix.Services.Repositories.Migrations
             constraints: table =>
             {
                table.PrimaryKey($"PK_{nameof(RolePermission)}_{nameof(RolePermission.Id)}", x => x.Id);
-               table.ForeignKey($"FK_{nameof(RolePermission)}_{nameof(RolePermission.RoleId)}", x => x.RoleId, nameof(Role), principalColumn: nameof(Role.Id));
-               table.UniqueConstraint($"UK_{nameof(RolePermission)}_{nameof(RolePermission.RoleId)}_{nameof(RolePermission.Permission)}", x => new { x.RoleId, x.Permission });
+               table.ForeignKey($"FK_{nameof(RolePermission)}_{nameof(RolePermission.Role)}", x => x.RoleId, nameof(Role), principalColumn: nameof(Role.Id));
+               table.UniqueConstraint($"UK_{nameof(RolePermission)}_{nameof(RolePermission.Role)}_{nameof(RolePermission.Permission)}", x => new { x.RoleId, x.Permission });
             }
          );
       }
