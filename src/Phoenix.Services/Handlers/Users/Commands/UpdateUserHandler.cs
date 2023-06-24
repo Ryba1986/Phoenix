@@ -62,7 +62,7 @@ namespace Phoenix.Services.Handlers.Users.Commands
 
          _uow.UserHistory.Add(new()
          {
-            UserId = user.Id,
+            UserId = request.Id,
             Name = user.Name != request.Name ? request.Name : string.Empty,
             Email = user.Email != request.Email ? request.Email : string.Empty,
             RoleId = request.RoleId,

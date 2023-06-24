@@ -53,7 +53,7 @@ namespace Phoenix.Services.Handlers.Roles.Commands
 
          _uow.RoleHistory.Add(new()
          {
-            RoleId = role.Id,
+            RoleId = request.Id,
             Name = role.Name != request.Name ? request.Name : string.Empty,
             IsActive = request.IsActive,
             CreatedById = request.ModifiedById,
