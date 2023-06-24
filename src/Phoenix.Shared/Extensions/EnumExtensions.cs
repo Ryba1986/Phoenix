@@ -23,11 +23,6 @@ namespace Phoenix.Shared.Extensions
          return Convert.ToInt32(value);
       }
 
-      public static IReadOnlyCollection<T> GetAll<T>() where T : struct, Enum
-      {
-         return Enum.GetValues<T>();
-      }
-
       public static IEnumerable<KeyValuePair<int, string>> GetValues<T>(bool skipDefault = false) where T : struct, Enum
       {
          IEnumerable<KeyValuePair<int, string>> query = Enum
