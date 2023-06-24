@@ -1,4 +1,5 @@
 using Microsoft.EntityFrameworkCore;
+using Phoenix.Entities.Locations;
 using Phoenix.Entities.Roles;
 using Phoenix.Entities.Users;
 
@@ -6,6 +7,9 @@ namespace Phoenix.Services.Repositories
 {
    internal sealed class UnitOfWork : DbContext
    {
+      public readonly DbSet<Location> Location;
+      public readonly DbSet<LocationHistory> LocationHistory;
+
       public readonly DbSet<Role> Role;
       public readonly DbSet<RoleHistory> RoleHistory;
 
@@ -16,6 +20,9 @@ namespace Phoenix.Services.Repositories
 
       public UnitOfWork(DbContextOptions<UnitOfWork> options) : base(options)
       {
+         Location = Set<Location>();
+         LocationHistory = Set<LocationHistory>();
+
          Role = Set<Role>();
          RoleHistory = Set<RoleHistory>();
 
