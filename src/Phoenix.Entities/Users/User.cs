@@ -22,7 +22,7 @@ namespace Phoenix.Entities.Users
          Name = string.Empty;
          Email = string.Empty;
          Password = string.Empty;
-         History = Array.Empty<UserHistory>();
+         History = null!;
       }
    }
 }

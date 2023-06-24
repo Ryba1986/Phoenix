@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using Phoenix.Entities.Base;
 
@@ -14,8 +13,8 @@ namespace Phoenix.Entities.Roles
       public Role()
       {
          Name = string.Empty;
-         History = Array.Empty<RoleHistory>();
-         Permissions = Array.Empty<RolePermission>();
+         History = null!;
+         Permissions = null!;
       }
    }
 }
