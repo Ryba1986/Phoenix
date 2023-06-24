@@ -30,5 +30,10 @@ namespace Phoenix.Services.Repositories.Migrations
             }
          );
       }
+
+      protected override void Down(MigrationBuilder migrationBuilder)
+      {
+         migrationBuilder.DropTable(nameof(RoleHistory));
+      }
    }
 }
