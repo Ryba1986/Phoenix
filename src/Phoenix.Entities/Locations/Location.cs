@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using Phoenix.Entities.Base;
 
 namespace Phoenix.Entities.Locations
@@ -7,9 +8,12 @@ namespace Phoenix.Entities.Locations
       public string Name { get; set; }
       public bool IncludeReport { get; set; }
 
+      public ICollection<LocationHistory> History { get; }
+
       public Location()
       {
          Name = string.Empty;
+         History = new List<LocationHistory>();
       }
    }
 }
