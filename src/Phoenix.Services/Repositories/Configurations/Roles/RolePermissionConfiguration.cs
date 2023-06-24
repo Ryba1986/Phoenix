@@ -30,8 +30,8 @@ namespace Phoenix.Services.Repositories.Configurations.Roles
          builder.HasKey(x => x.Id)
             .IsClustered();
 
-         builder.HasOne<Role>()
-            .WithMany()
+         builder.HasOne(x => x.Role)
+            .WithMany(x => x.Permissions)
             .HasForeignKey(x => x.RoleId);
       }
    }

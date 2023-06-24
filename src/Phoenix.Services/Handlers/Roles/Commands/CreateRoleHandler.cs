@@ -33,7 +33,11 @@ namespace Phoenix.Services.Handlers.Roles.Commands
             return Result.Error(Translations.Role_Exists);
          }
 
-         Role newRole = new(request.Name, request.IsActive);
+         Role newRole = new()
+         {
+            Name = request.Name,
+            IsActive = request.IsActive,
+         };
 
          _uow.Role.Add(newRole);
 

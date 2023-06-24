@@ -1,10 +1,8 @@
-using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
-using Phoenix.Entities.Roles;
 using Phoenix.Entities.Users;
 using Phoenix.Models.Users.Queries;
 using Phoenix.Services.Handlers.Base;
@@ -29,43 +27,21 @@ namespace Phoenix.Services.Handlers.Users.Queries
       {
          User? user = await _uow.User
             .AsNoTracking()
+            .Include(x => x.Role)
+            .ThenInclude(x => x.Permissions)
             .FirstOrDefaultAsync(x =>
                x.Email == request.Email &&
                x.Password == request.Password.CreatePassword() &&
-               x.IsActive
+               x.IsActive &&
+               x.Role.IsActive
             , cancellationToken);
 
-         if (user is null)
+         if (user?.Role?.Permissions is null || user.Role.Permissions.Count == 0)
          {
             return new();
          }
 
-         Role? role = await _uow.Role
-            .AsNoTracking()
-            .FirstOrDefaultAsync(x =>
-               x.Id == user.RoleId &&
-               x.IsActive
-            , cancellationToken);
-
-         if (role is null)
-         {
-            return new();
-         }
-
-         IReadOnlyCollection<RolePermission> permissions = await _uow.RolePermission
-            .AsNoTracking()
-            .Where(x =>
-               x.RoleId == role.Id &&
-               x.IsActive
-            )
-            .ToArrayAsync(cancellationToken);
-
-         if (permissions.Count == 0)
-         {
-            return new();
-         }
-
-         return JwtHandlerHelper.CreateWeb(user, permissions, _settings);
+         return JwtHandlerHelper.CreateWeb(user, user.Role.Permissions.ToArray(), _settings);
       }
    }
 }

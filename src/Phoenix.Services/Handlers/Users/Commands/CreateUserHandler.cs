@@ -2,11 +2,11 @@ using System.Threading;
 using System.Threading.Tasks;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
-using Phoenix.Entities.Roles;
 using Phoenix.Entities.Users;
 using Phoenix.Models.Users.Commands;
 using Phoenix.Services.Handlers.Base;
 using Phoenix.Services.Repositories;
+using Phoenix.Shared.Extensions;
 using Phoenix.Shared.Languages;
 using Phoenix.Shared.Results;
 
@@ -34,17 +34,24 @@ namespace Phoenix.Services.Handlers.Users.Commands
             return Result.Error(Translations.User_Exists);
          }
 
-         Role? role = await _uow.Role
+         bool roleExists = await _uow.Role
             .AsNoTracking()
-            .FirstOrDefaultAsync(x => x.Id == request.RoleId, cancellationToken);
+            .AnyAsync(x => x.Id == request.RoleId, cancellationToken);
 
-         if (role is null)
+         if (!roleExists)
          {
             return Result.Error(Translations.Role_NotExists);
          }
 
          // TODO: generate random password and send an email
-         User newUser = new(request.Name, request.Email, request.Email, role.Id, request.IsActive);
+         User newUser = new()
+         {
+            Name = request.Name,
+            Email = request.Email,
+            Password = request.Email.CreatePassword(),
+            RoleId = request.RoleId,
+            IsActive = request.IsActive,
+         };
 
          _uow.Add(newUser);
 

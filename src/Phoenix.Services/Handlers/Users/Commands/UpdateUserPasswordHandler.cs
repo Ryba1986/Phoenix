@@ -33,7 +33,7 @@ namespace Phoenix.Services.Handlers.Users.Commands
             return Result.Error(Translations.User_NotExists);
          }
 
-         user.Update(request.NewPassword);
+         user.Password = request.NewPassword.CreatePassword();
 
          await _uow.SaveChangesAsync(cancellationToken);
          return Result.Success();

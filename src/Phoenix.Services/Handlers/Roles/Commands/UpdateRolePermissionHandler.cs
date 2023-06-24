@@ -35,7 +35,7 @@ namespace Phoenix.Services.Handlers.Roles.Commands
             return Result.Error(Translations.Validator_Version_Invalid);
          }
 
-         rolePermission.Update(request.AccessLevel);
+         rolePermission.AccessLevel = request.AccessLevel;
 
          await _uow.SaveChangesAsync(cancellationToken);
          return Result.Success();

@@ -3,7 +3,6 @@ using System.Threading;
 using System.Threading.Tasks;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
-using Phoenix.Entities.Roles;
 using Phoenix.Entities.Users;
 using Phoenix.Models.Users.Commands;
 using Phoenix.Services.Handlers.Base;
@@ -38,11 +37,11 @@ namespace Phoenix.Services.Handlers.Users.Commands
             return Result.Error(Translations.User_Exists);
          }
 
-         Role? role = await _uow.Role
+         bool roleExists = await _uow.Role
             .AsNoTracking()
-            .FirstOrDefaultAsync(x => x.Id == request.RoleId, cancellationToken);
+            .AnyAsync(x => x.Id == request.RoleId, cancellationToken);
 
-         if (role is null)
+         if (!roleExists)
          {
             return Result.Error(Translations.Role_NotExists);
          }
@@ -57,7 +56,10 @@ namespace Phoenix.Services.Handlers.Users.Commands
             return Result.Error(Translations.Validator_Version_Invalid);
          }
 
-         user.Update(request.Name, request.Email, role.Id, request.IsActive);
+         user.Name = request.Name;
+         user.Email = request.Email;
+         user.RoleId = request.RoleId;
+         user.IsActive = request.IsActive;
 
          await _uow.SaveChangesAsync(cancellationToken);
          return Result.Success();

@@ -1,20 +1,19 @@
+using System;
+using System.Collections.Generic;
 using Phoenix.Entities.Base;
 
 namespace Phoenix.Entities.Roles
 {
    public sealed class Role : MetricBase
    {
-      public string Name { get; private set; }
+      public string Name { get; set; }
 
-      public Role(string name, bool isActive) : base(isActive)
-      {
-         Name = name;
-      }
+      public ICollection<RolePermission> Permissions { get; }
 
-      public void Update(string name, bool isActive)
+      public Role()
       {
-         Name = name;
-         IsActive = isActive;
+         Name = string.Empty;
+         Permissions = Array.Empty<RolePermission>();
       }
    }
 }

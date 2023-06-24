@@ -45,7 +45,13 @@ namespace Phoenix.Services.Handlers.Roles.Commands
             return Result.Error(Translations.RolePermission_Exists);
          }
 
-         RolePermission newRolePermission = new(request.RoleId, request.Permission, request.AccessLevel, true);
+         RolePermission newRolePermission = new()
+         {
+            RoleId = request.RoleId,
+            Permission = request.Permission,
+            AccessLevel = request.AccessLevel,
+            IsActive = true,
+         };
 
          _uow.RolePermission.Add(newRolePermission);
 

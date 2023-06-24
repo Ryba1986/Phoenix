@@ -1,34 +1,23 @@
 using Phoenix.Entities.Base;
-using Phoenix.Shared.Extensions;
+using Phoenix.Entities.Roles;
 
 namespace Phoenix.Entities.Users
 {
    public sealed class User : MetricBase
    {
-      public string Name { get; private set; }
-      public string Email { get; private set; }
-      public string Password { get; private set; }
-      public int RoleId { get; private set; }
+      public string Name { get; set; }
+      public string Email { get; set; }
+      public string Password { get; set; }
 
-      public User(string name, string email, string password, int roleId, bool isActive) : base(isActive)
-      {
-         Name = name;
-         Email = email;
-         Password = password.CreatePassword();
-         RoleId = roleId;
-      }
+      public int RoleId { get; set; }
+      public Role Role { get; set; }
 
-      public void Update(string name, string email, int roleId, bool isActive)
+      public User()
       {
-         Name = name;
-         Email = email;
-         RoleId = roleId;
-         IsActive = isActive;
-      }
-
-      public void Update(string newPassword)
-      {
-         Password = newPassword.CreatePassword();
+         Name = string.Empty;
+         Email = string.Empty;
+         Password = string.Empty;
+         Role = null!;
       }
    }
 }

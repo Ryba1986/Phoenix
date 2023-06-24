@@ -47,7 +47,8 @@ namespace Phoenix.Services.Handlers.Roles.Commands
             return Result.Error(Translations.Validator_Version_Invalid);
          }
 
-         role.Update(request.Name, request.IsActive);
+         role.Name = request.Name;
+         role.IsActive = request.IsActive;
 
          await _uow.SaveChangesAsync(cancellationToken);
          return Result.Success();

@@ -1,6 +1,5 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using Phoenix.Entities.Roles;
 using Phoenix.Entities.Users;
 
 namespace Phoenix.Services.Repositories.Configurations.Users
@@ -38,7 +37,7 @@ namespace Phoenix.Services.Repositories.Configurations.Users
          builder.HasKey(x => x.Id)
             .IsClustered();
 
-         builder.HasOne<Role>()
+         builder.HasOne(x => x.Role)
             .WithMany()
             .HasForeignKey(x => x.RoleId);
       }
