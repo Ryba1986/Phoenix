@@ -14,7 +14,7 @@ namespace Phoenix.Services.Repositories.Migrations
             name: nameof(RolePermission),
             columns: table => new
             {
-               Id = table.Column<int>(name: nameof(RolePermission.Id)),
+               Id = AddIdentity(table.Column<int>(name: nameof(RolePermission.Id))),
                RoleId = table.Column<int>(name: nameof(RolePermission.RoleId)),
                Permission = table.Column<Permission>(name: nameof(RolePermission.Permission), defaultValue: default(byte)),
                AccessLevel = table.Column<AccessLevel>(name: nameof(RolePermission.AccessLevel), defaultValue: default(byte)),
