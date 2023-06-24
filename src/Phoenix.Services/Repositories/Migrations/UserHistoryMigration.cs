@@ -6,7 +6,7 @@ using Phoenix.Services.Repositories.Migrations.Base;
 
 namespace Phoenix.Services.Repositories.Migrations
 {
-   [Migration("202306241404_CreateRoleHistory")]
+   [Migration("202306241404_CreateUserHistory")]
    internal sealed class UserHistoryMigration : DbMigration
    {
       protected override void Up(MigrationBuilder migrationBuilder)
