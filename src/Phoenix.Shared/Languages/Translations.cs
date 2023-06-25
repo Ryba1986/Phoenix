@@ -39,6 +39,7 @@ namespace Phoenix.Shared.Languages
       public static string RoleAccessLevel_Read => Get(eng: "Read", pol: "Odczyt");
       public static string RoleAccessLevel_Write => Get(eng: "Write", pol: "Zapis");
 
+      public static string RolePermission_Client => Get(eng: "Clients", pol: "Klienci");
       public static string RolePermission_Device => Get(eng: "Devices", pol: "Urządzenia");
       public static string RolePermission_Location => Get(eng: "Locations", pol: "Lokalizacje");
       public static string RolePermission_Plc => Get(eng: "Plcs", pol: "Sterowniki");
