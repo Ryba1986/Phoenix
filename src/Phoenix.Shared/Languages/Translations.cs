@@ -23,6 +23,11 @@ namespace Phoenix.Shared.Languages
 
       // Enums
 
+      public static string DeviceType_Meter => Get(eng: "Meter", pol: "Licznik ciepła");
+      public static string DeviceType_Heating => Get(eng: "Heating", pol: "CO");
+      public static string DeviceType_DoubleHeating => Get(eng: "Double heating", pol: "CO & CO");
+      public static string DeviceType_HeatingDomestic => Get(eng: "Heating & domestic water", pol: "CO & CWU");
+
       public static string RoleAccessLevel_None => Get(eng: "None", pol: "Brak");
       public static string RoleAccessLevel_Read => Get(eng: "Read", pol: "Odczyt");
       public static string RoleAccessLevel_Write => Get(eng: "Write", pol: "Zapis");
@@ -33,6 +38,10 @@ namespace Phoenix.Shared.Languages
       public static string RolePermission_Report => Get(eng: "Reports", pol: "Raporty");
       public static string RolePermission_Role => Get(eng: "Roles", pol: "Role");
       public static string RolePermission_User => Get(eng: "Users", pol: "Użytkownicy");
+
+      public static string SerialParity_None => Get(eng: "None", pol: "Brak");
+      public static string SerialParity_Odd => Get(eng: "Odd", pol: "Nieparzysty");
+      public static string SerialParity_Even => Get(eng: "Even", pol: "Parzysty");
 
       // Validators
 
