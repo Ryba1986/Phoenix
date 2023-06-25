@@ -11,8 +11,7 @@ namespace Phoenix.Services.Repositories.Configurations.Users
          builder.Property(x => x.UserId)
             .IsRequired();
 
-         builder.Property(x => x.RoleId)
-            .IsRequired();
+         builder.Property(x => x.RoleId);
 
          builder.Property(x => x.Name)
             .HasMaxLength(50)

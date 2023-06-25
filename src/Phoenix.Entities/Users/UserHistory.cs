@@ -8,8 +8,8 @@ namespace Phoenix.Entities.Users
       public int UserId { get; init; }
       public User User { get; init; }
 
-      public int RoleId { get; init; }
-      public Role Role { get; init; }
+      public int? RoleId { get; init; }
+      public Role? Role { get; init; }
 
       public string Name { get; init; }
       public string Email { get; init; }
@@ -17,7 +17,6 @@ namespace Phoenix.Entities.Users
       public UserHistory()
       {
          User = null!;
-         Role = null!;
          Name = string.Empty;
          Email = string.Empty;
       }

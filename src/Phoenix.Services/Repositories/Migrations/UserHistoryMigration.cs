@@ -17,7 +17,7 @@ namespace Phoenix.Services.Repositories.Migrations
             {
                Id = AddIdentity(table.Column<int>(name: nameof(UserHistory.Id))),
                UserId = table.Column<int>(name: nameof(UserHistory.UserId)),
-               RoleId = table.Column<int>(name: nameof(UserHistory.RoleId)),
+               RoleId = table.Column<int>(name: nameof(UserHistory.RoleId), nullable: true),
                Name = table.Column<string>(name: nameof(UserHistory.Name), maxLength: 50, defaultValue: string.Empty),
                Email = table.Column<string>(name: nameof(UserHistory.Email), maxLength: 50, defaultValue: string.Empty),
                CreatedById = table.Column<int>(name: nameof(UserHistory.CreatedById)),

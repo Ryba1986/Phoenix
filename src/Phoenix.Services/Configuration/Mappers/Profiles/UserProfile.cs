@@ -9,7 +9,9 @@ namespace Phoenix.Services.Configuration.Mappers.Profiles
       public UserProfile()
       {
          CreateProjection<User, UserDto>();
-         CreateProjection<UserHistory, UserHistoryDto>();
+
+         CreateProjection<UserHistory, UserHistoryDto>()
+            .ForMember(dst => dst.RoleName, opt => opt.MapFrom(src => src.Role != null ? src.Role.Name : string.Empty));
       }
    }
 }
