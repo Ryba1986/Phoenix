@@ -9,7 +9,7 @@ namespace Phoenix.Services.Configuration.Mappers.Profiles
    {
       public DeviceProfile()
       {
-         CreateProjection<Device, DeviceHistory>();
+         CreateProjection<Device, DeviceDto>();
 
          CreateProjection<DeviceHistory, DeviceHistoryDto>()
             .ForMember(dst => dst.LocationName, opt => opt.MapFrom(src => src.Location != null ? src.Location.Name : string.Empty))
