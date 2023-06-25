@@ -1,4 +1,5 @@
 using Microsoft.EntityFrameworkCore;
+using Phoenix.Entities.Clients;
 using Phoenix.Entities.Devices;
 using Phoenix.Entities.Locations;
 using Phoenix.Entities.Roles;
@@ -8,6 +9,9 @@ namespace Phoenix.Services.Repositories
 {
    internal sealed class UnitOfWork : DbContext
    {
+      public readonly DbSet<Client> Client;
+      public readonly DbSet<ClientHistory> ClientHistory;
+
       public readonly DbSet<Device> Device;
       public readonly DbSet<DeviceHistory> DeviceHistory;
 
@@ -24,6 +28,9 @@ namespace Phoenix.Services.Repositories
 
       public UnitOfWork(DbContextOptions<UnitOfWork> options) : base(options)
       {
+         Client = Set<Client>();
+         ClientHistory = Set<ClientHistory>();
+
          Device = Set<Device>();
          DeviceHistory = Set<DeviceHistory>();
 

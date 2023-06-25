@@ -13,7 +13,7 @@ namespace Phoenix.Entities.Clients
       public string Hostname { get; set; }
       public string ClientVersion { get; set; }
 
-      public ICollection<Client> History { get; }
+      public ICollection<ClientHistory> History { get; }
 
       public Client()
       {
@@ -21,7 +21,7 @@ namespace Phoenix.Entities.Clients
          MacAddress = string.Empty;
          Hostname = string.Empty;
          ClientVersion = string.Empty;
-         History = new List<Client>();
+         History = new List<ClientHistory>();
       }
    }
 }
