@@ -7,6 +7,9 @@ namespace Phoenix.Shared.Languages
    {
       // Entities
 
+      public static string Client_Exists => Get(eng: "Client exists.", pol: "Klient już istnieje.");
+      public static string Client_NotExists => Get(eng: "Client not exists.", pol: "Klient nie istnieje.");
+
       public static string Device_Exists => Get(eng: "Device exists.", pol: "Urządzenie już istnieje.");
       public static string Device_NotExists => Get(eng: "Device not exists.", pol: "Urządzenie nie istnieje.");
       public static string Device_DeviceType_Invalid => Get(eng: "Device type is invalid.", pol: "Typ urządzenia jest nieprawidłowy.");
@@ -51,12 +54,15 @@ namespace Phoenix.Shared.Languages
 
       public static string Validator_AccessLevel_Invalid => Get(eng: "Access level is invaild.", pol: "Poziom dostępu jest nieprawidłowy.");
       public static string Validator_BoundRate_Invalid => Get(eng: "Boundrate is invaild.", pol: "Prędkość jest nieprawidłowa.");
+      public static string Validator_ClientVersion_Invalid => Get(eng: "Client version is invaild.", pol: "Wersja klienta jest nieprawidłowa.");
       public static string Validator_CurrentPassword_Invalid => Get(eng: "Current password is invaild.", pol: "Aktualne hasło jest nieprawidłowe.");
       public static string Validator_DataBits_Invalid => Get(eng: "Data bit is invaild.", pol: "Data bit jest nieprawidłowe.");
       public static string Validator_DeviceType_Invalid => Get(eng: "Device type is invaild.", pol: "Typ urządzenia jest nieprawidłowe.");
       public static string Validator_Email_Invalid => Get(eng: "Email is invaild.", pol: "Email jest nieprawidłowy.");
+      public static string Validator_Hostname_Invalid => Get(eng: "Hostname is invaild.", pol: "Nazwa hosta jest nieprawidłowa.");
       public static string Validator_Id_Invalid => Get(eng: "Id is invaild.", pol: "Identyfikator jest nieprawidłowy.");
       public static string Validator_LocationId_Invalid => Get(eng: "Location is invaild.", pol: "Lokalizacja jest nieprawidłowa.");
+      public static string Validator_MacAddress_Invalid => Get(eng: "MAC address is invaild.", pol: "Adres MAC jest nieprawidłowy.");
       public static string Validator_Name_Invalid => Get(eng: "Name is invaild.", pol: "Nazwa jest nieprawidłowa.");
       public static string Validator_NewPassword_Invalid => Get(eng: "New password is invaild.", pol: "Nowe hasło jest nieprawidłowe.");
       public static string Validator_Parity_Invalid => Get(eng: "Parity is invaild.", pol: "Parzystość jest nieprawidłowa.");
