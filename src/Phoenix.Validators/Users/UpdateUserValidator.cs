@@ -11,6 +11,9 @@ namespace Phoenix.Validators.Users
          RuleFor(x => x.Id)
             .NotEmpty().WithMessage(Translations.Validator_Id_Invalid);
 
+         RuleFor(x => x.RoleId)
+            .NotEmpty().WithMessage(Translations.Validator_RoleId_Invalid);
+
          RuleFor(x => x.Name)
             .Length(3, 50).WithMessage(Translations.Validator_Name_Invalid);
 
@@ -18,8 +21,8 @@ namespace Phoenix.Validators.Users
             .Matches(@"^[a-zA-Z0-9.!#$%&'*+\/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$").WithMessage(Translations.Validator_Email_Invalid)
             .MaximumLength(50).WithMessage(Translations.Validator_Email_Invalid);
 
-         RuleFor(x => x.RoleId)
-            .NotEmpty().WithMessage(Translations.Validator_RoleId_Invalid);
+         RuleFor(x => x.Version)
+            .NotEmpty().WithMessage(Translations.Validator_Version_Invalid);
       }
    }
 }
