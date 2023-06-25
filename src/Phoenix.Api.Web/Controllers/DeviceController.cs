@@ -1,0 +1,89 @@
+using System.Threading.Tasks;
+using MediatR;
+using Microsoft.AspNetCore.Mvc;
+using Phoenix.Api.Web.Attributes;
+using Phoenix.Api.Web.Controllers.Base;
+using Phoenix.Models.Devices.Commands;
+using Phoenix.Models.Devices.Queries;
+using Phoenix.Shared.Enums.Roles;
+
+namespace Phoenix.Api.Web.Controllers
+{
+   public sealed class DeviceController : ApiControllerBase
+   {
+      public DeviceController(IMediator mediator) : base(mediator)
+      {
+      }
+
+      [HttpGet]
+      [Authorization(Permission.Device, AccessLevel.Read)]
+      public async Task<IActionResult> GetDevices()
+      {
+         return await HandleAsync(new GetDevicesQuery());
+      }
+
+      [HttpGet]
+      [Authorization(Permission.Device, AccessLevel.Read)]
+      public async Task<IActionResult> GetDevicesByLocation([FromQuery] GetDevicesByLocationQuery request)
+      {
+         return await HandleAsync(request);
+      }
+
+      [HttpGet]
+      [Authorization(Permission.Device, AccessLevel.Read)]
+      public async Task<IActionResult> GetDeviceHistory([FromQuery] GetDeviceHistoryQuery request)
+      {
+         return await HandleAsync(request);
+      }
+
+      [HttpGet]
+      public async Task<IActionResult> GetDeviceTypeDictionary()
+      {
+         return await HandleAsync(new GetDeviceTypeDictionaryQuery());
+      }
+
+      [HttpGet]
+      public async Task<IActionResult> GetDevicePlcTypeDictionary()
+      {
+         return await HandleAsync(new GetDevicePlcTypeDictionaryQuery());
+      }
+
+      [HttpGet]
+      public async Task<IActionResult> GetDeviceBoundRateDictionary()
+      {
+         return await HandleAsync(new GetDeviceBoundRateDictionaryQuery());
+      }
+
+      [HttpGet]
+      public async Task<IActionResult> GetDeviceDataBitDictionary()
+      {
+         return await HandleAsync(new GetDeviceDataBitDictionaryQuery());
+      }
+
+      [HttpGet]
+      public async Task<IActionResult> GetDeviceParityDictionary()
+      {
+         return await HandleAsync(new GetDeviceParityDictionaryQuery());
+      }
+
+      [HttpGet]
+      public async Task<IActionResult> GetDeviceStopBitDictionary()
+      {
+         return await HandleAsync(new GetDeviceStopBitDictionaryQuery());
+      }
+
+      [HttpPost]
+      [Authorization(Permission.Device, AccessLevel.Write)]
+      public async Task<IActionResult> CreateDevice([FromBody] CreateDeviceCommand request)
+      {
+         return await HandleAsync(request);
+      }
+
+      [HttpPost]
+      [Authorization(Permission.Device, AccessLevel.Write)]
+      public async Task<IActionResult> UpdateDevice([FromBody] UpdateDeviceCommand request)
+      {
+         return await HandleAsync(request);
+      }
+   }
+}
