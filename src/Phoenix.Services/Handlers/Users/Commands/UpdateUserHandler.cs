@@ -65,7 +65,7 @@ namespace Phoenix.Services.Handlers.Users.Commands
             UserId = request.Id,
             Name = user.Name != request.Name ? request.Name : string.Empty,
             Email = user.Email != request.Email ? request.Email : string.Empty,
-            RoleId = request.RoleId,
+            RoleId = user.RoleId != request.RoleId ? request.RoleId : null,
             IsActive = request.IsActive,
             CreatedById = request.ModifiedById,
          });
