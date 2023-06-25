@@ -16,15 +16,15 @@ namespace Phoenix.Api.Web.Controllers
       {
       }
 
-      [HttpGet]
       [Authorization(Permission.User, AccessLevel.Read)]
+      [HttpGet]
       public async Task<IActionResult> GetUsers()
       {
          return await HandleAsync(new GetUsersQuery());
       }
 
-      [HttpGet]
       [Authorization(Permission.User, AccessLevel.Read)]
+      [HttpGet]
       public async Task<IActionResult> GetUserHistory([FromQuery] GetUserHistoryQuery request)
       {
          return await HandleAsync(request);
@@ -36,8 +36,8 @@ namespace Phoenix.Api.Web.Controllers
          return await HandleAsync(new GetUserDictionaryQuery());
       }
 
-      [HttpPost]
       [AllowAnonymous]
+      [HttpPost]
       public async Task<IActionResult> GetUserToken([FromBody] GetUserTokenQuery request)
       {
          return await HandleAsync(request);
@@ -52,15 +52,15 @@ namespace Phoenix.Api.Web.Controllers
          });
       }
 
-      [HttpPost]
       [Authorization(Permission.User, AccessLevel.Write)]
+      [HttpPost]
       public async Task<IActionResult> CreateUser([FromBody] CreateUserCommand request)
       {
          return await HandleAsync(request);
       }
 
-      [HttpPost]
       [Authorization(Permission.User, AccessLevel.Write)]
+      [HttpPost]
       public async Task<IActionResult> UpdateUser([FromBody] UpdateUserCommand request)
       {
          return await HandleAsync(request);

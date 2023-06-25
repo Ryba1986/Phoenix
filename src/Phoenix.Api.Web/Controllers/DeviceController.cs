@@ -15,22 +15,22 @@ namespace Phoenix.Api.Web.Controllers
       {
       }
 
-      [HttpGet]
       [Authorization(Permission.Device, AccessLevel.Read)]
+      [HttpGet]
       public async Task<IActionResult> GetDevices()
       {
          return await HandleAsync(new GetDevicesQuery());
       }
 
-      [HttpGet]
       [Authorization(Permission.Device, AccessLevel.Read)]
+      [HttpGet]
       public async Task<IActionResult> GetDevicesByLocation([FromQuery] GetDevicesByLocationQuery request)
       {
          return await HandleAsync(request);
       }
 
-      [HttpGet]
       [Authorization(Permission.Device, AccessLevel.Read)]
+      [HttpGet]
       public async Task<IActionResult> GetDeviceHistory([FromQuery] GetDeviceHistoryQuery request)
       {
          return await HandleAsync(request);
@@ -72,15 +72,15 @@ namespace Phoenix.Api.Web.Controllers
          return await HandleAsync(new GetDeviceStopBitDictionaryQuery());
       }
 
-      [HttpPost]
       [Authorization(Permission.Device, AccessLevel.Write)]
+      [HttpPost]
       public async Task<IActionResult> CreateDevice([FromBody] CreateDeviceCommand request)
       {
          return await HandleAsync(request);
       }
 
-      [HttpPost]
       [Authorization(Permission.Device, AccessLevel.Write)]
+      [HttpPost]
       public async Task<IActionResult> UpdateDevice([FromBody] UpdateDeviceCommand request)
       {
          return await HandleAsync(request);

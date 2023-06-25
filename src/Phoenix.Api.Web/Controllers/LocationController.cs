@@ -15,15 +15,15 @@ namespace Phoenix.Api.Web.Controllers
       {
       }
 
-      [HttpGet]
       [Authorization(Permission.Location, AccessLevel.Read)]
+      [HttpGet]
       public async Task<IActionResult> GetLocations()
       {
          return await HandleAsync(new GetLocationsQuery());
       }
 
-      [HttpGet]
       [Authorization(Permission.Location, AccessLevel.Read)]
+      [HttpGet]
       public async Task<IActionResult> GetLocationHistory([FromQuery] GetLocationHistoryQuery request)
       {
          return await HandleAsync(request);
@@ -35,15 +35,15 @@ namespace Phoenix.Api.Web.Controllers
          return await HandleAsync(new GetLocationDictionaryQuery());
       }
 
-      [HttpPost]
       [Authorization(Permission.Location, AccessLevel.Write)]
+      [HttpPost]
       public async Task<IActionResult> CreateLocation([FromBody] CreateLocationCommand request)
       {
          return await HandleAsync(request);
       }
 
-      [HttpPost]
       [Authorization(Permission.Location, AccessLevel.Write)]
+      [HttpPost]
       public async Task<IActionResult> UpdateLocation([FromBody] UpdateLocationCommand request)
       {
          return await HandleAsync(request);

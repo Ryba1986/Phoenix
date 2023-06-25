@@ -15,8 +15,8 @@ namespace Phoenix.Api.Web.Controllers
       {
       }
 
-      [HttpGet]
       [Authorization(Permission.Role, AccessLevel.Read)]
+      [HttpGet]
       public async Task<IActionResult> GetRolePermissions([FromQuery] GetRolePermissionsQuery request)
       {
          return await HandleAsync(request);
@@ -34,15 +34,15 @@ namespace Phoenix.Api.Web.Controllers
          return await HandleAsync(new GetPermissionDictionaryQuery());
       }
 
-      [HttpPost]
       [Authorization(Permission.Role, AccessLevel.Write)]
+      [HttpPost]
       public async Task<IActionResult> CreateRolePermission([FromBody] CreateRolePermissionCommand request)
       {
          return await HandleAsync(request);
       }
 
-      [HttpPost]
       [Authorization(Permission.Role, AccessLevel.Write)]
+      [HttpPost]
       public async Task<IActionResult> UpdateRolePermission([FromBody] UpdateRolePermissionCommand request)
       {
          return await HandleAsync(request);
