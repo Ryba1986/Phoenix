@@ -8,6 +8,9 @@ namespace Phoenix.Services.Repositories.Configurations.Users
    {
       public void Configure(EntityTypeBuilder<User> builder)
       {
+         builder.Property(x => x.RoleId)
+            .IsRequired();
+
          builder.Property(x => x.Name)
             .HasMaxLength(50)
             .IsRequired();
@@ -19,9 +22,6 @@ namespace Phoenix.Services.Repositories.Configurations.Users
          builder.Property(x => x.Password)
             .HasMaxLength(64)
             .IsFixedLength()
-            .IsRequired();
-
-         builder.Property(x => x.RoleId)
             .IsRequired();
 
          builder.Property(x => x.Id)

@@ -11,8 +11,8 @@ namespace Phoenix.Entities.Roles
 
       public RoleHistory()
       {
-         Name = string.Empty;
          Role = null!;
+         Name = string.Empty;
       }
    }
 }

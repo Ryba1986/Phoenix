@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using Phoenix.Entities.Base;
 using Phoenix.Entities.Roles;
@@ -22,7 +21,7 @@ namespace Phoenix.Entities.Users
          Name = string.Empty;
          Email = string.Empty;
          Password = string.Empty;
-         History = null!;
+         History = new List<UserHistory>();
       }
    }
 }

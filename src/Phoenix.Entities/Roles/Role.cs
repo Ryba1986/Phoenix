@@ -13,8 +13,8 @@ namespace Phoenix.Entities.Roles
       public Role()
       {
          Name = string.Empty;
-         History = null!;
-         Permissions = null!;
+         History = new List<RoleHistory>();
+         Permissions = new List<RolePermission>();
       }
    }
 }
