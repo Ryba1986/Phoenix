@@ -450,5 +450,8 @@ package-lock.json
 # Yarn
 yarn.lock
 
-#VSCodeCounter
+# VSCodeCounter
 .VSCodeCounter/
+
+# Publish
+dist/
