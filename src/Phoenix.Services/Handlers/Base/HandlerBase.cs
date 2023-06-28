@@ -1,7 +1,11 @@
+using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
+using Phoenix.Entities.Base;
+using Phoenix.Models.Base.Commands;
 using Phoenix.Services.Repositories;
+using Phoenix.Shared.Extensions;
 
 namespace Phoenix.Services.Handlers.Base
 {
@@ -12,6 +16,16 @@ namespace Phoenix.Services.Handlers.Base
       public HandlerBase(UnitOfWork uow)
       {
          _uow = uow;
+      }
+
+      protected static Task<bool> IsPlcExistAsync<T>(IQueryable<T> plcs, CreatePlcCommandBase request, CancellationToken cancellationToken) where T : PlcBase
+      {
+         return plcs
+            .AsNoTracking()
+            .AnyAsync(x =>
+               x.DeviceId == request.DeviceId &&
+               x.Date == request.Date.RoundToSecond()
+            , cancellationToken);
       }
 
       protected Task<bool> IsActiveUserExistsAsync(int userId, CancellationToken cancellationToken)
