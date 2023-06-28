@@ -2,6 +2,7 @@ using Microsoft.EntityFrameworkCore;
 using Phoenix.Entities.Clients;
 using Phoenix.Entities.Devices;
 using Phoenix.Entities.Locations;
+using Phoenix.Entities.Plcs.Meters;
 using Phoenix.Entities.Roles;
 using Phoenix.Entities.Users;
 
@@ -26,6 +27,8 @@ namespace Phoenix.Services.Repositories
       public readonly DbSet<User> User;
       public readonly DbSet<UserHistory> UserHistory;
 
+      public readonly DbSet<Kamstrup> Kamstrup;
+
       public UnitOfWork(DbContextOptions<UnitOfWork> options) : base(options)
       {
          Client = Set<Client>();
@@ -44,6 +47,8 @@ namespace Phoenix.Services.Repositories
 
          User = Set<User>();
          UserHistory = Set<UserHistory>();
+
+         Kamstrup = Set<Kamstrup>();
       }
 
       protected override void OnModelCreating(ModelBuilder modelBuilder)
