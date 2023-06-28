@@ -5,8 +5,8 @@ using Phoenix.Services.Repositories.Migrations.Base;
 
 namespace Phoenix.Services.Repositories.Migrations
 {
-   [Migration("202306281917_CreateKamstrupHistory")]
-   internal sealed class CreateKamstrupMigration : DbMigration
+   [Migration("202306281917_CreateKamstrups")]
+   internal sealed class KamstrupMigration : DbMigration
    {
       protected override void Up(MigrationBuilder migrationBuilder)
       {
