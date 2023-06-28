@@ -1,4 +1,3 @@
-using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using MediatR;
@@ -36,12 +35,7 @@ namespace Phoenix.Services.Handlers.Users.Queries
                x.Role.IsActive
             , cancellationToken);
 
-         if (user?.Role?.Permissions is null || user.Role.Permissions.Count == 0)
-         {
-            return new();
-         }
-
-         return JwtHandlerHelper.CreateWeb(user, user.Role.Permissions.ToArray(), _settings);
+         return RoleHandlerHelper.GetTokenResult(user, _settings);
       }
    }
 }

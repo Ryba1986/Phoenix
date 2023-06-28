@@ -8,6 +8,7 @@ namespace Phoenix.Entities.Roles
       public Role Role { get; init; }
 
       public string Name { get; init; }
+      public bool IsAdmin { get; init; }
 
       public RoleHistory()
       {

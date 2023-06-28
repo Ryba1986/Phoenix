@@ -5,6 +5,7 @@ namespace Phoenix.Models.Roles.Dto
    public sealed class RoleDto : MetricDtoBase
    {
       public string Name { get; init; }
+      public bool IsAdmin { get; init; }
 
       public RoleDto()
       {

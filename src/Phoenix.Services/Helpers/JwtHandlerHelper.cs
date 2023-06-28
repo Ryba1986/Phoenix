@@ -5,7 +5,6 @@ using System.Linq;
 using System.Security.Claims;
 using System.Text;
 using Microsoft.IdentityModel.Tokens;
-using Phoenix.Entities.Roles;
 using Phoenix.Entities.Users;
 using Phoenix.Services.Settings;
 using Phoenix.Shared.Enums.Jwt;
@@ -28,7 +27,7 @@ namespace Phoenix.Services.Helpers
          return CreateToken(range, claims, JwtIssuer.Client, settings.Key);
       }
 
-      public static TokenResult CreateWeb(User user, IReadOnlyCollection<RolePermission> rolePermissions, JwtSettings settings)
+      public static TokenResult CreateWeb(User user, IEnumerable<KeyValuePair<Permission, AccessLevel>> rolePermissions, JwtSettings settings)
       {
          (DateTime StartDate, DateTime EndDate) range = GetTokenRange(settings.ExpireMinutes);
 
@@ -38,11 +37,7 @@ namespace Phoenix.Services.Helpers
             user.Name.CreateNameClaim(),
          };
 
-         claims.AddRange(
-            rolePermissions
-               .Select(x => new KeyValuePair<Permission, AccessLevel>(x.Permission, x.AccessLevel))
-               .Select(x => x.CreateRoleClaim())
-         );
+         claims.AddRange(rolePermissions.Select(x => x.CreateRoleClaim()));
 
          return CreateToken(range, claims, JwtIssuer.Web, settings.Key);
       }

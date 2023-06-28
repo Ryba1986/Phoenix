@@ -15,6 +15,9 @@ namespace Phoenix.Services.Repositories.Configurations.Roles
             .HasMaxLength(50)
             .IsRequired();
 
+         builder.Property(x => x.IsAdmin)
+         .IsRequired();
+
          builder.Property(x => x.Id)
             .IsRequired();
 

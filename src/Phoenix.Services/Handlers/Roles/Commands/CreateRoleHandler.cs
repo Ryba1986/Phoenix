@@ -36,6 +36,7 @@ namespace Phoenix.Services.Handlers.Roles.Commands
          Role newRole = new()
          {
             Name = request.Name,
+            IsAdmin = request.IsAdmin,
             IsActive = request.IsActive,
          };
 
@@ -44,6 +45,7 @@ namespace Phoenix.Services.Handlers.Roles.Commands
          {
             Role = newRole,
             Name = request.Name,
+            IsAdmin = request.IsAdmin,
             IsActive = request.IsActive,
             CreatedById = request.CreatedById,
          });

@@ -46,7 +46,7 @@ namespace Phoenix.Services.Handlers.Roles.Commands
          {
             return Result.Error(Translations.Validator_Version_Invalid);
          }
-         if (role.Name == request.Name && role.IsActive == request.IsActive)
+         if (role.Name == request.Name && role.IsAdmin == request.IsAdmin && role.IsActive == request.IsActive)
          {
             return Result.Success();
          }
@@ -55,11 +55,13 @@ namespace Phoenix.Services.Handlers.Roles.Commands
          {
             RoleId = request.Id,
             Name = role.Name != request.Name ? request.Name : string.Empty,
+            IsAdmin = role.IsAdmin,
             IsActive = request.IsActive,
             CreatedById = request.ModifiedById,
          });
 
          role.Name = request.Name;
+         role.IsAdmin = request.IsAdmin;
          role.IsActive = request.IsActive;
 
          await _uow.SaveChangesAsync(cancellationToken);

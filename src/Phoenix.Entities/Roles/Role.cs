@@ -6,6 +6,7 @@ namespace Phoenix.Entities.Roles
    public sealed class Role : MetricBase
    {
       public string Name { get; set; }
+      public bool IsAdmin { get; set; }
 
       public ICollection<RoleHistory> History { get; }
       public ICollection<RolePermission> Permissions { get; }

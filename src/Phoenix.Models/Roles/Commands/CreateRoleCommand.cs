@@ -5,6 +5,7 @@ namespace Phoenix.Models.Roles.Commands
    public sealed class CreateRoleCommand : CreateCommandBase
    {
       public string Name { get; init; }
+      public bool IsAdmin { get; init; }
 
       public CreateRoleCommand()
       {
