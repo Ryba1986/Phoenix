@@ -1,6 +1,7 @@
 using Microsoft.EntityFrameworkCore.Migrations;
 using Phoenix.Entities.Devices;
 using Phoenix.Entities.Locations;
+using Phoenix.Services.Extensions;
 using Phoenix.Services.Repositories.Migrations.Base;
 using Phoenix.Shared.Enums.Devices;
 
@@ -15,7 +16,7 @@ namespace Phoenix.Services.Repositories.Migrations
             name: nameof(Device),
             columns: table => new
             {
-               Id = AddIdentity(table.Column<int>(name: nameof(Device.Id))),
+               Id = table.Column<int>(name: nameof(Device.Id)).AddIdentity(),
                LocationId = table.Column<int>(name: nameof(Device.LocationId)),
                Name = table.Column<string>(name: nameof(Device.Name), maxLength: 30, defaultValue: string.Empty),
                DeviceType = table.Column<DeviceType>(name: nameof(Device.DeviceType)),

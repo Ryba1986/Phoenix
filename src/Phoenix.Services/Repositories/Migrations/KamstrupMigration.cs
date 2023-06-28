@@ -1,6 +1,7 @@
 using System;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Phoenix.Entities.Plcs.Meters;
+using Phoenix.Services.Extensions;
 using Phoenix.Services.Repositories.Migrations.Base;
 
 namespace Phoenix.Services.Repositories.Migrations
@@ -30,6 +31,8 @@ namespace Phoenix.Services.Repositories.Migrations
                table.PrimaryKey($"PK_{nameof(Kamstrup)}_{nameof(Kamstrup.Date)}_{nameof(Kamstrup.Device)}", x => new { x.Date, x.DeviceId });
             }
          );
+
+         migrationBuilder.AddTableCompression(nameof(Kamstrup));
       }
 
       protected override void Down(MigrationBuilder migrationBuilder)

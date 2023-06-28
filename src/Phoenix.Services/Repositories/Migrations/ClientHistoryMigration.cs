@@ -3,6 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 using Phoenix.Entities.Clients;
 using Phoenix.Entities.Locations;
 using Phoenix.Entities.Users;
+using Phoenix.Services.Extensions;
 using Phoenix.Services.Repositories.Migrations.Base;
 
 namespace Phoenix.Services.Repositories.Migrations
@@ -16,7 +17,7 @@ namespace Phoenix.Services.Repositories.Migrations
             name: nameof(ClientHistory),
             columns: table => new
             {
-               Id = AddIdentity(table.Column<int>(name: nameof(ClientHistory.Id))),
+               Id = table.Column<int>(name: nameof(ClientHistory.Id)).AddIdentity(),
                ClientId = table.Column<int>(name: nameof(ClientHistory.ClientId)),
                LocationId = table.Column<int>(name: nameof(ClientHistory.LocationId), nullable: true),
                MacAddress = table.Column<string>(name: nameof(ClientHistory.MacAddress), maxLength: 12, defaultValue: string.Empty),

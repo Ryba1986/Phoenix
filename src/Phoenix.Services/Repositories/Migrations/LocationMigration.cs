@@ -1,5 +1,6 @@
 using Microsoft.EntityFrameworkCore.Migrations;
 using Phoenix.Entities.Locations;
+using Phoenix.Services.Extensions;
 using Phoenix.Services.Repositories.Migrations.Base;
 
 namespace Phoenix.Services.Repositories.Migrations
@@ -13,7 +14,7 @@ namespace Phoenix.Services.Repositories.Migrations
             name: nameof(Location),
             columns: table => new
             {
-               Id = AddIdentity(table.Column<int>(name: nameof(Location.Id))),
+               Id = table.Column<int>(name: nameof(Location.Id)).AddIdentity(),
                Name = table.Column<string>(name: nameof(Location.Name), maxLength: 30, defaultValue: string.Empty),
                IncludeReport = table.Column<bool>(name: nameof(Location.IncludeReport), defaultValue: default(bool)),
                IsActive = table.Column<bool>(name: nameof(Location.IsActive), defaultValue: default(bool)),

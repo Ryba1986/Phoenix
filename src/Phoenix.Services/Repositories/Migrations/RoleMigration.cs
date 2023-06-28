@@ -1,5 +1,6 @@
 using Microsoft.EntityFrameworkCore.Migrations;
 using Phoenix.Entities.Roles;
+using Phoenix.Services.Extensions;
 using Phoenix.Services.Repositories.Migrations.Base;
 
 namespace Phoenix.Services.Repositories.Migrations
@@ -13,7 +14,7 @@ namespace Phoenix.Services.Repositories.Migrations
             name: nameof(Role),
             columns: table => new
             {
-               Id = AddIdentity(table.Column<int>(name: nameof(Role.Id))),
+               Id = table.Column<int>(name: nameof(Role.Id)).AddIdentity(),
                Name = table.Column<string>(name: nameof(Role.Name), maxLength: 50, defaultValue: string.Empty),
                IsActive = table.Column<bool>(name: nameof(Role.IsActive), defaultValue: default(bool)),
                Version = table.Column<byte[]>(name: nameof(Role.Version), rowVersion: true),

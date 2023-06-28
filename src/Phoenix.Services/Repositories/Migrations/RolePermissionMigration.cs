@@ -1,5 +1,6 @@
 using Microsoft.EntityFrameworkCore.Migrations;
 using Phoenix.Entities.Roles;
+using Phoenix.Services.Extensions;
 using Phoenix.Services.Repositories.Migrations.Base;
 using Phoenix.Shared.Enums.Roles;
 
@@ -14,7 +15,7 @@ namespace Phoenix.Services.Repositories.Migrations
             name: nameof(RolePermission),
             columns: table => new
             {
-               Id = AddIdentity(table.Column<int>(name: nameof(RolePermission.Id))),
+               Id = table.Column<int>(name: nameof(RolePermission.Id)).AddIdentity(),
                RoleId = table.Column<int>(name: nameof(RolePermission.RoleId)),
                Permission = table.Column<Permission>(name: nameof(RolePermission.Permission), defaultValue: default(byte)),
                AccessLevel = table.Column<AccessLevel>(name: nameof(RolePermission.AccessLevel), defaultValue: default(byte)),
