@@ -1,5 +1,6 @@
 using System;
 using Microsoft.EntityFrameworkCore.Migrations;
+using Phoenix.Entities.Devices;
 using Phoenix.Entities.Plcs.Climatixs;
 using Phoenix.Services.Extensions;
 using Phoenix.Services.Repositories.Migrations.Base;
@@ -51,6 +52,7 @@ namespace Phoenix.Services.Repositories.Migrations
             constraints: table =>
             {
                table.PrimaryKey($"PK_{nameof(Climatix)}_{nameof(Climatix.Date)}_{nameof(Climatix.Device)}", x => new { x.Date, x.DeviceId });
+               table.ForeignKey($"FK_{nameof(Climatix)}_{nameof(Climatix.Device)}", x => x.DeviceId, nameof(Device), principalColumn: nameof(Device.Id));
             }
          );
 
