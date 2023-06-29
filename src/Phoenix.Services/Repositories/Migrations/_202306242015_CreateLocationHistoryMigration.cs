@@ -7,8 +7,8 @@ using Phoenix.Services.Repositories.Migrations.Base;
 
 namespace Phoenix.Services.Repositories.Migrations
 {
-   [Migration("202306242015_CreateLocationHistory")]
-   internal sealed class LocationHistoryMigration : DbMigration
+   [Migration(nameof(_202306242015_CreateLocationHistoryMigration))]
+   internal sealed class _202306242015_CreateLocationHistoryMigration : DbMigration
    {
       protected override void Up(MigrationBuilder migrationBuilder)
       {

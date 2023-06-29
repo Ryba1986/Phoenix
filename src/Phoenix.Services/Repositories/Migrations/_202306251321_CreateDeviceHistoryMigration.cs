@@ -9,8 +9,8 @@ using Phoenix.Shared.Enums.Devices;
 
 namespace Phoenix.Services.Repositories.Migrations
 {
-   [Migration("202306251321_CreateDeviceHistory")]
-   internal sealed class DeviceHistoryMigration : DbMigration
+   [Migration(nameof(_202306251321_CreateDeviceHistoryMigration))]
+   internal sealed class _202306251321_CreateDeviceHistoryMigration : DbMigration
    {
       protected override void Up(MigrationBuilder migrationBuilder)
       {

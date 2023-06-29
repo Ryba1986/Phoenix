@@ -8,8 +8,8 @@ using Phoenix.Services.Repositories.Migrations.Base;
 
 namespace Phoenix.Services.Repositories.Migrations
 {
-   [Migration("202306252035_CreateClientHistory")]
-   internal sealed class ClientHistoryMigration : DbMigration
+   [Migration(nameof(_202306252035_CreateClientHistoryMigration))]
+   internal sealed class _202306252035_CreateClientHistoryMigration : DbMigration
    {
       protected override void Up(MigrationBuilder migrationBuilder)
       {

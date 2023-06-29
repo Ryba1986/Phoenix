@@ -6,8 +6,8 @@ using Phoenix.Shared.Enums.Roles;
 
 namespace Phoenix.Services.Repositories.Migrations
 {
-   [Migration("202306232213_CreateRolePermissions")]
-   internal sealed class RolePermissionMigration : DbMigration
+   [Migration(nameof(_202306232213_CreateRolePermissionsMigration))]
+   internal sealed class _202306232213_CreateRolePermissionsMigration : DbMigration
    {
       protected override void Up(MigrationBuilder migrationBuilder)
       {

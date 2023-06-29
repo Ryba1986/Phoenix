@@ -7,8 +7,8 @@ using Phoenix.Services.Repositories.Migrations.Base;
 
 namespace Phoenix.Services.Repositories.Migrations
 {
-   [Migration("202306241358_CreateRoleHistory")]
-   internal sealed class RoleHistoryMigration : DbMigration
+   [Migration(nameof(_202306241358_CreateRoleHistoryMigration))]
+   internal sealed class _202306241358_CreateRoleHistoryMigration : DbMigration
    {
       protected override void Up(MigrationBuilder migrationBuilder)
       {

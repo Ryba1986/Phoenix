@@ -4,8 +4,8 @@ using Phoenix.Services.Repositories.Migrations.Base;
 
 namespace Phoenix.Services.Repositories.Migrations
 {
-   [Migration("202306282054_AddIsAdminToRoles")]
-   internal sealed class AddIsAdminToRoleMigration : DbMigration
+   [Migration(nameof(_202306282054_AddIsAdminToRolesMigration))]
+   internal sealed class _202306282054_AddIsAdminToRolesMigration : DbMigration
    {
       protected override void Up(MigrationBuilder migrationBuilder)
       {

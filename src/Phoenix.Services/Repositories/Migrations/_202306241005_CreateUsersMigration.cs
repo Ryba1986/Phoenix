@@ -6,8 +6,8 @@ using Phoenix.Services.Repositories.Migrations.Base;
 
 namespace Phoenix.Services.Repositories.Migrations
 {
-   [Migration("202306241005_CreateUsers")]
-   internal sealed class UserMigration : DbMigration
+   [Migration(nameof(_202306241005_CreateUsersMigration))]
+   internal sealed class _202306241005_CreateUsersMigration : DbMigration
    {
       protected override void Up(MigrationBuilder migrationBuilder)
       {

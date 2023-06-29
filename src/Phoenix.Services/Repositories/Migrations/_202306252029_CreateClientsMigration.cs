@@ -6,8 +6,8 @@ using Phoenix.Services.Repositories.Migrations.Base;
 
 namespace Phoenix.Services.Repositories.Migrations
 {
-   [Migration("202306252029_CreateClients")]
-   internal sealed class ClientMigration : DbMigration
+   [Migration(nameof(_202306252029_CreateClientsMigration))]
+   internal sealed class _202306252029_CreateClientsMigration : DbMigration
    {
       protected override void Up(MigrationBuilder migrationBuilder)
       {
