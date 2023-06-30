@@ -1,11 +1,10 @@
 using System.Threading;
 using System.Threading.Tasks;
 using MediatR;
-using Microsoft.EntityFrameworkCore;
-using Phoenix.Entities.Clients;
-using Phoenix.Entities.Devices;
+using Phoenix.Entities.Plcs.Meters;
 using Phoenix.Models.Plcs.Meters.Commands;
 using Phoenix.Services.Handlers.Base;
+using Phoenix.Services.Helpers;
 using Phoenix.Services.Repositories;
 using Phoenix.Shared.Extensions;
 using Phoenix.Shared.Results;
@@ -25,27 +24,7 @@ namespace Phoenix.Services.Handlers.Plcs.Meters.Commands
             return Result.Success();
          }
 
-         Client? client = await _uow.Client
-            .AsNoTracking()
-            .FirstOrDefaultAsync(x => x.Id == request.ClientId, cancellationToken);
-
-         if (client is null)
-         {
-            return Result.Success();
-         }
-
-         Device? device = await _uow.Device.FirstOrDefaultAsync(x => x.Id == request.DeviceId, cancellationToken);
-         if (device is null || device.LocationId != client.LocationId)
-         {
-            return Result.Success();
-         }
-
-         if (device.SerialNumber != request.SerialNumber)
-         {
-            device.SerialNumber = request.SerialNumber;
-         }
-
-         _uow.Kamstrup.Add(new()
+         Kamstrup newKamstrup = new()
          {
             DeviceId = request.DeviceId,
             Date = request.Date.RoundToSecond(),
@@ -58,10 +37,9 @@ namespace Phoenix.Services.Handlers.Plcs.Meters.Commands
             EnergySummary = request.EnergySummary,
             HourCount = request.HourCount,
             ErrorCode = request.ErrorCode,
-         });
+         };
 
-         await _uow.SaveChangesAsync(cancellationToken);
-         return Result.Success();
+         return await PlcHandlerHelper.AddPlcAsync(_uow, request, newKamstrup, cancellationToken);
       }
    }
 }
