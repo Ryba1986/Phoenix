@@ -4,6 +4,7 @@ using Phoenix.Entities.Devices;
 using Phoenix.Entities.Locations;
 using Phoenix.Entities.Plcs.Climatixs;
 using Phoenix.Entities.Plcs.Meters;
+using Phoenix.Entities.Plcs.Rvds;
 using Phoenix.Entities.Roles;
 using Phoenix.Entities.Users;
 
@@ -30,6 +31,7 @@ namespace Phoenix.Services.Repositories
 
       public readonly DbSet<Climatix> Climatix;
       public readonly DbSet<Kamstrup> Kamstrup;
+      public readonly DbSet<Rvd145> Rvd145;
 
       public UnitOfWork(DbContextOptions<UnitOfWork> options) : base(options)
       {
@@ -52,6 +54,7 @@ namespace Phoenix.Services.Repositories
 
          Climatix = Set<Climatix>();
          Kamstrup = Set<Kamstrup>();
+         Rvd145 = Set<Rvd145>();
       }
 
       protected override void OnModelCreating(ModelBuilder modelBuilder)
