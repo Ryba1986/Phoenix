@@ -18,6 +18,11 @@ namespace Phoenix.Shared.Languages
       public static string Location_Exists => Get(eng: "Location exists.", pol: "Lokalizacja już istnieje.");
       public static string Location_NotExists => Get(eng: "Location not exists.", pol: "Lokalizacja nie istnieje.");
 
+      public static string ReportType_Day => Get(eng: "Day", pol: "Dobowy");
+      public static string ReportType_Month => Get(eng: "Month", pol: "Miesięczny");
+      public static string ReportType_Year => Get(eng: "Year", pol: "Roczny");
+      public static string ReportType_YearByDay => Get(eng: "Day of year", pol: "Dobowy roczny");
+
       public static string RolePermission_Exists => Get(eng: "Permission exists.", pol: "Uprawnienie już istnieje.");
       public static string RolePermission_NotExists => Get(eng: "Permission not exists.", pol: "Uprawnienie nie istnieje.");
 
