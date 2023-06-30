@@ -18,6 +18,7 @@ namespace Phoenix.Services.Repositories.Migrations
             {
                DeviceId = table.Column<int>(name: nameof(Kamstrup.DeviceId)),
                Date = table.Column<DateTime>(name: nameof(Kamstrup.Date)),
+
                InletTemp = table.Column<float>(name: nameof(Kamstrup.InletTemp), defaultValue: default(float)),
                OutletTemp = table.Column<float>(name: nameof(Kamstrup.OutletTemp), defaultValue: default(float)),
                Power = table.Column<float>(name: nameof(Kamstrup.Power), defaultValue: default(float)),
