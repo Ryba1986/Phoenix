@@ -13,7 +13,12 @@ namespace Phoenix.Services.Extensions
       public static IXLWorkbook GetReportTemplate()
       {
          string templatePath = $"{AppContext.BaseDirectory}Reports{Path.DirectorySeparatorChar}Templates{Path.DirectorySeparatorChar}PlcReport_{CultureInfo.CurrentCulture.Name}.xlsx";
-         return new XLWorkbook(templatePath);
+
+         return new XLWorkbook(templatePath)
+         {
+            Author = nameof(Phoenix),
+            CalculationOnSave = true,
+         };
       }
 
       public static IEnumerable<string> GetSheetNames(this IXLWorksheets sheets)
