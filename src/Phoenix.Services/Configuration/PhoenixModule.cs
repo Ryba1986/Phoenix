@@ -29,8 +29,9 @@ namespace Phoenix.Services.Configuration
 
       private void RegisterModules(ContainerBuilder builder)
       {
-         builder.RegisterModule<MediatorModule>();
          builder.RegisterModule<RepositoryModule>();
+         builder.RegisterModule<MediatorModule>();
+         builder.RegisterModule<ReportModule>();
          builder.RegisterModule(new SettingsModule(_configuration));
       }
    }
