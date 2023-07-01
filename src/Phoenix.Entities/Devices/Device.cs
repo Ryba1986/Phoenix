@@ -1,4 +1,3 @@
-using System.Collections.Generic;
 using Phoenix.Entities.Base;
 using Phoenix.Entities.Locations;
 using Phoenix.Shared.Enums.Devices;
@@ -21,14 +20,11 @@ namespace Phoenix.Entities.Devices
       public string SerialNumber { get; set; }
       public bool IncludeReport { get; set; }
 
-      public ICollection<DeviceHistory> History { get; }
-
       public Device()
       {
          Location = null!;
          Name = string.Empty;
          SerialNumber = string.Empty;
-         History = new List<DeviceHistory>();
       }
    }
 }

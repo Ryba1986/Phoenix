@@ -1,4 +1,3 @@
-using System.Collections.Generic;
 using Phoenix.Entities.Base;
 using Phoenix.Entities.Locations;
 
@@ -13,15 +12,12 @@ namespace Phoenix.Entities.Clients
       public string Hostname { get; set; }
       public string ClientVersion { get; set; }
 
-      public ICollection<ClientHistory> History { get; }
-
       public Client()
       {
          Location = null!;
          MacAddress = string.Empty;
          Hostname = string.Empty;
          ClientVersion = string.Empty;
-         History = new List<ClientHistory>();
       }
    }
 }

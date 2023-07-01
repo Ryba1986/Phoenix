@@ -33,7 +33,7 @@ namespace Phoenix.Services.Repositories.Configurations.Clients
             .IsClustered();
 
          builder.HasOne(x => x.Client)
-            .WithMany(x => x.History)
+            .WithMany()
             .HasForeignKey(x => x.ClientId);
 
          builder.HasOne(x => x.Location)

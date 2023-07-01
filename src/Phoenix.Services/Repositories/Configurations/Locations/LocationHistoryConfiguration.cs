@@ -34,7 +34,7 @@ namespace Phoenix.Services.Repositories.Configurations.Locations
             .IsClustered();
 
          builder.HasOne(x => x.Location)
-            .WithMany(x => x.History)
+            .WithMany()
             .HasForeignKey(x => x.LocationId);
 
          builder.HasOne(x => x.CreatedBy)

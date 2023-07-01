@@ -50,7 +50,7 @@ namespace Phoenix.Services.Repositories.Configurations.Devices
             .IsClustered();
 
          builder.HasOne(x => x.Device)
-            .WithMany(x => x.History)
+            .WithMany()
             .HasForeignKey(x => x.DeviceId);
 
          builder.HasOne(x => x.Location)

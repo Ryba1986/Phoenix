@@ -28,7 +28,7 @@ namespace Phoenix.Services.Repositories.Configurations.Roles
             .IsClustered();
 
          builder.HasOne(x => x.Role)
-            .WithMany(x => x.History)
+            .WithMany()
             .HasForeignKey(x => x.RoleId);
 
          builder.HasOne(x => x.CreatedBy)

@@ -37,7 +37,7 @@ namespace Phoenix.Services.Repositories.Configurations.Users
             .IsClustered();
 
          builder.HasOne(x => x.User)
-            .WithMany(x => x.History)
+            .WithMany()
             .HasForeignKey(x => x.UserId);
 
          builder.HasOne(x => x.CreatedBy)
