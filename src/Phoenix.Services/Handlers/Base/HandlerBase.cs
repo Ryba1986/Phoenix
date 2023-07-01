@@ -18,7 +18,7 @@ namespace Phoenix.Services.Handlers.Base
          _uow = uow;
       }
 
-      protected static Task<bool> IsPlcExistAsync<T>(IQueryable<T> plcs, CreatePlcCommandBase request, CancellationToken cancellationToken) where T : PlcBase
+      protected static Task<bool> IsPlcExistAsync<T>(DbSet<T> plcs, CreatePlcCommandBase request, CancellationToken cancellationToken) where T : PlcBase
       {
          return plcs
             .AsNoTracking()
