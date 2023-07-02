@@ -24,6 +24,18 @@
             "/consoleloggerparameters:NoSummary"
          ],
          "problemMatcher": "$msCompile"
+      },
+      {
+         "label": "Client",
+         "command": "dotnet",
+         "type": "process",
+         "args": [
+            "build",
+            "${workspaceFolder}/src/Phoenix.Client/Phoenix.Client.csproj",
+            "/property:GenerateFullPaths=true",
+            "/consoleloggerparameters:NoSummary"
+         ],
+         "problemMatcher": "$msCompile"
       }
    ]
 }

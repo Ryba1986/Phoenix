@@ -26,6 +26,17 @@
          "env": {
             "ASPNETCORE_ENVIRONMENT": "Development"
          }
+      },
+      {
+         "name": "Client",
+         "type": "coreclr",
+         "request": "launch",
+         "preLaunchTask": "Client",
+         "program": "${workspaceFolder}/src/Phoenix.Client/bin/Debug/net8.0/Phoenix.Client.dll",
+         "args": [],
+         "cwd": "${workspaceFolder}/src/Phoenix.Client",
+         "console": "internalConsole",
+         "stopAtEntry": false
       }
    ]
 }
