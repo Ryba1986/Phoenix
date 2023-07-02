@@ -60,7 +60,8 @@ namespace Phoenix.Services.Handlers.Reports.Queries
                x.IncludeReport &&
                x.Location.IncludeReport
             )
-            .OrderBy(x => x.Name)
+            .OrderBy(x => x.Location.Name)
+            .ThenBy(x => x.Name)
             .ProjectTo<DeviceReportDto>(_mapper.ConfigurationProvider)
             .ToArrayAsync(cancellationToken);
 
@@ -71,7 +72,6 @@ namespace Phoenix.Services.Handlers.Reports.Queries
 
          IReadOnlyCollection<string> locations = devices
             .GroupBy(x => x.LocationName)
-            .OrderBy(x => x.Key)
             .Select(x => x.Key)
             .ToArray();
 
