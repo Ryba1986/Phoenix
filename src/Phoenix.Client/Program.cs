@@ -2,6 +2,7 @@ using System.Threading.Tasks;
 using Autofac;
 using Autofac.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Phoenix.Client.Configuration;
 
 namespace Phoenix.Client
 {
@@ -25,6 +26,7 @@ namespace Phoenix.Client
             })
             .ConfigureContainer<ContainerBuilder>((ctx, builder) =>
             {
+               builder.RegisterModule(new PhoenixModule(ctx.Configuration));
             });
       }
    }
