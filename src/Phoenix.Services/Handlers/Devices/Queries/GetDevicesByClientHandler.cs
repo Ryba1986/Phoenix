@@ -35,6 +35,7 @@ namespace Phoenix.Services.Handlers.Devices.Queries
             select d;
 
          return await query
+            .AsNoTracking()
             .ProjectTo<DeviceDto>(_mapper.ConfigurationProvider)
             .ToArrayAsync(cancellationToken);
       }
