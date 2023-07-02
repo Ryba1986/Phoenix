@@ -3,37 +3,31 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
 using System.Linq;
-using ClosedXML.Excel;
+using OfficeOpenXml;
 using Phoenix.Shared.Enums.Reports;
 
 namespace Phoenix.Services.Extensions
 {
    internal static class ExcelExtensions
    {
-      public static IXLWorkbook GetReportTemplate()
+      public static ExcelPackage GetReportTemplate()
       {
          string templatePath = $"{AppContext.BaseDirectory}Reports{Path.DirectorySeparatorChar}Templates{Path.DirectorySeparatorChar}PlcReport_{CultureInfo.CurrentCulture.Name}.xlsx";
 
-         return new XLWorkbook(templatePath)
-         {
-            Author = nameof(Phoenix),
-            CalculationOnSave = true,
-         };
+         return new ExcelPackage(new(templatePath), true);
       }
 
-      public static IEnumerable<string> GetSheetNames(this IXLWorksheets sheets)
+      public static IEnumerable<string> GetSheetNames(this ExcelWorksheets sheets)
       {
          return sheets.Select(x => x.Name);
       }
 
-      public static IXLWorksheet CloneSheet(this IXLWorksheets sheets, ReportType type, string newSheetName)
+      public static ExcelWorksheet CloneSheet(this ExcelWorksheets sheets, ReportType type, string newSheetName)
       {
-         return sheets
-            .First(x => x.Name == type.ToString())
-            .CopyTo(newSheetName);
+         return sheets.Copy(type.ToString(), newSheetName);
       }
 
-      public static void RemoveSheets(this IXLWorksheets sheets, IEnumerable<string> sheetNames)
+      public static void RemoveSheets(this ExcelWorksheets sheets, IEnumerable<string> sheetNames)
       {
          foreach (string name in sheetNames)
          {
@@ -43,6 +37,8 @@ namespace Phoenix.Services.Extensions
          {
             sheets.Add("NO DATA");
          }
+
+         sheets.First().Select();
       }
    }
 }

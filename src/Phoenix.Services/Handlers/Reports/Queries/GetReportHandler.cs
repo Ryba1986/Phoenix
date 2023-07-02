@@ -1,14 +1,13 @@
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using Autofac.Features.Indexed;
 using AutoMapper;
 using AutoMapper.QueryableExtensions;
-using ClosedXML.Excel;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
+using OfficeOpenXml;
 using Phoenix.Models.Devices.Dto;
 using Phoenix.Models.Reports.Queries;
 using Phoenix.Services.Extensions;
@@ -35,27 +34,24 @@ namespace Phoenix.Services.Handlers.Reports.Queries
       public async Task<FileResult> Handle(GetReportQuery request, CancellationToken cancellationToken)
       {
          ITypeProcessor typeProcessor = _typeProcessors[request.Type];
-         using IXLWorkbook workbook = ExcelExtensions.GetReportTemplate();
+         using ExcelPackage ep = ExcelExtensions.GetReportTemplate();
 
-         IReadOnlyCollection<string> templateSheetNames = workbook.Worksheets
+         IReadOnlyCollection<string> templateSheetNames = ep.Workbook.Worksheets
             .GetSheetNames()
             .ToArray();
 
-         await CreateSheetsAsync(workbook.Worksheets, request, typeProcessor, cancellationToken);
-         workbook.Worksheets.RemoveSheets(templateSheetNames);
-
-         using MemoryStream ms = new();
-         workbook.SaveAs(ms);
+         await CreateSheetsAsync(ep.Workbook.Worksheets, request, typeProcessor, cancellationToken);
+         ep.Workbook.Worksheets.RemoveSheets(templateSheetNames);
 
          return new()
          {
             Name = typeProcessor.GetFileName(request.Date),
             Type = "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
-            Data = ms.ToArray(),
+            Data = ep.GetAsByteArray(),
          };
       }
 
-      private async Task CreateSheetsAsync(IXLWorksheets sheets, GetReportQuery request, ITypeProcessor typeProcessor, CancellationToken cancellationToken)
+      private async Task CreateSheetsAsync(ExcelWorksheets sheets, GetReportQuery request, ITypeProcessor typeProcessor, CancellationToken cancellationToken)
       {
          IReadOnlyCollection<DeviceReportDto> devices = await _uow.Device
             .AsNoTracking()
@@ -81,10 +77,10 @@ namespace Phoenix.Services.Handlers.Reports.Queries
 
          foreach (string location in locations)
          {
-            IXLWorksheet sheet = sheets.CloneSheet(request.Type, location);
+            ExcelWorksheet sheet = sheets.CloneSheet(request.Type, location);
 
-            sheet.SheetView.ZoomScale = 70;
-            sheet.Cell(1, 1).Value = typeProcessor.GetHeader(location, request.Date);
+            sheet.View.ZoomScale = 70;
+            sheet.Cells[1, 1].Value = typeProcessor.GetHeader(location, request.Date);
          }
       }
    }
