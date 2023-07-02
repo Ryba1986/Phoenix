@@ -20,6 +20,8 @@ namespace Phoenix.Services.Configuration.Mappers.Profiles
             .ForMember(dst => dst.DataBits, opt => opt.MapFrom(src => src.DataBits != null ? src.DataBits.GetDescription() : string.Empty))
             .ForMember(dst => dst.Parity, opt => opt.MapFrom(src => src.Parity != null ? src.Parity.GetDescription() : string.Empty))
             .ForMember(dst => dst.StopBits, opt => opt.MapFrom(src => src.StopBits != null ? src.StopBits.GetDescription() : string.Empty));
+
+         CreateProjection<Device, DeviceReportDto>();
       }
    }
 }
