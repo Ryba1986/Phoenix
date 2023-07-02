@@ -82,6 +82,13 @@ namespace Phoenix.Services.Handlers.Reports.Queries
             sheet.View.ZoomScale = 70;
             sheet.Cells[1, 1].Value = typeProcessor.GetHeader(location, request.Date);
          }
+
+         IReadOnlyCollection<Task> plcTasks = devices
+            .GroupBy(x => x.PlcType)
+            .Select(x => _plcProcessors[x.Key].FillDataAsync(sheets, request.Date, x.ToArray(), typeProcessor, cancellationToken))
+            .ToArray();
+
+         await Task.WhenAll(plcTasks);
       }
    }
 }
