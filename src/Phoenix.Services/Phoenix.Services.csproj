@@ -37,4 +37,10 @@
       <ProjectReference Include="..\Phoenix.Models\Phoenix.Models.csproj" />
    </ItemGroup>
 
+   <ItemGroup>
+      <Content Include="Reports\Templates\*.xlsx">
+         <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+   </ItemGroup>
+
 </Project>
