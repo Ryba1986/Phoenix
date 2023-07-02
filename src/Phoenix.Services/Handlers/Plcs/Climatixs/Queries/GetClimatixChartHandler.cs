@@ -27,9 +27,9 @@ namespace Phoenix.Services.Handlers.Plcs.Climatixs.Queries
          return await _uow.Climatix
             .AsNoTracking()
             .Where(x =>
-               x.DeviceId == request.DeviceId &&
                x.Date >= dateTime &&
-               x.Date < dateTime.AddDays(1)
+               x.Date < dateTime.AddDays(1) &&
+               x.DeviceId == request.DeviceId
             )
             .ProjectTo<ClimatixChartDto>(_mapper.ConfigurationProvider)
             .ToArrayAsync(cancellationToken);

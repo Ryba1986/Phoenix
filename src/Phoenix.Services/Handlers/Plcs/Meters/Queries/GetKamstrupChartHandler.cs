@@ -27,9 +27,9 @@ namespace Phoenix.Services.Handlers.Plcs.Meters.Queries
          return await _uow.Kamstrup
             .AsNoTracking()
             .Where(x =>
-               x.DeviceId == request.DeviceId &&
                x.Date >= dateTime &&
-               x.Date < dateTime.AddDays(1)
+               x.Date < dateTime.AddDays(1) &&
+               x.DeviceId == request.DeviceId
             )
             .ProjectTo<KamstrupChartDto>(_mapper.ConfigurationProvider)
             .ToArrayAsync(cancellationToken);

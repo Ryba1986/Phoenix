@@ -23,8 +23,8 @@ namespace Phoenix.Services.Handlers.Base
          return plcs
             .AsNoTracking()
             .AnyAsync(x =>
-               x.DeviceId == request.DeviceId &&
-               x.Date == request.Date.RoundToSecond()
+               x.Date == request.Date.RoundToSecond() &&
+               x.DeviceId == request.DeviceId
             , cancellationToken);
       }
 

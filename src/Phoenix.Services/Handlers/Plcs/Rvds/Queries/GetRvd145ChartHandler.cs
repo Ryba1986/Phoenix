@@ -27,9 +27,9 @@ namespace Phoenix.Services.Handlers.Plcs.Rvds.Queries
          return await _uow.Rvd145
             .AsNoTracking()
             .Where(x =>
-               x.DeviceId == request.DeviceId &&
                x.Date >= dateTime &&
-               x.Date < dateTime.AddDays(1)
+               x.Date < dateTime.AddDays(1) &&
+               x.DeviceId == request.DeviceId
             )
             .ProjectTo<Rvd145ChartDto>(_mapper.ConfigurationProvider)
             .ToArrayAsync(cancellationToken);

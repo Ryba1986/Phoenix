@@ -16,8 +16,8 @@ namespace Phoenix.Services.Repositories.Migrations
             name: nameof(Climatix),
             columns: table => new
             {
-               DeviceId = table.Column<int>(name: nameof(Climatix.DeviceId)),
                Date = table.Column<DateTime>(name: nameof(Climatix.Date)),
+               DeviceId = table.Column<int>(name: nameof(Climatix.DeviceId)),
 
                OutsideTemp = table.Column<float>(name: nameof(Climatix.OutsideTemp), defaultValue: default(float)),
                ChHighInletPresure = table.Column<float>(name: nameof(Climatix.ChHighInletPresure), defaultValue: default(float)),

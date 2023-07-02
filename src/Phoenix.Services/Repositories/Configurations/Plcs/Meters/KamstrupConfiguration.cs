@@ -32,10 +32,10 @@ namespace Phoenix.Services.Repositories.Configurations.Plcs.Meters
          builder.Property(x => x.ErrorCode)
             .IsRequired();
 
-         builder.Property(x => x.DeviceId)
+         builder.Property(x => x.Date)
             .IsRequired();
 
-         builder.Property(x => x.Date)
+         builder.Property(x => x.DeviceId)
             .IsRequired();
 
          builder.HasKey(x => new { x.Date, x.DeviceId })

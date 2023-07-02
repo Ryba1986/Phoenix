@@ -16,8 +16,8 @@ namespace Phoenix.Services.Repositories.Migrations
             name: nameof(Rvd145),
             columns: table => new
             {
-               DeviceId = table.Column<int>(name: nameof(Rvd145.DeviceId)),
                Date = table.Column<DateTime>(name: nameof(Rvd145.Date)),
+               DeviceId = table.Column<int>(name: nameof(Rvd145.DeviceId)),
 
                OutsideTemp = table.Column<float>(name: nameof(Rvd145.OutsideTemp), defaultValue: default(float)),
                ChHighInletPresure = table.Column<float>(name: nameof(Rvd145.ChHighInletPresure), defaultValue: default(float)),
