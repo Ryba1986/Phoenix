@@ -20,7 +20,8 @@
       "**/obj": true,
       "**/publish": true,
       "**/package-lock.json": true,
-      "**/yarn.lock": true
+      "**/yarn.lock": true,
+      "**/PhoenixClientDb*.db": true
    },
    "files.insertFinalNewline": true,
    "git.enableSmartCommit": true,
