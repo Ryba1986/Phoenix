@@ -48,7 +48,7 @@ namespace Phoenix.Api.Web.Controllers.Base
 
          return ModelState.IsValid
             ? Ok(await _mediator.Send(request))
-            : BadRequest(ModelState.Values.First().Errors.First().ErrorMessage);
+            : Ok(Result.Error(ModelState.Values.First().Errors.First().ErrorMessage));
       }
    }
 }
