@@ -13,9 +13,12 @@ namespace Phoenix.Api.Client.Controllers
       }
 
       [HttpGet]
-      public async Task<IActionResult> GetDevicesByClient([FromQuery] GetDevicesByClientQuery request)
+      public async Task<IActionResult> GetDevicesByClient()
       {
-         return await HandleAsync(request);
+         return await HandleAsync(new GetDevicesByClientQuery()
+         {
+            ClientId = GetId(),
+         });
       }
    }
 }
