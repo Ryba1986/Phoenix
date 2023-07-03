@@ -23,6 +23,8 @@ namespace Phoenix.Client.Configuration
          builder.RegisterModule<ApiClientModule>();
          builder.RegisterModule<LocalDatabaseModule>();
          builder.RegisterModule<MediatorModule>();
+         builder.RegisterModule<ModbusModule>();
+         builder.RegisterModule<PlcModule>();
          builder.RegisterModule(new SettingsModule(_configuration));
       }
    }
