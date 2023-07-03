@@ -8,8 +8,8 @@ namespace Phoenix.Shared.Extensions
       public static string GetVersion(this Type type)
       {
          return type.Assembly
-            .GetCustomAttribute<AssemblyInformationalVersionAttribute>()?
-            .InformationalVersion ?? string.Empty;
+            .GetCustomAttribute<AssemblyFileVersionAttribute>()?
+            .Version ?? string.Empty;
       }
 
       public static string GetPropertyValue(this Type type, string name)
