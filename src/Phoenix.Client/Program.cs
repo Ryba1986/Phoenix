@@ -1,8 +1,10 @@
 using System.Threading.Tasks;
 using Autofac;
 using Autofac.Extensions.DependencyInjection;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Phoenix.Client.Configuration;
+using Phoenix.Client.Workers;
 
 namespace Phoenix.Client
 {
@@ -23,6 +25,8 @@ namespace Phoenix.Client
             .UseSystemd()
             .ConfigureServices(services =>
             {
+               services.AddHostedService<ClientWorker>();
+               services.AddHostedService<PlcReaderWorker>();
             })
             .ConfigureContainer<ContainerBuilder>((ctx, builder) =>
             {
