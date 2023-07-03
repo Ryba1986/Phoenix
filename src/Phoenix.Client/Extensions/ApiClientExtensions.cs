@@ -42,22 +42,24 @@ namespace Phoenix.Client.Extensions
             : Result.Error(response.ErrorMessage ?? string.Empty);
       }
 
-      public static async Task<bool> PostAsync(this IRestClient client, string url, IRequest<TokenResult> command, CancellationToken cancellationToken)
+      public static async Task<TokenResult> PostAsync(this IRestClient client, string url, IRequest<TokenResult> command, CancellationToken cancellationToken)
+      {
+         RestResponse<TokenResult> response = await client.GetPostResponseAsync(url, command, cancellationToken);
+
+         return response.IsSuccessful
+            ? response.Data
+            : new();
+      }
+
+      public static void SetToken(this IRestClient client, string value)
       {
          if (client.Options.Authenticator is not JwtAuthenticator authenticator)
          {
-            return false;
+            return;
          }
 
-         RestResponse<TokenResult> response = await client.GetPostResponseAsync(url, command, cancellationToken);
-         if (response.IsSuccessful && !string.IsNullOrWhiteSpace(response.Data.Value))
-         {
-            authenticator.SetBearerToken(response.Data.Value);
-            return true;
-         }
-
-         authenticator.SetBearerToken(EmptyTokenValue);
-         return false;
+         authenticator.SetBearerToken(!string.IsNullOrWhiteSpace(value) ? value : EmptyTokenValue
+         );
       }
 
       private static Task<RestResponse<T>> GetPostResponseAsync<T>(this IRestClient client, string url, IRequest<T> command, CancellationToken cancellationToken) where T : struct
