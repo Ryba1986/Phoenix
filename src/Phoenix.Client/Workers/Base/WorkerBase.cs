@@ -1,3 +1,4 @@
+using System;
 using System.Threading;
 using System.Threading.Tasks;
 using MediatR;
@@ -17,14 +18,15 @@ namespace Phoenix.Client.Workers.Base
          _settings = settings;
       }
 
-      protected static Task GetIntervalAsync(int elapsedMilliseconds, int intervalMilliseconds, CancellationToken cancellationToken)
+      protected static Task GetIntervalAsync(TimeSpan elapsedTime, int interval, CancellationToken cancellationToken)
       {
-         if (elapsedMilliseconds >= intervalMilliseconds)
+         TimeSpan intervalTime = TimeSpan.FromMilliseconds(interval);
+         if (elapsedTime >= intervalTime)
          {
             return Task.CompletedTask;
          }
 
-         return Task.Delay(intervalMilliseconds - elapsedMilliseconds, cancellationToken);
+         return Task.Delay(intervalTime - elapsedTime, cancellationToken);
       }
    }
 }

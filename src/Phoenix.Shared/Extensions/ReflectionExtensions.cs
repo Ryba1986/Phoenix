@@ -5,6 +5,13 @@ namespace Phoenix.Shared.Extensions
 {
    public static class ReflectionExtensions
    {
+      public static string GetVersion(this Type type)
+      {
+         return type.Assembly
+            .GetCustomAttribute<AssemblyInformationalVersionAttribute>()?
+            .InformationalVersion ?? string.Empty;
+      }
+
       public static string GetPropertyValue(this Type type, string name)
       {
          PropertyInfo? propertyInfo = type.GetProperty(name, BindingFlags.Static | BindingFlags.Public);
