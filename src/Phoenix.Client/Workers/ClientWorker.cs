@@ -28,7 +28,7 @@ namespace Phoenix.Client.Workers
                await GetTokenAsync(cancellationToken);
             }
 
-            await UpdateClientInfoAsync(cancellationToken);
+            await UpdateInfoAsync(cancellationToken);
 
             await Task.Delay(TimeSpan.FromMinutes(1), cancellationToken);
          }
@@ -36,7 +36,10 @@ namespace Phoenix.Client.Workers
 
       private async Task GetTokenAsync(CancellationToken cancellationToken)
       {
-         await _mediator.Send(new GetClientTokenRefreshQuery(), cancellationToken);
+         await _mediator.Send(new GetClientTokenQuery()
+         {
+            MacAddress = NetworkHelper.GetMacAddress(),
+         }, cancellationToken);
       }
 
       private async Task<bool> GetTokenRefreshAsync(CancellationToken cancellationToken)
@@ -45,7 +48,7 @@ namespace Phoenix.Client.Workers
          return !string.IsNullOrWhiteSpace(result.Value);
       }
 
-      private async Task UpdateClientInfoAsync(CancellationToken cancellationToken)
+      private async Task UpdateInfoAsync(CancellationToken cancellationToken)
       {
          await _mediator.Send(new UpdateClientInfoCommand()
          {
