@@ -16,6 +16,7 @@ namespace Phoenix.Services.Repositories.Migrations
             {
                Id = table.Column<int>(name: nameof(Role.Id)).AddIdentity(),
                Name = table.Column<string>(name: nameof(Role.Name), maxLength: 50, defaultValue: string.Empty),
+               IsAdmin = table.Column<bool>(name: nameof(Role.IsAdmin), defaultValue: default(bool)),
                IsActive = table.Column<bool>(name: nameof(Role.IsActive), defaultValue: default(bool)),
                Version = table.Column<byte[]>(name: nameof(Role.Version), rowVersion: true),
             },

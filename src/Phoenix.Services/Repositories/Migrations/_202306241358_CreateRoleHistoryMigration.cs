@@ -20,6 +20,7 @@ namespace Phoenix.Services.Repositories.Migrations
                RoleId = table.Column<int>(name: nameof(RoleHistory.RoleId)),
                Name = table.Column<string>(name: nameof(RoleHistory.Name), maxLength: 50, defaultValue: string.Empty),
                CreatedById = table.Column<int>(name: nameof(RoleHistory.CreatedById)),
+               IsAdmin = table.Column<bool>(name: nameof(RoleHistory.IsAdmin), defaultValue: default(bool)),
                IsActive = table.Column<bool>(name: nameof(RoleHistory.IsActive), defaultValue: default(bool)),
                CreateDate = table.Column<DateTime>(name: nameof(RoleHistory.CreateDate), defaultValue: default(DateTime)),
             },
