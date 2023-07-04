@@ -18,4 +18,4 @@ In summary, a monitoring system for heating nodes is a sophisticated network of 
 
 ## License
 
-The project is licensed under the Polyform Noncommercial License.
+The project is licensed under the MIT license.
