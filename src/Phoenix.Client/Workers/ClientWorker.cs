@@ -20,26 +20,34 @@ namespace Phoenix.Client.Workers
 
       protected override async Task ExecuteAsync(CancellationToken cancellationToken)
       {
+         bool isAuthorized;
+         bool isInfoUpdated = false;
+
          while (!cancellationToken.IsCancellationRequested)
          {
-            bool refreshResult = await GetTokenRefreshAsync(cancellationToken);
-            if (!refreshResult)
+            isAuthorized = await GetTokenRefreshAsync(cancellationToken);
+            if (!isAuthorized)
             {
-               await GetTokenAsync(cancellationToken);
+               isAuthorized = await GetTokenAsync(cancellationToken);
             }
 
-            await UpdateInfoAsync(cancellationToken);
+            if (!isInfoUpdated && isAuthorized)
+            {
+               isInfoUpdated = await UpdateInfoAsync(cancellationToken);
+            }
 
             await Task.Delay(TimeSpan.FromMinutes(1), cancellationToken);
          }
       }
 
-      private async Task GetTokenAsync(CancellationToken cancellationToken)
+      private async Task<bool> GetTokenAsync(CancellationToken cancellationToken)
       {
-         await _mediator.Send(new GetClientTokenQuery()
+         TokenResult result = await _mediator.Send(new GetClientTokenQuery()
          {
             MacAddress = NetworkHelper.GetMacAddress(),
          }, cancellationToken);
+
+         return !string.IsNullOrWhiteSpace(result.Value);
       }
 
       private async Task<bool> GetTokenRefreshAsync(CancellationToken cancellationToken)
@@ -48,13 +56,15 @@ namespace Phoenix.Client.Workers
          return !string.IsNullOrWhiteSpace(result.Value);
       }
 
-      private async Task UpdateInfoAsync(CancellationToken cancellationToken)
+      private async Task<bool> UpdateInfoAsync(CancellationToken cancellationToken)
       {
-         await _mediator.Send(new UpdateClientInfoCommand()
+         Result result = await _mediator.Send(new UpdateClientInfoCommand()
          {
             Hostname = await NetworkHelper.GetTorHostAsync(_settings.TorHostPath, cancellationToken),
             ClientVersion = GetType().GetVersion(),
          }, cancellationToken);
+
+         return result.IsSuccess;
       }
    }
 }
