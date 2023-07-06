@@ -26,26 +26,25 @@ namespace Phoenix.Services.Reports.Plcs
          Dictionary<int, ExcelAddressBase> result = new();
 
          IReadOnlyDictionary<int, ClimatixReportDto[]> plcData = await GetPlcDataAsync<Climatix, ClimatixReportDto>(_uow.Climatix, date, typeProcessor, cancellationToken);
-         if (plcData.Count == 0)
-         {
-            return result;
-         }
 
          foreach (DeviceReportDto device in devices)
          {
-            if (!plcData.TryGetValue(device.Id, out ClimatixReportDto[]? deviceData))
-            {
-               continue;
-            }
-
+            plcData.TryGetValue(device.Id, out ClimatixReportDto[]? deviceData);
             result.Add(device.Id, GetSheetData(sheets[PlcSheet], device, deviceData, typeProcessor));
          }
 
          return result;
       }
 
-      private static ExcelAddressBase GetSheetData(ExcelWorksheet sheet, DeviceReportDto device, IReadOnlyCollection<ClimatixReportDto> plcData, ITypeProcessor typeProcessor)
+      private static ExcelAddressBase GetSheetData(ExcelWorksheet sheet, DeviceReportDto device, IReadOnlyCollection<ClimatixReportDto>? plcData, ITypeProcessor typeProcessor)
       {
+         sheet.Cells[typeProcessor.StartingRow - 4, 0].Value = device.Name;
+
+         if (plcData is null)
+         {
+            return sheet.Dimension;
+         }
+
          foreach (ClimatixReportDto climatix in plcData)
          {
             int rowIndex = typeProcessor.StartingRow + typeProcessor.GetDatePart(climatix.Date);

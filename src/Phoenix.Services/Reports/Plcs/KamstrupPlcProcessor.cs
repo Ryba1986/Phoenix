@@ -28,32 +28,27 @@ namespace Phoenix.Services.Reports.Plcs
          Dictionary<int, ExcelAddressBase> result = new();
 
          IReadOnlyDictionary<int, KamstrupReportDto[]> plcData = await GetPlcDataAsync<Kamstrup, KamstrupReportDto>(_uow.Kamstrup, date, typeProcessor, cancellationToken);
-         if (plcData.Count == 0)
-         {
-            return result;
-         }
-
          IReadOnlyDictionary<int, KamstrupDto> beforeData = await GetBeforeDataAsync(_uow.Kamstrup, date, devices, typeProcessor, cancellationToken);
-         if (beforeData.Count == 0)
-         {
-            return result;
-         }
 
          foreach (DeviceReportDto device in devices)
          {
-            if (!plcData.TryGetValue(device.Id, out KamstrupReportDto[]? currentData) || !beforeData.TryGetValue(device.Id, out KamstrupDto? beforePlc))
-            {
-               continue;
-            }
-
+            plcData.TryGetValue(device.Id, out KamstrupReportDto[]? currentData);
+            beforeData.TryGetValue(device.Id, out KamstrupDto? beforePlc);
             result.Add(device.Id, GetSheetData(sheets[MeterSheet], device, currentData, beforePlc, typeProcessor));
          }
 
          return result;
       }
 
-      private static ExcelAddressBase GetSheetData(ExcelWorksheet sheet, DeviceReportDto device, IReadOnlyCollection<KamstrupReportDto> currentData, KamstrupDto beforeMeter, ITypeProcessor typeProcessor)
+      private static ExcelAddressBase GetSheetData(ExcelWorksheet sheet, DeviceReportDto device, IReadOnlyCollection<KamstrupReportDto>? currentData, KamstrupDto? beforeMeter, ITypeProcessor typeProcessor)
       {
+         sheet.Cells[typeProcessor.StartingRow - 4, 0].Value = device.Name;
+
+         if (currentData is null || beforeMeter is null)
+         {
+            return sheet.Dimension;
+         }
+
          float beforeVolumeSummary = beforeMeter.VolumeSummary;
          float beforeEnergySummary = beforeMeter.EnergySummary;
 
@@ -83,8 +78,6 @@ namespace Phoenix.Services.Reports.Plcs
             sheet.Cells[rowIndex, 13].Value = meter.EnergySummaryMax - beforeEnergySummary;
             beforeEnergySummary = meter.EnergySummaryMax;
          }
-
-         sheet.Cells[typeProcessor.StartingRow - 4, 0].Value = device.Name;
 
          sheet.Cells[sheet.Dimension.Rows, 0].Value = currentData.Average(x => x.InletTempAvg).Round();
          sheet.Cells[sheet.Dimension.Rows, 1].Value = currentData.Min(x => x.InletTempMin);
