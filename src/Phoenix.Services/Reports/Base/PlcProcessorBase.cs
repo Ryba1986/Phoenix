@@ -16,6 +16,9 @@ namespace Phoenix.Services.Reports.Base
 {
    internal abstract class PlcProcessorBase : QueryHandlerBase
    {
+      protected const string MeterSheet = "Meter";
+      protected const string PlcSheet = "Plc";
+
       public PlcProcessorBase(UnitOfWork uow, IMapper mapper) : base(uow, mapper)
       {
       }

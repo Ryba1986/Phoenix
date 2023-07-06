@@ -11,6 +11,7 @@ using Phoenix.Services.Extensions;
 using Phoenix.Services.Handlers.Base;
 using Phoenix.Services.Reports.Base;
 using Phoenix.Services.Repositories;
+using Phoenix.Shared.Enums.Devices;
 using Phoenix.Shared.Enums.Reports;
 using Phoenix.Shared.Results;
 
@@ -18,10 +19,12 @@ namespace Phoenix.Services.Handlers.Reports.Queries
 {
    internal sealed class GetReportHandler : QueryHandlerBase, IRequestHandler<GetReportQuery, FileResult>
    {
+      private readonly IIndex<PlcType, IPlcProcessor> _plcProcessors;
       private readonly IIndex<ReportType, ITypeProcessor> _typeProcessors;
 
-      public GetReportHandler(UnitOfWork uow, IMapper mapper, IIndex<ReportType, ITypeProcessor> typeProcessors) : base(uow, mapper)
+      public GetReportHandler(UnitOfWork uow, IMapper mapper, IIndex<PlcType, IPlcProcessor> plcProcessors, IIndex<ReportType, ITypeProcessor> typeProcessors) : base(uow, mapper)
       {
+         _plcProcessors = plcProcessors;
          _typeProcessors = typeProcessors;
       }
 

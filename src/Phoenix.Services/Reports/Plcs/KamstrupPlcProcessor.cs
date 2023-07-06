@@ -23,90 +23,89 @@ namespace Phoenix.Services.Reports.Plcs
       {
       }
 
-      public async Task FillDataAsync(ExcelWorksheets sheets, DateOnly date, IReadOnlyCollection<DeviceReportDto> devices, ITypeProcessor typeProcessor, CancellationToken cancellationToken)
+      public async Task<IReadOnlyDictionary<int, ExcelAddressBase>> GetExcelDataAsync(ExcelWorksheets sheets, DateOnly date, IReadOnlyCollection<DeviceReportDto> devices, ITypeProcessor typeProcessor, CancellationToken cancellationToken)
       {
+         Dictionary<int, ExcelAddressBase> result = new();
+
          IReadOnlyDictionary<int, KamstrupReportDto[]> plcData = await GetPlcDataAsync<Kamstrup, KamstrupReportDto>(_uow.Kamstrup, date, typeProcessor, cancellationToken);
          if (plcData.Count == 0)
          {
-            return;
+            return result;
          }
 
          IReadOnlyDictionary<int, KamstrupDto> beforeData = await GetBeforeDataAsync(_uow.Kamstrup, date, devices, typeProcessor, cancellationToken);
          if (beforeData.Count == 0)
          {
-            return;
+            return result;
          }
 
-         foreach (var group in devices.GroupBy(x => x.LocationName))
+         foreach (DeviceReportDto device in devices)
          {
-            ushort startColumn = typeProcessor.StartingPoints.MeterColumn;
-
-            foreach (DeviceReportDto device in group)
+            if (!plcData.TryGetValue(device.Id, out KamstrupReportDto[]? currentData) || !beforeData.TryGetValue(device.Id, out KamstrupDto? beforePlc))
             {
-               if (!plcData.TryGetValue(device.Id, out KamstrupReportDto[]? currentData) || !beforeData.TryGetValue(device.Id, out KamstrupDto? beforePlc))
-               {
-                  continue;
-               }
-
-               FillSheet(sheets[device.LocationName], device, currentData, beforePlc, typeProcessor, ref startColumn);
+               continue;
             }
+
+            result.Add(device.Id, GetSheetData(sheets[MeterSheet], device, currentData, beforePlc, typeProcessor));
          }
+
+         return result;
       }
 
-      private static void FillSheet(ExcelWorksheet sheet, DeviceReportDto device, IReadOnlyCollection<KamstrupReportDto> currentData, KamstrupDto beforeMeter, ITypeProcessor typeProcessor, ref ushort startColumn)
+      private static ExcelAddressBase GetSheetData(ExcelWorksheet sheet, DeviceReportDto device, IReadOnlyCollection<KamstrupReportDto> currentData, KamstrupDto beforeMeter, ITypeProcessor typeProcessor)
       {
          float beforeVolumeSummary = beforeMeter.VolumeSummary;
          float beforeEnergySummary = beforeMeter.EnergySummary;
 
          foreach (KamstrupReportDto meter in currentData)
          {
-            int rowIndex = typeProcessor.StartingPoints.Row + typeProcessor.GetDatePart(meter.Date);
+            int rowIndex = typeProcessor.StartingRow + typeProcessor.GetDatePart(meter.Date);
 
-            sheet.Cells[rowIndex, startColumn + 0].Value = meter.InletTempAvg.Round();
-            sheet.Cells[rowIndex, startColumn + 1].Value = meter.InletTempMin;
-            sheet.Cells[rowIndex, startColumn + 2].Value = meter.InletTempMax;
+            sheet.Cells[rowIndex, 0].Value = meter.InletTempAvg.Round();
+            sheet.Cells[rowIndex, 1].Value = meter.InletTempMin;
+            sheet.Cells[rowIndex, 2].Value = meter.InletTempMax;
 
-            sheet.Cells[rowIndex, startColumn + 3].Value = meter.OutletTempAvg.Round();
-            sheet.Cells[rowIndex, startColumn + 4].Value = meter.OutletTempMin;
-            sheet.Cells[rowIndex, startColumn + 5].Value = meter.OutletTempMax;
+            sheet.Cells[rowIndex, 3].Value = meter.OutletTempAvg.Round();
+            sheet.Cells[rowIndex, 4].Value = meter.OutletTempMin;
+            sheet.Cells[rowIndex, 5].Value = meter.OutletTempMax;
 
-            sheet.Cells[rowIndex, startColumn + 6].Value = meter.PowerAvg.Round();
-            sheet.Cells[rowIndex, startColumn + 7].Value = meter.PowerMin;
-            sheet.Cells[rowIndex, startColumn + 8].Value = meter.PowerMax;
+            sheet.Cells[rowIndex, 6].Value = meter.PowerAvg.Round();
+            sheet.Cells[rowIndex, 7].Value = meter.PowerMin;
+            sheet.Cells[rowIndex, 8].Value = meter.PowerMax;
 
-            sheet.Cells[rowIndex, startColumn + 9].Value = meter.VolumeAvg.Round();
-            sheet.Cells[rowIndex, startColumn + 10].Value = meter.VolumeMin;
-            sheet.Cells[rowIndex, startColumn + 11].Value = meter.VolumeMax;
+            sheet.Cells[rowIndex, 9].Value = meter.VolumeAvg.Round();
+            sheet.Cells[rowIndex, 10].Value = meter.VolumeMin;
+            sheet.Cells[rowIndex, 11].Value = meter.VolumeMax;
 
-            sheet.Cells[rowIndex, startColumn + 12].Value = meter.VolumeSummaryMax - beforeVolumeSummary;
+            sheet.Cells[rowIndex, 12].Value = meter.VolumeSummaryMax - beforeVolumeSummary;
             beforeVolumeSummary = meter.VolumeSummaryMax;
 
-            sheet.Cells[rowIndex, startColumn + 13].Value = meter.EnergySummaryMax - beforeEnergySummary;
+            sheet.Cells[rowIndex, 13].Value = meter.EnergySummaryMax - beforeEnergySummary;
             beforeEnergySummary = meter.EnergySummaryMax;
          }
 
-         int summaryRowIndex = typeProcessor.StartingPoints.Row + typeProcessor.SummaryRowOffset;
+         sheet.Cells[typeProcessor.StartingRow - 4, 0].Value = device.Name;
 
-         sheet.Cells[typeProcessor.StartingPoints.Row - 4, startColumn].Value = device.Name;
+         sheet.Cells[sheet.Dimension.Rows, 0].Value = currentData.Average(x => x.InletTempAvg).Round();
+         sheet.Cells[sheet.Dimension.Rows, 1].Value = currentData.Min(x => x.InletTempMin);
+         sheet.Cells[sheet.Dimension.Rows, 2].Value = currentData.Max(x => x.InletTempMax);
 
-         sheet.Cells[summaryRowIndex, startColumn++].Value = currentData.Average(x => x.InletTempAvg).Round();
-         sheet.Cells[summaryRowIndex, startColumn++].Value = currentData.Min(x => x.InletTempMin);
-         sheet.Cells[summaryRowIndex, startColumn++].Value = currentData.Max(x => x.InletTempMax);
+         sheet.Cells[sheet.Dimension.Rows, 3].Value = currentData.Average(x => x.OutletTempAvg).Round();
+         sheet.Cells[sheet.Dimension.Rows, 4].Value = currentData.Min(x => x.OutletTempMin);
+         sheet.Cells[sheet.Dimension.Rows, 5].Value = currentData.Max(x => x.OutletTempMax);
 
-         sheet.Cells[summaryRowIndex, startColumn++].Value = currentData.Average(x => x.OutletTempAvg).Round();
-         sheet.Cells[summaryRowIndex, startColumn++].Value = currentData.Min(x => x.OutletTempMin);
-         sheet.Cells[summaryRowIndex, startColumn++].Value = currentData.Max(x => x.OutletTempMax);
+         sheet.Cells[sheet.Dimension.Rows, 6].Value = currentData.Average(x => x.PowerAvg).Round();
+         sheet.Cells[sheet.Dimension.Rows, 7].Value = currentData.Min(x => x.PowerMin);
+         sheet.Cells[sheet.Dimension.Rows, 8].Value = currentData.Max(x => x.PowerMax);
 
-         sheet.Cells[summaryRowIndex, startColumn++].Value = currentData.Average(x => x.PowerAvg).Round();
-         sheet.Cells[summaryRowIndex, startColumn++].Value = currentData.Min(x => x.PowerMin);
-         sheet.Cells[summaryRowIndex, startColumn++].Value = currentData.Max(x => x.PowerMax);
+         sheet.Cells[sheet.Dimension.Rows, 9].Value = currentData.Average(x => x.VolumeAvg).Round();
+         sheet.Cells[sheet.Dimension.Rows, 10].Value = currentData.Min(x => x.VolumeMin);
+         sheet.Cells[sheet.Dimension.Rows, 11].Value = currentData.Max(x => x.VolumeMax);
 
-         sheet.Cells[summaryRowIndex, startColumn++].Value = currentData.Average(x => x.VolumeAvg).Round();
-         sheet.Cells[summaryRowIndex, startColumn++].Value = currentData.Min(x => x.VolumeMin);
-         sheet.Cells[summaryRowIndex, startColumn++].Value = currentData.Max(x => x.VolumeMax);
+         sheet.Cells[sheet.Dimension.Rows, 12].Value = currentData.Max(x => x.VolumeSummaryMax) - beforeMeter.VolumeSummary;
+         sheet.Cells[sheet.Dimension.Rows, 13].Value = currentData.Max(x => x.EnergySummaryMax) - beforeMeter.EnergySummary;
 
-         sheet.Cells[summaryRowIndex, startColumn++].Value = currentData.Max(x => x.VolumeSummaryMax) - beforeMeter.VolumeSummary;
-         sheet.Cells[summaryRowIndex, startColumn++].Value = currentData.Max(x => x.EnergySummaryMax) - beforeMeter.EnergySummary;
+         return sheet.Dimension;
       }
 
       private async Task<IReadOnlyDictionary<int, KamstrupDto>> GetBeforeDataAsync(DbSet<Kamstrup> plc, DateOnly date, IReadOnlyCollection<DeviceReportDto> devices, ITypeProcessor typeProcessor, CancellationToken cancellationToken)

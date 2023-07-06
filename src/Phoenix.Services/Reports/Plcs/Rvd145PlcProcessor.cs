@@ -21,12 +21,14 @@ namespace Phoenix.Services.Reports.Plcs
       {
       }
 
-      public async Task FillDataAsync(ExcelWorksheets sheets, DateOnly date, IReadOnlyCollection<DeviceReportDto> devices, ITypeProcessor typeProcessor, CancellationToken cancellationToken)
+      public async Task<IReadOnlyDictionary<int, ExcelAddressBase>> GetExcelDataAsync(ExcelWorksheets sheets, DateOnly date, IReadOnlyCollection<DeviceReportDto> devices, ITypeProcessor typeProcessor, CancellationToken cancellationToken)
       {
+         Dictionary<int, ExcelAddressBase> result = new();
+
          IReadOnlyDictionary<int, Rvd145ReportDto[]> plcData = await GetPlcDataAsync<Rvd145, Rvd145ReportDto>(_uow.Rvd145, date, typeProcessor, cancellationToken);
          if (plcData.Count == 0)
          {
-            return;
+            return result;
          }
 
          foreach (DeviceReportDto device in devices)
@@ -36,72 +38,74 @@ namespace Phoenix.Services.Reports.Plcs
                continue;
             }
 
-            FillSheet(sheets[device.LocationName], device, deviceData, typeProcessor);
+            result.Add(device.Id, GetSheetData(sheets[PlcSheet], device, deviceData, typeProcessor));
          }
+
+         return result;
       }
 
-      private static void FillSheet(ExcelWorksheet sheet, DeviceReportDto device, IReadOnlyCollection<Rvd145ReportDto> plcData, ITypeProcessor typeProcessor)
+      private static ExcelAddressBase GetSheetData(ExcelWorksheet sheet, DeviceReportDto device, IReadOnlyCollection<Rvd145ReportDto> plcData, ITypeProcessor typeProcessor)
       {
          foreach (Rvd145ReportDto rvd in plcData)
          {
-            int rowIndex = typeProcessor.StartingPoints.Row + typeProcessor.GetDatePart(rvd.Date);
+            int rowIndex = typeProcessor.StartingRow + typeProcessor.GetDatePart(rvd.Date);
 
-            sheet.Cells[rowIndex, typeProcessor.StartingPoints.PlcColumn + 0].Value = rvd.OutsideTempAvg.Round();
-            sheet.Cells[rowIndex, typeProcessor.StartingPoints.PlcColumn + 1].Value = rvd.OutsideTempMin;
-            sheet.Cells[rowIndex, typeProcessor.StartingPoints.PlcColumn + 2].Value = rvd.OutsideTempMax;
+            sheet.Cells[rowIndex, 0].Value = rvd.OutsideTempAvg.Round();
+            sheet.Cells[rowIndex, 1].Value = rvd.OutsideTempMin;
+            sheet.Cells[rowIndex, 2].Value = rvd.OutsideTempMax;
 
-            sheet.Cells[rowIndex, typeProcessor.StartingPoints.PlcColumn + 3].Value = rvd.ChHighInletPresureAvg.Round();
-            sheet.Cells[rowIndex, typeProcessor.StartingPoints.PlcColumn + 4].Value = rvd.ChHighInletPresureMin;
-            sheet.Cells[rowIndex, typeProcessor.StartingPoints.PlcColumn + 5].Value = rvd.ChHighInletPresureMax;
+            sheet.Cells[rowIndex, 3].Value = rvd.ChHighInletPresureAvg.Round();
+            sheet.Cells[rowIndex, 4].Value = rvd.ChHighInletPresureMin;
+            sheet.Cells[rowIndex, 5].Value = rvd.ChHighInletPresureMax;
 
-            sheet.Cells[rowIndex, typeProcessor.StartingPoints.PlcColumn + 9].Value = rvd.Ch1LowInletTempAvg.Round();
-            sheet.Cells[rowIndex, typeProcessor.StartingPoints.PlcColumn + 10].Value = rvd.Ch1LowInletTempMin;
-            sheet.Cells[rowIndex, typeProcessor.StartingPoints.PlcColumn + 11].Value = rvd.Ch1LowInletTempMax;
+            sheet.Cells[rowIndex, 9].Value = rvd.Ch1LowInletTempAvg.Round();
+            sheet.Cells[rowIndex, 10].Value = rvd.Ch1LowInletTempMin;
+            sheet.Cells[rowIndex, 11].Value = rvd.Ch1LowInletTempMax;
 
-            sheet.Cells[rowIndex, typeProcessor.StartingPoints.PlcColumn + 15].Value = rvd.Ch1LowOutletPresureAvg.Round();
-            sheet.Cells[rowIndex, typeProcessor.StartingPoints.PlcColumn + 16].Value = rvd.Ch1LowOutletPresureMin;
-            sheet.Cells[rowIndex, typeProcessor.StartingPoints.PlcColumn + 17].Value = rvd.Ch1LowOutletPresureMax;
+            sheet.Cells[rowIndex, 15].Value = rvd.Ch1LowOutletPresureAvg.Round();
+            sheet.Cells[rowIndex, 16].Value = rvd.Ch1LowOutletPresureMin;
+            sheet.Cells[rowIndex, 17].Value = rvd.Ch1LowOutletPresureMax;
 
             if (device.DeviceType == DeviceType.HeatingDomestic)
             {
-               sheet.Cells[rowIndex, typeProcessor.StartingPoints.PlcColumn + 27].Value = rvd.DhwTempAvg.Round();
-               sheet.Cells[rowIndex, typeProcessor.StartingPoints.PlcColumn + 28].Value = rvd.DhwTempMin;
-               sheet.Cells[rowIndex, typeProcessor.StartingPoints.PlcColumn + 29].Value = rvd.DhwTempMax;
+               sheet.Cells[rowIndex, 27].Value = rvd.DhwTempAvg.Round();
+               sheet.Cells[rowIndex, 28].Value = rvd.DhwTempMin;
+               sheet.Cells[rowIndex, 29].Value = rvd.DhwTempMax;
 
-               sheet.Cells[rowIndex, typeProcessor.StartingPoints.PlcColumn + 30].Value = rvd.DhwCirculationTempAvg.Round();
-               sheet.Cells[rowIndex, typeProcessor.StartingPoints.PlcColumn + 31].Value = rvd.DhwCirculationTempMin;
-               sheet.Cells[rowIndex, typeProcessor.StartingPoints.PlcColumn + 32].Value = rvd.DhwCirculationTempMax;
+               sheet.Cells[rowIndex, 30].Value = rvd.DhwCirculationTempAvg.Round();
+               sheet.Cells[rowIndex, 31].Value = rvd.DhwCirculationTempMin;
+               sheet.Cells[rowIndex, 32].Value = rvd.DhwCirculationTempMax;
             }
          }
 
-         int summaryRowIndex = typeProcessor.StartingPoints.Row + typeProcessor.SummaryRowOffset;
+         sheet.Cells[sheet.Dimension.Rows, 0].Value = plcData.Average(x => x.OutsideTempAvg).Round();
+         sheet.Cells[sheet.Dimension.Rows, 1].Value = plcData.Min(x => x.OutsideTempMin);
+         sheet.Cells[sheet.Dimension.Rows, 2].Value = plcData.Max(x => x.OutsideTempMax);
 
-         sheet.Cells[summaryRowIndex, typeProcessor.StartingPoints.PlcColumn + 0].Value = plcData.Average(x => x.OutsideTempAvg).Round();
-         sheet.Cells[summaryRowIndex, typeProcessor.StartingPoints.PlcColumn + 1].Value = plcData.Min(x => x.OutsideTempMin);
-         sheet.Cells[summaryRowIndex, typeProcessor.StartingPoints.PlcColumn + 2].Value = plcData.Max(x => x.OutsideTempMax);
+         sheet.Cells[sheet.Dimension.Rows, 3].Value = plcData.Average(x => x.ChHighInletPresureAvg).Round();
+         sheet.Cells[sheet.Dimension.Rows, 4].Value = plcData.Min(x => x.ChHighInletPresureMin);
+         sheet.Cells[sheet.Dimension.Rows, 5].Value = plcData.Max(x => x.ChHighInletPresureMax);
 
-         sheet.Cells[summaryRowIndex, typeProcessor.StartingPoints.PlcColumn + 3].Value = plcData.Average(x => x.ChHighInletPresureAvg).Round();
-         sheet.Cells[summaryRowIndex, typeProcessor.StartingPoints.PlcColumn + 4].Value = plcData.Min(x => x.ChHighInletPresureMin);
-         sheet.Cells[summaryRowIndex, typeProcessor.StartingPoints.PlcColumn + 5].Value = plcData.Max(x => x.ChHighInletPresureMax);
+         sheet.Cells[sheet.Dimension.Rows, 9].Value = plcData.Average(x => x.Ch1LowInletTempAvg).Round();
+         sheet.Cells[sheet.Dimension.Rows, 10].Value = plcData.Min(x => x.Ch1LowInletTempMin);
+         sheet.Cells[sheet.Dimension.Rows, 11].Value = plcData.Max(x => x.Ch1LowInletTempMax);
 
-         sheet.Cells[summaryRowIndex, typeProcessor.StartingPoints.PlcColumn + 9].Value = plcData.Average(x => x.Ch1LowInletTempAvg).Round();
-         sheet.Cells[summaryRowIndex, typeProcessor.StartingPoints.PlcColumn + 10].Value = plcData.Min(x => x.Ch1LowInletTempMin);
-         sheet.Cells[summaryRowIndex, typeProcessor.StartingPoints.PlcColumn + 11].Value = plcData.Max(x => x.Ch1LowInletTempMax);
-
-         sheet.Cells[summaryRowIndex, typeProcessor.StartingPoints.PlcColumn + 15].Value = plcData.Average(x => x.Ch1LowOutletPresureAvg).Round();
-         sheet.Cells[summaryRowIndex, typeProcessor.StartingPoints.PlcColumn + 16].Value = plcData.Min(x => x.Ch1LowOutletPresureMin);
-         sheet.Cells[summaryRowIndex, typeProcessor.StartingPoints.PlcColumn + 17].Value = plcData.Max(x => x.Ch1LowOutletPresureMax);
+         sheet.Cells[sheet.Dimension.Rows, 15].Value = plcData.Average(x => x.Ch1LowOutletPresureAvg).Round();
+         sheet.Cells[sheet.Dimension.Rows, 16].Value = plcData.Min(x => x.Ch1LowOutletPresureMin);
+         sheet.Cells[sheet.Dimension.Rows, 17].Value = plcData.Max(x => x.Ch1LowOutletPresureMax);
 
          if (device.DeviceType == DeviceType.HeatingDomestic)
          {
-            sheet.Cells[summaryRowIndex, typeProcessor.StartingPoints.PlcColumn + 27].Value = plcData.Average(x => x.DhwTempAvg).Round();
-            sheet.Cells[summaryRowIndex, typeProcessor.StartingPoints.PlcColumn + 28].Value = plcData.Min(x => x.DhwTempMin);
-            sheet.Cells[summaryRowIndex, typeProcessor.StartingPoints.PlcColumn + 29].Value = plcData.Max(x => x.DhwTempMax);
+            sheet.Cells[sheet.Dimension.Rows, 27].Value = plcData.Average(x => x.DhwTempAvg).Round();
+            sheet.Cells[sheet.Dimension.Rows, 28].Value = plcData.Min(x => x.DhwTempMin);
+            sheet.Cells[sheet.Dimension.Rows, 29].Value = plcData.Max(x => x.DhwTempMax);
 
-            sheet.Cells[summaryRowIndex, typeProcessor.StartingPoints.PlcColumn + 30].Value = plcData.Average(x => x.DhwCirculationTempAvg).Round();
-            sheet.Cells[summaryRowIndex, typeProcessor.StartingPoints.PlcColumn + 31].Value = plcData.Min(x => x.DhwCirculationTempMin);
-            sheet.Cells[summaryRowIndex, typeProcessor.StartingPoints.PlcColumn + 32].Value = plcData.Max(x => x.DhwCirculationTempMax);
+            sheet.Cells[sheet.Dimension.Rows, 30].Value = plcData.Average(x => x.DhwCirculationTempAvg).Round();
+            sheet.Cells[sheet.Dimension.Rows, 31].Value = plcData.Min(x => x.DhwCirculationTempMin);
+            sheet.Cells[sheet.Dimension.Rows, 32].Value = plcData.Max(x => x.DhwCirculationTempMax);
          }
+
+         return sheet.Dimension;
       }
    }
 }
