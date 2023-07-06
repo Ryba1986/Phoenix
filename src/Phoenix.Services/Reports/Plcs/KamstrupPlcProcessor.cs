@@ -42,7 +42,7 @@ namespace Phoenix.Services.Reports.Plcs
 
       private static ExcelAddressBase GetSheetData(ExcelWorksheet sheet, DeviceReportDto device, IReadOnlyCollection<KamstrupReportDto>? currentData, KamstrupDto? beforeMeter, ITypeProcessor typeProcessor)
       {
-         sheet.Cells[typeProcessor.StartingRow - 4, 0].Value = device.Name;
+         sheet.Cells[typeProcessor.StartingRow - 4, 1].Value = device.Name;
 
          if (currentData is null || beforeMeter is null)
          {
@@ -56,47 +56,47 @@ namespace Phoenix.Services.Reports.Plcs
          {
             int rowIndex = typeProcessor.StartingRow + typeProcessor.GetDatePart(meter.Date);
 
-            sheet.Cells[rowIndex, 0].Value = meter.InletTempAvg.Round();
-            sheet.Cells[rowIndex, 1].Value = meter.InletTempMin;
-            sheet.Cells[rowIndex, 2].Value = meter.InletTempMax;
+            sheet.Cells[rowIndex, 1].Value = meter.InletTempAvg.Round();
+            sheet.Cells[rowIndex, 2].Value = meter.InletTempMin;
+            sheet.Cells[rowIndex, 3].Value = meter.InletTempMax;
 
-            sheet.Cells[rowIndex, 3].Value = meter.OutletTempAvg.Round();
-            sheet.Cells[rowIndex, 4].Value = meter.OutletTempMin;
-            sheet.Cells[rowIndex, 5].Value = meter.OutletTempMax;
+            sheet.Cells[rowIndex, 4].Value = meter.OutletTempAvg.Round();
+            sheet.Cells[rowIndex, 5].Value = meter.OutletTempMin;
+            sheet.Cells[rowIndex, 6].Value = meter.OutletTempMax;
 
-            sheet.Cells[rowIndex, 6].Value = meter.PowerAvg.Round();
-            sheet.Cells[rowIndex, 7].Value = meter.PowerMin;
-            sheet.Cells[rowIndex, 8].Value = meter.PowerMax;
+            sheet.Cells[rowIndex, 7].Value = meter.PowerAvg.Round();
+            sheet.Cells[rowIndex, 8].Value = meter.PowerMin;
+            sheet.Cells[rowIndex, 9].Value = meter.PowerMax;
 
-            sheet.Cells[rowIndex, 9].Value = meter.VolumeAvg.Round();
-            sheet.Cells[rowIndex, 10].Value = meter.VolumeMin;
-            sheet.Cells[rowIndex, 11].Value = meter.VolumeMax;
+            sheet.Cells[rowIndex, 10].Value = meter.VolumeAvg.Round();
+            sheet.Cells[rowIndex, 11].Value = meter.VolumeMin;
+            sheet.Cells[rowIndex, 12].Value = meter.VolumeMax;
 
-            sheet.Cells[rowIndex, 12].Value = meter.VolumeSummaryMax - beforeVolumeSummary;
+            sheet.Cells[rowIndex, 13].Value = meter.VolumeSummaryMax - beforeVolumeSummary;
             beforeVolumeSummary = meter.VolumeSummaryMax;
 
-            sheet.Cells[rowIndex, 13].Value = meter.EnergySummaryMax - beforeEnergySummary;
+            sheet.Cells[rowIndex, 14].Value = meter.EnergySummaryMax - beforeEnergySummary;
             beforeEnergySummary = meter.EnergySummaryMax;
          }
 
-         sheet.Cells[sheet.Dimension.Rows, 0].Value = currentData.Average(x => x.InletTempAvg).Round();
-         sheet.Cells[sheet.Dimension.Rows, 1].Value = currentData.Min(x => x.InletTempMin);
-         sheet.Cells[sheet.Dimension.Rows, 2].Value = currentData.Max(x => x.InletTempMax);
+         sheet.Cells[sheet.Dimension.Rows, 1].Value = currentData.Average(x => x.InletTempAvg).Round();
+         sheet.Cells[sheet.Dimension.Rows, 2].Value = currentData.Min(x => x.InletTempMin);
+         sheet.Cells[sheet.Dimension.Rows, 3].Value = currentData.Max(x => x.InletTempMax);
 
-         sheet.Cells[sheet.Dimension.Rows, 3].Value = currentData.Average(x => x.OutletTempAvg).Round();
-         sheet.Cells[sheet.Dimension.Rows, 4].Value = currentData.Min(x => x.OutletTempMin);
-         sheet.Cells[sheet.Dimension.Rows, 5].Value = currentData.Max(x => x.OutletTempMax);
+         sheet.Cells[sheet.Dimension.Rows, 4].Value = currentData.Average(x => x.OutletTempAvg).Round();
+         sheet.Cells[sheet.Dimension.Rows, 5].Value = currentData.Min(x => x.OutletTempMin);
+         sheet.Cells[sheet.Dimension.Rows, 6].Value = currentData.Max(x => x.OutletTempMax);
 
-         sheet.Cells[sheet.Dimension.Rows, 6].Value = currentData.Average(x => x.PowerAvg).Round();
-         sheet.Cells[sheet.Dimension.Rows, 7].Value = currentData.Min(x => x.PowerMin);
-         sheet.Cells[sheet.Dimension.Rows, 8].Value = currentData.Max(x => x.PowerMax);
+         sheet.Cells[sheet.Dimension.Rows, 7].Value = currentData.Average(x => x.PowerAvg).Round();
+         sheet.Cells[sheet.Dimension.Rows, 8].Value = currentData.Min(x => x.PowerMin);
+         sheet.Cells[sheet.Dimension.Rows, 9].Value = currentData.Max(x => x.PowerMax);
 
-         sheet.Cells[sheet.Dimension.Rows, 9].Value = currentData.Average(x => x.VolumeAvg).Round();
-         sheet.Cells[sheet.Dimension.Rows, 10].Value = currentData.Min(x => x.VolumeMin);
-         sheet.Cells[sheet.Dimension.Rows, 11].Value = currentData.Max(x => x.VolumeMax);
+         sheet.Cells[sheet.Dimension.Rows, 10].Value = currentData.Average(x => x.VolumeAvg).Round();
+         sheet.Cells[sheet.Dimension.Rows, 11].Value = currentData.Min(x => x.VolumeMin);
+         sheet.Cells[sheet.Dimension.Rows, 12].Value = currentData.Max(x => x.VolumeMax);
 
-         sheet.Cells[sheet.Dimension.Rows, 12].Value = currentData.Max(x => x.VolumeSummaryMax) - beforeMeter.VolumeSummary;
-         sheet.Cells[sheet.Dimension.Rows, 13].Value = currentData.Max(x => x.EnergySummaryMax) - beforeMeter.EnergySummary;
+         sheet.Cells[sheet.Dimension.Rows, 13].Value = currentData.Max(x => x.VolumeSummaryMax) - beforeMeter.VolumeSummary;
+         sheet.Cells[sheet.Dimension.Rows, 14].Value = currentData.Max(x => x.EnergySummaryMax) - beforeMeter.EnergySummary;
 
          return sheet.Dimension;
       }
