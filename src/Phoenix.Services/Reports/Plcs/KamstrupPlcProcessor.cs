@@ -11,6 +11,7 @@ using Phoenix.Entities.Plcs.Meters;
 using Phoenix.Models.Devices.Dto;
 using Phoenix.Models.Plcs.Meters.Dto;
 using Phoenix.Models.Utilities;
+using Phoenix.Services.Extensions;
 using Phoenix.Services.Reports.Base;
 using Phoenix.Services.Repositories;
 using Phoenix.Shared.Extensions;
@@ -23,10 +24,8 @@ namespace Phoenix.Services.Reports.Plcs
       {
       }
 
-      public async Task<IReadOnlyDictionary<int, ExcelAddressBase>> GetExcelDataAsync(ExcelWorksheets sheets, DateOnly date, IReadOnlyCollection<DeviceReportDto> devices, ITypeProcessor typeProcessor, CancellationToken cancellationToken)
+      public async Task FillDataAsync(ExcelWorksheets sheets, DateOnly date, IReadOnlyCollection<DeviceReportDto> devices, ITypeProcessor typeProcessor, CancellationToken cancellationToken)
       {
-         Dictionary<int, ExcelAddressBase> result = new();
-
          IReadOnlyDictionary<int, KamstrupReportDto[]> plcData = await GetPlcDataAsync<Kamstrup, KamstrupReportDto>(_uow.Kamstrup, date, typeProcessor, cancellationToken);
          IReadOnlyDictionary<int, KamstrupDto> beforeData = await GetBeforeDataAsync(_uow.Kamstrup, date, devices, typeProcessor, cancellationToken);
 
@@ -34,19 +33,19 @@ namespace Phoenix.Services.Reports.Plcs
          {
             plcData.TryGetValue(device.Id, out KamstrupReportDto[]? currentData);
             beforeData.TryGetValue(device.Id, out KamstrupDto? beforePlc);
-            result.Add(device.Id, GetSheetData(sheets[MeterSheet], device, currentData, beforePlc, typeProcessor));
-         }
 
-         return result;
+            ExcelWorksheet sheet = sheets.CloneSheet(MeterSheet, device.Id.ToString());
+            FillData(sheet, device, currentData, beforePlc, typeProcessor);
+         }
       }
 
-      private static ExcelAddressBase GetSheetData(ExcelWorksheet sheet, DeviceReportDto device, IReadOnlyCollection<KamstrupReportDto>? currentData, KamstrupDto? beforeMeter, ITypeProcessor typeProcessor)
+      private static void FillData(ExcelWorksheet sheet, DeviceReportDto device, IReadOnlyCollection<KamstrupReportDto>? currentData, KamstrupDto? beforeMeter, ITypeProcessor typeProcessor)
       {
-         sheet.Cells[typeProcessor.StartingRow - 4, 1].Value = device.Name;
+         sheet.Cells[1, 1].Value = device.Name;
 
          if (currentData is null || beforeMeter is null)
          {
-            return sheet.Dimension;
+            return;
          }
 
          float beforeVolumeSummary = beforeMeter.VolumeSummary;
@@ -97,8 +96,6 @@ namespace Phoenix.Services.Reports.Plcs
 
          sheet.Cells[sheet.Dimension.Rows, 13].Value = currentData.Max(x => x.VolumeSummaryMax) - beforeMeter.VolumeSummary;
          sheet.Cells[sheet.Dimension.Rows, 14].Value = currentData.Max(x => x.EnergySummaryMax) - beforeMeter.EnergySummary;
-
-         return sheet.Dimension;
       }
 
       private async Task<IReadOnlyDictionary<int, KamstrupDto>> GetBeforeDataAsync(DbSet<Kamstrup> plc, DateOnly date, IReadOnlyCollection<DeviceReportDto> devices, ITypeProcessor typeProcessor, CancellationToken cancellationToken)

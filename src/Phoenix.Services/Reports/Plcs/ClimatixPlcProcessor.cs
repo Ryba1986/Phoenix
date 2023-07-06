@@ -8,6 +8,7 @@ using OfficeOpenXml;
 using Phoenix.Entities.Plcs.Climatixs;
 using Phoenix.Models.Devices.Dto;
 using Phoenix.Models.Plcs.Climatixs.Dto;
+using Phoenix.Services.Extensions;
 using Phoenix.Services.Reports.Base;
 using Phoenix.Services.Repositories;
 using Phoenix.Shared.Enums.Devices;
@@ -21,28 +22,25 @@ namespace Phoenix.Services.Reports.Plcs
       {
       }
 
-      public async Task<IReadOnlyDictionary<int, ExcelAddressBase>> GetExcelDataAsync(ExcelWorksheets sheets, DateOnly date, IReadOnlyCollection<DeviceReportDto> devices, ITypeProcessor typeProcessor, CancellationToken cancellationToken)
+      public async Task FillDataAsync(ExcelWorksheets sheets, DateOnly date, IReadOnlyCollection<DeviceReportDto> devices, ITypeProcessor typeProcessor, CancellationToken cancellationToken)
       {
-         Dictionary<int, ExcelAddressBase> result = new();
-
          IReadOnlyDictionary<int, ClimatixReportDto[]> plcData = await GetPlcDataAsync<Climatix, ClimatixReportDto>(_uow.Climatix, date, typeProcessor, cancellationToken);
-
          foreach (DeviceReportDto device in devices)
          {
             plcData.TryGetValue(device.Id, out ClimatixReportDto[]? deviceData);
-            result.Add(device.Id, GetSheetData(sheets[PlcSheet], device, deviceData, typeProcessor));
-         }
 
-         return result;
+            ExcelWorksheet sheet = sheets.CloneSheet(PlcSheet, device.Id.ToString());
+            FillData(sheet, device, deviceData, typeProcessor);
+         }
       }
 
-      private static ExcelAddressBase GetSheetData(ExcelWorksheet sheet, DeviceReportDto device, IReadOnlyCollection<ClimatixReportDto>? plcData, ITypeProcessor typeProcessor)
+      private static void FillData(ExcelWorksheet sheet, DeviceReportDto device, IReadOnlyCollection<ClimatixReportDto>? plcData, ITypeProcessor typeProcessor)
       {
-         sheet.Cells[typeProcessor.StartingRow - 4, 1].Value = device.Name;
+         sheet.Cells[1, 1].Value = device.Name;
 
          if (plcData is null)
          {
-            return sheet.Dimension;
+            return;
          }
 
          foreach (ClimatixReportDto climatix in plcData)
@@ -141,8 +139,6 @@ namespace Phoenix.Services.Reports.Plcs
             sheet.Cells[sheet.Dimension.Rows, 29].Value = plcData.Min(x => x.DhwTempMin);
             sheet.Cells[sheet.Dimension.Rows, 30].Value = plcData.Max(x => x.DhwTempMax);
          }
-
-         return sheet.Dimension;
       }
    }
 }

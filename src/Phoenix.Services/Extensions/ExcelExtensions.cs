@@ -22,6 +22,11 @@ namespace Phoenix.Services.Extensions
          return sheets.Select(x => x.Name);
       }
 
+      public static ExcelWorksheet CloneSheet(this ExcelWorksheets sheets, string name, string newSheetName)
+      {
+         return sheets.Copy(name, newSheetName);
+      }
+
       public static ExcelWorksheet CloneSheet(this ExcelWorksheets sheets, ReportType type, string newSheetName)
       {
          return sheets.Copy(type.ToString(), newSheetName);

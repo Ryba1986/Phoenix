@@ -8,6 +8,7 @@ using OfficeOpenXml;
 using Phoenix.Entities.Plcs.Rvds;
 using Phoenix.Models.Devices.Dto;
 using Phoenix.Models.Plcs.Rvds.Dto;
+using Phoenix.Services.Extensions;
 using Phoenix.Services.Reports.Base;
 using Phoenix.Services.Repositories;
 using Phoenix.Shared.Enums.Devices;
@@ -21,28 +22,25 @@ namespace Phoenix.Services.Reports.Plcs
       {
       }
 
-      public async Task<IReadOnlyDictionary<int, ExcelAddressBase>> GetExcelDataAsync(ExcelWorksheets sheets, DateOnly date, IReadOnlyCollection<DeviceReportDto> devices, ITypeProcessor typeProcessor, CancellationToken cancellationToken)
+      public async Task FillDataAsync(ExcelWorksheets sheets, DateOnly date, IReadOnlyCollection<DeviceReportDto> devices, ITypeProcessor typeProcessor, CancellationToken cancellationToken)
       {
-         Dictionary<int, ExcelAddressBase> result = new();
-
          IReadOnlyDictionary<int, Rvd145ReportDto[]> plcData = await GetPlcDataAsync<Rvd145, Rvd145ReportDto>(_uow.Rvd145, date, typeProcessor, cancellationToken);
-
          foreach (DeviceReportDto device in devices)
          {
             plcData.TryGetValue(device.Id, out Rvd145ReportDto[]? deviceData);
-            result.Add(device.Id, GetSheetData(sheets[PlcSheet], device, deviceData, typeProcessor));
-         }
 
-         return result;
+            ExcelWorksheet sheet = sheets.CloneSheet(PlcSheet, device.Id.ToString());
+            FillData(sheet, device, deviceData, typeProcessor);
+         }
       }
 
-      private static ExcelAddressBase GetSheetData(ExcelWorksheet sheet, DeviceReportDto device, IReadOnlyCollection<Rvd145ReportDto>? plcData, ITypeProcessor typeProcessor)
+      private static void FillData(ExcelWorksheet sheet, DeviceReportDto device, IReadOnlyCollection<Rvd145ReportDto>? plcData, ITypeProcessor typeProcessor)
       {
-         sheet.Cells[typeProcessor.StartingRow - 4, 1].Value = device.Name;
+         sheet.Cells[1, 1].Value = device.Name;
 
          if (plcData is null)
          {
-            return sheet.Dimension;
+            return;
          }
 
          foreach (Rvd145ReportDto rvd in plcData)
@@ -103,8 +101,6 @@ namespace Phoenix.Services.Reports.Plcs
             sheet.Cells[sheet.Dimension.Rows, 32].Value = plcData.Min(x => x.DhwCirculationTempMin);
             sheet.Cells[sheet.Dimension.Rows, 33].Value = plcData.Max(x => x.DhwCirculationTempMax);
          }
-
-         return sheet.Dimension;
       }
    }
 }
