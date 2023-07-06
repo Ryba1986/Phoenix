@@ -40,5 +40,18 @@ namespace Phoenix.Services.Extensions
 
          sheets.First().Select();
       }
+
+      public static void RemoveTemplateRows(this ExcelWorksheets sheets, ushort rowCount)
+      {
+         if (rowCount == 0)
+         {
+            return;
+         }
+
+         foreach (ExcelWorksheet sheet in sheets)
+         {
+            sheet.DeleteRow(sheet.Dimension.Rows - rowCount, rowCount);
+         }
+      }
    }
 }

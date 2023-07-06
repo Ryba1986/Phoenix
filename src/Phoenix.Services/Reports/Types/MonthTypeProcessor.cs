@@ -10,22 +10,14 @@ namespace Phoenix.Services.Reports.Types
 {
    internal sealed class MonthTypeProcessor : ITypeProcessor
    {
-      public StartingPoints StartingPoints { get; init; }
-      public short SummaryRowOffset { get; init; }
+      public ushort RemoveTemplateRowCount { get; init; }
+      public ushort StartingRow { get; init; }
       public ReportType Type { get; init; }
 
       public MonthTypeProcessor()
       {
-
-         SummaryRowOffset = 31;
-
-         StartingPoints = new()
-         {
-            MeterColumn = 35,
-            PlcColumn = 2,
-            Row = 8
-         };
-
+         RemoveTemplateRowCount = 335;
+         StartingRow = 6;
          Type = ReportType.Month;
       }
 
@@ -52,7 +44,6 @@ namespace Phoenix.Services.Reports.Types
             DeviceId = x.DeviceId,
          };
       }
-
 
       public DateRange GetRange(DateOnly date)
       {

@@ -8,8 +8,8 @@ namespace Phoenix.Services.Reports.Base
 {
    internal interface ITypeProcessor
    {
-      StartingPoints StartingPoints { get; init; }
-      short SummaryRowOffset { get; init; }
+      ushort RemoveTemplateRowCount { get; init; }
+      ushort StartingRow { get; init; }
       ReportType Type { get; init; }
 
       int GetDatePart(DateTime date);

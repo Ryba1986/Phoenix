@@ -10,21 +10,14 @@ namespace Phoenix.Services.Reports.Types
 {
    internal sealed class YearTypeProcessor : ITypeProcessor
    {
-      public StartingPoints StartingPoints { get; init; }
-      public short SummaryRowOffset { get; init; }
+      public ushort RemoveTemplateRowCount { get; init; }
+      public ushort StartingRow { get; init; }
       public ReportType Type { get; init; }
 
       public YearTypeProcessor()
       {
-         SummaryRowOffset = 12;
-
-         StartingPoints = new()
-         {
-            MeterColumn = 35,
-            PlcColumn = 2,
-            Row = 8
-         };
-
+         RemoveTemplateRowCount = 354;
+         StartingRow = 6;
          Type = ReportType.Year;
       }
 

@@ -10,21 +10,14 @@ namespace Phoenix.Services.Reports.Types
 {
    public class YearByDayProcessor : ITypeProcessor
    {
-      public StartingPoints StartingPoints { get; init; }
-      public short SummaryRowOffset { get; init; }
+      public ushort RemoveTemplateRowCount { get; init; }
+      public ushort StartingRow { get; init; }
       public ReportType Type { get; init; }
 
       public YearByDayProcessor()
       {
-         SummaryRowOffset = 366;
-
-         StartingPoints = new()
-         {
-            MeterColumn = 35,
-            PlcColumn = 2,
-            Row = 8
-         };
-
+         RemoveTemplateRowCount = 0;
+         StartingRow = 6;
          Type = ReportType.YearByDay;
       }
 

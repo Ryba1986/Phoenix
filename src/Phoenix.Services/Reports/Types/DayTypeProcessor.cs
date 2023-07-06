@@ -10,22 +10,14 @@ namespace Phoenix.Services.Reports.Types
 {
    internal sealed class DayTypeProcessor : ITypeProcessor
    {
-      public StartingPoints StartingPoints { get; init; }
-      public short SummaryRowOffset { get; init; }
+      public ushort RemoveTemplateRowCount { get; init; }
+      public ushort StartingRow { get; init; }
       public ReportType Type { get; init; }
 
       public DayTypeProcessor()
       {
-
-         SummaryRowOffset = 24;
-
-         StartingPoints = new()
-         {
-            MeterColumn = 35,
-            PlcColumn = 2,
-            Row = 8
-         };
-
+         RemoveTemplateRowCount = 342;
+         StartingRow = 6;
          Type = ReportType.Day;
       }
 
