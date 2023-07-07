@@ -19,7 +19,8 @@ namespace Phoenix.Services.Configuration.Mappers.Profiles
             .ForMember(dst => dst.BoundRate, opt => opt.MapFrom(src => src.BoundRate != null ? src.BoundRate.GetDescription() : string.Empty))
             .ForMember(dst => dst.DataBits, opt => opt.MapFrom(src => src.DataBits != null ? src.DataBits.GetDescription() : string.Empty))
             .ForMember(dst => dst.Parity, opt => opt.MapFrom(src => src.Parity != null ? src.Parity.GetDescription() : string.Empty))
-            .ForMember(dst => dst.StopBits, opt => opt.MapFrom(src => src.StopBits != null ? src.StopBits.GetDescription() : string.Empty));
+            .ForMember(dst => dst.StopBits, opt => opt.MapFrom(src => src.StopBits != null ? src.StopBits.GetDescription() : string.Empty))
+            .ForMember(dst => dst.ReportSequence, opt => opt.MapFrom(src => src.ReportSequence != null ? src.ReportSequence.ToString() : string.Empty));
 
          CreateProjection<Device, DeviceReportDto>();
       }

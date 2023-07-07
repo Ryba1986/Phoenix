@@ -16,6 +16,7 @@ namespace Phoenix.Models.Devices.Dto
       public SerialStopBits StopBits { get; init; }
       public string SerialNumber { get; init; }
       public bool IncludeReport { get; init; }
+      public byte ReportSequence { get; init; }
 
       public DeviceDto()
       {

@@ -21,6 +21,7 @@ namespace Phoenix.Entities.Devices
       public SerialParity? Parity { get; init; }
       public SerialStopBits? StopBits { get; init; }
       public bool IncludeReport { get; init; }
+      public byte? ReportSequence { get; init; }
 
       public DeviceHistory()
       {

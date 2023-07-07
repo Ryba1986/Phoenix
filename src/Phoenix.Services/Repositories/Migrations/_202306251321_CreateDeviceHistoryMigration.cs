@@ -30,6 +30,7 @@ namespace Phoenix.Services.Repositories.Migrations
                Parity = table.Column<SerialParity>(name: nameof(DeviceHistory.Parity), nullable: true),
                StopBits = table.Column<SerialStopBits>(name: nameof(DeviceHistory.StopBits), nullable: true),
                IncludeReport = table.Column<bool>(name: nameof(DeviceHistory.IncludeReport), defaultValue: default(bool)),
+               ReportSequence = table.Column<byte>(name: nameof(Device.ReportSequence), nullable: true),
                CreatedById = table.Column<int>(name: nameof(DeviceHistory.CreatedById)),
                IsActive = table.Column<bool>(name: nameof(DeviceHistory.IsActive), defaultValue: default(bool)),
                CreateDate = table.Column<DateTime>(name: nameof(DeviceHistory.CreateDate), defaultValue: default(DateTime)),

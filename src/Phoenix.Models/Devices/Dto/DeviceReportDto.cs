@@ -9,6 +9,7 @@ namespace Phoenix.Models.Devices.Dto
       public string LocationName { get; init; }
       public DeviceType DeviceType { get; init; }
       public PlcType PlcType { get; init; }
+      public byte ReportSequence { get; init; }
 
       public DeviceReportDto()
       {

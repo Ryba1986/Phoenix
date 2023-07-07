@@ -43,6 +43,9 @@ namespace Phoenix.Services.Repositories.Configurations.Devices
          builder.Property(x => x.IncludeReport)
             .IsRequired();
 
+         builder.Property(x => x.ReportSequence)
+            .IsRequired();
+
          builder.Property(x => x.Id)
             .IsRequired();
 

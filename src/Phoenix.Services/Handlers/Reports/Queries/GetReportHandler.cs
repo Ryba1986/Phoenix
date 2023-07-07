@@ -81,7 +81,7 @@ namespace Phoenix.Services.Handlers.Reports.Queries
             .ToArray();
 
          IEnumerable<IGrouping<string, DeviceReportDto>> locationGroups = devices
-            .OrderBy(x => x.LocationName)
+            .OrderBy(x => x.ReportSequence)
             .GroupBy(x => x.LocationName);
 
          foreach (IGrouping<string, DeviceReportDto> group in locationGroups)

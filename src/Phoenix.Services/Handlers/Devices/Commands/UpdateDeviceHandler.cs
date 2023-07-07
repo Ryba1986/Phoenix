@@ -67,7 +67,7 @@ namespace Phoenix.Services.Handlers.Devices.Commands
          {
             return Result.Error(Translations.Validator_Version_Invalid);
          }
-         if (device.LocationId == request.LocationId && device.Name == request.Name && device.DeviceType == request.DeviceType && device.PlcType == request.PlcType && device.ModbusId == request.ModbusId && device.BoundRate == request.BoundRate && device.DataBits == request.DataBits && device.Parity == request.Parity && device.StopBits == request.StopBits && device.IncludeReport == request.IncludeReport && device.IsActive == request.IsActive)
+         if (device.LocationId == request.LocationId && device.Name == request.Name && device.DeviceType == request.DeviceType && device.PlcType == request.PlcType && device.ModbusId == request.ModbusId && device.BoundRate == request.BoundRate && device.DataBits == request.DataBits && device.Parity == request.Parity && device.StopBits == request.StopBits && device.IncludeReport == request.IncludeReport && device.ReportSequence == request.ReportSequence && device.IsActive == request.IsActive)
          {
             return Result.Success();
          }
@@ -85,6 +85,7 @@ namespace Phoenix.Services.Handlers.Devices.Commands
             Parity = device.Parity != request.Parity ? request.Parity : null,
             StopBits = device.StopBits != request.StopBits ? request.StopBits : null,
             IncludeReport = request.IncludeReport,
+            ReportSequence = device.ReportSequence != request.ReportSequence ? request.ReportSequence : null,
             IsActive = request.IsActive,
             CreatedById = request.ModifiedById,
          });
@@ -99,6 +100,7 @@ namespace Phoenix.Services.Handlers.Devices.Commands
          device.Parity = request.Parity;
          device.StopBits = request.StopBits;
          device.IncludeReport = request.IncludeReport;
+         device.ReportSequence = request.ReportSequence;
          device.IsActive = request.IsActive;
 
          await _uow.SaveChangesAsync(cancellationToken);

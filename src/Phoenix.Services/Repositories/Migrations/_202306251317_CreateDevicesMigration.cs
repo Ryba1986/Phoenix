@@ -28,6 +28,7 @@ namespace Phoenix.Services.Repositories.Migrations
                StopBits = table.Column<SerialStopBits>(name: nameof(Device.StopBits)),
                SerialNumber = table.Column<string>(name: nameof(Device.SerialNumber), maxLength: 30, defaultValue: string.Empty),
                IncludeReport = table.Column<bool>(name: nameof(Device.IncludeReport), defaultValue: default(bool)),
+               ReportSequence = table.Column<byte>(name: nameof(Device.ReportSequence), defaultValue: default(byte)),
                IsActive = table.Column<bool>(name: nameof(Device.IsActive), defaultValue: default(bool)),
                Version = table.Column<byte[]>(name: nameof(Device.Version), rowVersion: true),
             },

@@ -67,6 +67,7 @@ namespace Phoenix.Services.Handlers.Devices.Commands
             Parity = request.Parity,
             StopBits = request.StopBits,
             IncludeReport = request.IncludeReport,
+            ReportSequence = request.ReportSequence,
             IsActive = request.IsActive,
          };
 
@@ -84,6 +85,7 @@ namespace Phoenix.Services.Handlers.Devices.Commands
             Parity = request.Parity,
             StopBits = request.StopBits,
             IncludeReport = request.IncludeReport,
+            ReportSequence = request.ReportSequence,
             IsActive = request.IsActive,
             CreatedById = request.CreatedById,
          });
