@@ -15,6 +15,7 @@ namespace Phoenix.Services.Reports.Base
       int GetDatePart(DateTime date);
       string GetFileName(DateOnly date);
       string GetHeader(string locationName, DateOnly date);
+      string GetLegend();
       Expression<Func<T, PlcGroupBy>> GetPlcGroup<T>() where T : PlcBase;
       DateRange GetRange(DateOnly date);
    }

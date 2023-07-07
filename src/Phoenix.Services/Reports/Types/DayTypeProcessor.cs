@@ -36,6 +36,11 @@ namespace Phoenix.Services.Reports.Types
          return string.Format(Translations.Report_Header_Day, locationName, date.ToString("yyyy-MM-dd"));
       }
 
+      public string GetLegend()
+      {
+         return Translations.Report_Legend_Day;
+      }
+
       public Expression<Func<T, PlcGroupBy>> GetPlcGroup<T>() where T : PlcBase
       {
          return x => new()

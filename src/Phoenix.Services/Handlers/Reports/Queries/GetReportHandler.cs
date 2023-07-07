@@ -8,6 +8,7 @@ using AutoMapper.QueryableExtensions;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 using OfficeOpenXml;
+using OfficeOpenXml.Style;
 using Phoenix.Models.Devices.Dto;
 using Phoenix.Models.Reports.Queries;
 using Phoenix.Services.Extensions;
@@ -56,8 +57,6 @@ namespace Phoenix.Services.Handlers.Reports.Queries
                x.IncludeReport &&
                x.Location.IncludeReport
             )
-            .OrderBy(x => x.Location.Name)
-            .ThenBy(x => x.Name)
             .ProjectTo<DeviceReportDto>(_mapper.ConfigurationProvider)
             .ToArrayAsync(cancellationToken);
 
@@ -72,13 +71,54 @@ namespace Phoenix.Services.Handlers.Reports.Queries
 
          await Task.WhenAll(plcTasks);
 
-         IReadOnlyCollection<string> sheetNamesToRemove = sheets
-           .GetSheetNames()
-           .ToArray();
+         CreateResultSheets(sheets, request, devices, typeProcessor);
+      }
 
-         //TODO: combine sheets to locations
+      private static void CreateResultSheets(ExcelWorksheets sheets, GetReportQuery request, IReadOnlyCollection<DeviceReportDto> devices, ITypeProcessor typeProcessor)
+      {
+         IReadOnlyCollection<string> inputSheetNames = sheets
+            .GetSheetNames()
+            .ToArray();
 
-         sheets.RemoveSheets(sheetNamesToRemove);
+         IEnumerable<IGrouping<string, DeviceReportDto>> locationGroups = devices
+            .OrderBy(x => x.LocationName)
+            .GroupBy(x => x.LocationName);
+
+         foreach (IGrouping<string, DeviceReportDto> group in locationGroups)
+         {
+            ExcelWorksheet groupSheet = sheets.CloneSheet(PlcProcessorBase.BaseSheet, group.Key);
+            foreach (DeviceReportDto device in group)
+            {
+               ExcelWorksheet deviceSheet = sheets[device.Id.ToString()];
+
+               deviceSheet.Cells[1, 1, deviceSheet.Dimension.Rows, deviceSheet.Dimension.Columns]
+                  .Copy(groupSheet.Cells[1, groupSheet.Dimension.Columns + 1]);
+            }
+
+            SetHeaders(groupSheet, request, group.Key, typeProcessor);
+         }
+
+         sheets.RemoveSheets(inputSheetNames);
+      }
+
+      private static void SetHeaders(ExcelWorksheet sheet, GetReportQuery request, string locationName, ITypeProcessor typeProcessor)
+      {
+         sheet.InsertRow(1, 2);
+         sheet.Cells[1, 1, 1, sheet.Dimension.Columns].Merge = true;
+
+         sheet.Row(1).Height = 21;
+         sheet.Row(2).Height = 10;
+
+         ExcelRange headerCell = sheet.Cells[1, 1];
+         headerCell.Value = typeProcessor.GetHeader(locationName, request.Date);
+         headerCell.Style.Font.SetFromFont("Arial CE", 14, true);
+         headerCell.Style.HorizontalAlignment = ExcelHorizontalAlignment.Center;
+         headerCell.Style.VerticalAlignment = ExcelVerticalAlignment.Center;
+         sheet.Select(headerCell);
+
+         sheet.Cells[3, 1].Value = typeProcessor.GetLegend();
+
+         sheet.PrinterSettings.PrintArea = sheet.Cells[1, 1, sheet.Dimension.Rows, sheet.Dimension.Columns];
       }
    }
 }
