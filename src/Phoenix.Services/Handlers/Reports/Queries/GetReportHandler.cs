@@ -37,6 +37,8 @@ namespace Phoenix.Services.Handlers.Reports.Queries
          ITypeProcessor typeProcessor = _typeProcessors[request.Type];
          using ExcelPackage ep = ExcelExtensions.GetReportTemplate();
 
+         ep.Workbook.Properties.Author = nameof(Phoenix);
+
          ep.Workbook.Worksheets.RemoveTemplateRows(typeProcessor.RemoveTemplateRowCount);
          await CreateSheetsAsync(ep.Workbook.Worksheets, request, typeProcessor, cancellationToken);
 
