@@ -4,7 +4,6 @@ using System.Globalization;
 using System.IO;
 using System.Linq;
 using OfficeOpenXml;
-using Phoenix.Shared.Enums.Reports;
 
 namespace Phoenix.Services.Extensions
 {
@@ -25,11 +24,6 @@ namespace Phoenix.Services.Extensions
       public static ExcelWorksheet CloneSheet(this ExcelWorksheets sheets, string name, string newSheetName)
       {
          return sheets.Copy(name, newSheetName);
-      }
-
-      public static ExcelWorksheet CloneSheet(this ExcelWorksheets sheets, ReportType type, string newSheetName)
-      {
-         return sheets.Copy(type.ToString(), newSheetName);
       }
 
       public static void RemoveSheets(this ExcelWorksheets sheets, IEnumerable<string> sheetNames)
