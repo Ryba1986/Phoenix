@@ -24,7 +24,7 @@
       <IncludeAllContentForSelfExtract>true</IncludeAllContentForSelfExtract>
       <PublishReadyToRun>false</PublishReadyToRun>
       <PublishSingleFile>true</PublishSingleFile>
-      <PublishTrimmed>true</PublishTrimmed>
+      <PublishTrimmed>false</PublishTrimmed>
       <RuntimeIdentifier>linux-arm64</RuntimeIdentifier>
       <SelfContained>true</SelfContained>
       <TrimMode>partial</TrimMode>
