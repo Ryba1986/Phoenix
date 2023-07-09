@@ -31,7 +31,6 @@ namespace Phoenix.Services.Handlers.Devices.Queries
                c.IsActive &&
                l.IsActive &&
                d.IsActive
-            orderby d.Name
             select d;
 
          return await query
