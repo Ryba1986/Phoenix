@@ -58,8 +58,7 @@ namespace Phoenix.Client.Extensions
             return;
          }
 
-         authenticator.SetBearerToken(!string.IsNullOrWhiteSpace(value) ? value : EmptyTokenValue
-         );
+         authenticator.SetBearerToken(!string.IsNullOrWhiteSpace(value) ? value : EmptyTokenValue);
       }
 
       private static Task<RestResponse<T>> GetPostResponseAsync<T>(this IRestClient client, string url, IRequest<T> command, CancellationToken cancellationToken) where T : struct
