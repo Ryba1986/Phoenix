@@ -8,7 +8,6 @@ using AutoMapper.QueryableExtensions;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 using OfficeOpenXml;
-using OfficeOpenXml.Style;
 using Phoenix.Models.Devices.Dto;
 using Phoenix.Models.Reports.Queries;
 using Phoenix.Services.Extensions;
@@ -103,20 +102,12 @@ namespace Phoenix.Services.Handlers.Reports.Queries
 
       private static void SetHeaders(ExcelWorksheet sheet, GetReportQuery request, string locationName, ITypeProcessor typeProcessor)
       {
-         sheet.InsertRow(1, 2);
          sheet.Cells[1, 1, 1, sheet.Dimension.Columns].Merge = true;
-
-         sheet.Row(1).Height = 21;
-         sheet.Row(2).Height = 10;
+         sheet.Cells[3, 1].Value = typeProcessor.GetLegend();
 
          ExcelRange headerCell = sheet.Cells[1, 1];
          headerCell.Value = typeProcessor.GetHeader(locationName, request.Date);
-         headerCell.Style.Font.SetFromFont("Arial CE", 14, true);
-         headerCell.Style.HorizontalAlignment = ExcelHorizontalAlignment.Center;
-         headerCell.Style.VerticalAlignment = ExcelVerticalAlignment.Center;
          sheet.Select(headerCell);
-
-         sheet.Cells[3, 1].Value = typeProcessor.GetLegend();
 
          sheet.PrinterSettings.PrintArea = sheet.Cells[1, 1, sheet.Dimension.Rows, sheet.Dimension.Columns];
       }
