@@ -34,8 +34,8 @@
       <PackageReference Include="Autofac.Extensions.DependencyInjection" Version="8.0.0" />
       <PackageReference Include="FluentValidation.AspNetCore" Version="11.3.0" />
       <PackageReference Include="FluentValidation.DependencyInjectionExtensions" Version="11.6.0" />
-      <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="8.0.0-preview.5.23302.2" />
-      <PackageReference Include="Microsoft.Extensions.Hosting.Systemd" Version="8.0.0-preview.5.23280.8" />
+      <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="8.0.0-preview.6.23329.11" />
+      <PackageReference Include="Microsoft.Extensions.Hosting.Systemd" Version="8.0.0-preview.6.23329.7" />
    </ItemGroup>
 
    <ItemGroup>
