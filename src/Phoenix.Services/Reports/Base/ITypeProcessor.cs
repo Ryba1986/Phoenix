@@ -8,9 +8,10 @@ namespace Phoenix.Services.Reports.Base
 {
    internal interface ITypeProcessor
    {
-      ushort RemoveTemplateRowCount { get; init; }
-      ushort StartingRow { get; init; }
-      ReportType Type { get; init; }
+      ushort DeviceNameRow { get; }
+      ushort RemoveTemplateRowCount { get; }
+      ushort StartingRow { get; }
+      ReportType Type { get; }
 
       int GetDatePart(DateTime date);
       string GetFileName(DateOnly date);

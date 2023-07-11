@@ -36,7 +36,7 @@ namespace Phoenix.Services.Reports.Plcs
 
       private static void FillData(ExcelWorksheet sheet, DeviceReportDto device, IReadOnlyCollection<Rvd145ReportDto>? plcData, ITypeProcessor typeProcessor)
       {
-         sheet.Cells[1, 1].Value = device.Name;
+         sheet.Cells[typeProcessor.DeviceNameRow, 1].Value = device.Name;
 
          if (plcData is null)
          {

@@ -41,7 +41,7 @@ namespace Phoenix.Services.Reports.Plcs
 
       private static void FillData(ExcelWorksheet sheet, DeviceReportDto device, IReadOnlyCollection<KamstrupReportDto>? currentData, KamstrupDto? beforeMeter, ITypeProcessor typeProcessor)
       {
-         sheet.Cells[1, 1].Value = device.Name;
+         sheet.Cells[typeProcessor.DeviceNameRow, 1].Value = device.Name;
 
          if (currentData is null || beforeMeter is null)
          {

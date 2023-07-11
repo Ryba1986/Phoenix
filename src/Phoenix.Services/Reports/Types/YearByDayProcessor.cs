@@ -8,16 +8,14 @@ using Phoenix.Shared.Languages;
 
 namespace Phoenix.Services.Reports.Types
 {
-   public class YearByDayProcessor : ITypeProcessor
+   internal class YearByDayProcessor : TypeProcessorBase, ITypeProcessor
    {
-      public ushort RemoveTemplateRowCount { get; init; }
-      public ushort StartingRow { get; init; }
-      public ReportType Type { get; init; }
+      public ushort RemoveTemplateRowCount { get; }
+      public ReportType Type { get; }
 
       public YearByDayProcessor()
       {
          RemoveTemplateRowCount = 0;
-         StartingRow = 6;
          Type = ReportType.YearByDay;
       }
 

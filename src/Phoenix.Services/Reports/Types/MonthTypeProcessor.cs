@@ -8,16 +8,14 @@ using Phoenix.Shared.Languages;
 
 namespace Phoenix.Services.Reports.Types
 {
-   internal sealed class MonthTypeProcessor : ITypeProcessor
+   internal sealed class MonthTypeProcessor : TypeProcessorBase, ITypeProcessor
    {
-      public ushort RemoveTemplateRowCount { get; init; }
-      public ushort StartingRow { get; init; }
-      public ReportType Type { get; init; }
+      public ushort RemoveTemplateRowCount { get; }
+      public ReportType Type { get; }
 
       public MonthTypeProcessor()
       {
          RemoveTemplateRowCount = 335;
-         StartingRow = 6;
          Type = ReportType.Month;
       }
 
