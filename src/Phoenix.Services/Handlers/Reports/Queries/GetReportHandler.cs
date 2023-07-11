@@ -55,6 +55,8 @@ namespace Phoenix.Services.Handlers.Reports.Queries
          IReadOnlyCollection<DeviceReportDto> devices = await _uow.Device
             .AsNoTracking()
             .Include(x => x.Location)
+            .OrderBy(x => x.Location.Name)
+            .ThenBy(x => x.ReportSequence)
             .Where(x =>
                x.IncludeReport &&
                x.Location.IncludeReport
@@ -82,11 +84,7 @@ namespace Phoenix.Services.Handlers.Reports.Queries
             .GetSheetNames()
             .ToArray();
 
-         IEnumerable<IGrouping<string, DeviceReportDto>> locationGroups = devices
-            .OrderBy(x => x.ReportSequence)
-            .GroupBy(x => x.LocationName);
-
-         foreach (IGrouping<string, DeviceReportDto> group in locationGroups)
+         foreach (IGrouping<string, DeviceReportDto> group in devices.GroupBy(x => x.LocationName))
          {
             ExcelWorksheet groupSheet = sheets.CloneSheet(PlcProcessorBase.BaseSheet, group.Key);
             foreach (DeviceReportDto device in group)
