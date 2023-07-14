@@ -30,11 +30,6 @@ namespace Phoenix.Api.Web.Controllers.Base
          return Ok(await _mediator.Send(request));
       }
 
-      protected async Task<IActionResult> HandleAsync(IRequest<TokenResult> request)
-      {
-         return Ok(await _mediator.Send(request));
-      }
-
       protected async Task<IActionResult> HandleAsync(CommandBase request)
       {
          request.SetId(GetId());
