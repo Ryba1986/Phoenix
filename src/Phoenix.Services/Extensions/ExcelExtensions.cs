@@ -21,11 +21,6 @@ namespace Phoenix.Services.Extensions
          return sheets.Select(x => x.Name);
       }
 
-      public static ExcelWorksheet CloneSheet(this ExcelWorksheets sheets, string name, string newSheetName)
-      {
-         return sheets.Copy(name, newSheetName);
-      }
-
       public static void RemoveSheets(this ExcelWorksheets sheets, IEnumerable<string> sheetNames)
       {
          foreach (string name in sheetNames)

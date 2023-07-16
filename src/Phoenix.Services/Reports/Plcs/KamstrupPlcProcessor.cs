@@ -11,7 +11,6 @@ using Phoenix.Entities.Plcs.Meters;
 using Phoenix.Models.Devices.Dto;
 using Phoenix.Models.Plcs.Meters.Dto;
 using Phoenix.Models.Utilities;
-using Phoenix.Services.Extensions;
 using Phoenix.Services.Reports.Base;
 using Phoenix.Services.Repositories;
 using Phoenix.Shared.Extensions;
@@ -34,7 +33,7 @@ namespace Phoenix.Services.Reports.Plcs
             plcData.TryGetValue(device.Id, out KamstrupReportDto[]? currentData);
             beforeData.TryGetValue(device.Id, out KamstrupDto? beforePlc);
 
-            ExcelWorksheet sheet = sheets.CloneSheet(MeterSheet, device.Id.ToString());
+            ExcelWorksheet sheet = sheets.Copy(MeterSheet, device.Id.ToString());
             FillData(sheet, device, currentData, beforePlc, typeProcessor);
          }
       }

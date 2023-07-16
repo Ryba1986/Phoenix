@@ -87,7 +87,7 @@ namespace Phoenix.Services.Handlers.Reports.Queries
       {
          foreach (IGrouping<string, DeviceReportDto> group in devices.GroupBy(x => x.LocationName))
          {
-            ExcelWorksheet groupSheet = sheets.CloneSheet(PlcProcessorBase.BaseSheet, group.Key);
+            ExcelWorksheet groupSheet = sheets.Copy(PlcProcessorBase.BaseSheet, group.Key);
             foreach (DeviceReportDto device in group)
             {
                ExcelWorksheet deviceSheet = sheets[device.Id.ToString()];

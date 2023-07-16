@@ -8,7 +8,6 @@ using OfficeOpenXml;
 using Phoenix.Entities.Plcs.Rvds;
 using Phoenix.Models.Devices.Dto;
 using Phoenix.Models.Plcs.Rvds.Dto;
-using Phoenix.Services.Extensions;
 using Phoenix.Services.Reports.Base;
 using Phoenix.Services.Repositories;
 using Phoenix.Shared.Enums.Devices;
@@ -29,7 +28,7 @@ namespace Phoenix.Services.Reports.Plcs
          {
             plcData.TryGetValue(device.Id, out Rvd145ReportDto[]? deviceData);
 
-            ExcelWorksheet sheet = sheets.CloneSheet(PlcSheet, device.Id.ToString());
+            ExcelWorksheet sheet = sheets.Copy(PlcSheet, device.Id.ToString());
             FillData(sheet, device, deviceData, typeProcessor);
          }
       }
