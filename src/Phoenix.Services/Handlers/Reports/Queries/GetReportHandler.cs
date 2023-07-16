@@ -38,8 +38,14 @@ namespace Phoenix.Services.Handlers.Reports.Queries
 
          ep.Workbook.Properties.Author = nameof(Phoenix);
 
+         IReadOnlyCollection<string> templateSheetNames = ep.Workbook.Worksheets
+            .GetSheetNames()
+            .ToArray();
+
          ep.Workbook.Worksheets.RemoveTemplateRows(typeProcessor.RemoveTemplateRowCount);
          await CreateSheetsAsync(ep.Workbook.Worksheets, request, typeProcessor, cancellationToken);
+
+         ep.Workbook.Worksheets.RemoveSheets(templateSheetNames);
 
          return new()
          {
@@ -79,10 +85,6 @@ namespace Phoenix.Services.Handlers.Reports.Queries
 
       private static void CreateResultSheets(ExcelWorksheets sheets, GetReportQuery request, IReadOnlyCollection<DeviceReportDto> devices, ITypeProcessor typeProcessor)
       {
-         IReadOnlyCollection<string> inputSheetNames = sheets
-            .GetSheetNames()
-            .ToArray();
-
          foreach (IGrouping<string, DeviceReportDto> group in devices.GroupBy(x => x.LocationName))
          {
             ExcelWorksheet groupSheet = sheets.CloneSheet(PlcProcessorBase.BaseSheet, group.Key);
@@ -92,12 +94,12 @@ namespace Phoenix.Services.Handlers.Reports.Queries
 
                deviceSheet.Cells[1, 1, deviceSheet.Dimension.Rows, deviceSheet.Dimension.Columns]
                   .Copy(groupSheet.Cells[1, groupSheet.Dimension.Columns + 1]);
+
+               sheets.Delete(deviceSheet);
             }
 
             SetHeaders(groupSheet, request, group.Key, typeProcessor);
          }
-
-         sheets.RemoveSheets(inputSheetNames);
       }
 
       private static void SetHeaders(ExcelWorksheet sheet, GetReportQuery request, string locationName, ITypeProcessor typeProcessor)
