@@ -39,7 +39,7 @@ namespace Phoenix.Services.Handlers.Reports.Queries
          ep.Workbook.Properties.Author = nameof(Phoenix);
 
          IReadOnlyCollection<string> templateSheetNames = ep.Workbook.Worksheets
-            .GetSheetNames()
+            .Select(x => x.Name)
             .ToArray();
 
          ep.Workbook.Worksheets.RemoveTemplateRows(typeProcessor.RemoveTemplateRowCount);

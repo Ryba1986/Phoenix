@@ -16,11 +16,6 @@ namespace Phoenix.Services.Extensions
          return new ExcelPackage(new(templatePath), true);
       }
 
-      public static IEnumerable<string> GetSheetNames(this ExcelWorksheets sheets)
-      {
-         return sheets.Select(x => x.Name);
-      }
-
       public static void RemoveSheets(this ExcelWorksheets sheets, IEnumerable<string> sheetNames)
       {
          foreach (string name in sheetNames)
