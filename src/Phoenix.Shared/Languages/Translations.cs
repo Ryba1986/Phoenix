@@ -75,6 +75,7 @@ namespace Phoenix.Shared.Languages
       public static string Validator_AccessLevel_Invalid => Get(eng: "Access level is invaild.", pol: "Poziom dostępu jest nieprawidłowy.");
       public static string Validator_BoundRate_Invalid => Get(eng: "Boundrate is invaild.", pol: "Prędkość jest nieprawidłowa.");
       public static string Validator_ClientVersion_Invalid => Get(eng: "Client version is invaild.", pol: "Wersja klienta jest nieprawidłowa.");
+      public static string Validator_ConfirmNewPassword_Invalid => Get(eng: "Confirmation password is invaild.", pol: "Potwierdzenie nowego hasła jest nieprawidłowe.");
       public static string Validator_CurrentPassword_Invalid => Get(eng: "Current password is invaild.", pol: "Aktualne hasło jest nieprawidłowe.");
       public static string Validator_DataBits_Invalid => Get(eng: "Data bit is invaild.", pol: "Data bit jest nieprawidłowe.");
       public static string Validator_DeviceType_Invalid => Get(eng: "Device type is invaild.", pol: "Typ urządzenia jest nieprawidłowe.");

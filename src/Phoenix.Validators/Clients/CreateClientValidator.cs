@@ -1,6 +1,7 @@
 using FluentValidation;
 using Phoenix.Models.Clients.Commands;
 using Phoenix.Shared.Languages;
+using Phoenix.Shared.Validators;
 
 namespace Phoenix.Validators.Clients
 {
@@ -13,7 +14,7 @@ namespace Phoenix.Validators.Clients
 
          RuleFor(x => x.MacAddress)
             .NotEmpty().WithMessage(Translations.Validator_MacAddress_Invalid)
-            .Matches("^[0-9A-F]{12}$").WithMessage(Translations.Validator_MacAddress_Invalid);
+            .Matches(RegexPatterns.MacAddress).WithMessage(Translations.Validator_MacAddress_Invalid);
       }
    }
 }
