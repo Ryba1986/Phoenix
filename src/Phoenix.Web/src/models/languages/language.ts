@@ -2,6 +2,10 @@ import { DefineLocaleMessage } from "vue-i18n";
 
 export interface Language extends DefineLocaleMessage {
    components: {};
-   requests: {};
+   requests: {
+      default: string;
+      forbidden: string;
+      unauthorized: string;
+   };
    views: {};
 }

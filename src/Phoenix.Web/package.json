@@ -11,7 +11,6 @@
    "dependencies": {
       "chart.js": "^4.3.0",
       "date-fns": "^2.30.0",
-      "jwt-decode": "^3.1.2",
       "linq-to-typescript": "^11.0.0",
       "pinia": "^2.1.4",
       "primeflex": "^3.3.1",
