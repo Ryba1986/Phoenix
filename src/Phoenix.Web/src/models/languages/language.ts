@@ -6,6 +6,7 @@ export interface Language extends DefineLocaleMessage {
       default: string;
       forbidden: string;
       unauthorized: string;
+      userNotFound: string;
    };
    views: {};
 }

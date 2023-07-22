@@ -2,6 +2,9 @@ import { useI18n } from "vue-i18n";
 import { authStore } from "../stores/authStore";
 import { apiRequestContentType, apiUrlBase } from "../config";
 import { Result } from "../models/requests/result";
+import { CommandBase } from "../models/api/base/commands/commandBase";
+import { TokenResult } from "../models/requests/tokenResult";
+import { GetUserTokenQuery } from "../models/api/users/queries/getUserTokenQuery";
 
 const _authStore = authStore();
 const { t } = useI18n();
@@ -53,7 +56,7 @@ export async function getAsync<T>(url: string, request?: any): Promise<T> {
    return Promise.resolve<T>(await response.json());
 }
 
-export async function postAsync<T>(url: string, data?: T): Promise<Result> {
+export async function postAsync(url: string, data?: CommandBase): Promise<Result> {
    const requestOptions: RequestInit = {
       method: "POST",
       headers: getHeders(),
@@ -74,4 +77,27 @@ export async function postAsync<T>(url: string, data?: T): Promise<Result> {
    }
 
    return Promise.resolve<Result>(result);
+}
+
+export async function postTokenAsync(url: string, data?: GetUserTokenQuery): Promise<TokenResult> {
+   const requestOptions: RequestInit = {
+      method: "POST",
+      headers: getHeders(),
+   };
+
+   if (data) {
+      requestOptions.body = JSON.stringify(data);
+   }
+
+   const response: Response = await fetch(`${apiUrlBase}${url}`, requestOptions);
+   if (!response.ok) {
+      return handleErrorAsync<TokenResult>(response.status);
+   }
+
+   const result: TokenResult = await response.json();
+   if (!result.value) {
+      return Promise.reject<TokenResult>(t("requests.userNotFound"));
+   }
+
+   return Promise.resolve<TokenResult>(result);
 }
