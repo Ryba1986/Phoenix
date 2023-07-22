@@ -1,8 +1,8 @@
+import { ApiBase } from "./base/apiBase";
 import { Rvd145ChartDto } from "../models/api/plcs/rvds/dto/rvd145ChartDto";
 import { Rvd145Dto } from "../models/api/plcs/rvds/dto/rvd145Dto";
 import { GetRvd145ChartQuery } from "../models/api/plcs/rvds/queries/getRvd145ChartQuery";
 import { GetRvd145LastQuery } from "../models/api/plcs/rvds/queries/getRvd145LastQuery";
-import { ApiBase } from "./base/apiBase";
 
 export class Rvd145Api extends ApiBase {
    constructor() {

@@ -1,3 +1,4 @@
+import { ApiBase } from "./base/apiBase";
 import { DictionaryItem } from "../models/api/base/dto/dictionaryItem";
 import { CreateUserCommand } from "../models/api/users/commands/createUserCommand";
 import { UpdateUserCommand } from "../models/api/users/commands/updateUserCommand";
@@ -9,7 +10,6 @@ import { GetUserTokenQuery } from "../models/api/users/queries/getUserTokenQuery
 import { Result } from "../models/requests/result";
 import { TokenResult } from "../models/requests/tokenResult";
 import { authStore } from "../stores/authStore";
-import { ApiBase } from "./base/apiBase";
 
 export class UserApi extends ApiBase {
    private readonly _authStore;

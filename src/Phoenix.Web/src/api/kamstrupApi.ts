@@ -1,8 +1,8 @@
+import { ApiBase } from "./base/apiBase";
 import { KamstrupChartDto } from "../models/api/plcs/meters/dto/kamstrupChartDto";
 import { KamstrupDto } from "../models/api/plcs/meters/dto/kamstrupDto";
 import { GetKamstrupChartQuery } from "../models/api/plcs/meters/queries/getKamstrupChartQuery";
 import { GetKamstrupLastQuery } from "../models/api/plcs/meters/queries/getKamstrupLastQuery";
-import { ApiBase } from "./base/apiBase";
 
 export class KamstrupApi extends ApiBase {
    constructor() {

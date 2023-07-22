@@ -1,10 +1,10 @@
 import { useI18n } from "vue-i18n";
-import { authStore } from "../stores/authStore";
 import { apiRequestContentType, apiUrlBase } from "../config";
-import { Result } from "../models/requests/result";
 import { CommandBase } from "../models/api/base/commands/commandBase";
-import { TokenResult } from "../models/requests/tokenResult";
 import { GetUserTokenQuery } from "../models/api/users/queries/getUserTokenQuery";
+import { Result } from "../models/requests/result";
+import { TokenResult } from "../models/requests/tokenResult";
+import { authStore } from "../stores/authStore";
 
 export class RequestHelper {
    private readonly _authStore;
