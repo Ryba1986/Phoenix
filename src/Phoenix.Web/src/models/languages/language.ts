@@ -1,4 +1,4 @@
-import { DefineLocaleMessage } from "vue-i18n/dist/vue-i18n.js";
+import { DefineLocaleMessage } from "vue-i18n";
 
 export interface Language extends DefineLocaleMessage {
    components: {};
