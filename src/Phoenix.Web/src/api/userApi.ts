@@ -1,4 +1,3 @@
-import { getAsync, postAsync, postTokenAsync } from "../helpers/requestHelper";
 import { DictionaryItem } from "../models/api/base/dto/dictionaryItem";
 import { CreateUserCommand } from "../models/api/users/commands/createUserCommand";
 import { UpdateUserCommand } from "../models/api/users/commands/updateUserCommand";
@@ -10,51 +9,59 @@ import { GetUserTokenQuery } from "../models/api/users/queries/getUserTokenQuery
 import { Result } from "../models/requests/result";
 import { TokenResult } from "../models/requests/tokenResult";
 import { authStore } from "../stores/authStore";
+import { ApiBase } from "./base/apiBase";
 
-const _authStore = authStore();
+export class UserApi extends ApiBase {
+   private readonly _authStore;
 
-export function getUsersAsync(): Promise<Array<UserDto>> {
-   return getAsync<Array<UserDto>>("user/getUsers");
-}
-
-export function getUserHistoryAsync(request: GetUserHistoryQuery): Promise<Array<UserHistoryDto>> {
-   return getAsync<Array<UserHistoryDto>>("user/getUserHistory", request);
-}
-
-export function getUserDictionaryAsync(): Promise<Array<DictionaryItem>> {
-   return getAsync<Array<DictionaryItem>>("user/getUserDictionary");
-}
-
-export async function getUserTokenAsync(request: GetUserTokenQuery): Promise<void> {
-   const result: TokenResult = await postTokenAsync("user/getUserToken", request);
-
-   if (result.value) {
-      _authStore.setToken(result.value);
-      // TODO: add route to default
-   } else {
-      _authStore.removeToken();
+   constructor() {
+      super();
+      this._authStore = authStore();
    }
-}
 
-export async function getUserTokenRefreshAsync(): Promise<void> {
-   const result: TokenResult = await postTokenAsync("user/getUserTokenRefresh");
-
-   if (result.value) {
-      _authStore.setToken(result.value);
-   } else {
-      _authStore.removeToken();
-      // TODO: add route to default
+   public getUsersAsync(): Promise<Array<UserDto>> {
+      return this._requestHelper.getAsync<Array<UserDto>>("user/getUsers");
    }
-}
 
-export function createUserAsync(command: CreateUserCommand): Promise<Result> {
-   return postAsync("user/createUser", command);
-}
+   public getUserHistoryAsync(request: GetUserHistoryQuery): Promise<Array<UserHistoryDto>> {
+      return this._requestHelper.getAsync<Array<UserHistoryDto>>("user/getUserHistory", request);
+   }
 
-export function updateUserAsync(command: UpdateUserCommand): Promise<Result> {
-   return postAsync("user/updateUser", command);
-}
+   public getUserDictionaryAsync(): Promise<Array<DictionaryItem>> {
+      return this._requestHelper.getAsync<Array<DictionaryItem>>("user/getUserDictionary");
+   }
 
-export function updateUserPasswordAsync(command: UpdateUserPasswordCommand): Promise<Result> {
-   return postAsync("user/updateUserPassword", command);
+   public async getUserTokenAsync(request: GetUserTokenQuery): Promise<void> {
+      const result: TokenResult = await this._requestHelper.postTokenAsync("user/getUserToken", request);
+
+      if (result.value) {
+         this._authStore.setToken(result.value);
+         // TODO: add route to default
+      } else {
+         this._authStore.removeToken();
+      }
+   }
+
+   public async getUserTokenRefreshAsync(): Promise<void> {
+      const result: TokenResult = await this._requestHelper.postTokenAsync("user/getUserTokenRefresh");
+
+      if (result.value) {
+         this._authStore.setToken(result.value);
+      } else {
+         this._authStore.removeToken();
+         // TODO: add route to default
+      }
+   }
+
+   public createUserAsync(command: CreateUserCommand): Promise<Result> {
+      return this._requestHelper.postAsync("user/createUser", command);
+   }
+
+   public updateUserAsync(command: UpdateUserCommand): Promise<Result> {
+      return this._requestHelper.postAsync("user/updateUser", command);
+   }
+
+   public updateUserPasswordAsync(command: UpdateUserPasswordCommand): Promise<Result> {
+      return this._requestHelper.postAsync("user/updateUserPassword", command);
+   }
 }

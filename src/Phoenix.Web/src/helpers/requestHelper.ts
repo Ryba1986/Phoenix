@@ -6,98 +6,105 @@ import { CommandBase } from "../models/api/base/commands/commandBase";
 import { TokenResult } from "../models/requests/tokenResult";
 import { GetUserTokenQuery } from "../models/api/users/queries/getUserTokenQuery";
 
-const _authStore = authStore();
-const { t } = useI18n();
+export class RequestHelper {
+   private readonly _authStore;
+   private readonly _translation;
 
-function getHeders(): HeadersInit {
-   return {
-      Authorization: `Bearer ${_authStore.token}`,
-      "Content-Type": apiRequestContentType,
-   };
-}
-
-function handleErrorAsync<T>(statusCode: number): Promise<T> {
-   if (statusCode == 401) {
-      _authStore.removeToken();
-      // TODO: add route to default
-
-      return Promise.reject<T>(t("requests.unauthorized"));
+   constructor() {
+      this._authStore = authStore();
+      this._translation = useI18n().t;
    }
 
-   if (statusCode == 403) {
-      return Promise.reject<T>(t("requests.forbidden"));
+   public async getAsync<T>(url: string, request?: any): Promise<T> {
+      if (request) {
+         url = this.toQueryString(url, request);
+      }
+
+      const response: Response = await fetch(`${apiUrlBase}${url}`, {
+         method: "GET",
+         headers: this.getHeders(),
+      });
+
+      if (!response.ok) {
+         return this.handleErrorAsync<T>(response.status);
+      }
+
+      return Promise.resolve<T>(await response.json());
    }
 
-   return Promise.reject<T>(t("requests.default"));
-}
+   public async postAsync(url: string, data?: CommandBase): Promise<Result> {
+      const requestOptions: RequestInit = {
+         method: "POST",
+         headers: this.getHeders(),
+      };
 
-function toQueryString(url: string, request: any): string {
-   const queryString: string = Object.keys(request)
-      .map((x: string) => `${encodeURIComponent(x)}=${encodeURIComponent(request[x])}`)
-      .join("&");
+      if (data) {
+         requestOptions.body = JSON.stringify(data);
+      }
 
-   return `${url}?${queryString}`;
-}
+      const response: Response = await fetch(`${apiUrlBase}${url}`, requestOptions);
+      if (!response.ok) {
+         return this.handleErrorAsync<Result>(response.status);
+      }
 
-export async function getAsync<T>(url: string, request?: any): Promise<T> {
-   if (request) {
-      url = toQueryString(url, request);
+      const result: Result = await response.json();
+      if (!result.isSuccess) {
+         return Promise.reject<Result>(result.message);
+      }
+
+      return Promise.resolve<Result>(result);
    }
 
-   const response: Response = await fetch(`${apiUrlBase}${url}`, {
-      method: "GET",
-      headers: getHeders(),
-   });
+   public async postTokenAsync(url: string, data?: GetUserTokenQuery): Promise<TokenResult> {
+      const requestOptions: RequestInit = {
+         method: "POST",
+         headers: this.getHeders(),
+      };
 
-   if (!response.ok) {
-      return handleErrorAsync<T>(response.status);
+      if (data) {
+         requestOptions.body = JSON.stringify(data);
+      }
+
+      const response: Response = await fetch(`${apiUrlBase}${url}`, requestOptions);
+      if (!response.ok) {
+         return this.handleErrorAsync<TokenResult>(response.status);
+      }
+
+      const result: TokenResult = await response.json();
+      if (!result.value) {
+         return Promise.reject<TokenResult>(this._translation("requests.userNotFound"));
+      }
+
+      return Promise.resolve<TokenResult>(result);
    }
 
-   return Promise.resolve<T>(await response.json());
-}
-
-export async function postAsync(url: string, data?: CommandBase): Promise<Result> {
-   const requestOptions: RequestInit = {
-      method: "POST",
-      headers: getHeders(),
-   };
-
-   if (data) {
-      requestOptions.body = JSON.stringify(data);
+   private getHeders(): HeadersInit {
+      return {
+         Authorization: `Bearer ${this._authStore.token}`,
+         "Content-Type": apiRequestContentType,
+      };
    }
 
-   const response: Response = await fetch(`${apiUrlBase}${url}`, requestOptions);
-   if (!response.ok) {
-      return handleErrorAsync<Result>(response.status);
+   private handleErrorAsync<T>(statusCode: number): Promise<T> {
+      if (statusCode == 401) {
+         this._authStore.removeToken();
+         // TODO: add route to default
+
+         return Promise.reject<T>(this._translation("requests.unauthorized"));
+      }
+
+      if (statusCode == 403) {
+         return Promise.reject<T>(this._translation("requests.forbidden"));
+      }
+
+      return Promise.reject<T>(this._translation("requests.default"));
    }
 
-   const result: Result = await response.json();
-   if (!result.isSuccess) {
-      return Promise.reject<Result>(result.message);
+   private toQueryString(url: string, request: any): string {
+      const queryString: string = Object.keys(request)
+         .map((x: string) => `${encodeURIComponent(x)}=${encodeURIComponent(request[x])}`)
+         .join("&");
+
+      return `${url}?${queryString}`;
    }
-
-   return Promise.resolve<Result>(result);
-}
-
-export async function postTokenAsync(url: string, data?: GetUserTokenQuery): Promise<TokenResult> {
-   const requestOptions: RequestInit = {
-      method: "POST",
-      headers: getHeders(),
-   };
-
-   if (data) {
-      requestOptions.body = JSON.stringify(data);
-   }
-
-   const response: Response = await fetch(`${apiUrlBase}${url}`, requestOptions);
-   if (!response.ok) {
-      return handleErrorAsync<TokenResult>(response.status);
-   }
-
-   const result: TokenResult = await response.json();
-   if (!result.value) {
-      return Promise.reject<TokenResult>(t("requests.userNotFound"));
-   }
-
-   return Promise.resolve<TokenResult>(result);
 }
