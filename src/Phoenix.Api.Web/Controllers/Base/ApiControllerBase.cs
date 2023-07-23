@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using Phoenix.Models.Base.Commands;
 using Phoenix.Shared.Extensions;
 using Phoenix.Shared.Results;
+using FileResult = Phoenix.Shared.Results.FileResult;
 
 namespace Phoenix.Api.Web.Controllers.Base
 {
@@ -28,6 +29,12 @@ namespace Phoenix.Api.Web.Controllers.Base
       protected async Task<IActionResult> HandleAsync<T>(IRequest<T?> request)
       {
          return Ok(await _mediator.Send(request));
+      }
+
+      protected async Task<IActionResult> HandleAsync(IRequest<FileResult> request)
+      {
+         FileResult result = await _mediator.Send(request);
+         return File(result.Data, result.Type, result.Name);
       }
 
       protected async Task<IActionResult> HandleAsync(CommandBase request)
