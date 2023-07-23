@@ -4,6 +4,7 @@ export interface Language extends DefineLocaleMessage {
    components: {};
    requests: {
       default: string;
+      fileNameNotExists: string;
       forbidden: string;
       unauthorized: string;
       userNotFound: string;

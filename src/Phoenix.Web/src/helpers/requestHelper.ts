@@ -2,6 +2,7 @@ import { useI18n } from "vue-i18n";
 import { apiRequestContentType, apiUrlBase } from "../config";
 import { CommandBase } from "../models/api/base/commands/commandBase";
 import { GetUserTokenQuery } from "../models/api/users/queries/getUserTokenQuery";
+import { FileResult } from "../models/requests/fileResult";
 import { Result } from "../models/requests/result";
 import { TokenResult } from "../models/requests/tokenResult";
 import { authStore } from "../stores/authStore";
@@ -31,6 +32,31 @@ export class RequestHelper {
 
       return Promise.resolve<T>(await response.json());
    }
+
+   public getFileAsync = async (url: string, request?: any): Promise<FileResult> => {
+      if (request) {
+         url = this.toQueryString(url, request);
+      }
+
+      const response: Response = await fetch(`${apiUrlBase}${url}`, {
+         method: "GET",
+         headers: this.getHeders(),
+      });
+
+      if (!response.ok) {
+         return this.handleErrorAsync<FileResult>(response.status);
+      }
+
+      const fileName: string = response.headers.get("content-disposition")?.split("filename=")[1] ?? "";
+      if (!fileName) {
+         return Promise.reject(this._translation("requests.fileNameNotExists"));
+      }
+
+      return {
+         name: fileName.substring(0, fileName.indexOf(";")).trim(),
+         data: await response.blob(),
+      };
+   };
 
    public async postAsync(url: string, data?: CommandBase): Promise<Result> {
       const requestOptions: RequestInit = {
