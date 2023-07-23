@@ -1,4 +1,4 @@
 export interface GetReportQuery {
-   date: Date;
+   date: string;
    type: number;
 }
