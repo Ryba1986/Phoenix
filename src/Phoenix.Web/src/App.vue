@@ -2,6 +2,7 @@
 import { ComputedRef, Ref, computed, onMounted, onUnmounted, ref } from "vue";
 import { UserApi } from "./api/userApi";
 import { apiTokenRefreshInterval } from "./config";
+import { displayError } from "./helpers/toastHelper";
 import { authStore } from "./stores/authStore";
 
 const store = authStore();
@@ -18,8 +19,7 @@ async function refreshTokenAsync(): Promise<void> {
    try {
       await userApi.getUserTokenRefreshAsync();
    } catch (error) {
-      //TODO: move to toast
-      console.warn(error);
+      displayError(error);
    }
 }
 
@@ -37,5 +37,8 @@ onUnmounted((): void => {
 </script>
 
 <template>
-   <router-view />
+   <NavBar />
+   <div class="container-fluid pt-3 px-2">
+      <router-view />
+   </div>
 </template>
