@@ -1,8 +1,10 @@
 import { Router, createRouter, createWebHistory } from "vue-router";
 import { routerRoutes } from "../config";
+import { authStore } from "../stores/authStore";
 
 import Dashboard from "../views/Dashboard.vue";
-import { authStore } from "../stores/authStore";
+import SignIn from "../views/SignIn.vue";
+import SignOut from "../views/SignOut.vue";
 
 const router: Router = createRouter({
    history: createWebHistory(),
@@ -14,6 +16,14 @@ const router: Router = createRouter({
       {
          path: routerRoutes.dashboard,
          component: Dashboard,
+      },
+      {
+         path: routerRoutes.signIn,
+         component: SignIn,
+      },
+      {
+         path: routerRoutes.signOut,
+         component: SignOut,
       },
       {
          path: "/:pathMatch(.*)",
