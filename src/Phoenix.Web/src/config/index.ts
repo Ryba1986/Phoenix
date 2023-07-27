@@ -1,8 +1,8 @@
 import { Routes } from "../models/routers/routes";
 
 export const apiRequestContentType: string = "application/json";
-export const apiTokenName: string = "ApiToken";
 export const apiTokenEmptyValue: string = "";
+export const apiTokenName: string = "ApiToken";
 export const apiTokenRefreshInterval: number = 60_000;
 export const apiUrlBase: string = "/apiweb/";
 

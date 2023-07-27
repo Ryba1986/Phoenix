@@ -6,6 +6,7 @@ import { DxLoadPanel } from "devextreme-vue/load-panel";
 import { DxSelectBox } from "devextreme-vue/select-box";
 import { DxTextBox } from "devextreme-vue/text-box";
 
+import Card from "../components/Card.vue";
 import NavBar from "../components/NavBar.vue";
 
 export const componentPlugin: Plugin = {
@@ -16,6 +17,7 @@ export const componentPlugin: Plugin = {
       app.component("DxSelectBox", DxSelectBox);
       app.component("DxTextBox", DxTextBox);
 
+      app.component("Card", Card);
       app.component("NavBar", NavBar);
    },
 };
