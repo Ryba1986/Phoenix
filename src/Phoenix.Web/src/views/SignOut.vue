@@ -4,4 +4,4 @@ import { authStore } from "../stores/authStore";
 authStore().removeToken();
 </script>
 
-<template></template>
+<template>Sign out</template>
