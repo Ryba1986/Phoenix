@@ -1,10 +1,11 @@
 import { useI18n } from "vue-i18n";
-import { apiRequestContentType, apiUrlBase } from "../config";
+import { apiRequestContentType, apiUrlBase, routerRoutes } from "../config";
 import { CommandBase } from "../models/api/base/commands/commandBase";
 import { GetUserTokenQuery } from "../models/api/users/queries/getUserTokenQuery";
 import { FileResult } from "../models/requests/fileResult";
 import { Result } from "../models/requests/result";
 import { TokenResult } from "../models/requests/tokenResult";
+import router from "../router";
 import { authStore } from "../stores/authStore";
 
 export class RequestHelper {
@@ -114,7 +115,7 @@ export class RequestHelper {
    private handleErrorAsync<T>(statusCode: number): Promise<T> {
       if (statusCode == 401) {
          this._authStore.removeToken();
-         // TODO: add route to default
+         router.push(routerRoutes.default);
 
          return Promise.reject<T>(this._translation("requests.unauthorized"));
       }

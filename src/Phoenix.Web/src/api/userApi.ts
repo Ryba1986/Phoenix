@@ -1,4 +1,5 @@
 import { ApiBase } from "./base/apiBase";
+import { routerRoutes } from "../config";
 import { DictionaryItem } from "../models/api/base/dto/dictionaryItem";
 import { CreateUserCommand } from "../models/api/users/commands/createUserCommand";
 import { UpdateUserCommand } from "../models/api/users/commands/updateUserCommand";
@@ -9,6 +10,7 @@ import { GetUserHistoryQuery } from "../models/api/users/queries/getUserHistoryQ
 import { GetUserTokenQuery } from "../models/api/users/queries/getUserTokenQuery";
 import { Result } from "../models/requests/result";
 import { TokenResult } from "../models/requests/tokenResult";
+import router from "../router";
 import { authStore } from "../stores/authStore";
 
 export class UserApi extends ApiBase {
@@ -36,7 +38,7 @@ export class UserApi extends ApiBase {
 
       if (result.value) {
          this._authStore.setToken(result.value);
-         // TODO: add route to default
+         router.push(routerRoutes.default);
       } else {
          this._authStore.removeToken();
       }
@@ -49,7 +51,7 @@ export class UserApi extends ApiBase {
          this._authStore.setToken(result.value);
       } else {
          this._authStore.removeToken();
-         // TODO: add route to default
+         router.push(routerRoutes.default);
       }
    }
 
