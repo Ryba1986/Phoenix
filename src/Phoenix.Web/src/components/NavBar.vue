@@ -8,7 +8,7 @@ import { authStore } from "../stores/authStore";
 const aStore = authStore();
 const { t } = useI18n();
 
-const isLogged: ComputedRef<boolean> = computed((): boolean => !aStore.isLogged);
+const isLogged: ComputedRef<boolean> = computed((): boolean => aStore.isLogged);
 </script>
 
 <template>
