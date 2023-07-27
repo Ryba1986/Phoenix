@@ -19,3 +19,5 @@ export const routerRoutes: Routes = {
    signOut: "/signout",
    anonymous: ["/signin"],
 };
+
+export const toastDisplayTime: number = 3_000;
