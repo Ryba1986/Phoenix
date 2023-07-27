@@ -9,5 +9,6 @@ import "primevue/resources/themes/lara-light-teal/theme.css";
 import "primevue/resources/primevue.css";
 import "primeflex/primeflex.scss";
 import "primeicons/primeicons.css";
+import "./styles/main.scss";
 
 createApp(App).use(createPinia()).use(PrimeVue).use(componentPlugin).use(i18n).mount("#app");
