@@ -15,7 +15,7 @@ const isLogged: ComputedRef<boolean> = computed((): boolean => !aStore.isLogged)
    <nav class="navbar navbar-light bg-white navbar-expand-md shadow-sm">
       <div class="container-fluid">
          <router-link :to="routerRoutes.default" class="navbar-brand" @click="collapseNavBar">
-            <img src="logo.png" alt="logo" width="32" height="32" class="align-text-top me-1" />
+            <img src="/logo.png" alt="logo" width="32" height="32" class="align-text-top me-1" />
          </router-link>
          <button
             class="navbar-toggler"
