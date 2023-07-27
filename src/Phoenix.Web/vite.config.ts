@@ -10,6 +10,11 @@ export default defineConfig({
       reportCompressedSize: false,
    },
    plugins: [vue()],
+   resolve: {
+      alias: {
+         "devextreme/ui": "devextreme/esm/ui",
+      },
+   },
    server: {
       proxy: {
          "/apiweb": {
