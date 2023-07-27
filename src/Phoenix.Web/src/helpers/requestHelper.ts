@@ -115,7 +115,7 @@ export class RequestHelper {
    private handleErrorAsync<T>(statusCode: number): Promise<T> {
       if (statusCode == 401) {
          this._authStore.removeToken();
-         router.push(routerRoutes.default);
+         router.push(routerRoutes.signIn);
 
          return Promise.reject<T>(this._translation("requests.unauthorized"));
       }

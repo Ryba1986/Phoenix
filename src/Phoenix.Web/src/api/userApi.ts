@@ -51,7 +51,7 @@ export class UserApi extends ApiBase {
          this._authStore.setToken(result.value);
       } else {
          this._authStore.removeToken();
-         router.push(routerRoutes.default);
+         router.push(routerRoutes.signIn);
       }
    }
 
