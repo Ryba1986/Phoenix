@@ -9,13 +9,13 @@
       "preview": "vite preview"
    },
    "dependencies": {
-      "chart.js": "^4.3.0",
+      "chart.js": "^4.3.2",
       "date-fns": "^2.30.0",
       "linq-to-typescript": "^11.0.0",
-      "pinia": "^2.1.4",
+      "pinia": "^2.1.6",
       "primeflex": "^3.3.1",
       "primeicons": "^6.0.1",
-      "primevue": "^3.30.2",
+      "primevue": "^3.31.0",
       "vue": "^3.3.4",
       "vue-i18n": "^9.3.0-beta.24",
       "vue-router": "^4.2.4"
@@ -24,7 +24,7 @@
       "@vitejs/plugin-vue": "^4.2.3",
       "sass": "^1.64.1",
       "typescript": "^5.1.6",
-      "vite": "^4.4.6",
-      "vue-tsc": "^1.8.6"
+      "vite": "^4.4.7",
+      "vue-tsc": "^1.8.8"
    }
 }
