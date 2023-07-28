@@ -24,5 +24,18 @@ export interface Language extends DefineLocaleMessage {
       unauthorized: string;
       userNotFound: string;
    };
-   views: {};
+   views: {
+      signIn: {
+         loginButton: string;
+         email: {
+            placeHolder: string;
+            emailValidator: string;
+            lengthValidator: string;
+         };
+         password: {
+            placeHolder: string;
+            lengthValidator: string;
+         };
+      };
+   };
 }

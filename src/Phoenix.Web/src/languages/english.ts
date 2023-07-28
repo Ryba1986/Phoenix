@@ -24,5 +24,18 @@ export const english: Language = {
       unauthorized: "You are not authorized.",
       userNotFound: "User not found.",
    },
-   views: {},
+   views: {
+      signIn: {
+         loginButton: "Login",
+         email: {
+            placeHolder: "Enter email address.",
+            emailValidator: "Email is invalid.",
+            lengthValidator: "Email must contain a maximum of 50 symbols.",
+         },
+         password: {
+            placeHolder: "Enter password.",
+            lengthValidator: "Password must be between 10 and 30 symbols.",
+         },
+      },
+   },
 };

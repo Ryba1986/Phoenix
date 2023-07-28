@@ -4,3 +4,12 @@ body {
    background-color: $body-background-color;
    user-select: none;
 }
+
+.card-icon {
+   font-size: 7rem;
+   color: $card-icon-color;
+}
+
+.card-login {
+   width: 380px;
+}

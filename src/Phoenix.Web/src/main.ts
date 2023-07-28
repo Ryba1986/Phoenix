@@ -6,7 +6,7 @@ import { componentPlugin } from "./plugins/componentPlugin";
 import router from "./router";
 
 import "bootstrap/dist/css/bootstrap.min.css";
-import "devextreme/dist/css/dx.carmine.css";
+import "devextreme/dist/css/dx.material.teal.light.compact.css";
 import "./styles/main.scss";
 
 createApp(App).use(router).use(createPinia()).use(componentPlugin).use(i18n).mount("#app");
