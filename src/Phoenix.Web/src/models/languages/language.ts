@@ -2,6 +2,9 @@ import { DefineLocaleMessage } from "vue-i18n";
 
 export interface Language extends DefineLocaleMessage {
    components: {
+      loadPanel: {
+         message: string;
+      };
       navbar: {
          client: string;
          dashboard: string;

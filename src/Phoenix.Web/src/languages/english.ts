@@ -2,6 +2,9 @@ import { Language } from "../models/languages/language";
 
 export const english: Language = {
    components: {
+      loadPanel: {
+         message: "Loading ...",
+      },
       navbar: {
          client: "Clients",
          dashboard: "Dashboard",
