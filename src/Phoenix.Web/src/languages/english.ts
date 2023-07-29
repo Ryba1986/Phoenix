@@ -2,6 +2,13 @@ import { Language } from "../models/languages/language";
 
 export const english: Language = {
    components: {
+      dataGrid: {
+         columns: {
+            createdBy: "Created by",
+            createDate: "Create date",
+            isActive: "Active",
+         },
+      },
       loadPanel: {
          message: "Loading ...",
       },
@@ -25,6 +32,19 @@ export const english: Language = {
       userNotFound: "User not found.",
    },
    views: {
+      location: {
+         grid: {
+            columns: {
+               name: "Name",
+               includeReport: "Report",
+            },
+            validators: {
+               name: {
+                  length: "Name must have between 3 and 30 characters.",
+               },
+            },
+         },
+      },
       report: {
          downloadButton: "Download",
          date: {

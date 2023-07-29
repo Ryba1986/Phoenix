@@ -2,6 +2,13 @@ import { DefineLocaleMessage } from "vue-i18n";
 
 export interface Language extends DefineLocaleMessage {
    components: {
+      dataGrid: {
+         columns: {
+            createdBy: string;
+            createDate: string;
+            isActive: string;
+         };
+      };
       loadPanel: {
          message: string;
       };
@@ -25,6 +32,19 @@ export interface Language extends DefineLocaleMessage {
       userNotFound: string;
    };
    views: {
+      location: {
+         grid: {
+            columns: {
+               name: string;
+               includeReport: string;
+            };
+            validators: {
+               name: {
+                  length: string;
+               };
+            };
+         };
+      };
       report: {
          downloadButton: string;
          date: {

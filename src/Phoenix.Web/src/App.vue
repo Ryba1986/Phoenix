@@ -38,7 +38,7 @@ onUnmounted((): void => {
 
 <template>
    <NavBar />
-   <div class="container-fluid pt-3 px-3">
+   <div class="container-fluid pt-4 px-3">
       <router-view />
    </div>
 </template>

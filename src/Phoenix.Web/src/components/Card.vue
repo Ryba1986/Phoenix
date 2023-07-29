@@ -12,7 +12,7 @@ const props = defineProps({
       <div v-if="props.showHeader" class="card-header bg-white">
          <slot name="header" />
       </div>
-      <div class="card-body py-3">
+      <div class="card-body py-2">
          <slot name="body" />
       </div>
    </div>

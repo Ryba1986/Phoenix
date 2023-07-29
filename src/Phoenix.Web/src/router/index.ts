@@ -18,6 +18,10 @@ const router: Router = createRouter({
          component: () => import("../views/Report.vue"),
       },
       {
+         path: routerRoutes.location,
+         component: () => import("../views/Location.vue"),
+      },
+      {
          path: routerRoutes.signIn,
          component: () => import("../views/SignIn.vue"),
       },
