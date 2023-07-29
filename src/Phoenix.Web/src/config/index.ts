@@ -6,6 +6,10 @@ export const apiTokenName: string = "ApiToken";
 export const apiTokenRefreshInterval: number = 60_000;
 export const apiUrlBase: string = "/apiweb/";
 
+export const dateFormat: string = "yyyy-MM-dd";
+export const dateTimeFormat: string = "yyyy-MM-dd HH:mm:ss";
+export const dateTimeShortFormat: string = "yyyy-MM-dd HH:mm";
+
 export const loadPanelDelay: number = 200;
 
 export const routerRoutes: Routes = {
