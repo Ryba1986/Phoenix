@@ -82,7 +82,7 @@ onMounted(async (): Promise<void> => {
          <template #body>
             <div class="row pb-2">
                <div class="col text-center">
-                  <i class="dx-icon-tableproperties text-center pt-4 card-icon" />
+                  <i class="dx-icon-tableproperties card-icon" />
                </div>
             </div>
             <div class="row px-2 pt-4">

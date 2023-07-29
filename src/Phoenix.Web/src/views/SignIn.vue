@@ -46,9 +46,9 @@ async function userLoginClicAsync(e: ClickEvent): Promise<void> {
    <div class="mx-auto py-5 card-login">
       <Card :show-header="false">
          <template #body>
-            <div class="row pt-2">
+            <div class="row pb-2">
                <div class="col text-center">
-                  <i class="dx-icon-user text-center card-icon" />
+                  <i class="dx-icon-user card-icon" />
                </div>
             </div>
             <div class="row px-2 pt-4">
