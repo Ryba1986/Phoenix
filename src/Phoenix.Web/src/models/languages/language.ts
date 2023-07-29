@@ -27,15 +27,11 @@ export interface Language extends DefineLocaleMessage {
    views: {
       report: {
          downloadButton: string;
-         form: {
-            validators: {
-               date: {
-                  required: string;
-               };
-               type: {
-                  range: string;
-               };
-            };
+         date: {
+            requiredValidator: string;
+         };
+         type: {
+            rangeValidator: string;
          };
       };
       signIn: {

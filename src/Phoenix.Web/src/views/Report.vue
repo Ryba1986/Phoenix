@@ -98,7 +98,7 @@ onMounted(async (): Promise<void> => {
                            width="100%"
                         >
                            <DxValidator>
-                              <DxRangeRule :ignore-empty-value="false" :message="t('views.report.form.validators.type.range')" :min="1" alignment="left" />
+                              <DxRangeRule :ignore-empty-value="false" :message="t('views.report.type.rangeValidator')" :min="1" alignment="left" />
                            </DxValidator>
                         </DxSelectBox>
                      </div>
@@ -113,7 +113,7 @@ onMounted(async (): Promise<void> => {
                            width="100%"
                         >
                            <DxValidator>
-                              <DxRequiredRule :message="t('views.report.form.validators.date.required')" alignment="left" />
+                              <DxRequiredRule :message="t('views.report.date.requiredValidator')" alignment="left" />
                            </DxValidator>
                         </DxDateBox>
                      </div>

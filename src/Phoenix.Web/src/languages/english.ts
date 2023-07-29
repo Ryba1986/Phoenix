@@ -27,15 +27,11 @@ export const english: Language = {
    views: {
       report: {
          downloadButton: "Download",
-         form: {
-            validators: {
-               date: {
-                  required: "Date is required.",
-               },
-               type: {
-                  range: "Type is required.",
-               },
-            },
+         date: {
+            requiredValidator: "Date is required.",
+         },
+         type: {
+            rangeValidator: "Type is required.",
          },
       },
       signIn: {
