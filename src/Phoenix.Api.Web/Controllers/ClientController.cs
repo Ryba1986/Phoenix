@@ -24,9 +24,9 @@ namespace Phoenix.Api.Web.Controllers
 
       [Authorization(Permission.Client, AccessLevel.Read)]
       [HttpGet]
-      public async Task<IActionResult> GetClientHistory()
+      public async Task<IActionResult> GetClientHistory([FromQuery] GetClientHistoryQuery request)
       {
-         return await HandleAsync(new GetClientHistoryQuery());
+         return await HandleAsync(request);
       }
 
       [Authorization(Permission.Client, AccessLevel.Write)]
