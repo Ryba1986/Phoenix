@@ -25,6 +25,19 @@ export const english: Language = {
       userNotFound: "User not found.",
    },
    views: {
+      report: {
+         downloadButton: "Download",
+         form: {
+            validators: {
+               date: {
+                  required: "Date is required.",
+               },
+               type: {
+                  range: "Type is required.",
+               },
+            },
+         },
+      },
       signIn: {
          loginButton: "Login",
          email: {

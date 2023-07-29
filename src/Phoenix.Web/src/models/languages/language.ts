@@ -25,6 +25,19 @@ export interface Language extends DefineLocaleMessage {
       userNotFound: string;
    };
    views: {
+      report: {
+         downloadButton: string;
+         form: {
+            validators: {
+               date: {
+                  required: string;
+               };
+               type: {
+                  range: string;
+               };
+            };
+         };
+      };
       signIn: {
          loginButton: string;
          email: {

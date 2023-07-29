@@ -8,11 +8,11 @@ export class ReportApi extends ApiBase {
       super();
    }
 
-   public GetReportTypeDictionaryAsync(): Promise<Array<DictionaryItem>> {
+   public getReportTypeDictionaryAsync(): Promise<Array<DictionaryItem>> {
       return this._requestHelper.getAsync<Array<DictionaryItem>>("report/getReportTypeDictionary");
    }
 
-   public GetReportAsync(request: GetReportQuery): Promise<FileResult> {
+   public getReportAsync(request: GetReportQuery): Promise<FileResult> {
       return this._requestHelper.getFileAsync("report/getReport", request);
    }
 }
