@@ -8,7 +8,7 @@ import { DxSelectBox } from "devextreme-vue/select-box";
 import { DxTextBox } from "devextreme-vue/text-box";
 
 import { DxValidationGroup } from "devextreme-vue/validation-group";
-import { DxEmailRule, DxPatternRule, DxRangeRule, DxStringLengthRule, DxValidator } from "devextreme-vue/validator";
+import { DxEmailRule, DxPatternRule, DxRangeRule, DxRequiredRule, DxStringLengthRule, DxValidator } from "devextreme-vue/validator";
 
 import Card from "../components/Card.vue";
 import LoadPanel from "../components/LoadPanel.vue";
@@ -26,6 +26,7 @@ export const componentPlugin: Plugin = {
       app.component("DxEmailRule", DxEmailRule);
       app.component("DxPatternRule", DxPatternRule);
       app.component("DxRangeRule", DxRangeRule);
+      app.component("DxRequiredRule", DxRequiredRule);
       app.component("DxStringLengthRule", DxStringLengthRule);
       app.component("DxValidator", DxValidator);
       app.component("DxValidationGroup", DxValidationGroup);
