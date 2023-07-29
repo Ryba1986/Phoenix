@@ -9,14 +9,13 @@ namespace Phoenix.Entities.Clients
       public Client Client { get; init; }
 
       public int? LocationId { get; init; }
-      public Location Location { get; init; }
+      public Location? Location { get; init; }
 
       public string MacAddress { get; init; }
 
       public ClientHistory()
       {
          Client = null!;
-         Location = null!;
          MacAddress = string.Empty;
       }
    }
