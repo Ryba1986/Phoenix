@@ -1,10 +1,10 @@
 <script setup lang="ts">
 import { Ref, ref } from "vue";
 import { useI18n } from "vue-i18n";
-import { UserApi } from "../api/userApi";
-import { GetUserTokenQuery } from "../models/api/users/queries/getUserTokenQuery";
 import { ClickEvent } from "devextreme/ui/button";
+import { UserApi } from "../api/userApi";
 import { displayError } from "../helpers/toastHelper";
+import { GetUserTokenQuery } from "../models/api/users/queries/getUserTokenQuery";
 
 const userApi: UserApi = new UserApi();
 const { t } = useI18n();
