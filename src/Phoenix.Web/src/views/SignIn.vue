@@ -51,7 +51,7 @@ async function userLoginClicAsync(e: ClickEvent): Promise<void> {
                   <i class="dx-icon-user card-icon" />
                </div>
             </div>
-            <div class="row px-2 pt-4">
+            <div class="row px-2 pt-2">
                <div class="col">
                   <DxValidationGroup>
                      <div class="dx-field">
@@ -80,7 +80,7 @@ async function userLoginClicAsync(e: ClickEvent): Promise<void> {
                            </DxValidator>
                         </DxTextBox>
                      </div>
-                     <div class="dx-field pt-3 pb-2">
+                     <div class="dx-field py-2">
                         <DxButton
                            :disabled="isLoading || toastIsVisible"
                            :text="t('views.signIn.loginButton')"

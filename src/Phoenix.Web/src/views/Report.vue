@@ -80,12 +80,12 @@ onMounted(async (): Promise<void> => {
    <div class="mx-auto py-5 card-report">
       <Card :show-header="false">
          <template #body>
-            <div class="row pb-2">
+            <div class="row pb-4">
                <div class="col text-center">
                   <i class="dx-icon-tableproperties card-icon" />
                </div>
             </div>
-            <div class="row px-2 pt-4">
+            <div class="row px-2 pt-2">
                <div class="col">
                   <DxValidationGroup>
                      <div class="dx-field">
@@ -117,7 +117,7 @@ onMounted(async (): Promise<void> => {
                            </DxValidator>
                         </DxDateBox>
                      </div>
-                     <div class="dx-field pt-3 pb-2">
+                     <div class="dx-field py-2">
                         <DxButton
                            :disabled="isLoading || toastIsVisible"
                            :text="t('views.report.downloadButton')"
