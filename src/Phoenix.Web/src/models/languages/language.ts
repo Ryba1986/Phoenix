@@ -32,6 +32,24 @@ export interface Language extends DefineLocaleMessage {
       userNotFound: string;
    };
    views: {
+      client: {
+         grid: {
+            columns: {
+               location: string;
+               macAddress: string;
+               hostname: string;
+               clientVersion: string;
+            };
+            validators: {
+               location: {
+                  range: string;
+               };
+               macAddress: {
+                  pattern: string;
+               };
+            };
+         };
+      };
       location: {
          grid: {
             columns: {

@@ -32,6 +32,24 @@ export const english: Language = {
       userNotFound: "User not found.",
    },
    views: {
+      client: {
+         grid: {
+            columns: {
+               location: "Location",
+               macAddress: "MAC address",
+               hostname: "Hostname",
+               clientVersion: "Client version",
+            },
+            validators: {
+               location: {
+                  range: "Location is required.",
+               },
+               macAddress: {
+                  pattern: "MAC address is invaild.",
+               },
+            },
+         },
+      },
       location: {
          grid: {
             columns: {

@@ -10,16 +10,20 @@ const router: Router = createRouter({
          redirect: routerRoutes.dashboard,
       },
       {
+         path: routerRoutes.client,
+         component: () => import("../views/Client.vue"),
+      },
+      {
+         path: routerRoutes.location,
+         component: () => import("../views/Location.vue"),
+      },
+      {
          path: routerRoutes.dashboard,
          component: () => import("../views/Dashboard.vue"),
       },
       {
          path: routerRoutes.report,
          component: () => import("../views/Report.vue"),
-      },
-      {
-         path: routerRoutes.location,
-         component: () => import("../views/Location.vue"),
       },
       {
          path: routerRoutes.signIn,
