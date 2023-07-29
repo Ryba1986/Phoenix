@@ -66,7 +66,7 @@ function rowUpdatingEvent(e: RowUpdatingEvent): void {
       <DxGridEditing :allow-adding="props.allowAdding" :allow-updating="props.allowUpdating" :allow-deleting="false" mode="row" />
       <DxGridFilterRow :visible="true" apply-filter="auto" />
       <DxGridPager :show-info="false" :show-page-size-selector="false" :show-navigation-buttons="true" :visible="true" display-mode="full" />
-      <DxGridPaging :page-size="17" />
+      <DxGridPaging :page-size="props.enableDetail ? 17 : 5" />
       <DxGridSorting mode="single" />
       <DxGridToolbar>
          <DxGridItem location="after" template="gridRefresh" />
