@@ -2,12 +2,10 @@
 import { Ref, ref } from "vue";
 import { useI18n } from "vue-i18n";
 import CustomStore from "devextreme/data/custom_store";
-import { ClientApi } from "../api/clientApi";
-import { LocationApi } from "../api/locationApi";
+import { createClientAsync, getClientHistoryAsync, getClientsAsync, updateClientAsync } from "../api/clientApi";
+import { getLocationDictionaryAsync } from "../api/locationApi";
 import { DictionaryItem } from "../models/api/base/dto/dictionaryItem";
 
-const clientApi: ClientApi = new ClientApi();
-const locationApi: LocationApi = new LocationApi();
 const { t } = useI18n();
 
 const locations: Ref<Array<DictionaryItem>> = ref([]);
@@ -15,19 +13,19 @@ const locations: Ref<Array<DictionaryItem>> = ref([]);
 const clientStore = new CustomStore<any, any>({
    key: "id",
    load: async () => {
-      const result = await Promise.all([locationApi.getLocationDictionaryAsync(), clientApi.getClientsAsync()]);
+      const result = await Promise.all([getLocationDictionaryAsync(), getClientsAsync()]);
 
       locations.value = result[0];
       return result[1];
    },
-   insert: (value) => clientApi.createClientAsync(value),
-   update: (_key, value) => clientApi.updateClientAsync(value),
+   insert: (value) => createClientAsync(value),
+   update: (_key, value) => updateClientAsync(value),
 });
 
 const clientHistoryStore = (clientId: number) => {
    return new CustomStore<any, any>({
       key: undefined,
-      load: () => clientApi.getClientHistoryAsync({ clientId: clientId }),
+      load: () => getClientHistoryAsync({ clientId: clientId }),
    });
 };
 </script>

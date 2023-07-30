@@ -1,12 +1,11 @@
 <script setup lang="ts">
 import { ComputedRef, Ref, computed, onMounted, onUnmounted, ref } from "vue";
-import { UserApi } from "./api/userApi";
+import { getUserTokenRefreshAsync } from "./api/userApi";
 import { apiTokenRefreshInterval } from "./config";
 import { displayError } from "./helpers/toastHelper";
 import { authStore } from "./stores/authStore";
 
 const store = authStore();
-const userApi: UserApi = new UserApi();
 
 const tokenInterval: Ref<number> = ref(0);
 const isLogged: ComputedRef<boolean> = computed((): boolean => store.isLogged);
@@ -17,7 +16,7 @@ async function refreshTokenAsync(): Promise<void> {
    }
 
    try {
-      await userApi.getUserTokenRefreshAsync();
+      await getUserTokenRefreshAsync();
    } catch (error) {
       displayError(error);
    }

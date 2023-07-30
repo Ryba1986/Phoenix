@@ -1,4 +1,4 @@
-import { ApiBase } from "./base/apiBase";
+import { getAsync, postAsync } from "../helpers/requestHelper";
 import { DictionaryItem } from "../models/api/base/dto/dictionaryItem";
 import { CreateLocationCommand } from "../models/api/locations/commands/createLocationCommand";
 import { UpdateLocationCommand } from "../models/api/locations/commands/updateLocationCommand";
@@ -7,28 +7,22 @@ import { LocationHistoryDto } from "../models/api/locations/dto/locationHistoryD
 import { GetLocationHistoryQuery } from "../models/api/locations/queries/getLocationHistoryQuery";
 import { Result } from "../models/requests/result";
 
-export class LocationApi extends ApiBase {
-   constructor() {
-      super();
-   }
+export function getLocationsAsync(): Promise<Array<LocationDto>> {
+   return getAsync<Array<LocationDto>>("location/getLocations");
+}
 
-   public getLocationsAsync(): Promise<Array<LocationDto>> {
-      return this._requestHelper.getAsync<Array<LocationDto>>("location/getLocations");
-   }
+export function getLocationHistoryAsync(request: GetLocationHistoryQuery): Promise<Array<LocationHistoryDto>> {
+   return getAsync<Array<LocationHistoryDto>>("location/getLocationHistory", request);
+}
 
-   public getLocationHistoryAsync(request: GetLocationHistoryQuery): Promise<Array<LocationHistoryDto>> {
-      return this._requestHelper.getAsync<Array<LocationHistoryDto>>("location/getLocationHistory", request);
-   }
+export function getLocationDictionaryAsync(): Promise<Array<DictionaryItem>> {
+   return getAsync<Array<DictionaryItem>>("location/getLocationDictionary");
+}
 
-   public getLocationDictionaryAsync(): Promise<Array<DictionaryItem>> {
-      return this._requestHelper.getAsync<Array<DictionaryItem>>("location/getLocationDictionary");
-   }
+export function createLocationAsync(command: CreateLocationCommand): Promise<Result> {
+   return postAsync("location/createLocation", command);
+}
 
-   public createLocationAsync(command: CreateLocationCommand): Promise<Result> {
-      return this._requestHelper.postAsync("location/createLocation", command);
-   }
-
-   public updateLocationAsync(command: UpdateLocationCommand): Promise<Result> {
-      return this._requestHelper.postAsync("location/updateLocation", command);
-   }
+export function updateLocationAsync(command: UpdateLocationCommand): Promise<Result> {
+   return postAsync("location/updateLocation", command);
 }

@@ -7,129 +7,121 @@ import { Result } from "../models/requests/result";
 import { TokenResult } from "../models/requests/tokenResult";
 import { authStore } from "../stores/authStore";
 
-export class RequestHelper {
-   private readonly _authStore;
-   private readonly _translation;
+function getHeders(): HeadersInit {
+   return {
+      Authorization: `Bearer ${authStore().token}`,
+      "Content-Type": apiRequestContentType,
+   };
+}
 
-   constructor() {
-      this._authStore = authStore();
-      this._translation = useI18n().t;
+function handleErrorAsync<T>(statusCode: number): Promise<T> {
+   const { t } = useI18n();
+
+   if (statusCode == 401) {
+      authStore().removeToken();
+
+      return Promise.reject<T>(t("requests.unauthorized"));
    }
 
-   public async getAsync<T>(url: string, request?: any): Promise<T> {
-      if (request) {
-         url = this.toQueryString(url, request);
-      }
-
-      const response: Response = await fetch(`${apiUrlBase}${url}`, {
-         method: "GET",
-         headers: this.getHeders(),
-      });
-
-      if (!response.ok) {
-         return this.handleErrorAsync<T>(response.status);
-      }
-
-      return Promise.resolve<T>(await response.json());
+   if (statusCode == 403) {
+      return Promise.reject<T>(t("requests.forbidden"));
    }
 
-   public getFileAsync = async (url: string, request?: any): Promise<FileResult> => {
-      if (request) {
-         url = this.toQueryString(url, request);
-      }
+   return Promise.reject<T>(t("requests.default"));
+}
 
-      const response: Response = await fetch(`${apiUrlBase}${url}`, {
-         method: "GET",
-         headers: this.getHeders(),
-      });
+function toQueryString(url: string, request: any): string {
+   const queryString: string = Object.keys(request)
+      .map((x: string) => `${encodeURIComponent(x)}=${encodeURIComponent(request[x])}`)
+      .join("&");
 
-      if (!response.ok) {
-         return this.handleErrorAsync<FileResult>(response.status);
-      }
+   return `${url}?${queryString}`;
+}
 
-      const fileName: string = response.headers.get("content-disposition")?.split("filename=")[1] ?? "";
-      if (!fileName) {
-         return Promise.reject(this._translation("requests.fileNameNotExists"));
-      }
+export async function getAsync<T>(url: string, request?: any): Promise<T> {
+   if (request) {
+      url = toQueryString(url, request);
+   }
 
-      return {
-         name: fileName.substring(0, fileName.indexOf(";")).trim(),
-         data: await response.blob(),
-      };
+   const response: Response = await fetch(`${apiUrlBase}${url}`, {
+      method: "GET",
+      headers: getHeders(),
+   });
+
+   if (!response.ok) {
+      return handleErrorAsync<T>(response.status);
+   }
+
+   return Promise.resolve<T>(await response.json());
+}
+
+export async function getFileAsync(url: string, request?: any): Promise<FileResult> {
+   if (request) {
+      url = toQueryString(url, request);
+   }
+
+   const response: Response = await fetch(`${apiUrlBase}${url}`, {
+      method: "GET",
+      headers: getHeders(),
+   });
+
+   if (!response.ok) {
+      return handleErrorAsync<FileResult>(response.status);
+   }
+
+   const fileName: string = response.headers.get("content-disposition")?.split("filename=")[1] ?? "";
+   if (!fileName) {
+      return Promise.reject(useI18n().t("requests.fileNameNotExists"));
+   }
+
+   return {
+      name: fileName.substring(0, fileName.indexOf(";")).trim(),
+      data: await response.blob(),
+   };
+}
+
+export async function postAsync(url: string, data?: CommandBase): Promise<Result> {
+   const requestOptions: RequestInit = {
+      method: "POST",
+      headers: getHeders(),
    };
 
-   public async postAsync(url: string, data?: CommandBase): Promise<Result> {
-      const requestOptions: RequestInit = {
-         method: "POST",
-         headers: this.getHeders(),
-      };
-
-      if (data) {
-         requestOptions.body = JSON.stringify(data);
-      }
-
-      const response: Response = await fetch(`${apiUrlBase}${url}`, requestOptions);
-      if (!response.ok) {
-         return this.handleErrorAsync<Result>(response.status);
-      }
-
-      const result: Result = await response.json();
-      if (!result.isSuccess) {
-         return Promise.reject<Result>(result.message);
-      }
-
-      return Promise.resolve<Result>(result);
+   if (data) {
+      requestOptions.body = JSON.stringify(data);
    }
 
-   public async postTokenAsync(url: string, data?: GetUserTokenQuery): Promise<TokenResult> {
-      const requestOptions: RequestInit = {
-         method: "POST",
-         headers: this.getHeders(),
-      };
-
-      if (data) {
-         requestOptions.body = JSON.stringify(data);
-      }
-
-      const response: Response = await fetch(`${apiUrlBase}${url}`, requestOptions);
-      if (!response.ok) {
-         return this.handleErrorAsync<TokenResult>(response.status);
-      }
-
-      const result: TokenResult = await response.json();
-      if (!result.value) {
-         return Promise.reject<TokenResult>(this._translation("requests.userNotFound"));
-      }
-
-      return Promise.resolve<TokenResult>(result);
+   const response: Response = await fetch(`${apiUrlBase}${url}`, requestOptions);
+   if (!response.ok) {
+      return handleErrorAsync<Result>(response.status);
    }
 
-   private getHeders(): HeadersInit {
-      return {
-         Authorization: `Bearer ${this._authStore.token}`,
-         "Content-Type": apiRequestContentType,
-      };
+   const result: Result = await response.json();
+   if (!result.isSuccess) {
+      return Promise.reject<Result>(result.message);
    }
 
-   private handleErrorAsync<T>(statusCode: number): Promise<T> {
-      if (statusCode == 401) {
-         this._authStore.removeToken();
+   return Promise.resolve<Result>(result);
+}
 
-         return Promise.reject<T>(this._translation("requests.unauthorized"));
-      }
+export async function postTokenAsync(url: string, data?: GetUserTokenQuery): Promise<TokenResult> {
+   const requestOptions: RequestInit = {
+      method: "POST",
+      headers: getHeders(),
+   };
 
-      if (statusCode == 403) {
-         return Promise.reject<T>(this._translation("requests.forbidden"));
-      }
-
-      return Promise.reject<T>(this._translation("requests.default"));
+   if (data) {
+      requestOptions.body = JSON.stringify(data);
    }
 
-   private toQueryString(url: string, request: any): string {
-      const queryString: string = Object.keys(request)
-         .map((x: string) => `${encodeURIComponent(x)}=${encodeURIComponent(request[x])}`)
-         .join("&");
-
-      return `${url}?${queryString}`;
+   const response: Response = await fetch(`${apiUrlBase}${url}`, requestOptions);
+   if (!response.ok) {
+      return handleErrorAsync<TokenResult>(response.status);
    }
+
+   const result: TokenResult = await response.json();
+   if (!result.value) {
+      return Promise.reject<TokenResult>(useI18n().t("requests.userNotFound"));
+   }
+
+   return Promise.resolve<TokenResult>(result);
 }

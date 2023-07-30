@@ -2,11 +2,10 @@
 import { Ref, ref } from "vue";
 import { useI18n } from "vue-i18n";
 import { ClickEvent } from "devextreme/ui/button";
-import { UserApi } from "../api/userApi";
+import { getUserTokenAsync } from "../api/userApi";
 import { displayError } from "../helpers/toastHelper";
 import { GetUserTokenQuery } from "../models/api/users/queries/getUserTokenQuery";
 
-const userApi: UserApi = new UserApi();
 const { t } = useI18n();
 
 const isLoading: Ref<boolean> = ref(false);
@@ -24,7 +23,7 @@ async function userLoginClicAsync(e: ClickEvent): Promise<void> {
          return;
       }
 
-      await userApi.getUserTokenAsync(request.value);
+      await getUserTokenAsync(request.value);
    } catch (error) {
       displayError(
          error,

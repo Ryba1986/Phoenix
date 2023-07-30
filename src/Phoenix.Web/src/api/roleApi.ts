@@ -1,4 +1,4 @@
-import { ApiBase } from "./base/apiBase";
+import { getAsync, postAsync } from "../helpers/requestHelper";
 import { DictionaryItem } from "../models/api/base/dto/dictionaryItem";
 import { CreateRoleCommand } from "../models/api/roles/commands/createRoleCommand";
 import { UpdateRoleCommand } from "../models/api/roles/commands/updateRoleCommand";
@@ -7,28 +7,22 @@ import { RoleHistoryDto } from "../models/api/roles/dto/roleHistoryDto";
 import { GetRoleHistoryQuery } from "../models/api/roles/queries/getRoleHistoryQuery";
 import { Result } from "../models/requests/result";
 
-export class RoleApi extends ApiBase {
-   constructor() {
-      super();
-   }
+export function getRolesAsync(): Promise<Array<RoleDto>> {
+   return getAsync<Array<RoleDto>>("role/getRoles");
+}
 
-   public getRolesAsync(): Promise<Array<RoleDto>> {
-      return this._requestHelper.getAsync<Array<RoleDto>>("role/getRoles");
-   }
+export function getRoleHistoryAsync(request: GetRoleHistoryQuery): Promise<Array<RoleHistoryDto>> {
+   return getAsync<Array<RoleHistoryDto>>("role/getRoleHistory", request);
+}
 
-   public getRoleHistoryAsync(request: GetRoleHistoryQuery): Promise<Array<RoleHistoryDto>> {
-      return this._requestHelper.getAsync<Array<RoleHistoryDto>>("role/getRoleHistory", request);
-   }
+export function getRoleDictionaryAsync(): Promise<Array<DictionaryItem>> {
+   return getAsync<Array<DictionaryItem>>("role/getRoleDictionary");
+}
 
-   public getRoleDictionaryAsync(): Promise<Array<DictionaryItem>> {
-      return this._requestHelper.getAsync<Array<DictionaryItem>>("role/getRoleDictionary");
-   }
+export function createRoleAsync(command: CreateRoleCommand): Promise<Result> {
+   return postAsync("role/createRole", command);
+}
 
-   public createRoleAsync(command: CreateRoleCommand): Promise<Result> {
-      return this._requestHelper.postAsync("role/createRole", command);
-   }
-
-   public updateRoleAsync(command: UpdateRoleCommand): Promise<Result> {
-      return this._requestHelper.postAsync("role/updateRole", command);
-   }
+export function updateRoleAsync(command: UpdateRoleCommand): Promise<Result> {
+   return postAsync("role/updateRole", command);
 }

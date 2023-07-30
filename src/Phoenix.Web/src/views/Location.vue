@@ -1,22 +1,21 @@
 <script setup lang="ts">
 import { useI18n } from "vue-i18n";
 import CustomStore from "devextreme/data/custom_store";
-import { LocationApi } from "../api/locationApi";
+import { createLocationAsync, getLocationHistoryAsync, getLocationsAsync, updateLocationAsync } from "../api/locationApi";
 
-const locationApi: LocationApi = new LocationApi();
 const { t } = useI18n();
 
 const locationStore = new CustomStore<any, any>({
    key: "id",
-   load: () => locationApi.getLocationsAsync(),
-   insert: (value) => locationApi.createLocationAsync(value),
-   update: (_key, value) => locationApi.updateLocationAsync(value),
+   load: () => getLocationsAsync(),
+   insert: (value) => createLocationAsync(value),
+   update: (_key, value) => updateLocationAsync(value),
 });
 
 const locationHistoryStore = (locationId: number) => {
    return new CustomStore<any, any>({
       key: undefined,
-      load: () => locationApi.getLocationHistoryAsync({ locationId: locationId }),
+      load: () => getLocationHistoryAsync({ locationId: locationId }),
    });
 };
 </script>

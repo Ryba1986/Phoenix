@@ -2,6 +2,13 @@ import { Router, createRouter, createWebHistory } from "vue-router";
 import { routerRoutes } from "../config";
 import { authStore } from "../stores/authStore";
 
+import Client from "../views/Client.vue";
+import Dashboard from "../views/Dashboard.vue";
+import Location from "../views/Location.vue";
+import Report from "../views/Report.vue";
+import SignIn from "../views/SignIn.vue";
+import SignOut from "../views/SignOut.vue";
+
 const router: Router = createRouter({
    history: createWebHistory(),
    routes: [
@@ -11,27 +18,27 @@ const router: Router = createRouter({
       },
       {
          path: routerRoutes.client,
-         component: () => import("../views/Client.vue"),
-      },
-      {
-         path: routerRoutes.location,
-         component: () => import("../views/Location.vue"),
+         component: Client,
       },
       {
          path: routerRoutes.dashboard,
-         component: () => import("../views/Dashboard.vue"),
+         component: Dashboard,
+      },
+      {
+         path: routerRoutes.location,
+         component: Location,
       },
       {
          path: routerRoutes.report,
-         component: () => import("../views/Report.vue"),
+         component: Report,
       },
       {
          path: routerRoutes.signIn,
-         component: () => import("../views/SignIn.vue"),
+         component: SignIn,
       },
       {
          path: routerRoutes.signOut,
-         component: () => import("../views/SignOut.vue"),
+         component: SignOut,
       },
       {
          path: "/:pathMatch(.*)",

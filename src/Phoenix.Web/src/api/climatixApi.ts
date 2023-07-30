@@ -1,19 +1,13 @@
-import { ApiBase } from "./base/apiBase";
+import { getAsync } from "../helpers/requestHelper";
 import { ClimatixChartDto } from "../models/api/plcs/climatixs/dto/climatixChartDto";
 import { ClimatixDto } from "../models/api/plcs/climatixs/dto/climatixDto";
 import { GetClimatixChartQuery } from "../models/api/plcs/climatixs/queries/getClimatixChartQuery";
 import { GetClimatixLastQuery } from "../models/api/plcs/climatixs/queries/getClimatixLastQuery";
 
-export class ClimatixApi extends ApiBase {
-   constructor() {
-      super();
-   }
+export function getClimatixChartAsync(request: GetClimatixChartQuery): Promise<Array<ClimatixChartDto>> {
+   return getAsync<Array<ClimatixChartDto>>("climatix/getClimatixChart", request);
+}
 
-   public getClimatixChartAsync(request: GetClimatixChartQuery): Promise<Array<ClimatixChartDto>> {
-      return this._requestHelper.getAsync<Array<ClimatixChartDto>>("climatix/getClimatixChart", request);
-   }
-
-   public getClimatixLastAsync(request: GetClimatixLastQuery): Promise<ClimatixDto> {
-      return this._requestHelper.getAsync<ClimatixDto>("kamstrup/getClimatixLast", request);
-   }
+export function getClimatixLastAsync(request: GetClimatixLastQuery): Promise<ClimatixDto> {
+   return getAsync<ClimatixDto>("kamstrup/getClimatixLast", request);
 }

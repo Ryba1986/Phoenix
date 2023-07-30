@@ -3,14 +3,13 @@ import { Ref, onMounted, ref } from "vue";
 import { useI18n } from "vue-i18n";
 import { ClickEvent } from "devextreme/ui/button";
 import { dateFormat } from "../config";
-import { ReportApi } from "../api/reportApi";
+import { getReportAsync, getReportTypeDictionaryAsync } from "../api/reportApi";
 import { getDateString } from "../helpers/dateHelper";
 import { displayError } from "../helpers/toastHelper";
 import { DictionaryItem } from "../models/api/base/dto/dictionaryItem";
 import { GetReportQuery } from "../models/api/reports/queries/getReportQuery";
 import { FileResult } from "../models/requests/fileResult";
 
-const reportApi: ReportApi = new ReportApi();
 const { t } = useI18n();
 
 const isLoading: Ref<boolean> = ref(false);
@@ -29,7 +28,7 @@ async function downloadReportClickAsync(e: ClickEvent): Promise<void> {
          return;
       }
 
-      const result: FileResult = await reportApi.getReportAsync(request.value);
+      const result: FileResult = await getReportAsync(request.value);
       if (!result.data?.size) {
          return;
       }
@@ -58,7 +57,7 @@ onMounted(async (): Promise<void> => {
    try {
       isLoading.value = true;
 
-      reportTypes.value = await reportApi.getReportTypeDictionaryAsync();
+      reportTypes.value = await getReportTypeDictionaryAsync();
    } catch (error) {
       displayError(
          error,
