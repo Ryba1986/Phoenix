@@ -4,6 +4,7 @@ import { authStore } from "../stores/authStore";
 
 import Client from "../views/Client.vue";
 import Dashboard from "../views/Dashboard.vue";
+import Device from "../views/Device.vue";
 import Location from "../views/Location.vue";
 import Report from "../views/Report.vue";
 import SignIn from "../views/SignIn.vue";
@@ -23,6 +24,10 @@ const router: Router = createRouter({
       {
          path: routerRoutes.dashboard,
          component: Dashboard,
+      },
+      {
+         path: routerRoutes.device,
+         component: Device,
       },
       {
          path: routerRoutes.location,

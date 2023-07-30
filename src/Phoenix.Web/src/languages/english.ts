@@ -52,6 +52,51 @@ export const english: Language = {
             },
          },
       },
+      device: {
+         grid: {
+            columns: {
+               boundRate: "Bound rate",
+               dataBits: "Data bits",
+               parity: "Parity",
+               stopBits: "Stop bits",
+               includeReport: "Report",
+               location: "Location",
+               modbusId: "Modbus ID",
+               name: "Name",
+               deviceType: "Device type",
+               plcType: "Plc type",
+            },
+            validators: {
+               boundRate: {
+                  range: "Bound rate is required.",
+               },
+               dataBits: {
+                  range: "Data bits is required.",
+               },
+               parity: {
+                  range: "Parity is required.",
+               },
+               stopBits: {
+                  range: "Stop bits is required.",
+               },
+               location: {
+                  range: "Location is required.",
+               },
+               modbusId: {
+                  range: "Modbus ID is required.",
+               },
+               name: {
+                  length: "Name must have between 3 and 30 characters.",
+               },
+               deviceType: {
+                  range: "Device type is required.",
+               },
+               plcType: {
+                  range: "Plc type is required.",
+               },
+            },
+         },
+      },
       location: {
          grid: {
             columns: {

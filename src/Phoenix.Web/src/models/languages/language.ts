@@ -65,6 +65,51 @@ export interface Language extends DefineLocaleMessage {
             };
          };
       };
+      device: {
+         grid: {
+            columns: {
+               boundRate: string;
+               dataBits: string;
+               parity: string;
+               stopBits: string;
+               includeReport: string;
+               location: string;
+               modbusId: string;
+               name: string;
+               deviceType: string;
+               plcType: string;
+            };
+            validators: {
+               boundRate: {
+                  range: string;
+               };
+               dataBits: {
+                  range: string;
+               };
+               parity: {
+                  range: string;
+               };
+               stopBits: {
+                  range: string;
+               };
+               location: {
+                  range: string;
+               };
+               modbusId: {
+                  range: string;
+               };
+               name: {
+                  length: string;
+               };
+               deviceType: {
+                  range: string;
+               };
+               plcType: {
+                  range: string;
+               };
+            };
+         };
+      };
       report: {
          downloadButton: string;
          date: {
