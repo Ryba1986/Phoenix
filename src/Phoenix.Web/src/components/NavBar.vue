@@ -36,20 +36,35 @@ const isLogged: ComputedRef<boolean> = computed((): boolean => aStore.isLogged);
                <li v-show="isLogged" class="nav-item mx-1">
                   <router-link :to="routerRoutes.report" class="nav-link" @click="collapseNavBar">{{ t("components.navbar.report") }}</router-link>
                </li>
-               <li v-show="isLogged" class="nav-item mx-1">
-                  <router-link :to="routerRoutes.location" class="nav-link" @click="collapseNavBar">{{ t("components.navbar.location") }}</router-link>
+               <li v-show="isLogged" class="nav-item dropdown mx-1">
+                  <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                     {{ t("components.navbar.masterdata") }}
+                  </a>
+                  <ul class="dropdown-menu">
+                     <li class="dropdown-item">
+                        <router-link :to="routerRoutes.location" class="nav-link" @click="collapseNavBar">{{ t("components.navbar.location") }}</router-link>
+                     </li>
+                     <li class="dropdown-item">
+                        <router-link :to="routerRoutes.client" class="nav-link" @click="collapseNavBar">{{ t("components.navbar.client") }}</router-link>
+                     </li>
+                     <li><hr class="dropdown-divider" /></li>
+                     <li class="dropdown-item">
+                        <router-link :to="routerRoutes.device" class="nav-link" @click="collapseNavBar">{{ t("components.navbar.device") }}</router-link>
+                     </li>
+                  </ul>
                </li>
-               <li v-show="isLogged" class="nav-item mx-1">
-                  <router-link :to="routerRoutes.client" class="nav-link" @click="collapseNavBar">{{ t("components.navbar.client") }}</router-link>
-               </li>
-               <li v-show="isLogged" class="nav-item mx-1">
-                  <router-link :to="routerRoutes.device" class="nav-link" @click="collapseNavBar">{{ t("components.navbar.device") }}</router-link>
-               </li>
-               <li v-show="isLogged" class="nav-item mx-1">
-                  <router-link :to="routerRoutes.role" class="nav-link" @click="collapseNavBar">{{ t("components.navbar.role") }}</router-link>
-               </li>
-               <li v-show="isLogged" class="nav-item mx-1">
-                  <router-link :to="routerRoutes.user" class="nav-link" @click="collapseNavBar">{{ t("components.navbar.user") }}</router-link>
+               <li v-show="isLogged" class="nav-item dropdown mx-1">
+                  <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                     {{ t("components.navbar.administration") }}
+                  </a>
+                  <ul class="dropdown-menu">
+                     <li class="dropdown-item">
+                        <router-link :to="routerRoutes.role" class="nav-link" @click="collapseNavBar">{{ t("components.navbar.role") }}</router-link>
+                     </li>
+                     <li class="dropdown-item">
+                        <router-link :to="routerRoutes.user" class="nav-link" @click="collapseNavBar">{{ t("components.navbar.user") }}</router-link>
+                     </li>
+                  </ul>
                </li>
                <li v-show="!isLogged" class="nav-item mx-1">
                   <router-link :to="routerRoutes.signIn" class="nav-link" @click="collapseNavBar">{{ t("components.navbar.signIn") }}</router-link>

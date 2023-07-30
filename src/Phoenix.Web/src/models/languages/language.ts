@@ -13,10 +13,12 @@ export interface Language extends DefineLocaleMessage {
          message: string;
       };
       navbar: {
+         administration: string;
          client: string;
          dashboard: string;
          device: string;
          location: string;
+         masterdata: string;
          report: string;
          role: string;
          signIn: string;

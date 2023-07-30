@@ -13,10 +13,12 @@ export const english: Language = {
          message: "Loading ...",
       },
       navbar: {
+         administration: "Administration",
          client: "Clients",
          dashboard: "Dashboard",
          device: "Devices",
          location: "Locations",
+         masterdata: "Masterdata",
          report: "Reports",
          role: "Roles",
          signIn: "Sign in",
