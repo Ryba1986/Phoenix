@@ -35,13 +35,7 @@ const clientHistoryStore = (clientId: number) => {
       <template #body>
          <DataGrid :data-store="clientStore" :enable-detail="true">
             <template #columns>
-               <DxGridColumn
-                  :allow-grouping="false"
-                  :caption="t('views.client.grid.columns.location')"
-                  alignment="left"
-                  data-field="locationId"
-                  data-type="number"
-               >
+               <DxGridColumn :caption="t('views.client.grid.columns.location')" alignment="left" data-field="locationId" data-type="number">
                   <DxGridLookup :data-source="locations" display-expr="value" value-expr="key" />
                   <DxRangeRule :ignoreEmptyValue="false" :message="t('views.client.grid.validators.location.range')" :min="1" />
                </DxGridColumn>
