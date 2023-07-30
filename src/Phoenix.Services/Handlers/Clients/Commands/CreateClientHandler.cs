@@ -42,6 +42,15 @@ namespace Phoenix.Services.Handlers.Clients.Commands
             return Result.Error(Translations.Client_Exists);
          }
 
+         bool clientLocationExists = await _uow.Client
+            .AsNoTracking()
+            .AnyAsync(x => x.LocationId == request.LocationId, cancellationToken);
+
+         if (clientLocationExists)
+         {
+            return Result.Error(Translations.Client_Exists);
+         }
+
          Client newClient = new()
          {
             LocationId = request.LocationId,
