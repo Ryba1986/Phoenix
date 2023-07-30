@@ -58,7 +58,7 @@ function rowUpdatingEvent(e: RowUpdatingEvent): void {
       :hover-state-enabled="true"
       :repaint-changes-only="false"
       :show-borders="true"
-      :show-row-lines="false"
+      :show-row-lines="true"
       ref="grid"
       @row-expanding="rowExpandingEvent"
       @row-updating="rowUpdatingEvent"
