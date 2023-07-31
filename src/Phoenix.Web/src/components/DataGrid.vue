@@ -24,6 +24,10 @@ const props = defineProps({
       type: Boolean,
       default: false,
    },
+   showMetrics: {
+      type: Boolean,
+      default: true,
+   },
 });
 
 const grid: Ref<DxDataGrid> = ref({});
@@ -78,14 +82,14 @@ function rowUpdatingEvent(e: RowUpdatingEvent): void {
       <slot name="columns" />
       <DxGridColumn :caption="t('components.dataGrid.columns.isActive')" :value="false" :width="100" data-field="isActive" data-type="boolean" />
       <DxGridColumn
-         v-if="!props.enableDetail"
+         v-if="!props.enableDetail && props.showMetrics"
          :caption="t('components.dataGrid.columns.createdBy')"
          :width="200"
          data-field="createdByName"
          data-type="string"
       />
       <DxGridColumn
-         v-if="!props.enableDetail"
+         v-if="!props.enableDetail && props.showMetrics"
          :caption="t('components.dataGrid.columns.createDate')"
          :format="dateTimeFormat"
          :width="160"
