@@ -37,10 +37,10 @@ const clientHistoryStore = (clientId: number) => {
             <template #columns>
                <DxGridColumn :caption="t('views.client.grid.columns.location')" alignment="left" data-field="locationId" data-type="number">
                   <DxGridLookup :data-source="locations" display-expr="value" value-expr="key" />
-                  <DxRangeRule :ignoreEmptyValue="false" :message="t('views.client.grid.validators.location.range')" :min="1" />
+                  <DxRangeRule :ignore-empty-value="false" :message="t('views.client.grid.validators.location.range')" :min="1" />
                </DxGridColumn>
                <DxGridColumn :caption="t('views.client.grid.columns.macAddress')" data-field="macAddress" data-type="string">
-                  <DxPatternRule :ignoreEmptyValue="false" :message="t('views.client.grid.validators.macAddress.pattern')" pattern="^[0-9A-F]{12}$" />
+                  <DxPatternRule :ignore-empty-value="false" :message="t('views.client.grid.validators.macAddress.pattern')" pattern="^[0-9A-F]{12}$" />
                </DxGridColumn>
                <DxGridColumn :allow-editing="false" :caption="t('views.client.grid.columns.hostname')" :width="450" data-field="hostname" data-type="string" />
                <DxGridColumn :allow-editing="false" :caption="t('views.client.grid.columns.clientVersion')" data-field="clientVersion" data-type="string" />
