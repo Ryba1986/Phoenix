@@ -31,7 +31,7 @@ const roleHistoryStore = (roleId: number) => {
                <DxGridColumn :caption="t('views.role.grid.columns.isAdmin')" :value="false" :width="100" data-field="isAdmin" data-type="boolean" />
             </template>
             <template #detailView="detailProps">
-               <DataGrid :data-store="roleHistoryStore(detailProps.key)" :enable-detail="false">
+               <DataGrid :data-store="roleHistoryStore(detailProps.key)" :allow-adding="false" :allow-updating="false" :enable-detail="false">
                   <template #columns>
                      <DxGridColumn :caption="t('views.role.grid.columns.name')" data-field="name" data-type="string" />
                      <DxGridColumn :caption="t('views.role.grid.columns.isAdmin')" :width="100" data-field="isAdmin" data-type="boolean" />
