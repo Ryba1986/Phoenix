@@ -119,6 +119,19 @@ export const english: Language = {
             rangeValidator: "Type is required.",
          },
       },
+      role: {
+         grid: {
+            columns: {
+               name: "Name",
+               isAdmin: "Admin",
+            },
+            validators: {
+               name: {
+                  length: "Name must have between 3 and 50 characters.",
+               },
+            },
+         },
+      },
       signIn: {
          loginButton: "Login",
          email: {

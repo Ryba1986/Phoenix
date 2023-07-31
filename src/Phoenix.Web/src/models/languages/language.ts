@@ -119,6 +119,19 @@ export interface Language extends DefineLocaleMessage {
             rangeValidator: string;
          };
       };
+      role: {
+         grid: {
+            columns: {
+               name: string;
+               isAdmin: string;
+            };
+            validators: {
+               name: {
+                  length: string;
+               };
+            };
+         };
+      };
       signIn: {
          loginButton: string;
          email: {
