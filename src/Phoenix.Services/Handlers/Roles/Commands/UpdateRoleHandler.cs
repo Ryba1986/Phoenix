@@ -55,7 +55,7 @@ namespace Phoenix.Services.Handlers.Roles.Commands
          {
             RoleId = request.Id,
             Name = role.Name != request.Name ? request.Name : string.Empty,
-            IsAdmin = role.IsAdmin,
+            IsAdmin = request.IsAdmin,
             IsActive = request.IsActive,
             CreatedById = request.ModifiedById,
          });
