@@ -9,6 +9,7 @@ import Location from "../views/Location.vue";
 import Report from "../views/Report.vue";
 import SignIn from "../views/SignIn.vue";
 import SignOut from "../views/SignOut.vue";
+import User from "../views/User.vue";
 
 const router: Router = createRouter({
    history: createWebHistory(),
@@ -44,6 +45,10 @@ const router: Router = createRouter({
       {
          path: routerRoutes.signOut,
          component: SignOut,
+      },
+      {
+         path: routerRoutes.user,
+         component: User,
       },
       {
          path: "/:pathMatch(.*)",

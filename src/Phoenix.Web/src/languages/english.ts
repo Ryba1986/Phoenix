@@ -131,5 +131,26 @@ export const english: Language = {
             lengthValidator: "Password must be between 10 and 30 symbols.",
          },
       },
+      user: {
+         grid: {
+            columns: {
+               name: "Name",
+               email: "Email",
+               role: "Role",
+            },
+            validators: {
+               name: {
+                  length: "Name must have between 3 and 30 characters.",
+               },
+               email: {
+                  email: "Email is invalid",
+                  length: "Email must have between 3 and 50 characters",
+               },
+               role: {
+                  range: "Role is required",
+               },
+            },
+         },
+      },
    },
 };

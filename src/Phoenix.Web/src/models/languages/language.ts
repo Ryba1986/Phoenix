@@ -131,5 +131,26 @@ export interface Language extends DefineLocaleMessage {
             lengthValidator: string;
          };
       };
+      user: {
+         grid: {
+            columns: {
+               name: string;
+               email: string;
+               role: string;
+            };
+            validators: {
+               name: {
+                  length: string;
+               };
+               email: {
+                  email: string;
+                  length: string;
+               };
+               role: {
+                  range: string;
+               };
+            };
+         };
+      };
    };
 }
