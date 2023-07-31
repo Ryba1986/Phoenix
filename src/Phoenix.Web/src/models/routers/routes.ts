@@ -6,6 +6,7 @@ export interface Routes {
    device: string;
    client: string;
    role: string;
+   rolePermission: string;
    user: string;
    signIn: string;
    signOut: string;

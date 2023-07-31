@@ -21,6 +21,7 @@ export const english: Language = {
          masterdata: "Masterdata",
          report: "Reports",
          role: "Roles",
+         rolePermission: "Permissions",
          signIn: "Sign in",
          signOut: "Sign out",
          user: "Users",

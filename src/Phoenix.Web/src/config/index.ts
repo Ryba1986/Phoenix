@@ -20,6 +20,7 @@ export const routerRoutes: Routes = {
    client: "/client",
    device: "/device",
    role: "/role",
+   rolePermission: "/rolepermission",
    user: "/user",
    signIn: "/signin",
    signOut: "/signout",

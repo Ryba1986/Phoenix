@@ -62,6 +62,12 @@ const isLogged: ComputedRef<boolean> = computed((): boolean => aStore.isLogged);
                         <router-link :to="routerRoutes.role" class="nav-link" @click="collapseNavBar">{{ t("components.navbar.role") }}</router-link>
                      </li>
                      <li class="dropdown-item">
+                        <router-link :to="routerRoutes.rolePermission" class="nav-link" @click="collapseNavBar">
+                           {{ t("components.navbar.rolePermission") }}
+                        </router-link>
+                     </li>
+                     <li><hr class="dropdown-divider" /></li>
+                     <li class="dropdown-item">
                         <router-link :to="routerRoutes.user" class="nav-link" @click="collapseNavBar">{{ t("components.navbar.user") }}</router-link>
                      </li>
                   </ul>

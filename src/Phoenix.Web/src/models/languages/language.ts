@@ -21,6 +21,7 @@ export interface Language extends DefineLocaleMessage {
          masterdata: string;
          report: string;
          role: string;
+         rolePermission: string;
          signIn: string;
          signOut: string;
          user: string;
