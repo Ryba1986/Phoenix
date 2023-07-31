@@ -8,6 +8,7 @@ import Device from "../views/Device.vue";
 import Location from "../views/Location.vue";
 import Report from "../views/Report.vue";
 import Role from "../views/Role.vue";
+import RolePermission from "../views/RolePermission.vue";
 import SignIn from "../views/SignIn.vue";
 import SignOut from "../views/SignOut.vue";
 import User from "../views/User.vue";
@@ -42,6 +43,10 @@ const router: Router = createRouter({
       {
          path: routerRoutes.role,
          component: Role,
+      },
+      {
+         path: routerRoutes.rolePermission,
+         component: RolePermission,
       },
       {
          path: routerRoutes.signIn,

@@ -3,11 +3,10 @@ import { DictionaryItem } from "../models/api/base/dto/dictionaryItem";
 import { CreateRolePermissionCommand } from "../models/api/roles/commands/createRolePermissionCommand";
 import { UpdateRolePermissionCommand } from "../models/api/roles/commands/updateRolePermissionCommand";
 import { RolePermissionDto } from "../models/api/roles/dto/rolePermissionDto";
-import { GetRolePermissionsQuery } from "../models/api/roles/queries/getRolePermissionsQuery";
 import { Result } from "../models/requests/result";
 
-export function getRolePermissionsAsync(request: GetRolePermissionsQuery): Promise<Array<RolePermissionDto>> {
-   return getAsync<Array<RolePermissionDto>>("rolePermission/getRolePermissions", request);
+export function getRolePermissionsAsync(): Promise<Array<RolePermissionDto>> {
+   return getAsync<Array<RolePermissionDto>>("rolePermission/getRolePermissions");
 }
 
 export function getAccessLevelDictionaryAsync(): Promise<Array<DictionaryItem>> {

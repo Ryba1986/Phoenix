@@ -133,6 +133,26 @@ export interface Language extends DefineLocaleMessage {
             };
          };
       };
+      rolePermission: {
+         grid: {
+            columns: {
+               role: string;
+               permission: string;
+               accessLevel: string;
+            };
+            validators: {
+               role: {
+                  range: string;
+               };
+               permission: {
+                  range: string;
+               };
+               accessLevel: {
+                  range: string;
+               };
+            };
+         };
+      };
       signIn: {
          loginButton: string;
          email: {

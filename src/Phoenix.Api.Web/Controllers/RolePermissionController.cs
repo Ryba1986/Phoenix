@@ -17,9 +17,9 @@ namespace Phoenix.Api.Web.Controllers
 
       [Authorization(Permission.Role, AccessLevel.Read)]
       [HttpGet]
-      public async Task<IActionResult> GetRolePermissions([FromQuery] GetRolePermissionsQuery request)
+      public async Task<IActionResult> GetRolePermissions()
       {
-         return await HandleAsync(request);
+         return await HandleAsync(new GetRolePermissionsQuery());
       }
 
       [HttpGet]

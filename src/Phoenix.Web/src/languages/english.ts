@@ -133,6 +133,26 @@ export const english: Language = {
             },
          },
       },
+      rolePermission: {
+         grid: {
+            columns: {
+               role: "Role",
+               permission: "Permission",
+               accessLevel: "Access level",
+            },
+            validators: {
+               role: {
+                  range: "role is required.",
+               },
+               permission: {
+                  range: "Permission is required.",
+               },
+               accessLevel: {
+                  range: "Access level is required.",
+               },
+            },
+         },
+      },
       signIn: {
          loginButton: "Login",
          email: {

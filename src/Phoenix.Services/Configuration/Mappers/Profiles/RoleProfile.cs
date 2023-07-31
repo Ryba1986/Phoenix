@@ -11,7 +11,7 @@ namespace Phoenix.Services.Configuration.Mappers.Profiles
          CreateProjection<Role, RoleDto>();
          CreateProjection<RoleHistory, RoleHistoryDto>();
 
-         CreateProjection<RolePermission, RolePermissionDto>();
+         CreateMap<RolePermission, RolePermissionDto>();
       }
    }
 }

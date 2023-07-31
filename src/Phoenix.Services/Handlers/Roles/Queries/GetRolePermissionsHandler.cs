@@ -3,9 +3,9 @@ using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using AutoMapper;
-using AutoMapper.QueryableExtensions;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
+using Phoenix.Entities.Roles;
 using Phoenix.Models.Roles.Dto;
 using Phoenix.Models.Roles.Queries;
 using Phoenix.Services.Handlers.Base;
@@ -22,15 +22,17 @@ namespace Phoenix.Services.Handlers.Roles.Queries
 
       public async Task<IReadOnlyCollection<RolePermissionDto>> Handle(GetRolePermissionsQuery request, CancellationToken cancellationToken)
       {
-         IReadOnlyCollection<RolePermissionDto> result = await _uow.RolePermission
+         IReadOnlyCollection<RolePermission> result = await _uow.RolePermission
             .AsNoTracking()
-            .Where(x => x.RoleId == request.RoleId)
-            .ProjectTo<RolePermissionDto>(_mapper.ConfigurationProvider)
+            .Include(x => x.Role)
             .ToArrayAsync(cancellationToken);
 
-         return result
-            .OrderBy(x => x.Permission.GetDescription())
+         result = result
+            .OrderBy(x => x.Role.Name)
+            .ThenBy(x => x.Permission.GetDescription())
             .ToArray();
+
+         return _mapper.Map<IReadOnlyCollection<RolePermissionDto>>(result);
       }
    }
 }
