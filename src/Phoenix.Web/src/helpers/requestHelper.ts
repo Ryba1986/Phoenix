@@ -1,11 +1,13 @@
-import { useI18n } from "vue-i18n";
 import { apiRequestContentType, apiUrlBase } from "../config";
+import { i18n } from "../languages";
 import { CommandBase } from "../models/api/base/commands/commandBase";
 import { GetUserTokenQuery } from "../models/api/users/queries/getUserTokenQuery";
 import { FileResult } from "../models/requests/fileResult";
 import { Result } from "../models/requests/result";
 import { TokenResult } from "../models/requests/tokenResult";
 import { authStore } from "../stores/authStore";
+
+const { t } = i18n.global;
 
 function getHeders(): HeadersInit {
    return {
@@ -15,8 +17,6 @@ function getHeders(): HeadersInit {
 }
 
 function handleErrorAsync<T>(statusCode: number): Promise<T> {
-   const { t } = useI18n();
-
    if (statusCode == 401) {
       authStore().removeToken();
 
@@ -71,7 +71,7 @@ export async function getFileAsync(url: string, request?: any): Promise<FileResu
 
    const fileName: string = response.headers.get("content-disposition")?.split("filename=")[1] ?? "";
    if (!fileName) {
-      return Promise.reject(useI18n().t("requests.fileNameNotExists"));
+      return Promise.reject(t("requests.fileNameNotExists"));
    }
 
    return {
@@ -120,7 +120,7 @@ export async function postTokenAsync(url: string, data?: GetUserTokenQuery): Pro
 
    const result: TokenResult = await response.json();
    if (!result.value) {
-      return Promise.reject<TokenResult>(useI18n().t("requests.userNotFound"));
+      return Promise.reject<TokenResult>(t("requests.userNotFound"));
    }
 
    return Promise.resolve<TokenResult>(result);
