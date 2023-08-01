@@ -7,10 +7,11 @@ import { Result } from "../models/requests/result";
 import { TokenResult } from "../models/requests/tokenResult";
 import { authStore } from "../stores/authStore";
 
-const { t } = i18n.global;
+const { locale, t } = i18n.global;
 
 function getHeders(): HeadersInit {
    return {
+      "Accept-Language": locale.value,
       Authorization: `Bearer ${authStore().token}`,
       "Content-Type": apiRequestContentType,
    };
