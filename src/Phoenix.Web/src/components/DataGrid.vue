@@ -34,15 +34,15 @@ const grid: Ref<DxDataGrid> = ref({});
 
 const { t } = useI18n();
 
-async function refreshEventAsync(): Promise<void> {
+function refreshEvent(): void {
    const instance = grid.value.instance!;
 
    instance.cancelEditData();
    instance.clearSelection();
    instance.collapseAll(-1);
    instance.clearFilter();
-   await instance.pageIndex(0);
-   await instance.refresh();
+   instance.pageIndex(0);
+   instance.refresh();
 }
 
 function rowExpandingEvent(e: RowExpandingEvent): void {
@@ -77,7 +77,7 @@ function rowUpdatingEvent(e: RowUpdatingEvent): void {
          <DxGridItem location="after" name="addRowButton" />
       </DxGridToolbar>
       <template #gridRefresh>
-         <DxButton icon="refresh" @click="refreshEventAsync" />
+         <DxButton icon="refresh" @click="refreshEvent" />
       </template>
       <slot name="columns" />
       <DxGridColumn :caption="t('components.dataGrid.columns.isActive')" :value="false" :width="100" data-field="isActive" data-type="boolean" />
