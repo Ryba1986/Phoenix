@@ -10,6 +10,9 @@ export const dateFormat: string = "yyyy-MM-dd";
 export const dateTimeFormat: string = "yyyy-MM-dd HH:mm:ss";
 export const dateTimeShortFormat: string = "yyyy-MM-dd HH:mm";
 
+export const dashboardLocationIdName: string = "DashboardLocationId";
+export const dashboardRefreshInterval: number = 60_000;
+
 export const loadPanelDelay: number = 200;
 
 export const routerRoutes: Routes = {

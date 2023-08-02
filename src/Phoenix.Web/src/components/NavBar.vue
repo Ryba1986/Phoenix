@@ -1,14 +1,29 @@
 <script setup lang="ts">
 import { ComputedRef, computed } from "vue";
 import { useI18n } from "vue-i18n";
+import { useRoute } from "vue-router";
+import { ValueChangedEvent } from "devextreme/ui/select_box";
 import { routerRoutes } from "../config";
 import { collapseNavBar } from "../helpers/bootstrapHelper";
+import { DictionaryItem } from "../models/api/base/dto/dictionaryItem";
 import { authStore } from "../stores/authStore";
+import { dashboardStore } from "../stores/dashboardStore";
 
 const aStore = authStore();
+const dStore = dashboardStore();
 const { t } = useI18n();
+const route = useRoute();
 
 const isLogged: ComputedRef<boolean> = computed((): boolean => aStore.isLogged);
+const isDashboardView: ComputedRef<boolean> = computed((): boolean => isLogged.value && dStore.locations.length > 0 && route.path == routerRoutes.dashboard);
+const locationId: ComputedRef<number> = computed((): number => dStore.locationId);
+const locations: ComputedRef<Array<DictionaryItem>> = computed((): Array<DictionaryItem> => dStore.locations);
+
+function changeLocationEvent(e: ValueChangedEvent): void {
+   e.component.blur();
+   dStore.setLocationId(e.value);
+   collapseNavBar();
+}
 </script>
 
 <template>
@@ -17,6 +32,18 @@ const isLogged: ComputedRef<boolean> = computed((): boolean => aStore.isLogged);
          <router-link :to="routerRoutes.default" class="navbar-brand" @click="collapseNavBar">
             <img src="/logo.png" alt="logo" width="32" height="32" class="align-text-top me-1" />
          </router-link>
+         <ul v-show="isDashboardView" class="navbar-nav me-auto">
+            <li class="nav-item">
+               <DxSelectBox
+                  :data-source="locations"
+                  :search-enabled="false"
+                  :value="locationId"
+                  display-expr="value"
+                  value-expr="key"
+                  @value-changed="changeLocationEvent"
+               />
+            </li>
+         </ul>
          <button
             class="navbar-toggler"
             type="button"
