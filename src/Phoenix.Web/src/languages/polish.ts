@@ -30,9 +30,9 @@ export const polish: Language = {
    requests: {
       default: "Wystąpił błąd podczas wykonywania operacji.",
       fileNameNotExists: "Nazwa pliku nie istnieje.",
-      forbidden: "Nie masz uprawnień do wykonania tej operacji.",
+      forbidden: "Brak uprawnień do wykonania tej operacji.",
       unauthorized: "Nie jesteś zalogowany.",
-      userNotFound: "Użytkownik nieznaleziony.",
+      userNotFound: "Użytkownik nie istnieje.",
    },
    views: {
       client: {
@@ -56,10 +56,10 @@ export const polish: Language = {
       device: {
          grid: {
             columns: {
-               boundRate: "Bound rate",
-               dataBits: "Data bits",
-               parity: "Parity",
-               stopBits: "Stop bits",
+               boundRate: "Prędkość",
+               dataBits: "Bity danych",
+               parity: "Parzystość",
+               stopBits: "Bity stopu",
                includeReport: "Raport",
                location: "Lokalizacja",
                modbusId: "Modbus ID",
@@ -69,16 +69,16 @@ export const polish: Language = {
             },
             validators: {
                boundRate: {
-                  range: "Bound rate jest wymagany.",
+                  range: "Prędkość jest wymagana.",
                },
                dataBits: {
-                  range: "Data bits jest wymagane.",
+                  range: "Bity danych są wymagane.",
                },
                parity: {
-                  range: "Parity jest wymagane.",
+                  range: "Parzystość jest wymagana.",
                },
                stopBits: {
-                  range: "Stop bits jest wymagany.",
+                  range: "Bity stopu są wymagane.",
                },
                location: {
                   range: "Lokalizacja jest wymagana.",
@@ -154,7 +154,7 @@ export const polish: Language = {
          },
       },
       signIn: {
-         loginButton: "Login",
+         loginButton: "Zaloguj",
          email: {
             placeHolder: "Wprowadź adres email.",
             emailValidator: "Email jest nieprawidłowy.",
