@@ -110,8 +110,8 @@ namespace Phoenix.Shared.Languages
          };
       }
 
-      private const string English = "en-US";
-      private const string Polish = "pl-PL";
+      private const string English = "en";
+      private const string Polish = "pl";
 
       private static string Get(string eng, string pol)
       {
