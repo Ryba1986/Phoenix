@@ -119,7 +119,7 @@ const deviceHistoryStore = (deviceId: number) => {
                <DxGridColumn
                   :caption="t('views.device.grid.columns.includeReport')"
                   :value="false"
-                  :width="100"
+                  :width="80"
                   data-field="includeReport"
                   data-type="boolean"
                />
@@ -136,7 +136,7 @@ const deviceHistoryStore = (deviceId: number) => {
                      <DxGridColumn :caption="t('views.device.grid.columns.dataBits')" data-field="dataBits" data-type="string" />
                      <DxGridColumn :caption="t('views.device.grid.columns.parity')" data-field="parity" data-type="string" />
                      <DxGridColumn :caption="t('views.device.grid.columns.stopBits')" data-field="stopBits" data-type="string" />
-                     <DxGridColumn :caption="t('views.device.grid.columns.includeReport')" :width="100" data-field="includeReport" data-type="boolean" />
+                     <DxGridColumn :caption="t('views.device.grid.columns.includeReport')" :width="80" data-field="includeReport" data-type="boolean" />
                   </template>
                </DataGrid>
             </template>

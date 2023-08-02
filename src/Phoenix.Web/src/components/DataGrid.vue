@@ -80,11 +80,11 @@ function rowUpdatingEvent(e: RowUpdatingEvent): void {
          <DxButton icon="refresh" @click="refreshEvent" />
       </template>
       <slot name="columns" />
-      <DxGridColumn :caption="t('components.dataGrid.columns.isActive')" :value="false" :width="100" data-field="isActive" data-type="boolean" />
+      <DxGridColumn :caption="t('components.dataGrid.columns.isActive')" :value="false" :width="80" data-field="isActive" data-type="boolean" />
       <DxGridColumn
          v-if="!props.enableDetail && props.showMetrics"
          :caption="t('components.dataGrid.columns.createdBy')"
-         :width="200"
+         :width="150"
          data-field="createdByName"
          data-type="string"
       />
@@ -92,7 +92,7 @@ function rowUpdatingEvent(e: RowUpdatingEvent): void {
          v-if="!props.enableDetail && props.showMetrics"
          :caption="t('components.dataGrid.columns.createDate')"
          :format="dateTimeFormat"
-         :width="160"
+         :width="150"
          data-field="createDate"
          data-type="date"
       />

@@ -5,7 +5,7 @@ export const polish: Language = {
       dataGrid: {
          columns: {
             createdBy: "Utworzył",
-            createDate: "Data",
+            createDate: "Data utworzenia",
             isActive: "Aktywny",
          },
       },
