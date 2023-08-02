@@ -2,7 +2,7 @@
 import { ComputedRef, computed } from "vue";
 import { useI18n } from "vue-i18n";
 import { routerRoutes } from "../config";
-import { collapseNavBar } from "../helpers/bootstrapHelper.ts";
+import { collapseNavBar } from "../helpers/bootstrapHelper";
 import { authStore } from "../stores/authStore";
 
 const aStore = authStore();
