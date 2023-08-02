@@ -9,5 +9,5 @@ export function getClimatixChartAsync(request: GetClimatixChartQuery): Promise<A
 }
 
 export function getClimatixLastAsync(request: GetClimatixLastQuery): Promise<ClimatixDto> {
-   return getAsync<ClimatixDto>("kamstrup/getClimatixLast", request);
+   return getAsync<ClimatixDto>("climatix/getClimatixLast", request);
 }
