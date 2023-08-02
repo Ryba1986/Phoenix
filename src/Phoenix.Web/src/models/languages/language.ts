@@ -53,6 +53,9 @@ export interface Language extends DefineLocaleMessage {
             };
          };
       };
+      dashboard: {
+         emptyData: string;
+      };
       location: {
          grid: {
             columns: {

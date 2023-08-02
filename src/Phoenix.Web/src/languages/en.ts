@@ -53,6 +53,9 @@ export const en: Language = {
             },
          },
       },
+      dashboard: {
+         emptyData: "The location has not been configured or does not contain any data.",
+      },
       device: {
          grid: {
             columns: {

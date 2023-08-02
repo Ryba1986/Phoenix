@@ -53,6 +53,9 @@ export const pl: Language = {
             },
          },
       },
+      dashboard: {
+         emptyData: "Lokalizacja nie została skonfigurowana lub nie zawiera żadnych danych.",
+      },
       device: {
          grid: {
             columns: {
