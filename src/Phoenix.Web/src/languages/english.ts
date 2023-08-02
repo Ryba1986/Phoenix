@@ -142,7 +142,7 @@ export const english: Language = {
             },
             validators: {
                role: {
-                  range: "role is required.",
+                  range: "Role is required.",
                },
                permission: {
                   range: "Permission is required.",
@@ -158,11 +158,11 @@ export const english: Language = {
          email: {
             placeHolder: "Enter email address.",
             emailValidator: "Email is invalid.",
-            lengthValidator: "Email must contain a maximum of 50 symbols.",
+            lengthValidator: "Email must contain a maximum of 50 characters.",
          },
          password: {
             placeHolder: "Enter password.",
-            lengthValidator: "Password must be between 10 and 30 symbols.",
+            lengthValidator: "Password must be between 10 and 30 characters.",
          },
       },
       user: {
@@ -177,11 +177,11 @@ export const english: Language = {
                   length: "Name must have between 3 and 30 characters.",
                },
                email: {
-                  email: "Email is invalid",
-                  length: "Email must have between 3 and 50 characters",
+                  email: "Email is invalid.",
+                  length: "Email must have between 3 and 50 characters.",
                },
                role: {
-                  range: "Role is required",
+                  range: "Role is required.",
                },
             },
          },
