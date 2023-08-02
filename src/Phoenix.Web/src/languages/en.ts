@@ -1,6 +1,6 @@
 import { Language } from "../models/languages/language";
 
-export const english: Language = {
+export const en: Language = {
    components: {
       dataGrid: {
          columns: {
