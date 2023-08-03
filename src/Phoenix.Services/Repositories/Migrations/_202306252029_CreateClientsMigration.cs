@@ -21,7 +21,7 @@ namespace Phoenix.Services.Repositories.Migrations
                Hostname = table.Column<string>(name: nameof(Client.Hostname), maxLength: 66, defaultValue: string.Empty),
                ClientVersion = table.Column<string>(name: nameof(Client.ClientVersion), maxLength: 20, defaultValue: string.Empty),
                IsActive = table.Column<bool>(name: nameof(Client.IsActive), defaultValue: default(bool)),
-               Version = table.Column<byte[]>(name: nameof(Client.Version), rowVersion: true),
+               Version = table.Column<uint>(name: nameof(Client.Version), rowVersion: true),
             },
             constraints: table =>
             {

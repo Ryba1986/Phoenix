@@ -2,7 +2,6 @@ using System;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Phoenix.Entities.Devices;
 using Phoenix.Entities.Plcs.Rvds;
-using Phoenix.Services.Extensions;
 using Phoenix.Services.Repositories.Migrations.Base;
 
 namespace Phoenix.Services.Repositories.Migrations
@@ -42,8 +41,6 @@ namespace Phoenix.Services.Repositories.Migrations
                table.ForeignKey($"FK_{nameof(Rvd145)}_{nameof(Rvd145.Device)}", x => x.DeviceId, nameof(Device), principalColumn: nameof(Device.Id));
             }
          );
-
-         migrationBuilder.AddTableCompression(nameof(Rvd145));
       }
 
       protected override void Down(MigrationBuilder migrationBuilder)
