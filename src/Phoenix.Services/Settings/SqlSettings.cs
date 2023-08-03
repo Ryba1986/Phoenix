@@ -7,7 +7,6 @@ namespace Phoenix.Services.Settings
       public string Database { get; init; }
       public string Username { get; init; }
       public string Password { get; init; }
-      public bool IsEncrypt { get; init; }
       public ushort CommandTimeout { get; init; }
 
       public SqlSettings()

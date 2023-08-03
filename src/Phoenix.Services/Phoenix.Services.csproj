@@ -26,8 +26,7 @@
       <PackageReference Include="EPPlus" Version="7.0.0-preview2" />
       <PackageReference Include="MediatR" Version="12.1.1" />
       <PackageReference Include="MediatR.Extensions.Autofac.DependencyInjection" Version="11.1.0" />
-      <PackageReference Include="Microsoft.Data.SqlClient" Version="5.2.0-preview3.23201.1" />
-      <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="8.0.0-preview.6.23329.4" />
+      <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="8.0.0-preview.4" />
       <PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="7.1.0-preview" />
       <PackageReference Include="System.Text.Json" Version="8.0.0-preview.6.23329.7" />
    </ItemGroup>
