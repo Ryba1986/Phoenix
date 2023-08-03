@@ -100,6 +100,7 @@ namespace Phoenix.Services.Handlers.Devices.Commands
          device.IncludeReport = request.IncludeReport;
          device.ReportSequence = request.ReportSequence;
          device.IsActive = request.IsActive;
+         device.UpdateVersion();
 
          await _uow.SaveChangesAsync(cancellationToken);
          return Result.Success();

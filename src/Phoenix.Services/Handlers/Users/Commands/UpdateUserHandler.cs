@@ -73,6 +73,7 @@ namespace Phoenix.Services.Handlers.Users.Commands
          user.Email = request.Email;
          user.RoleId = request.RoleId;
          user.IsActive = request.IsActive;
+         user.UpdateVersion();
 
          await _uow.SaveChangesAsync(cancellationToken);
          return Result.Success();

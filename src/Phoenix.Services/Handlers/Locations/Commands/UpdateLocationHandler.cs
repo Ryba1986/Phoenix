@@ -72,6 +72,7 @@ namespace Phoenix.Services.Handlers.Locations.Commands
          location.Name = request.Name;
          location.IncludeReport = request.IncludeReport;
          location.IsActive = request.IsActive;
+         location.UpdateVersion();
 
          await _uow.SaveChangesAsync(cancellationToken);
          return Result.Success();

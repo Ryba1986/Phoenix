@@ -83,6 +83,7 @@ namespace Phoenix.Services.Handlers.Clients.Commands
          client.LocationId = request.LocationId;
          client.MacAddress = request.MacAddress;
          client.IsActive = request.IsActive;
+         client.UpdateVersion();
 
          await _uow.SaveChangesAsync(cancellationToken);
          return Result.Success();

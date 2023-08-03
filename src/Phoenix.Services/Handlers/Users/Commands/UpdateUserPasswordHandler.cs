@@ -34,6 +34,7 @@ namespace Phoenix.Services.Handlers.Users.Commands
          }
 
          user.Password = request.NewPassword.CreatePassword();
+         user.UpdateVersion();
 
          await _uow.SaveChangesAsync(cancellationToken);
          return Result.Success();

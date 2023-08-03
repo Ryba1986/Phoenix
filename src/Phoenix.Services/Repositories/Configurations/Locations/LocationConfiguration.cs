@@ -22,8 +22,7 @@ namespace Phoenix.Services.Repositories.Configurations.Locations
             .IsRequired();
 
          builder.Property(x => x.Version)
-            .IsRequired()
-            .IsRowVersion();
+            .IsRequired();
 
          builder.HasKey(x => x.Id);
       }

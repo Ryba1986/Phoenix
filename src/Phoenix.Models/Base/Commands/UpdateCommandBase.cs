@@ -4,7 +4,7 @@ namespace Phoenix.Models.Base.Commands
    {
       public int Id { get; init; }
       public bool IsActive { get; init; }
-      public uint Version { get; init; }
+      public short Version { get; init; }
       public int ModifiedById { get; private set; }
 
       public override void SetId(int id)

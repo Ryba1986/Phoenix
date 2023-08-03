@@ -31,8 +31,7 @@ namespace Phoenix.Services.Repositories.Configurations.Clients
             .IsRequired();
 
          builder.Property(x => x.Version)
-            .IsRequired()
-            .IsRowVersion();
+            .IsRequired();
 
          builder.HasKey(x => x.Id);
 

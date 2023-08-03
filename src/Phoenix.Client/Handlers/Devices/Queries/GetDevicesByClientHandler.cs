@@ -35,12 +35,12 @@ namespace Phoenix.Client.Handlers.Devices.Queries
 
       private void UpdateLocalDatabase(IReadOnlyCollection<DeviceDto> devices)
       {
-         IReadOnlyCollection<uint> deviceVersions = devices
+         IReadOnlyCollection<short> deviceVersions = devices
             .OrderBy(x => x.Id)
             .Select(x => x.Version)
             .ToArray();
 
-         IReadOnlyCollection<uint> storageVersions = _repository
+         IReadOnlyCollection<short> storageVersions = _repository
             .Query<DeviceDto>()
             .OrderBy(x => x.Id)
             .Select(x => x.Version)

@@ -24,8 +24,7 @@ namespace Phoenix.Services.Repositories.Configurations.Roles
             .IsRequired();
 
          builder.Property(x => x.Version)
-            .IsRequired()
-            .IsRowVersion();
+            .IsRequired();
 
          builder.HasKey(x => x.Id);
 

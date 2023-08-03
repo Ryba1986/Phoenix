@@ -35,6 +35,7 @@ namespace Phoenix.Services.Handlers.Roles.Commands
          }
 
          rolePermission.AccessLevel = request.AccessLevel;
+         rolePermission.UpdateVersion();
 
          await _uow.SaveChangesAsync(cancellationToken);
          return Result.Success();

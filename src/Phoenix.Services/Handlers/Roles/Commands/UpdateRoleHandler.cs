@@ -62,6 +62,7 @@ namespace Phoenix.Services.Handlers.Roles.Commands
          role.Name = request.Name;
          role.IsAdmin = request.IsAdmin;
          role.IsActive = request.IsActive;
+         role.UpdateVersion();
 
          await _uow.SaveChangesAsync(cancellationToken);
          return Result.Success();

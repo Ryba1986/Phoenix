@@ -21,7 +21,7 @@ namespace Phoenix.Services.Repositories.Migrations
                Email = table.Column<string>(name: nameof(User.Email), maxLength: 50, defaultValue: string.Empty),
                Password = table.Column<string>(name: nameof(User.Password), maxLength: 64, fixedLength: true, defaultValue: string.Empty),
                IsActive = table.Column<bool>(name: nameof(User.IsActive), defaultValue: default(bool)),
-               Version = table.Column<uint>(name: nameof(User.Version), rowVersion: true),
+               Version = table.Column<short>(name: nameof(User.Version), defaultValue: default(short)),
             },
             constraints: table =>
             {

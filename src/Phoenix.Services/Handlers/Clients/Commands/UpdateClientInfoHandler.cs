@@ -36,6 +36,7 @@ namespace Phoenix.Services.Handlers.Clients.Commands
 
          client.Hostname = request.Hostname;
          client.ClientVersion = request.ClientVersion;
+         client.UpdateVersion();
 
          await _uow.SaveChangesAsync(cancellationToken);
          return Result.Success();
