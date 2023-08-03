@@ -15,7 +15,7 @@ export const pl: Language = {
       navbar: {
          administration: "Administracja",
          client: "Klienci",
-         dashboard: "Tablica",
+         dashboard: "Wizualizacja",
          device: "Urządzenia",
          location: "Lokalizacje",
          masterdata: "Konfiguracja",
@@ -24,7 +24,7 @@ export const pl: Language = {
          rolePermission: "Uprawnienia",
          signIn: "Zaloguj",
          signOut: "Wyloguj",
-         user: "Urzytkownicy",
+         user: "Użytkownicy",
       },
    },
    requests: {
