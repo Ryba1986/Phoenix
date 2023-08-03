@@ -30,8 +30,7 @@ namespace Phoenix.Services.Repositories.Configurations.Locations
          builder.Property(x => x.CreateDate)
             .IsRequired();
 
-         builder.HasKey(x => x.Id)
-            .IsClustered();
+         builder.HasKey(x => x.Id);
 
          builder.HasOne(x => x.Location)
             .WithMany()

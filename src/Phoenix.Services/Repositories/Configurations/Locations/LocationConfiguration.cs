@@ -25,8 +25,7 @@ namespace Phoenix.Services.Repositories.Configurations.Locations
             .IsRequired()
             .IsRowVersion();
 
-         builder.HasKey(x => x.Id)
-            .IsClustered();
+         builder.HasKey(x => x.Id);
       }
    }
 }

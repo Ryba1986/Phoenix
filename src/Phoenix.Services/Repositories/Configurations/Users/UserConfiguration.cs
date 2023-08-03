@@ -34,8 +34,7 @@ namespace Phoenix.Services.Repositories.Configurations.Users
             .IsRequired()
             .IsRowVersion();
 
-         builder.HasKey(x => x.Id)
-            .IsClustered();
+         builder.HasKey(x => x.Id);
 
          builder.HasOne(x => x.Role)
             .WithMany()
