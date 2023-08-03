@@ -18,9 +18,6 @@ namespace Phoenix.Validators.Clients
          RuleFor(x => x.MacAddress)
             .NotEmpty().WithMessage(Translations.Validator_MacAddress_Invalid)
             .Matches(RegexPatterns.MacAddress).WithMessage(Translations.Validator_MacAddress_Invalid);
-
-         RuleFor(x => x.Version)
-            .NotEmpty().WithMessage(Translations.Validator_Version_Invalid);
       }
    }
 }

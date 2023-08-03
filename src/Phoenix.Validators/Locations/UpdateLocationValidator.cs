@@ -14,9 +14,6 @@ namespace Phoenix.Validators.Locations
          RuleFor(x => x.Name)
             .NotEmpty().WithMessage(Translations.Validator_Name_Invalid)
             .Length(3, 30).WithMessage(Translations.Validator_Name_Invalid);
-
-         RuleFor(x => x.Version)
-            .NotEmpty().WithMessage(Translations.Validator_Version_Invalid);
       }
    }
 }
