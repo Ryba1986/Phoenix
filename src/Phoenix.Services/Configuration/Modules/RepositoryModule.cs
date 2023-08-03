@@ -1,5 +1,4 @@
 using System;
-using System.Text;
 using Autofac;
 using Microsoft.EntityFrameworkCore;
 using Phoenix.Services.Repositories;
@@ -16,15 +15,8 @@ namespace Phoenix.Services.Configuration.Modules
             {
                AppContext.SetSwitch("Npgsql.EnableLegacyTimestampBehavior", true);
 
-               StringBuilder connectionBuilder = new();
-               connectionBuilder.Append($"Server={settings.Server},{settings.Port};");
-               connectionBuilder.Append($"Database={settings.Database};");
-               connectionBuilder.Append($"User Id={settings.Username};");
-               connectionBuilder.Append($"Password={settings.Password};");
-               connectionBuilder.Append($"Command Timeout={settings.CommandTimeout};");
-
                DbContextOptions<UnitOfWork> contextOptions = new DbContextOptionsBuilder<UnitOfWork>()
-                  .UseNpgsql(connectionBuilder.ToString())
+                  .UseNpgsql($"Server={settings.Server};Port={settings.Port};Database={settings.Database};User Id={settings.Username};Password={settings.Password};Command Timeout={settings.CommandTimeout};")
                   .Options;
 
                using UnitOfWork uow = new(contextOptions);
