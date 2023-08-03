@@ -1,4 +1,3 @@
-using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using MediatR;
@@ -63,7 +62,7 @@ namespace Phoenix.Services.Handlers.Clients.Commands
          {
             return Result.Error(Translations.Client_NotExists);
          }
-         if (!client.Version.SequenceEqual(request.Version))
+         if (client.Version != request.Version)
          {
             return Result.Error(Translations.Validator_Version_Invalid);
          }

@@ -1,5 +1,3 @@
-using System;
-using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using MediatR;
@@ -63,7 +61,7 @@ namespace Phoenix.Services.Handlers.Devices.Commands
          {
             return Result.Error(Translations.Device_NotExists);
          }
-         if (!device.Version.SequenceEqual(request.Version))
+         if (device.Version != request.Version)
          {
             return Result.Error(Translations.Validator_Version_Invalid);
          }

@@ -1,6 +1,5 @@
 using System.Threading;
 using System.Threading.Tasks;
-using System.Linq;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 using Phoenix.Entities.Roles;
@@ -30,7 +29,7 @@ namespace Phoenix.Services.Handlers.Roles.Commands
          {
             return Result.Error(Translations.RolePermission_NotExists);
          }
-         if (!rolePermission.Version.SequenceEqual(request.Version))
+         if (rolePermission.Version != request.Version)
          {
             return Result.Error(Translations.Validator_Version_Invalid);
          }
