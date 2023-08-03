@@ -119,10 +119,5 @@ export async function postTokenAsync(url: string, data?: GetUserTokenQuery): Pro
       return handleErrorAsync<TokenResult>(response.status);
    }
 
-   const result: TokenResult = await response.json();
-   if (!result.value) {
-      return Promise.reject<TokenResult>(t("requests.userNotFound"));
-   }
-
-   return Promise.resolve<TokenResult>(result);
+   return Promise.resolve<TokenResult>(await response.json());
 }
