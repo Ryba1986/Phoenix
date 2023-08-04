@@ -30,7 +30,7 @@ const locationHistoryStore = (locationId: number) => {
                </DxGridColumn>
                <DxGridColumn
                   :caption="t('views.location.grid.columns.includeReport')"
-                  :value="false"
+                  :value="true"
                   :width="100"
                   data-field="includeReport"
                   data-type="boolean"
