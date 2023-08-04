@@ -72,11 +72,11 @@ function changeLocationEvent(e: ValueChangedEvent): void {
                         <router-link :to="routerRoutes.location" class="nav-link" @click="collapseNavBar">{{ t("components.navbar.location") }}</router-link>
                      </li>
                      <li class="dropdown-item">
-                        <router-link :to="routerRoutes.client" class="nav-link" @click="collapseNavBar">{{ t("components.navbar.client") }}</router-link>
+                        <router-link :to="routerRoutes.device" class="nav-link" @click="collapseNavBar">{{ t("components.navbar.device") }}</router-link>
                      </li>
                      <li><hr class="dropdown-divider" /></li>
                      <li class="dropdown-item">
-                        <router-link :to="routerRoutes.device" class="nav-link" @click="collapseNavBar">{{ t("components.navbar.device") }}</router-link>
+                        <router-link :to="routerRoutes.client" class="nav-link" @click="collapseNavBar">{{ t("components.navbar.client") }}</router-link>
                      </li>
                   </ul>
                </li>
