@@ -82,9 +82,9 @@ const { t } = useI18n();
                <svg
                   v-if="isHeatingPlcType(plc)"
                   class="d-none d-lg-block"
-                  version="1.1" 
-                  viewBox="0 0 501 67" 
-                  xmlns="http://www.w3.org/2000/svg" 
+                  version="1.1"
+                  viewBox="0 0 501 67"
+                  xmlns="http://www.w3.org/2000/svg"
                   xmlns:xlink="http://www.w3.org/1999/xlink"
                >
                   <defs>
@@ -250,9 +250,9 @@ const { t } = useI18n();
                <svg 
                   v-if="isDomesticPlcType(plc)"
                   class="d-none d-lg-block"
-                  version="1.1" 
-                  viewBox="0 0 501 138" 
-                  xmlns="http://www.w3.org/2000/svg" 
+                  version="1.1"
+                  viewBox="0 0 501 138"
+                  xmlns="http://www.w3.org/2000/svg"
                   xmlns:xlink="http://www.w3.org/1999/xlink"
                >
                   <defs>
