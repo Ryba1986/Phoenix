@@ -2,6 +2,31 @@ import { Language } from "../models/languages/language";
 
 export const en: Language = {
    components: {
+      climatix: {
+         circulation: "Circulation",
+         ch: "Heating",
+         ch1Short: "CH1",
+         ch2Short: "CH2",
+         dhwShort: "DHW",
+         ch1HeatCurveTemp: "CH1 - heat curve temp",
+         ch1HighOutletTemp: "CH1 - high outlet temp",
+         ch1LowInletTemp: "CH1 - low inlet temp",
+         ch1LowOutletTemp: "CH1 - low outlet temp",
+         ch1LowOutletPresure: "CH1 - low outlet presure",
+         ch2HeatCurveTemp: "CH2 - heat curve temp",
+         ch2HighOutletTemp: "CH2 - high outlet temp",
+         ch2LowInletTemp: "CH2 - low inlet temp",
+         ch2LowOutletTemp: "CH2 - low outlet temp",
+         ch2LowOutletPresure: "CH2 - low outlet presure",
+         chHighInletPresure: "Network - inlet presure",
+         chHighOutletPresure: "Network - outlet presure",
+         dhwTemp: "Domestic - temp",
+         dhwTempSet: "Domestic - set temp",
+         network: "Network",
+         outsideTemp: "Outside temp",
+         waterCold: "Cold water",
+         waterWarm: "Warm water",
+      },
       dataGrid: {
          columns: {
             createdBy: "Created by",

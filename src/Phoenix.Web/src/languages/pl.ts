@@ -2,6 +2,31 @@ import { Language } from "../models/languages/language";
 
 export const pl: Language = {
    components: {
+      climatix: {
+         circulation: "Cyrkulacja",
+         ch: "Ogrzewanie",
+         ch1Short: "CO1",
+         ch2Short: "CO2",
+         dhwShort: "CWU",
+         ch1HeatCurveTemp: "CO1 - krzywa grzania temp",
+         ch1HighOutletTemp: "CO1 - wejście powrót temp",
+         ch1LowInletTemp: "CO1 - wyjście zasilanie temp",
+         ch1LowOutletTemp: "CO1 - wyjście powrót temp",
+         ch1LowOutletPresure: "CO1 - wyjście powrót ciśnienie",
+         ch2HeatCurveTemp: "CO2 - krzywa grzania temp",
+         ch2HighOutletTemp: "CO2 - wejście powrót temp",
+         ch2LowInletTemp: "CO2 - wyjście zasilanie temp",
+         ch2LowOutletTemp: "CO2 - wyjście powrót temp",
+         ch2LowOutletPresure: "CO2 - wyjście powrót ciśnienie",
+         chHighInletPresure: "Sieć - zasilanie ciśnienie",
+         chHighOutletPresure: "Sieć - powrót ciśnienie",
+         dhwTemp: "Ciepła woda - temp",
+         dhwTempSet: "Ciepła woda - zadana temp",
+         network: "Sieć",
+         outsideTemp: "Temp zewnętrzna",
+         waterCold: "Zimna woda",
+         waterWarm: "Ciepła woda",
+      },
       dataGrid: {
          columns: {
             createdBy: "Utworzył",

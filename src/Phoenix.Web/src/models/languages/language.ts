@@ -2,6 +2,31 @@ import { DefineLocaleMessage } from "vue-i18n";
 
 export interface Language extends DefineLocaleMessage {
    components: {
+      climatix: {
+         circulation: string;
+         ch: string;
+         ch1Short: string;
+         ch2Short: string;
+         dhwShort: string;
+         ch1HeatCurveTemp: string;
+         ch1HighOutletTemp: string;
+         ch1LowInletTemp: string;
+         ch1LowOutletTemp: string;
+         ch1LowOutletPresure: string;
+         ch2HeatCurveTemp: string;
+         ch2HighOutletTemp: string;
+         ch2LowInletTemp: string;
+         ch2LowOutletTemp: string;
+         ch2LowOutletPresure: string;
+         chHighInletPresure: string;
+         chHighOutletPresure: string;
+         dhwTemp: string;
+         dhwTempSet: string;
+         network: string;
+         outsideTemp: string;
+         waterCold: string;
+         waterWarm: string;
+      };
       dataGrid: {
          columns: {
             createdBy: string;
