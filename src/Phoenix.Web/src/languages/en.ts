@@ -8,11 +8,6 @@ export const en: Language = {
             createDate: "Create date",
             isActive: "Active",
          },
-         validators: {
-            isActive: {
-               required: "Active is required.",
-            },
-         },
       },
       loadPanel: {
          message: "Loading ...",
@@ -103,9 +98,6 @@ export const en: Language = {
                plcType: {
                   range: "Plc type is required.",
                },
-               includeReport: {
-                  required: "Report is required.",
-               },
             },
          },
       },
@@ -118,9 +110,6 @@ export const en: Language = {
             validators: {
                name: {
                   length: "Name must have between 3 and 30 characters.",
-               },
-               includeReport: {
-                  required: "Report is required.",
                },
             },
          },
@@ -143,9 +132,6 @@ export const en: Language = {
             validators: {
                name: {
                   length: "Name must have between 3 and 50 characters.",
-               },
-               isAdmin: {
-                  required: "Admin is required.",
                },
             },
          },

@@ -80,9 +80,7 @@ function rowUpdatingEvent(e: RowUpdatingEvent): void {
          <DxButton icon="refresh" @click="refreshEvent" />
       </template>
       <slot name="columns" />
-      <DxGridColumn :caption="t('components.dataGrid.columns.isActive')" :width="80" data-field="isActive" data-type="boolean">
-         <DxRequiredRule :message="t('components.dataGrid.validators.isActive.required')" />
-      </DxGridColumn>
+      <DxGridColumn :caption="t('components.dataGrid.columns.isActive')" :value="true" :width="80" data-field="isActive" data-type="boolean" />
       <DxGridColumn
          v-if="!props.enableDetail && props.showMetrics"
          :caption="t('components.dataGrid.columns.createdBy')"

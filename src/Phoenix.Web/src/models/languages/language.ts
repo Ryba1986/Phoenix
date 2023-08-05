@@ -8,11 +8,6 @@ export interface Language extends DefineLocaleMessage {
             createDate: string;
             isActive: string;
          };
-         validators: {
-            isActive: {
-               required: string;
-            };
-         };
       };
       loadPanel: {
          message: string;
@@ -71,9 +66,6 @@ export interface Language extends DefineLocaleMessage {
                name: {
                   length: string;
                };
-               includeReport: {
-                  required: string;
-               };
             };
          };
       };
@@ -119,9 +111,6 @@ export interface Language extends DefineLocaleMessage {
                plcType: {
                   range: string;
                };
-               includeReport: {
-                  required: string;
-               };
             };
          };
       };
@@ -143,9 +132,6 @@ export interface Language extends DefineLocaleMessage {
             validators: {
                name: {
                   length: string;
-               };
-               isAdmin: {
-                  required: string;
                };
             };
          };

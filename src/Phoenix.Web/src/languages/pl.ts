@@ -8,11 +8,6 @@ export const pl: Language = {
             createDate: "Data utworzenia",
             isActive: "Aktywny",
          },
-         validators: {
-            isActive: {
-               required: "Aktywność jest wymagana.",
-            },
-         },
       },
       loadPanel: {
          message: "Ładowanie ...",
@@ -103,9 +98,6 @@ export const pl: Language = {
                plcType: {
                   range: "Typ sterownika jest wymagany.",
                },
-               includeReport: {
-                  required: "Raport jest wymagany.",
-               },
             },
          },
       },
@@ -118,9 +110,6 @@ export const pl: Language = {
             validators: {
                name: {
                   length: "Nazwa musi mieć od 3 do 30 znaków.",
-               },
-               includeReport: {
-                  required: "Raport jest wymagany.",
                },
             },
          },
@@ -143,9 +132,6 @@ export const pl: Language = {
             validators: {
                name: {
                   length: "Nazwa musi mieć od 3 do 50 znaków.",
-               },
-               isAdmin: {
-                  required: "Admin jest wymagany.",
                },
             },
          },
