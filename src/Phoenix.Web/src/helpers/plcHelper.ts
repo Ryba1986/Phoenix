@@ -1,4 +1,5 @@
 import { from } from "linq-to-typescript";
+import { PlcDtoBase } from "../models/api/base/dto/plcDtoBase";
 import { GetPlcLastQueryBase } from "../models/api/base/queries/getPlcLastQueryBase";
 import { DeviceDto } from "../models/api/devices/dto/deviceDto";
 
@@ -22,4 +23,12 @@ export function getPlcFromLocationAsync<T>(
       .where((x) => x != null)
       .select((x) => x!)
       .toArray();
+}
+
+export function isDomesticPlcType(plc: PlcDtoBase): boolean {
+   return plc.deviceType == 30;
+}
+
+export function isDoubleHeatingPlcType(plc: PlcDtoBase): boolean {
+   return plc.deviceType == 20;
 }
