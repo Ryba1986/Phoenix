@@ -21,7 +21,9 @@ namespace Phoenix.Services.Helpers
          {
             return JwtHandlerHelper.CreateWeb(
                user,
-               Enum.GetValues<Permission>().Select(x => new KeyValuePair<Permission, AccessLevel>(x, AccessLevel.Write)),
+               Enum
+                  .GetValues<Permission>()
+                  .Select(x => new KeyValuePair<Permission, AccessLevel>(x, AccessLevel.Write)),
                settings
             );
          }
@@ -33,7 +35,9 @@ namespace Phoenix.Services.Helpers
 
          return JwtHandlerHelper.CreateWeb(
             user,
-            user.Role.Permissions.Select(x => new KeyValuePair<Permission, AccessLevel>(x.Permission, x.AccessLevel)),
+            user.Role.Permissions
+               .Where(x => x.IsActive)
+               .Select(x => new KeyValuePair<Permission, AccessLevel>(x.Permission, x.AccessLevel)),
             settings
          );
       }
