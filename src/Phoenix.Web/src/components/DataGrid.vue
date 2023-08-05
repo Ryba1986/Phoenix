@@ -24,6 +24,10 @@ const props = defineProps({
       type: Boolean,
       default: false,
    },
+   showIsActive: {
+      type: Boolean,
+      default: true,
+   },
    showMetrics: {
       type: Boolean,
       default: true,
@@ -80,7 +84,14 @@ function rowUpdatingEvent(e: RowUpdatingEvent): void {
          <DxButton icon="refresh" @click="refreshEvent" />
       </template>
       <slot name="columns" />
-      <DxGridColumn :caption="t('components.dataGrid.columns.isActive')" :value="false" :width="80" data-field="isActive" data-type="boolean" />
+      <DxGridColumn
+         v-if="props.showIsActive"
+         :caption="t('components.dataGrid.columns.isActive')"
+         :value="false"
+         :width="80"
+         data-field="isActive"
+         data-type="boolean"
+      />
       <DxGridColumn
          v-if="!props.enableDetail && props.showMetrics"
          :caption="t('components.dataGrid.columns.createdBy')"

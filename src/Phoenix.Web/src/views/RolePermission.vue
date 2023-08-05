@@ -37,7 +37,7 @@ const rolePermissionStore = new CustomStore<any, any>({
 <template>
    <Card :show-header="false">
       <template #body>
-         <DataGrid :data-store="rolePermissionStore" :enable-detail="false" :show-metrics="false">
+         <DataGrid :data-store="rolePermissionStore" :enable-detail="false" :show-is-active="false" :show-metrics="false">
             <template #columns>
                <DxGridColumn :caption="t('views.rolePermission.grid.columns.role')" alignment="left" data-field="roleId" data-type="number">
                   <DxGridLookup :data-source="roles" display-expr="value" value-expr="key" />
