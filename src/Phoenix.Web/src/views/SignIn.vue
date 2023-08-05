@@ -51,7 +51,7 @@ async function userLoginClicAsync(e: ClickEvent): Promise<void> {
                </div>
             </div>
             <div class="row px-2 pt-2">
-               <div class="col">
+               <div class="col-12">
                   <DxValidationGroup>
                      <div class="dx-field">
                         <DxTextBox
