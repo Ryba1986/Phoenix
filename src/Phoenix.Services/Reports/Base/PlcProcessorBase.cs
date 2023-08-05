@@ -40,7 +40,10 @@ namespace Phoenix.Services.Reports.Base
 
          return result
             .GroupBy(x => x.DeviceId)
-            .ToDictionary(x => x.Key, x => x.ToArray());
+            .ToDictionary(
+               x => x.Key,
+               x => x.OrderBy(x => x.Date).ToArray()
+            );
       }
    }
 }
