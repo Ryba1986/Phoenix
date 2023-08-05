@@ -28,13 +28,9 @@ const locationHistoryStore = (locationId: number) => {
                <DxGridColumn :caption="t('views.location.grid.columns.name')" data-field="name" data-type="string">
                   <DxStringLengthRule :ignore-empty-value="false" :message="t('views.location.grid.validators.name.length')" :min="3" :max="30" />
                </DxGridColumn>
-               <DxGridColumn
-                  :caption="t('views.location.grid.columns.includeReport')"
-                  :value="true"
-                  :width="100"
-                  data-field="includeReport"
-                  data-type="boolean"
-               />
+               <DxGridColumn :caption="t('views.location.grid.columns.includeReport')" :width="100" data-field="includeReport" data-type="boolean">
+                  <DxRequiredRule :message="t('views.location.grid.validators.includeReport.required')" />
+               </DxGridColumn>
             </template>
             <template #detailView="detailProps">
                <DataGrid :data-store="locationHistoryStore(detailProps.key)" :allow-adding="false" :allow-updating="false" :enable-detail="false">
