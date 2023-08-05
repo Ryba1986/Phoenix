@@ -14,7 +14,8 @@ namespace Phoenix.Services.Configuration.Mappers.Profiles
    {
       public PlcProfile()
       {
-         CreateProjection<Climatix, ClimatixDto>();
+         CreateProjection<Climatix, ClimatixDto>()
+            .ForMember(dst => dst.DeviceType, opt => opt.MapFrom(src => src.Device.DeviceType));
          CreateProjection<Climatix, ClimatixChartDto>();
          CreateProjection<IEnumerable<Climatix>, ClimatixReportDto>()
             .ForMember(dst => dst.Date, opt => opt.MapFrom(src => src.Min(x => x.Date)))
@@ -50,7 +51,8 @@ namespace Phoenix.Services.Configuration.Mappers.Profiles
             .ForMember(dst => dst.DhwTempMin, opt => opt.MapFrom(src => src.Min(x => x.DhwTemp)))
             .ForMember(dst => dst.DhwTempMax, opt => opt.MapFrom(src => src.Max(x => x.DhwTemp)));
 
-         CreateProjection<Kamstrup, KamstrupDto>();
+         CreateProjection<Kamstrup, KamstrupDto>()
+            .ForMember(dst => dst.DeviceType, opt => opt.MapFrom(src => src.Device.DeviceType));
          CreateProjection<Kamstrup, KamstrupChartDto>();
          CreateProjection<IEnumerable<Kamstrup>, KamstrupReportDto>()
             .ForMember(dst => dst.Date, opt => opt.MapFrom(src => src.Min(x => x.Date)))
@@ -70,7 +72,8 @@ namespace Phoenix.Services.Configuration.Mappers.Profiles
             .ForMember(dst => dst.VolumeSummaryMax, opt => opt.MapFrom(src => src.Max(x => x.VolumeSummary)))
             .ForMember(dst => dst.EnergySummaryMax, opt => opt.MapFrom(src => src.Max(x => x.EnergySummary)));
 
-         CreateProjection<Rvd145, Rvd145Dto>();
+         CreateProjection<Rvd145, Rvd145Dto>()
+            .ForMember(dst => dst.DeviceType, opt => opt.MapFrom(src => src.Device.DeviceType));
          CreateProjection<Rvd145, Rvd145ChartDto>();
          CreateProjection<IEnumerable<Rvd145>, Rvd145ReportDto>()
             .ForMember(dst => dst.Date, opt => opt.MapFrom(src => src.Min(x => x.Date)))
