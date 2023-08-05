@@ -25,10 +25,14 @@ export function getPlcFromLocationAsync<T>(
       .toArray();
 }
 
-export function isDomesticPlcType(plc: PlcDtoBase): boolean {
-   return plc.deviceType == 30;
+export function isHeatingPlcType(plc: PlcDtoBase): boolean {
+   return plc.deviceType == 10;
 }
 
 export function isDoubleHeatingPlcType(plc: PlcDtoBase): boolean {
    return plc.deviceType == 20;
+}
+
+export function isDomesticPlcType(plc: PlcDtoBase): boolean {
+   return plc.deviceType == 30;
 }

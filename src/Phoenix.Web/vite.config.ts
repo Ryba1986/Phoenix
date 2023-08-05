@@ -9,7 +9,17 @@ export default defineConfig({
       outDir: "../../dist/Phoenix.Web",
       reportCompressedSize: false,
    },
-   plugins: [vue()],
+   plugins: [
+      vue({
+         template: {
+            compilerOptions: {
+               isCustomElement: (tag) => {
+                  return tag === "svg:style";
+               },
+            },
+         },
+      }),
+   ],
    resolve: {
       alias: {
          "devextreme/ui": "devextreme/esm/ui",

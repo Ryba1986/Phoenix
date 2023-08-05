@@ -86,8 +86,9 @@ onUnmounted((): void => {
 <template>
    <LoadPanel :visible="isLoading" />
    <div v-show="!isPlcData" class="row py-5">
-      <div class="col">
+      <div class="col-12">
          <h4 class="text-center">{{ t("views.dashboard.emptyData") }}</h4>
       </div>
    </div>
+   <Climatix :data="climatixs" />
 </template>
