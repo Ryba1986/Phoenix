@@ -9,12 +9,10 @@ export interface Language extends DefineLocaleMessage {
          ch2Short: string;
          dhwShort: string;
          ch1HeatCurveTemp: string;
-         ch1HighOutletTemp: string;
          ch1LowInletTemp: string;
          ch1LowOutletTemp: string;
          ch1LowOutletPresure: string;
          ch2HeatCurveTemp: string;
-         ch2HighOutletTemp: string;
          ch2LowInletTemp: string;
          ch2LowOutletTemp: string;
          ch2LowOutletPresure: string;
@@ -50,6 +48,24 @@ export interface Language extends DefineLocaleMessage {
          signIn: string;
          signOut: string;
          user: string;
+      };
+      rvd145: {
+         circulation: string;
+         ch: string;
+         chShort: string;
+         dhwShort: string;
+         ch1HeatCurveTemp: string;
+         ch1HighOutletTemp: string;
+         ch1LowInletTemp: string;
+         ch1LowOutletPresure: string;
+         chHighInletPresure: string;
+         dhwCirculationTemp: string;
+         dhwTemp: string;
+         dhwTempSet: string;
+         network: string;
+         outsideTemp: string;
+         waterCold: string;
+         waterWarm: string;
       };
    };
    requests: {
