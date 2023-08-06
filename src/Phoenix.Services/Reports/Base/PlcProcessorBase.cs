@@ -24,18 +24,18 @@ namespace Phoenix.Services.Reports.Base
       {
       }
 
-      protected async Task<IReadOnlyDictionary<int, TResult[]>> GetPlcDataAsync<TSource, TResult>(DbSet<TSource> plc, DateOnly date, ITypeProcessor typeProcessor, CancellationToken cancellationToken) where TSource : PlcBase where TResult : PlcReportDtoBase
+      protected async Task<IReadOnlyDictionary<int, R[]>> GetPlcDataAsync<S, R>(DbSet<S> plc, DateOnly date, ITypeProcessor typeProcessor, CancellationToken cancellationToken) where S : PlcBase where R : PlcReportDtoBase
       {
          DateRange range = typeProcessor.GetRange(date);
 
-         IReadOnlyCollection<TResult> result = await plc
+         IReadOnlyCollection<R> result = await plc
             .AsNoTracking()
             .Where(x =>
                x.Date >= range.Start &&
                x.Date < range.End
             )
-            .GroupBy(typeProcessor.GetPlcGroup<TSource>())
-            .ProjectTo<TResult>(_mapper.ConfigurationProvider)
+            .GroupBy(typeProcessor.GetPlcGroup<S>())
+            .ProjectTo<R>(_mapper.ConfigurationProvider)
             .ToArrayAsync(cancellationToken);
 
          return result

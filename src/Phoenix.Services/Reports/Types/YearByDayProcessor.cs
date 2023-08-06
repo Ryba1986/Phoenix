@@ -39,7 +39,7 @@ namespace Phoenix.Services.Reports.Types
          return Translations.Report_Legend_YearByDay;
       }
 
-      public Expression<Func<TSource, PlcGroupBy>> GetPlcGroup<TSource>() where TSource : PlcBase
+      public Expression<Func<T, PlcGroupBy>> GetPlcGroup<T>() where T : PlcBase
       {
          return x => new()
          {
