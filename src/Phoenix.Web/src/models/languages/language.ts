@@ -32,6 +32,15 @@ export interface Language extends DefineLocaleMessage {
             isActive: string;
          };
       };
+      kamstrup: {
+         energySummary: string;
+         hourCount: string;
+         inletTemp: string;
+         outletTemp: string;
+         power: string;
+         volume: string;
+         volumeSummary: string;
+      };
       loadPanel: {
          message: string;
       };

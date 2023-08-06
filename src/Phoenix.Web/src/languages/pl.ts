@@ -32,6 +32,15 @@ export const pl: Language = {
             isActive: "Aktywny",
          },
       },
+      kamstrup: {
+         energySummary: "Energia sumaryczna",
+         hourCount: "Czas pracy",
+         inletTemp: "Zasilanie",
+         outletTemp: "Powrót",
+         power: "Moc",
+         volume: "Przepływ",
+         volumeSummary: "Przepływ sumaryczny",
+      },
       loadPanel: {
          message: "Ładowanie ...",
       },

@@ -32,6 +32,15 @@ export const en: Language = {
             isActive: "Active",
          },
       },
+      kamstrup: {
+         energySummary: "Summary energy",
+         hourCount: "Working time",
+         inletTemp: "Inlet temp",
+         outletTemp: "Outlet temp",
+         power: "Power",
+         volume: "Volume",
+         volumeSummary: "Summary volume",
+      },
       loadPanel: {
          message: "Loading ...",
       },
