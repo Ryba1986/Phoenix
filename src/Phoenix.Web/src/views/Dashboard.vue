@@ -92,4 +92,5 @@ onUnmounted((): void => {
    </div>
    <Climatix :data="climatixs" />
    <Rvd145 :data="rvd145s" />
+   <Kamstrup :data="kamstrups" />
 </template>
