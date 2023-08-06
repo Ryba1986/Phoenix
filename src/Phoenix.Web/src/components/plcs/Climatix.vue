@@ -768,7 +768,7 @@ const { t } = useI18n();
                         <path d="m16.2 11.1 2.38 2.42" style="fill:none;stroke-width:.279px;stroke:#000"/>
                         <path d="m16.2 11.1.626 1.11.453-.451z" style="fill-rule:evenodd;stroke-linecap:round;stroke-linejoin:round;stroke-width:.279px;stroke:#000"/>
                      </g>
-                     <text x="20.041454" y="45.917336" style="font-family:sans-serif;font-size:5.64px;line-height:1.25;stroke-width:.265" xml:space="preserve"><tspan x="20.041454" y="45.917336" style="font-family:sans-serif;font-size:5.64px;stroke-width:.265">p{{ $t('components.climatix.network') }}</tspan></text>
+                     <text x="20.041454" y="45.917336" style="font-family:sans-serif;font-size:5.64px;line-height:1.25;stroke-width:.265" xml:space="preserve"><tspan x="20.041454" y="45.917336" style="font-family:sans-serif;font-size:5.64px;stroke-width:.265">p{{ t('components.climatix.network') }}</tspan></text>
                      <g transform="matrix(1.01 0 0 1.01 65.5 13.1)" style="stroke-width:.989">
                         <path d="m17.5 17.7v-3.02" style="fill:none;stroke-width:.279px;stroke:#000"/>
                         <path d="m17.5 14.7a2.38 2.42 0 01-2.38-2.42 2.38 2.42 0 012.38-2.42 2.38 2.42 0 012.38 2.42 2.38 2.42 0 01-2.38 2.42" style="fill:none;stroke-linecap:round;stroke-linejoin:round;stroke-width:.279;stroke:#000"/>
@@ -814,7 +814,7 @@ const { t } = useI18n();
                      </g>
                      <path d="m505 30.1v3.52l8.2-3.52v3.52z" fill="none" stroke="#000" style="fill:#fff;stroke-width:.298"/>
                      <path d="m505 57v3.52l8.2-3.52v3.52z" fill="none" stroke="#000" style="fill:#fff;stroke-width:.298"/>
-                     <text x="513.12549" y="47.578751" style="font-family:sans-serif;font-size:5.64px;line-height:1.25;stroke-width:.265" xml:space="preserve"><tspan x="513.12549" y="47.578751" style="font-family:sans-serif;font-size:5.64px;stroke-width:.265;text-align:end;text-anchor:end">p{{ $t('components.climatix.ch') }}</tspan></text>
+                     <text x="513.12549" y="47.578751" style="font-family:sans-serif;font-size:5.64px;line-height:1.25;stroke-width:.265" xml:space="preserve"><tspan x="513.12549" y="47.578751" style="font-family:sans-serif;font-size:5.64px;stroke-width:.265;text-align:end;text-anchor:end">p{{ t('components.climatix.ch') }}</tspan></text>
                      <g transform="matrix(1.33 0 0 1.33 104 -80.3)" style="stroke-width:.753">
                         <rect x="66.6" y="102" width="11.2" height="5.65" style="fill:#fff;paint-order:markers stroke fill"/>
                         <path d="m66.6 102v5.58l11.1-5.58v5.58z" fill="none" stroke="#000" style="fill:#ffa400;stroke-width:.199"/>
@@ -880,8 +880,8 @@ const { t } = useI18n();
                         <path d="m16.2 11.1 2.38 2.42" style="fill:none;stroke-width:.279px;stroke:#000"/>
                         <path d="m16.2 11.1.626 1.11.453-.451z" style="fill-rule:evenodd;stroke-linecap:round;stroke-linejoin:round;stroke-width:.279px;stroke:#000"/>
                      </g>
-                     <text x="513.33771" y="75.58313" style="font-family:sans-serif;font-size:5.64px;line-height:1.25;stroke-width:.265" xml:space="preserve"><tspan x="513.33771" y="75.58313" style="font-family:sans-serif;font-size:5.64px;stroke-width:.265;text-align:end;text-anchor:end">p{{ $t('components.climatix.waterWarm') }}</tspan></text>
-                     <text x="513.33771" y="99.83136" style="font-family:sans-serif;font-size:5.64px;line-height:1.25;stroke-width:.265" xml:space="preserve"><tspan x="513.33771" y="99.83136" style="font-family:sans-serif;font-size:5.64px;stroke-width:.265;text-align:end;text-anchor:end">p{{ $t('components.climatix.waterCold') }}</tspan></text>
+                     <text x="513.33771" y="75.58313" style="font-family:sans-serif;font-size:5.64px;line-height:1.25;stroke-width:.265" xml:space="preserve"><tspan x="513.33771" y="75.58313" style="font-family:sans-serif;font-size:5.64px;stroke-width:.265;text-align:end;text-anchor:end">p{{ t('components.climatix.waterWarm') }}</tspan></text>
+                     <text x="513.33771" y="99.83136" style="font-family:sans-serif;font-size:5.64px;line-height:1.25;stroke-width:.265" xml:space="preserve"><tspan x="513.33771" y="99.83136" style="font-family:sans-serif;font-size:5.64px;stroke-width:.265;text-align:end;text-anchor:end">p{{ t('components.climatix.waterCold') }}</tspan></text>
                      <g transform="matrix(1.01 0 0 1.01 348 115)" style="stroke-width:.989">
                         <path d="m17.5 17.7v-3.02" style="fill:none;stroke-width:.279px;stroke:#000"/>
                         <path d="m17.5 14.7a2.38 2.42 0 01-2.38-2.42 2.38 2.42 0 012.38-2.42 2.38 2.42 0 012.38 2.42 2.38 2.42 0 01-2.38 2.42" style="fill:none;stroke-linecap:round;stroke-linejoin:round;stroke-width:.279;stroke:#000"/>
@@ -902,7 +902,7 @@ const { t } = useI18n();
                      </g>
                      <rect x="279" y="133" width="228" height="2" style="fill:#f1b345;stroke-width:.373"/>
                      <path d="m505 132v3.52l8.2-3.52v3.52z" fill="none" stroke="#000" style="fill:#fff;stroke-width:.298"/>
-                     <text x="513.33771" y="122.99466" style="font-family:sans-serif;font-size:5.64px;line-height:1.25;stroke-width:.265" xml:space="preserve"><tspan x="513.33771" y="122.99466" style="font-family:sans-serif;font-size:5.64px;stroke-width:.265;text-align:end;text-anchor:end">p{{ $t('components.climatix.circulation') }}</tspan></text>
+                     <text x="513.33771" y="122.99466" style="font-family:sans-serif;font-size:5.64px;line-height:1.25;stroke-width:.265" xml:space="preserve"><tspan x="513.33771" y="122.99466" style="font-family:sans-serif;font-size:5.64px;stroke-width:.265;text-align:end;text-anchor:end">p{{ t('components.climatix.circulation') }}</tspan></text>
                      <g transform="matrix(1.13 0 0 .986 224 79.3)" style="stroke-width:1.07">
                         <rect x="86.7" y="53.7" width="7.28" height="3.57" style="fill:#fff;paint-order:markers stroke fill"/>
                         <path d="m86.7 53.7v3.57l7.28-3.57v3.57z" fill="none" stroke="#000" style="fill:#fff;stroke-width:.283"/>
