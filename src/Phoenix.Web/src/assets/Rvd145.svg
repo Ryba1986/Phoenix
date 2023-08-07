@@ -445,7 +445,7 @@
    sodipodi:role="line"
    id="tspan1142"
    x="303.01874"
-   y="46.519512">{{ plc.ch1LowOutletPresure.toFixed(1) }} Bar</tspan></text>
+   y="46.519512">{{ plc.ch1LowOutletPresure.toFixed(1) }} bar</tspan></text>
     <g
        id="g1900"
        transform="translate(5.1412631,3.1750001)">
@@ -1633,7 +1633,7 @@
          sodipodi:role="line"
          id="tspan315"
          x="115.39965"
-         y="20.126001">{{ plc.chHighInletPresure.toFixed(1) }} Bar</tspan></text>
+         y="20.126001">{{ plc.chHighInletPresure.toFixed(1) }} bar</tspan></text>
     <g
        id="g579">
       <text

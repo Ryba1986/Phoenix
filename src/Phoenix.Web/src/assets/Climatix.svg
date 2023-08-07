@@ -273,7 +273,7 @@
    sodipodi:role="line"
    id="tspan1142"
    x="297.72708"
-   y="46.519512">{{ plc.ch1LowOutletPresure.toFixed(1) }} Bar</tspan></text>
+   y="46.519512">{{ plc.ch1LowOutletPresure.toFixed(1) }} bar</tspan></text>
     <g
        id="g1900"
        transform="translate(-0.15040353,3.1750001)">
@@ -733,7 +733,7 @@
          id="tspan3137"
          x="20.041454"
          y="45.917336"
-         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:5.64444px;font-family:sans-serif;-inkscape-font-specification:sans-serif;stroke-width:0.264583">p{{ $t('components.climatix.network') }}</tspan></text>
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:5.64444px;font-family:sans-serif;-inkscape-font-specification:sans-serif;stroke-width:0.264583">{{ $t('components.climatix.network') }}</tspan></text>
     <g
        id="g3272-3-1"
        transform="matrix(1.0108769,0,0,1.0106208,65.506694,13.124058)"
@@ -954,7 +954,7 @@
          x="513.12549"
          y="47.578751"
          style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:5.64444px;font-family:sans-serif;-inkscape-font-specification:sans-serif;text-align:end;text-anchor:end;stroke-width:0.264583"
-         id="tspan317">p{{ $t('components.climatix.ch') }}</tspan></text>
+         id="tspan317">{{ $t('components.climatix.ch') }}</tspan></text>
     <g
        id="g4432"
        transform="matrix(1.3255444,0,0,1.3298321,104.49318,-80.327804)"
@@ -1318,7 +1318,7 @@
          x="513.33771"
          y="75.58313"
          style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:5.64444px;font-family:sans-serif;-inkscape-font-specification:sans-serif;text-align:end;text-anchor:end;stroke-width:0.264583"
-         id="tspan4390-7">p{{ $t('components.climatix.waterWarm') }}</tspan></text>
+         id="tspan4390-7">{{ $t('components.climatix.waterWarm') }}</tspan></text>
     <text
        xml:space="preserve"
        style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:5.64444px;line-height:1.25;font-family:sans-serif;-inkscape-font-specification:sans-serif;stroke-width:0.264583"
@@ -1329,7 +1329,7 @@
          x="513.33771"
          y="99.83136"
          style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:5.64444px;font-family:sans-serif;-inkscape-font-specification:sans-serif;text-align:end;text-anchor:end;stroke-width:0.264583"
-         id="tspan4390-7-6">p{{ $t('components.climatix.waterCold') }}</tspan></text>
+         id="tspan4390-7-6">{{ $t('components.climatix.waterCold') }}</tspan></text>
     <g
        id="g3272-3-1-4-1"
        transform="matrix(1.0108769,0,0,1.0106208,348.17839,115.37911)"
@@ -1456,7 +1456,7 @@
          x="513.33771"
          y="122.99466"
          style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:5.64444px;font-family:sans-serif;-inkscape-font-specification:sans-serif;text-align:end;text-anchor:end;stroke-width:0.264583"
-         id="tspan4390-7-6-4">p{{ $t('components.climatix.circulation') }}</tspan></text>
+         id="tspan4390-7-6-4">{{ $t('components.climatix.circulation') }}</tspan></text>
     <g
        id="g4544-3-5-2"
        transform="matrix(1.1260023,0,0,0.98602074,223.80086,79.305683)"
@@ -1529,7 +1529,7 @@
          id="tspan1537-8"
          x="258.01889"
          y="103.85228"
-         style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:7.05556px;font-family:sans-serif;-inkscape-font-specification:'sans-serif Bold';text-align:center;text-anchor:middle;fill:#ffffff;fill-opacity:1;stroke-width:0.264583">p{{ $t('components.climatix.dhwShort') }}</tspan></text>
+         style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:7.05556px;font-family:sans-serif;-inkscape-font-specification:'sans-serif Bold';text-align:center;text-anchor:middle;fill:#ffffff;fill-opacity:1;stroke-width:0.264583">{{ $t('components.climatix.dhwShort') }}</tspan></text>
     <rect
        style="fill:url(#linearGradient1584);fill-opacity:1;stroke-width:0.266092"
        id="rect654-1"
@@ -1548,7 +1548,7 @@
          id="tspan1537-8-7"
          x="258.54254"
          y="48.733189"
-         style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:7.05556px;font-family:sans-serif;-inkscape-font-specification:'sans-serif Bold';text-align:center;text-anchor:middle;fill:#ffffff;fill-opacity:1;stroke-width:0.264583">p{{ $t('components.climatix.ch1Short') }}</tspan></text>
+         style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:7.05556px;font-family:sans-serif;-inkscape-font-specification:'sans-serif Bold';text-align:center;text-anchor:middle;fill:#ffffff;fill-opacity:1;stroke-width:0.264583">{{ $t('components.climatix.ch1Short') }}</tspan></text>
     <text
        xml:space="preserve"
        style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:6.35px;line-height:1.25;font-family:sans-serif;-inkscape-font-specification:'sans-serif, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;text-align:center;text-anchor:middle;stroke-width:0.264583"
@@ -1558,7 +1558,7 @@
          sodipodi:role="line"
          id="tspan315"
          x="115.39965"
-         y="20.126001">{{ plc.chHighInletPresure.toFixed(1) }} Bar</tspan></text>
+         y="20.126001">{{ plc.chHighInletPresure.toFixed(1) }} bar</tspan></text>
     <text
        xml:space="preserve"
        style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:6.35px;line-height:1.25;font-family:sans-serif;-inkscape-font-specification:'sans-serif, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;text-align:center;text-anchor:middle;stroke-width:0.264583"
@@ -1568,7 +1568,7 @@
          sodipodi:role="line"
          id="tspan315-2"
          x="115.11905"
-         y="47.033669">{{ plc.chHighOutletPresure.toFixed(1) }} Bar</tspan></text>
+         y="47.033669">{{ plc.chHighOutletPresure.toFixed(1) }} bar</tspan></text>
     <g
        id="g579">
       <text
