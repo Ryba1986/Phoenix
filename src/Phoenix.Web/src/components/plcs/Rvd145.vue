@@ -31,49 +31,49 @@ const { t } = useI18n();
                <table class="table table-sm table-borderless table-striped d-lg-none">
                   <tbody>
                      <tr>
-                        <td>{{ t("components.rvd145.outsideTemp") }}</td>
+                        <td class="text-muted">{{ t("components.rvd145.outsideTemp") }}</td>
                         <td class="text-end">{{ plc.outsideTemp.toFixed(1) }}</td>
-                        <td>&#8451;</td>
+                        <td class="text-muted">&#8451;</td>
                      </tr>
                      <tr>
-                        <td>{{ t("components.rvd145.chHighInletPresure") }}</td>
+                        <td class="text-muted">{{ t("components.rvd145.chHighInletPresure") }}</td>
                         <td class="text-end">{{ plc.chHighInletPresure.toFixed(1) }}</td>
-                        <td>bar</td>
+                        <td class="text-muted">bar</td>
                      </tr>
                      <tr>
-                        <td>{{ t("components.rvd145.ch1HighOutletTemp") }}</td>
+                        <td class="text-muted">{{ t("components.rvd145.ch1HighOutletTemp") }}</td>
                         <td class="text-end">{{ plc.ch1HighOutletTemp.toFixed(1) }}</td>
-                        <td>&#8451;</td>
+                        <td class="text-muted">&#8451;</td>
                      </tr>
                      <tr>
-                        <td>{{ t("components.rvd145.ch1HeatCurveTemp") }}</td>
+                        <td class="text-muted">{{ t("components.rvd145.ch1HeatCurveTemp") }}</td>
                         <td class="text-end">{{ plc.ch1HeatCurveTemp.toFixed(1) }}</td>
-                        <td>&#8451;</td>
+                        <td class="text-muted">&#8451;</td>
                      </tr>
                      <tr>
-                        <td>{{ t("components.rvd145.ch1LowInletTemp") }}</td>
+                        <td class="text-muted">{{ t("components.rvd145.ch1LowInletTemp") }}</td>
                         <td class="text-end">{{ plc.ch1LowInletTemp.toFixed(1) }}</td>
-                        <td>&#8451;</td>
+                        <td class="text-muted">&#8451;</td>
                      </tr>
                      <tr>
-                        <td>{{ t("components.rvd145.ch1LowOutletPresure") }}</td>
+                        <td class="text-muted">{{ t("components.rvd145.ch1LowOutletPresure") }}</td>
                         <td class="text-end">{{ plc.ch1LowOutletPresure.toFixed(1) }}</td>
-                        <td>bar</td>
+                        <td class="text-muted">bar</td>
                      </tr>
                      <tr v-if="isDomesticPlcType(plc)">
-                        <td>{{ t("components.rvd145.dhwTempSet") }}</td>
+                        <td class="text-muted">{{ t("components.rvd145.dhwTempSet") }}</td>
                         <td class="text-end">{{ plc.dhwTempSet.toFixed(1) }}</td>
-                        <td>&#8451;</td>
+                        <td class="text-muted">&#8451;</td>
                      </tr>
                      <tr v-if="isDomesticPlcType(plc)">
-                        <td>{{ t("components.rvd145.dhwTemp") }}</td>
+                        <td class="text-muted">{{ t("components.rvd145.dhwTemp") }}</td>
                         <td class="text-end">{{ plc.dhwTemp.toFixed(1) }}</td>
-                        <td>&#8451;</td>
+                        <td class="text-muted">&#8451;</td>
                      </tr>
                      <tr v-if="isDomesticPlcType(plc)">
-                        <td>{{ t("components.rvd145.dhwCirculationTemp") }}</td>
+                        <td class="text-muted">{{ t("components.rvd145.dhwCirculationTemp") }}</td>
                         <td class="text-end">{{ plc.dhwCirculationTemp.toFixed(1) }}</td>
-                        <td>&#8451;</td>
+                        <td class="text-muted">&#8451;</td>
                      </tr>
                   </tbody>
                </table>

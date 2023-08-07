@@ -31,69 +31,69 @@ const { t } = useI18n();
                <table class="table table-sm table-borderless table-striped d-lg-none">
                   <tbody>
                      <tr>
-                        <td>{{ t("components.climatix.outsideTemp") }}</td>
+                        <td class="text-muted">{{ t("components.climatix.outsideTemp") }}</td>
                         <td class="text-end">{{ plc.outsideTemp.toFixed(1) }}</td>
-                        <td>&#8451;</td>
+                        <td class="text-muted">&#8451;</td>
                      </tr>
                      <tr>
-                        <td>{{ t("components.climatix.chHighInletPresure") }}</td>
+                        <td class="text-muted">{{ t("components.climatix.chHighInletPresure") }}</td>
                         <td class="text-end">{{ plc.chHighInletPresure.toFixed(1) }}</td>
-                        <td>bar</td>
+                        <td class="text-muted">bar</td>
                      </tr>
                      <tr>
-                        <td>{{ t("components.climatix.chHighOutletPresure") }}</td>
+                        <td class="text-muted">{{ t("components.climatix.chHighOutletPresure") }}</td>
                         <td class="text-end">{{ plc.chHighOutletPresure.toFixed(1) }}</td>
-                        <td>bar</td>
+                        <td class="text-muted">bar</td>
                      </tr>
                      <tr>
-                        <td>{{ t("components.climatix.ch1HeatCurveTemp") }}</td>
+                        <td class="text-muted">{{ t("components.climatix.ch1HeatCurveTemp") }}</td>
                         <td class="text-end">{{ plc.ch1HeatCurveTemp.toFixed(1) }}</td>
-                        <td>&#8451;</td>
+                        <td class="text-muted">&#8451;</td>
                      </tr>
                      <tr>
-                        <td>{{ t("components.climatix.ch1LowInletTemp") }}</td>
+                        <td class="text-muted">{{ t("components.climatix.ch1LowInletTemp") }}</td>
                         <td class="text-end">{{ plc.ch1LowInletTemp.toFixed(1) }}</td>
-                        <td>&#8451;</td>
+                        <td class="text-muted">&#8451;</td>
                      </tr>
                      <tr>
-                        <td>{{ t("components.climatix.ch1LowOutletTemp") }}</td>
+                        <td class="text-muted">{{ t("components.climatix.ch1LowOutletTemp") }}</td>
                         <td class="text-end">{{ plc.ch1LowOutletTemp.toFixed(1) }}</td>
-                        <td>&#8451;</td>
+                        <td class="text-muted">&#8451;</td>
                      </tr>
                      <tr>
-                        <td>{{ t("components.climatix.ch1LowOutletPresure") }}</td>
+                        <td class="text-muted">{{ t("components.climatix.ch1LowOutletPresure") }}</td>
                         <td class="text-end">{{ plc.ch1LowOutletPresure.toFixed(1) }}</td>
-                        <td>bar</td>
+                        <td class="text-muted">bar</td>
                      </tr>
                      <tr v-if="isDoubleHeatingPlcType(plc)">
-                        <td>{{ t("components.climatix.ch2HeatCurveTemp") }}</td>
+                        <td class="text-muted">{{ t("components.climatix.ch2HeatCurveTemp") }}</td>
                         <td class="text-end">{{ plc.ch2HeatCurveTemp.toFixed(1) }}</td>
-                        <td>&#8451;</td>
+                        <td class="text-muted">&#8451;</td>
                      </tr>
                      <tr v-if="isDoubleHeatingPlcType(plc)">
-                        <td>{{ t("components.climatix.ch2LowInletTemp") }}</td>
+                        <td class="text-muted">{{ t("components.climatix.ch2LowInletTemp") }}</td>
                         <td class="text-end">{{ plc.ch2LowInletTemp.toFixed(1) }}</td>
-                        <td>&#8451;</td>
+                        <td class="text-muted">&#8451;</td>
                      </tr>
                      <tr v-if="isDoubleHeatingPlcType(plc)">
-                        <td>{{ t("components.climatix.ch2LowOutletTemp") }}</td>
+                        <td class="text-muted">{{ t("components.climatix.ch2LowOutletTemp") }}</td>
                         <td class="text-end">{{ plc.ch2LowOutletTemp.toFixed(1) }}</td>
-                        <td>&#8451;</td>
+                        <td class="text-muted">&#8451;</td>
                      </tr>
                      <tr v-if="isDoubleHeatingPlcType(plc)">
-                        <td>{{ t("components.climatix.ch2LowOutletPresure") }}</td>
+                        <td class="text-muted">{{ t("components.climatix.ch2LowOutletPresure") }}</td>
                         <td class="text-end">{{ plc.ch2LowOutletPresure.toFixed(1) }}</td>
-                        <td>bar</td>
+                        <td class="text-muted">bar</td>
                      </tr>
                      <tr v-if="isDomesticPlcType(plc)">
-                        <td>{{ t("components.climatix.dhwTempSet") }}</td>
+                        <td class="text-muted">{{ t("components.climatix.dhwTempSet") }}</td>
                         <td class="text-end">{{ plc.dhwTempSet.toFixed(1) }}</td>
-                        <td>&#8451;</td>
+                        <td class="text-muted">&#8451;</td>
                      </tr>
                      <tr v-if="isDomesticPlcType(plc)">
-                        <td>{{ t("components.climatix.dhwTemp") }}</td>
+                        <td class="text-muted">{{ t("components.climatix.dhwTemp") }}</td>
                         <td class="text-end">{{ plc.dhwTemp.toFixed(1) }}</td>
-                        <td>&#8451;</td>
+                        <td class="text-muted">&#8451;</td>
                      </tr>
                   </tbody>
                </table>

@@ -46,39 +46,39 @@ function getDoubleExtraLargeMeterSize(): number {
                <table class="table table-sm table-borderless table-striped">
                   <tbody>
                      <tr>
-                        <td>{{ t("components.kamstrup.inletTemp") }}</td>
+                        <td class="text-muted">{{ t("components.kamstrup.inletTemp") }}</td>
                         <td class="text-end">{{ plc.inletTemp.toFixed(1) }}</td>
-                        <td>&#8451;</td>
+                        <td class="text-muted">&#8451;</td>
                      </tr>
                      <tr>
-                        <td>{{ t("components.kamstrup.outletTemp") }}</td>
+                        <td class="text-muted">{{ t("components.kamstrup.outletTemp") }}</td>
                         <td class="text-end">{{ plc.outletTemp.toFixed(1) }}</td>
-                        <td>&#8451;</td>
+                        <td class="text-muted">&#8451;</td>
                      </tr>
                      <tr>
-                        <td>{{ t("components.kamstrup.power") }}</td>
+                        <td class="text-muted">{{ t("components.kamstrup.power") }}</td>
                         <td class="text-end">{{ plc.power.toFixed(1) }}</td>
-                        <td>kW</td>
+                        <td class="text-muted">kW</td>
                      </tr>
                      <tr>
-                        <td>{{ t("components.kamstrup.volume") }}</td>
+                        <td class="text-muted">{{ t("components.kamstrup.volume") }}</td>
                         <td class="text-end">{{ plc.volume.toFixed(1) }}</td>
-                        <td>m<sup>3</sup></td>
+                        <td class="text-muted">m<sup>3</sup></td>
                      </tr>
                      <tr>
-                        <td>{{ t("components.kamstrup.energySummary") }}</td>
+                        <td class="text-muted">{{ t("components.kamstrup.energySummary") }}</td>
                         <td class="text-end">{{ plc.energySummary.toFixed(1) }}</td>
-                        <td>GJ</td>
+                        <td class="text-muted">GJ</td>
                      </tr>
                      <tr>
-                        <td>{{ t("components.kamstrup.volumeSummary") }}</td>
+                        <td class="text-muted">{{ t("components.kamstrup.volumeSummary") }}</td>
                         <td class="text-end">{{ plc.volumeSummary.toFixed(1) }}</td>
-                        <td>m<sup>3</sup></td>
+                        <td class="text-muted">m<sup>3</sup></td>
                      </tr>
                      <tr>
-                        <td>{{ t("components.kamstrup.hourCount") }}</td>
+                        <td class="text-muted">{{ t("components.kamstrup.hourCount") }}</td>
                         <td class="text-end">{{ plc.hourCount.toFixed(1) }}</td>
-                        <td>h</td>
+                        <td class="text-muted">h</td>
                      </tr>
                   </tbody>
                </table>
