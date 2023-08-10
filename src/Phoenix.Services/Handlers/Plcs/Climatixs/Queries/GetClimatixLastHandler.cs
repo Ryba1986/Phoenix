@@ -1,10 +1,8 @@
-using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using AutoMapper;
-using AutoMapper.QueryableExtensions;
 using MediatR;
-using Microsoft.EntityFrameworkCore;
+using Phoenix.Entities.Plcs.Climatixs;
 using Phoenix.Models.Plcs.Climatixs.Dto;
 using Phoenix.Models.Plcs.Climatixs.Queries;
 using Phoenix.Services.Handlers.Base;
@@ -18,15 +16,9 @@ namespace Phoenix.Services.Handlers.Plcs.Climatixs.Queries
       {
       }
 
-      public async Task<ClimatixDto?> Handle(GetClimatixLastQuery request, CancellationToken cancellationToken)
+      public Task<ClimatixDto?> Handle(GetClimatixLastQuery request, CancellationToken cancellationToken)
       {
-         return await _uow.Climatix
-            .AsNoTracking()
-            .Include(x => x.Device)
-            .Where(x => x.DeviceId == request.DeviceId)
-            .OrderByDescending(x => x.Date)
-            .ProjectTo<ClimatixDto>(_mapper.ConfigurationProvider)
-            .FirstOrDefaultAsync(cancellationToken);
+         return GetPlcLastAsync<Climatix, ClimatixDto>(_uow.Climatix, request, cancellationToken);
       }
    }
 }

@@ -1,12 +1,9 @@
-using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using AutoMapper;
-using AutoMapper.QueryableExtensions;
 using MediatR;
-using Microsoft.EntityFrameworkCore;
+using Phoenix.Entities.Plcs.Rvds;
 using Phoenix.Models.Plcs.Rvds.Dto;
 using Phoenix.Models.Plcs.Rvds.Queries;
 using Phoenix.Services.Handlers.Base;
@@ -20,19 +17,9 @@ namespace Phoenix.Services.Handlers.Plcs.Rvds.Queries
       {
       }
 
-      public async Task<IReadOnlyCollection<Rvd145ChartDto>> Handle(GetRvd145ChartQuery request, CancellationToken cancellationToken)
+      public Task<IReadOnlyCollection<Rvd145ChartDto>> Handle(GetRvd145ChartQuery request, CancellationToken cancellationToken)
       {
-         DateTime dateTime = request.Date.ToDateTime(TimeOnly.MinValue);
-
-         return await _uow.Rvd145
-            .AsNoTracking()
-            .Where(x =>
-               x.Date >= dateTime &&
-               x.Date < dateTime.AddDays(1) &&
-               x.DeviceId == request.DeviceId
-            )
-            .ProjectTo<Rvd145ChartDto>(_mapper.ConfigurationProvider)
-            .ToArrayAsync(cancellationToken);
+         return GetPlcChartAsync<Rvd145, Rvd145ChartDto>(_uow.Rvd145, request, cancellationToken);
       }
    }
 }

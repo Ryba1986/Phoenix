@@ -1,10 +1,8 @@
-using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using AutoMapper;
-using AutoMapper.QueryableExtensions;
 using MediatR;
-using Microsoft.EntityFrameworkCore;
+using Phoenix.Entities.Plcs.Rvds;
 using Phoenix.Models.Plcs.Rvds.Dto;
 using Phoenix.Models.Plcs.Rvds.Queries;
 using Phoenix.Services.Handlers.Base;
@@ -18,15 +16,9 @@ namespace Phoenix.Services.Handlers.Plcs.Rvds.Queries
       {
       }
 
-      public async Task<Rvd145Dto?> Handle(GetRvd145LastQuery request, CancellationToken cancellationToken)
+      public Task<Rvd145Dto?> Handle(GetRvd145LastQuery request, CancellationToken cancellationToken)
       {
-         return await _uow.Rvd145
-            .AsNoTracking()
-            .Include(x => x.Device)
-            .Where(x => x.DeviceId == request.DeviceId)
-            .OrderByDescending(x => x.Date)
-            .ProjectTo<Rvd145Dto>(_mapper.ConfigurationProvider)
-            .FirstOrDefaultAsync(cancellationToken);
+         return GetPlcLastAsync<Rvd145, Rvd145Dto>(_uow.Rvd145, request, cancellationToken);
       }
    }
 }

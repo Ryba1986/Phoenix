@@ -1,10 +1,8 @@
-using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using AutoMapper;
-using AutoMapper.QueryableExtensions;
 using MediatR;
-using Microsoft.EntityFrameworkCore;
+using Phoenix.Entities.Plcs.Meters;
 using Phoenix.Models.Plcs.Meters.Dto;
 using Phoenix.Models.Plcs.Meters.Queries;
 using Phoenix.Services.Handlers.Base;
@@ -18,15 +16,9 @@ namespace Phoenix.Services.Handlers.Plcs.Meters.Queries
       {
       }
 
-      public async Task<KamstrupDto?> Handle(GetKamstrupLastQuery request, CancellationToken cancellationToken)
+      public Task<KamstrupDto?> Handle(GetKamstrupLastQuery request, CancellationToken cancellationToken)
       {
-         return await _uow.Kamstrup
-            .AsNoTracking()
-            .Include(x => x.Device)
-            .Where(x => x.DeviceId == request.DeviceId)
-            .OrderByDescending(x => x.Date)
-            .ProjectTo<KamstrupDto>(_mapper.ConfigurationProvider)
-            .FirstOrDefaultAsync(cancellationToken);
+         return GetPlcLastAsync<Kamstrup, KamstrupDto>(_uow.Kamstrup, request, cancellationToken);
       }
    }
 }

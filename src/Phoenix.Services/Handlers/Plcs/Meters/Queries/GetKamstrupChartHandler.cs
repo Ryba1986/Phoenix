@@ -1,12 +1,9 @@
-using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using AutoMapper;
-using AutoMapper.QueryableExtensions;
 using MediatR;
-using Microsoft.EntityFrameworkCore;
+using Phoenix.Entities.Plcs.Meters;
 using Phoenix.Models.Plcs.Meters.Dto;
 using Phoenix.Models.Plcs.Meters.Queries;
 using Phoenix.Services.Handlers.Base;
@@ -20,19 +17,9 @@ namespace Phoenix.Services.Handlers.Plcs.Meters.Queries
       {
       }
 
-      public async Task<IReadOnlyCollection<KamstrupChartDto>> Handle(GetKamstrupChartQuery request, CancellationToken cancellationToken)
+      public Task<IReadOnlyCollection<KamstrupChartDto>> Handle(GetKamstrupChartQuery request, CancellationToken cancellationToken)
       {
-         DateTime dateTime = request.Date.ToDateTime(TimeOnly.MinValue);
-
-         return await _uow.Kamstrup
-            .AsNoTracking()
-            .Where(x =>
-               x.Date >= dateTime &&
-               x.Date < dateTime.AddDays(1) &&
-               x.DeviceId == request.DeviceId
-            )
-            .ProjectTo<KamstrupChartDto>(_mapper.ConfigurationProvider)
-            .ToArrayAsync(cancellationToken);
+         return GetPlcChartAsync<Kamstrup, KamstrupChartDto>(_uow.Kamstrup, request, cancellationToken);
       }
    }
 }
