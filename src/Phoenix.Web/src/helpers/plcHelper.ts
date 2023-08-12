@@ -3,6 +3,23 @@ import { PlcDtoBase } from "../models/api/base/dto/plcDtoBase";
 import { GetPlcLastQueryBase } from "../models/api/base/queries/getPlcLastQueryBase";
 import { DeviceDto } from "../models/api/devices/dto/deviceDto";
 
+export function getMeterDoubleExtraLargeSize(meterCount: number): number {
+   switch (meterCount) {
+      case 1:
+         return 12;
+      case 2:
+         return 6;
+      case 3:
+         return 4;
+      default:
+         return 3;
+   }
+}
+
+export function getMeterMediumSize(meterCount: number): number {
+   return meterCount > 1 ? 6 : 12;
+}
+
 export function getPumpStatus(alarm: boolean, status: boolean): string {
    return alarm ? "#ff3333" : status ? "#00e200" : "#b5b3b2";
 }

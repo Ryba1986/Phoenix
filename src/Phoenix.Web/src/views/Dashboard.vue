@@ -7,7 +7,7 @@ import { getKamstrupLastAsync } from "../api/kamstrupApi";
 import { getLocationDictionaryAsync } from "../api/locationApi";
 import { getRvd145LastAsync } from "../api/rvd145Api";
 import { dashboardRefreshInterval } from "../config";
-import { getPlcFromLocationAsync } from "../helpers/plcHelper";
+import { getMeterDoubleExtraLargeSize, getMeterMediumSize, getPlcFromLocationAsync } from "../helpers/plcHelper";
 import { displayError } from "../helpers/toastHelper";
 import { DeviceDto } from "../models/api/devices/dto/deviceDto";
 import { ClimatixDto } from "../models/api/plcs/climatixs/dto/climatixDto";
@@ -15,12 +15,13 @@ import { KamstrupDto } from "../models/api/plcs/meters/dto/kamstrupDto";
 import { Rvd145Dto } from "../models/api/plcs/rvds/dto/rvd145Dto";
 import { dashboardStore } from "../stores/dashboardStore";
 
-const climatixs: Ref<Array<ClimatixDto>> = ref([]);
-const devices: Ref<Array<DeviceDto>> = ref([]);
 const isLoading: Ref<boolean> = ref(false);
 const isPageLoaded: Ref<boolean> = ref(false);
-const kamstrups: Ref<Array<KamstrupDto>> = ref([]);
 const refreshLocationInterval: Ref<number> = ref(0);
+
+const devices: Ref<Array<DeviceDto>> = ref([]);
+const climatixs: Ref<Array<ClimatixDto>> = ref([]);
+const kamstrups: Ref<Array<KamstrupDto>> = ref([]);
 const rvd145s: Ref<Array<Rvd145Dto>> = ref([]);
 
 const dStore = dashboardStore();
@@ -85,12 +86,27 @@ onUnmounted((): void => {
 
 <template>
    <LoadPanel :visible="isLoading" />
-   <div v-show="!isPlcData" class="row py-5">
+   <div v-if="!isPlcData" class="row py-5">
       <div class="col-12">
          <h4 class="text-center">{{ t("views.dashboard.emptyData") }}</h4>
       </div>
    </div>
-   <Climatix :data="climatixs" />
-   <Rvd145 :data="rvd145s" />
-   <Kamstrup :data="kamstrups" />
+   <div v-if="climatixs.length > 0" class="row">
+      <div v-for="climatix in climatixs" class="cell-12">
+         <Climatix :plc="climatix" />
+      </div>
+   </div>
+   <div v-if="rvd145s.length > 0" class="row">
+      <div v-for="rvd145 in rvd145s" class="cell-12">
+         <Rvd145 :plc="rvd145" />
+      </div>
+   </div>
+   <div v-if="kamstrups.length > 0" class="row">
+      <div
+         v-for="kamstrup in kamstrups"
+         :class="`col-12 col-md-${getMeterMediumSize(kamstrups.length)} col-xxl-${getMeterDoubleExtraLargeSize(kamstrups.length)}`"
+      >
+         <Kamstrup :plc="kamstrup" />
+      </div>
+   </div>
 </template>
