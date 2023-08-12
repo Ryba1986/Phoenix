@@ -1,10 +1,10 @@
 <script setup lang="ts">
-import { Ref, ref } from 'vue';
-import { useI18n } from 'vue-i18n';
-import CustomStore from 'devextreme/data/custom_store';
-import { getRoleDictionaryAsync } from '../api/roleApi';
-import { getUsersAsync, createUserAsync, updateUserAsync, getUserHistoryAsync } from '../api/userApi';
-import { DictionaryItem } from '../models/api/base/dto/dictionaryItem';
+import { Ref, ref } from "vue";
+import { useI18n } from "vue-i18n";
+import CustomStore from "devextreme/data/custom_store";
+import { getRoleDictionaryAsync } from "../api/roleApi";
+import { getUsersAsync, createUserAsync, updateUserAsync, getUserHistoryAsync } from "../api/userApi";
+import { DictionaryItem } from "../models/api/base/dto/dictionaryItem";
 
 const { t } = useI18n();
 
