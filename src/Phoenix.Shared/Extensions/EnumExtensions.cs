@@ -27,7 +27,7 @@ namespace Phoenix.Shared.Extensions
       {
          IEnumerable<KeyValuePair<int, string>> query = Enum
             .GetValues<T>()
-            .Select(x => new KeyValuePair<int, string>(Convert.ToInt32(x), x.GetDescription()));
+            .Select(x => new KeyValuePair<int, string>(x.GetKey(), x.GetDescription()));
 
          if (skipDefault)
          {
