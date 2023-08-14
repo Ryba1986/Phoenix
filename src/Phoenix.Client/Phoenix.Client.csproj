@@ -32,7 +32,7 @@
    </PropertyGroup>
 
   <ItemGroup>
-      <PackageReference Include="Autofac" Version="7.0.1" />
+      <PackageReference Include="Autofac" Version="7.1.0" />
       <PackageReference Include="Autofac.Extensions.DependencyInjection" Version="8.0.0" />
       <PackageReference Include="LiteDB" Version="5.0.17" />
       <PackageReference Include="MediatR" Version="12.1.1" />
@@ -40,7 +40,7 @@
       <PackageReference Include="Microsoft.Extensions.Hosting.Systemd" Version="8.0.0-preview.6.23329.7" />
       <PackageReference Include="NModbus" Version="3.0.78" />
       <PackageReference Include="NModbus.Serial" Version="3.0.78" />
-      <PackageReference Include="RestSharp" Version="110.2.1-alpha.0.10" />
+      <PackageReference Include="RestSharp" Version="110.2.1-alpha.0.11" />
       <PackageReference Include="System.IO.Ports" Version="8.0.0-preview.6.23329.7" />
   </ItemGroup>
 
