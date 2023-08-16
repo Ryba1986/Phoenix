@@ -12,7 +12,7 @@ namespace Phoenix.Client.Configuration.Modules
          builder
             .Register((IHostEnvironment environment) =>
             {
-               return new LiteRepository(new LiteDatabase($"{environment.ContentRootPath}{Path.DirectorySeparatorChar}{nameof(Phoenix)}{nameof(Client)}Db.db")
+               return new LiteRepository(new LiteDatabase(Path.Combine(environment.ContentRootPath, $"{nameof(Phoenix)}{nameof(Client)}Db.db"))
                {
                   CheckpointSize = 10,
                   UtcDate = false,

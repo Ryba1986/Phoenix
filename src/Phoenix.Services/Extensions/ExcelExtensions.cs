@@ -11,7 +11,7 @@ namespace Phoenix.Services.Extensions
    {
       public static ExcelPackage GetReportTemplate()
       {
-         string templatePath = $"{AppContext.BaseDirectory}Reports{Path.DirectorySeparatorChar}Templates{Path.DirectorySeparatorChar}PlcReport_{CultureInfo.CurrentCulture.Name}.xlsx";
+         string templatePath = Path.Combine(AppContext.BaseDirectory, "Reports", "Templates", $"PlcReport_{CultureInfo.CurrentCulture.Name}.xlsx");
 
          return new ExcelPackage(new(templatePath), true);
       }
