@@ -37,6 +37,7 @@ namespace Phoenix.Services.Handlers.Reports.Queries
          using ExcelPackage ep = ExcelExtensions.GetReportTemplate();
 
          ep.Workbook.Properties.Author = nameof(Phoenix);
+         ep.Workbook.Properties.LastModifiedBy = nameof(Phoenix);
 
          IReadOnlyCollection<string> templateSheetNames = ep.Workbook.Worksheets
             .Select(x => x.Name)
