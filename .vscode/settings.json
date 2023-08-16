@@ -5,6 +5,7 @@
    "dotnetAcquisitionExtension.enableTelemetry": false,
    "dotnet.completion.showCompletionItemsFromUnimportedNamespaces": true,
    "dotnet.defaultSolution": "Phoenix.sln",
+   "dotnet.preferRuntimeFromSDK": true,
    "editor.bracketPairColorization.enabled": true,
    "editor.defaultFormatter": "esbenp.prettier-vscode",
    "editor.detectIndentation": false,
