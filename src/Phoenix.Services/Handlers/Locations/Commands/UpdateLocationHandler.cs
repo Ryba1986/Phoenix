@@ -8,6 +8,7 @@ using Phoenix.Services.Handlers.Base;
 using Phoenix.Services.Helpers;
 using Phoenix.Services.Repositories;
 using Phoenix.Services.Settings;
+using Phoenix.Shared.Helpers;
 using Phoenix.Shared.Languages;
 using Phoenix.Shared.Results;
 
@@ -67,12 +68,13 @@ namespace Phoenix.Services.Handlers.Locations.Commands
             IncludeReport = request.IncludeReport,
             IsActive = request.IsActive,
             CreatedById = request.ModifiedById,
+            CreateDate = await GetServerDateAsync(),
          });
 
          location.Name = request.Name;
          location.IncludeReport = request.IncludeReport;
          location.IsActive = request.IsActive;
-         location.UpdateVersion();
+         location.Version = RandomHelper.NewShort();
 
          await _uow.SaveChangesAsync(cancellationToken);
          return Result.Success();

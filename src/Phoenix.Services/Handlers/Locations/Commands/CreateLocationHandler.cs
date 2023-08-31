@@ -57,6 +57,7 @@ namespace Phoenix.Services.Handlers.Locations.Commands
             IncludeReport = request.IncludeReport,
             IsActive = request.IsActive,
             CreatedById = request.CreatedById,
+            CreateDate = await GetServerDateAsync(),
          });
 
          await _uow.SaveChangesAsync(cancellationToken);

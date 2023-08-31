@@ -62,6 +62,7 @@ namespace Phoenix.Services.Handlers.Users.Commands
             Email = request.Email,
             IsActive = request.IsActive,
             CreatedById = request.CreatedById,
+            CreateDate = await GetServerDateAsync(),
          });
 
          await _uow.SaveChangesAsync(cancellationToken);

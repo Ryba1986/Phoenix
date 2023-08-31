@@ -66,6 +66,7 @@ namespace Phoenix.Services.Handlers.Clients.Commands
             MacAddress = request.MacAddress,
             IsActive = request.IsActive,
             CreatedById = request.CreatedById,
+            CreateDate = await GetServerDateAsync(),
          });
 
          await _uow.SaveChangesAsync(cancellationToken);

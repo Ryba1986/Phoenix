@@ -88,6 +88,7 @@ namespace Phoenix.Services.Handlers.Devices.Commands
             ReportSequence = request.ReportSequence,
             IsActive = request.IsActive,
             CreatedById = request.CreatedById,
+            CreateDate = await GetServerDateAsync(),
          });
 
          await _uow.SaveChangesAsync(cancellationToken);

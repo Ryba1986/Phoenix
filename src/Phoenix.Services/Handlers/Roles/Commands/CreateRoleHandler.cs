@@ -48,6 +48,7 @@ namespace Phoenix.Services.Handlers.Roles.Commands
             IsAdmin = request.IsAdmin,
             IsActive = request.IsActive,
             CreatedById = request.CreatedById,
+            CreateDate = await GetServerDateAsync(),
          });
 
          await _uow.SaveChangesAsync(cancellationToken);

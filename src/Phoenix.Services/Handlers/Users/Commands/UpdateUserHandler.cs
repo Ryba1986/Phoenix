@@ -6,6 +6,7 @@ using Phoenix.Entities.Users;
 using Phoenix.Models.Users.Commands;
 using Phoenix.Services.Handlers.Base;
 using Phoenix.Services.Repositories;
+using Phoenix.Shared.Helpers;
 using Phoenix.Shared.Languages;
 using Phoenix.Shared.Results;
 
@@ -67,13 +68,14 @@ namespace Phoenix.Services.Handlers.Users.Commands
             RoleId = user.RoleId != request.RoleId ? request.RoleId : null,
             IsActive = request.IsActive,
             CreatedById = request.ModifiedById,
+            CreateDate = await GetServerDateAsync(),
          });
 
          user.Name = request.Name;
          user.Email = request.Email;
          user.RoleId = request.RoleId;
          user.IsActive = request.IsActive;
-         user.UpdateVersion();
+         user.Version = RandomHelper.NewShort();
 
          await _uow.SaveChangesAsync(cancellationToken);
          return Result.Success();

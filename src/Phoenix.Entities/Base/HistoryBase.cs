@@ -1,6 +1,5 @@
 using System;
 using Phoenix.Entities.Users;
-using Phoenix.Shared.Extensions;
 
 namespace Phoenix.Entities.Base
 {
@@ -15,7 +14,6 @@ namespace Phoenix.Entities.Base
       public HistoryBase()
       {
          CreatedBy = null!;
-         CreateDate = DateTime.Now.RoundToSecond();
       }
    }
 }

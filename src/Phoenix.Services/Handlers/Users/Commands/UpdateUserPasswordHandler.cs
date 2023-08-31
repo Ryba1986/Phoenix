@@ -6,8 +6,9 @@ using Phoenix.Entities.Users;
 using Phoenix.Models.Users.Commands;
 using Phoenix.Services.Handlers.Base;
 using Phoenix.Services.Repositories;
-using Phoenix.Shared.Languages;
 using Phoenix.Shared.Extensions;
+using Phoenix.Shared.Helpers;
+using Phoenix.Shared.Languages;
 using Phoenix.Shared.Results;
 
 namespace Phoenix.Services.Handlers.Users.Commands
@@ -34,7 +35,7 @@ namespace Phoenix.Services.Handlers.Users.Commands
          }
 
          user.Password = request.NewPassword.CreatePassword();
-         user.UpdateVersion();
+         user.Version = RandomHelper.NewShort();
 
          await _uow.SaveChangesAsync(cancellationToken);
          return Result.Success();

@@ -1,3 +1,4 @@
+using System;
 using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
@@ -15,6 +16,11 @@ namespace Phoenix.Services.Handlers.Base
       public HandlerBase(UnitOfWork uow)
       {
          _uow = uow;
+      }
+
+      protected static Task<DateTime> GetServerDateAsync()
+      {
+         return Task.FromResult(DateTime.Now.RoundToSecond());
       }
 
       protected static Task<bool> IsPlcExistAsync<T>(DbSet<T> plcs, CreatePlcCommandBase request, CancellationToken cancellationToken) where T : PlcBase

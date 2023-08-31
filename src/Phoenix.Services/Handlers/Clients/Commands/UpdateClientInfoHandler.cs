@@ -6,6 +6,7 @@ using Phoenix.Entities.Clients;
 using Phoenix.Models.Clients.Commands;
 using Phoenix.Services.Handlers.Base;
 using Phoenix.Services.Repositories;
+using Phoenix.Shared.Helpers;
 using Phoenix.Shared.Languages;
 using Phoenix.Shared.Results;
 
@@ -28,7 +29,6 @@ namespace Phoenix.Services.Handlers.Clients.Commands
          {
             return Result.Error(Translations.Client_NotExists);
          }
-
          if (client.Hostname == request.Hostname && client.ClientVersion == request.ClientVersion)
          {
             return Result.Success();
@@ -36,7 +36,7 @@ namespace Phoenix.Services.Handlers.Clients.Commands
 
          client.Hostname = request.Hostname;
          client.ClientVersion = request.ClientVersion;
-         client.UpdateVersion();
+         client.Version = RandomHelper.NewShort();
 
          await _uow.SaveChangesAsync(cancellationToken);
          return Result.Success();
