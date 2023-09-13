@@ -24,7 +24,8 @@ namespace Phoenix.Services.Repositories.Configurations.Roles
          builder.Property(x => x.IsActive)
             .IsRequired();
 
-         builder.HasKey(x => x.Id);
+         builder.HasKey(x => x.Id)
+            .IsClustered();
 
          builder.HasOne(x => x.Role)
             .WithMany()

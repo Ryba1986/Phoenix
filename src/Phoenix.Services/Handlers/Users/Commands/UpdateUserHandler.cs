@@ -1,3 +1,4 @@
+using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using MediatR;
@@ -6,7 +7,6 @@ using Phoenix.Entities.Users;
 using Phoenix.Models.Users.Commands;
 using Phoenix.Services.Handlers.Base;
 using Phoenix.Services.Repositories;
-using Phoenix.Shared.Helpers;
 using Phoenix.Shared.Languages;
 using Phoenix.Shared.Results;
 
@@ -51,7 +51,7 @@ namespace Phoenix.Services.Handlers.Users.Commands
          {
             return Result.Error(Translations.User_NotExists);
          }
-         if (user.Version != request.Version)
+         if (!user.Version.SequenceEqual(request.Version))
          {
             return Result.Error(Translations.Validator_Version_Invalid);
          }
@@ -75,7 +75,6 @@ namespace Phoenix.Services.Handlers.Users.Commands
          user.Email = request.Email;
          user.RoleId = request.RoleId;
          user.IsActive = request.IsActive;
-         user.Version = RandomHelper.NewShort();
 
          await _uow.SaveChangesAsync(cancellationToken);
          return Result.Success();

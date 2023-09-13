@@ -13,6 +13,9 @@ namespace Phoenix.Validators.Roles
 
          RuleFor(x => x.AccessLevel)
             .IsInEnum().WithMessage(Translations.Validator_AccessLevel_Invalid);
+
+         RuleFor(x => x.Version)
+            .NotEmpty().WithMessage(Translations.Validator_Version_Invalid);
       }
    }
 }

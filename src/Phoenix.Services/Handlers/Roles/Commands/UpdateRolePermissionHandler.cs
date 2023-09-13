@@ -1,3 +1,4 @@
+using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using MediatR;
@@ -6,7 +7,6 @@ using Phoenix.Entities.Roles;
 using Phoenix.Models.Roles.Commands;
 using Phoenix.Services.Handlers.Base;
 using Phoenix.Services.Repositories;
-using Phoenix.Shared.Helpers;
 using Phoenix.Shared.Languages;
 using Phoenix.Shared.Results;
 
@@ -30,13 +30,12 @@ namespace Phoenix.Services.Handlers.Roles.Commands
          {
             return Result.Error(Translations.RolePermission_NotExists);
          }
-         if (rolePermission.Version != request.Version)
+         if (!rolePermission.Version.SequenceEqual(request.Version))
          {
             return Result.Error(Translations.Validator_Version_Invalid);
          }
 
          rolePermission.AccessLevel = request.AccessLevel;
-         rolePermission.Version = RandomHelper.NewShort();
 
          await _uow.SaveChangesAsync(cancellationToken);
          return Result.Success();

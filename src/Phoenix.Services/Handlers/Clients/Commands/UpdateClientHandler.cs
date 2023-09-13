@@ -1,3 +1,4 @@
+using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using MediatR;
@@ -6,7 +7,6 @@ using Phoenix.Entities.Clients;
 using Phoenix.Models.Clients.Commands;
 using Phoenix.Services.Handlers.Base;
 using Phoenix.Services.Repositories;
-using Phoenix.Shared.Helpers;
 using Phoenix.Shared.Languages;
 using Phoenix.Shared.Results;
 
@@ -63,7 +63,7 @@ namespace Phoenix.Services.Handlers.Clients.Commands
          {
             return Result.Error(Translations.Client_NotExists);
          }
-         if (client.Version != request.Version)
+         if (!client.Version.SequenceEqual(request.Version))
          {
             return Result.Error(Translations.Validator_Version_Invalid);
          }
@@ -85,7 +85,6 @@ namespace Phoenix.Services.Handlers.Clients.Commands
          client.LocationId = request.LocationId;
          client.MacAddress = request.MacAddress;
          client.IsActive = request.IsActive;
-         client.Version = RandomHelper.NewShort();
 
          await _uow.SaveChangesAsync(cancellationToken);
          return Result.Success();

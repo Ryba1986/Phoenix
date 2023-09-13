@@ -29,7 +29,8 @@ namespace Phoenix.Services.Repositories.Configurations.Clients
          builder.Property(x => x.CreateDate)
             .IsRequired();
 
-         builder.HasKey(x => x.Id);
+         builder.HasKey(x => x.Id)
+            .IsClustered();
 
          builder.HasOne(x => x.Client)
             .WithMany()

@@ -38,6 +38,9 @@ namespace Phoenix.Validators.Devices
 
          RuleFor(x => x.ReportSequence)
             .NotNull().WithMessage(Translations.Validator_ReportSequence_Invalid);
+
+         RuleFor(x => x.Version)
+            .NotEmpty().WithMessage(Translations.Validator_Version_Invalid);
       }
    }
 }

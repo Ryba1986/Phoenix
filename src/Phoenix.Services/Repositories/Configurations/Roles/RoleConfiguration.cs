@@ -22,9 +22,11 @@ namespace Phoenix.Services.Repositories.Configurations.Roles
             .IsRequired();
 
          builder.Property(x => x.Version)
-            .IsRequired();
+            .IsRequired()
+            .IsRowVersion();
 
-         builder.HasKey(x => x.Id);
+         builder.HasKey(x => x.Id)
+            .IsClustered();
       }
    }
 }

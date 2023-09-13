@@ -1,3 +1,4 @@
+using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using MediatR;
@@ -6,7 +7,6 @@ using Phoenix.Entities.Roles;
 using Phoenix.Models.Roles.Commands;
 using Phoenix.Services.Handlers.Base;
 using Phoenix.Services.Repositories;
-using Phoenix.Shared.Helpers;
 using Phoenix.Shared.Languages;
 using Phoenix.Shared.Results;
 
@@ -42,7 +42,7 @@ namespace Phoenix.Services.Handlers.Roles.Commands
          {
             return Result.Error(Translations.Role_NotExists);
          }
-         if (role.Version != request.Version)
+         if (!role.Version.SequenceEqual(request.Version))
          {
             return Result.Error(Translations.Validator_Version_Invalid);
          }
@@ -64,7 +64,6 @@ namespace Phoenix.Services.Handlers.Roles.Commands
          role.Name = request.Name;
          role.IsAdmin = request.IsAdmin;
          role.IsActive = request.IsActive;
-         role.Version = RandomHelper.NewShort();
 
          await _uow.SaveChangesAsync(cancellationToken);
          return Result.Success();

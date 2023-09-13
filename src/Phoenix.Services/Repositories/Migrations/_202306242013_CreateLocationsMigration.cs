@@ -18,7 +18,7 @@ namespace Phoenix.Services.Repositories.Migrations
                Name = table.Column<string>(name: nameof(Location.Name), maxLength: 30, defaultValue: string.Empty),
                IncludeReport = table.Column<bool>(name: nameof(Location.IncludeReport), defaultValue: default(bool)),
                IsActive = table.Column<bool>(name: nameof(Location.IsActive), defaultValue: default(bool)),
-               Version = table.Column<short>(name: nameof(Location.Version), defaultValue: default(short)),
+               Version = table.Column<byte[]>(name: nameof(Location.Version), rowVersion: true),
             },
             constraints: table =>
             {

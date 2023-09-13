@@ -1,3 +1,4 @@
+using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using MediatR;
@@ -8,7 +9,6 @@ using Phoenix.Services.Handlers.Base;
 using Phoenix.Services.Helpers;
 using Phoenix.Services.Repositories;
 using Phoenix.Services.Settings;
-using Phoenix.Shared.Helpers;
 using Phoenix.Shared.Languages;
 using Phoenix.Shared.Results;
 
@@ -51,7 +51,7 @@ namespace Phoenix.Services.Handlers.Locations.Commands
          {
             return Result.Error(Translations.Location_Active_Limit);
          }
-         if (location.Version != request.Version)
+         if (!location.Version.SequenceEqual(request.Version))
          {
             return Result.Error(Translations.Validator_Version_Invalid);
          }
@@ -74,7 +74,6 @@ namespace Phoenix.Services.Handlers.Locations.Commands
          location.Name = request.Name;
          location.IncludeReport = request.IncludeReport;
          location.IsActive = request.IsActive;
-         location.Version = RandomHelper.NewShort();
 
          await _uow.SaveChangesAsync(cancellationToken);
          return Result.Success();

@@ -38,7 +38,8 @@ namespace Phoenix.Services.Repositories.Configurations.Plcs.Meters
          builder.Property(x => x.DeviceId)
             .IsRequired();
 
-         builder.HasKey(x => new { x.Date, x.DeviceId });
+         builder.HasKey(x => new { x.Date, x.DeviceId })
+            .IsClustered();
 
          builder.HasOne(x => x.Device)
             .WithMany()

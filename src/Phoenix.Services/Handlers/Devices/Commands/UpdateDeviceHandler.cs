@@ -1,3 +1,4 @@
+using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using MediatR;
@@ -7,7 +8,6 @@ using Phoenix.Models.Devices.Commands;
 using Phoenix.Services.Handlers.Base;
 using Phoenix.Services.Repositories;
 using Phoenix.Shared.Enums.Devices;
-using Phoenix.Shared.Helpers;
 using Phoenix.Shared.Languages;
 using Phoenix.Shared.Results;
 
@@ -62,7 +62,7 @@ namespace Phoenix.Services.Handlers.Devices.Commands
          {
             return Result.Error(Translations.Device_NotExists);
          }
-         if (device.Version != request.Version)
+         if (!device.Version.SequenceEqual(request.Version))
          {
             return Result.Error(Translations.Validator_Version_Invalid);
          }
@@ -102,7 +102,6 @@ namespace Phoenix.Services.Handlers.Devices.Commands
          device.IncludeReport = request.IncludeReport;
          device.ReportSequence = request.ReportSequence;
          device.IsActive = request.IsActive;
-         device.Version = RandomHelper.NewShort();
 
          await _uow.SaveChangesAsync(cancellationToken);
          return Result.Success();

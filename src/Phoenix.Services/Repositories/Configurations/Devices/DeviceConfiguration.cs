@@ -53,9 +53,11 @@ namespace Phoenix.Services.Repositories.Configurations.Devices
             .IsRequired();
 
          builder.Property(x => x.Version)
-            .IsRequired();
+            .IsRequired()
+            .IsRowVersion();
 
-         builder.HasKey(x => x.Id);
+         builder.HasKey(x => x.Id)
+            .IsClustered();
 
          builder.HasOne(x => x.Location)
             .WithMany()

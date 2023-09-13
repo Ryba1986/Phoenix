@@ -21,6 +21,9 @@ namespace Phoenix.Validators.Users
          RuleFor(x => x.Email)
             .Matches(RegexPatterns.Email).WithMessage(Translations.Validator_Email_Invalid)
             .MaximumLength(50).WithMessage(Translations.Validator_Email_Invalid);
+
+         RuleFor(x => x.Version)
+            .NotEmpty().WithMessage(Translations.Validator_Version_Invalid);
       }
    }
 }

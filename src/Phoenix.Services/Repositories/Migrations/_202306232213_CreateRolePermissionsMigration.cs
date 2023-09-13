@@ -20,7 +20,7 @@ namespace Phoenix.Services.Repositories.Migrations
                Permission = table.Column<Permission>(name: nameof(RolePermission.Permission), defaultValue: default(byte)),
                AccessLevel = table.Column<AccessLevel>(name: nameof(RolePermission.AccessLevel), defaultValue: default(byte)),
                IsActive = table.Column<bool>(name: nameof(RolePermission.IsActive), defaultValue: default(bool)),
-               Version = table.Column<short>(name: nameof(RolePermission.Version), defaultValue: default(short)),
+               Version = table.Column<byte[]>(name: nameof(RolePermission.Version), rowVersion: true),
             },
             constraints: table =>
             {
