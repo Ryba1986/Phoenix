@@ -35,7 +35,7 @@ namespace Phoenix.Services.Repositories.Migrations
             }
          );
 
-         migrationBuilder.AddTableCompression(nameof(Kamstrup));
+         migrationBuilder.AddTableCompression(typeof(Kamstrup));
       }
 
       protected override void Down(MigrationBuilder migrationBuilder)

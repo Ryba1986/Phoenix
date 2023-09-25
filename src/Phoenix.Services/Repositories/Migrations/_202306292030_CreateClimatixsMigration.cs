@@ -56,7 +56,7 @@ namespace Phoenix.Services.Repositories.Migrations
             }
          );
 
-         migrationBuilder.AddTableCompression(nameof(Climatix));
+         migrationBuilder.AddTableCompression(typeof(Climatix));
       }
 
       protected override void Down(MigrationBuilder migrationBuilder)

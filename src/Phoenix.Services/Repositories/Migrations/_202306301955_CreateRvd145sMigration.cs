@@ -43,7 +43,7 @@ namespace Phoenix.Services.Repositories.Migrations
             }
          );
 
-         migrationBuilder.AddTableCompression(nameof(Rvd145));
+         migrationBuilder.AddTableCompression(typeof(Rvd145));
       }
 
       protected override void Down(MigrationBuilder migrationBuilder)
