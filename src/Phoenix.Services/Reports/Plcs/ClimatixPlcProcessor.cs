@@ -5,6 +5,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using OfficeOpenXml;
 using Phoenix.Models.Plcs.Climatixs.Dto;
+using Phoenix.Services.Helpers;
 using Phoenix.Services.Mappings;
 using Phoenix.Services.Reports.Base;
 using Phoenix.Services.Repositories;
@@ -13,20 +14,20 @@ using Phoenix.Shared.Extensions;
 
 namespace Phoenix.Services.Reports.Plcs
 {
-   internal sealed class ClimatixPlcProcessor : PlcProcessorBase, IPlcProcessor
+   internal sealed class ClimatixPlcProcessor : IPlcProcessor
    {
       public string TemplateSheetName { get; }
 
-      public ClimatixPlcProcessor(UnitOfWork uow) : base(uow)
+      public ClimatixPlcProcessor()
       {
-         TemplateSheetName = PlcSheet;
+         TemplateSheetName = PlcHandlerHelper.PlcSheet;
       }
 
-      public async Task FillDataAsync(ExcelWorksheets sheets, DateOnly date, ITypeProcessor typeProcessor, CancellationToken cancellationToken)
+      public async Task FillDataAsync(UnitOfWork uow, ExcelWorksheets sheets, DateOnly date, ITypeProcessor typeProcessor, CancellationToken cancellationToken)
       {
          Tuple<DateTime, DateTime> range = typeProcessor.GetRange(date);
 
-         IReadOnlyDictionary<int, ClimatixReportDto[]> plcData = await GetPlcDataAsync(_uow.Climatix, range, typeProcessor, ClimatixMappings.ToClimatixReportDto, cancellationToken);
+         IReadOnlyDictionary<int, ClimatixReportDto[]> plcData = await PlcHandlerHelper.GetPlcDataAsync(uow.Climatix, range, typeProcessor, ClimatixMappings.ToClimatixReportDto, cancellationToken);
          foreach (KeyValuePair<int, ClimatixReportDto[]> plc in plcData)
          {
             FillData(sheets[plc.Key.ToString()], plc.Value, typeProcessor);

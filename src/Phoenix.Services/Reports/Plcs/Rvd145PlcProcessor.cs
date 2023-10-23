@@ -5,6 +5,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using OfficeOpenXml;
 using Phoenix.Models.Plcs.Rvds.Dto;
+using Phoenix.Services.Helpers;
 using Phoenix.Services.Mappings;
 using Phoenix.Services.Reports.Base;
 using Phoenix.Services.Repositories;
@@ -14,20 +15,20 @@ using Phoenix.Shared.Extensions;
 
 namespace Phoenix.Services.Reports.Plcs
 {
-   internal sealed class Rvd145PlcProcessor : PlcProcessorBase, IPlcProcessor
+   internal sealed class Rvd145PlcProcessor : IPlcProcessor
    {
       public string TemplateSheetName { get; }
 
-      public Rvd145PlcProcessor(UnitOfWork uow) : base(uow)
+      public Rvd145PlcProcessor()
       {
-         TemplateSheetName = PlcSheet;
+         TemplateSheetName = PlcHandlerHelper.PlcSheet;
       }
 
-      public async Task FillDataAsync(ExcelWorksheets sheets, DateOnly date, ITypeProcessor typeProcessor, CancellationToken cancellationToken)
+      public async Task FillDataAsync(UnitOfWork uow, ExcelWorksheets sheets, DateOnly date, ITypeProcessor typeProcessor, CancellationToken cancellationToken)
       {
          Tuple<DateTime, DateTime> range = typeProcessor.GetRange(date);
 
-         IReadOnlyDictionary<int, Rvd145ReportDto[]> plcData = await GetPlcDataAsync(_uow.Rvd145, range, typeProcessor, Rvd145Mappings.ToRvd145ReportDto, cancellationToken);
+         IReadOnlyDictionary<int, Rvd145ReportDto[]> plcData = await PlcHandlerHelper.GetPlcDataAsync(uow.Rvd145, range, typeProcessor, Rvd145Mappings.ToRvd145ReportDto, cancellationToken);
          foreach (KeyValuePair<int, Rvd145ReportDto[]> plc in plcData)
          {
             FillData(sheets[plc.Key.ToString()], plc.Value, typeProcessor);

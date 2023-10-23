@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using OfficeOpenXml;
 using Phoenix.Models.Plcs.Meters.Dto;
+using Phoenix.Services.Helpers;
 using Phoenix.Services.Mappings;
 using Phoenix.Services.Reports.Base;
 using Phoenix.Services.Repositories;
@@ -13,23 +14,23 @@ using Phoenix.Shared.Extensions;
 
 namespace Phoenix.Services.Reports.Plcs
 {
-   internal sealed class KamstrupPlcProcessor : PlcProcessorBase, IPlcProcessor
+   internal sealed class KamstrupPlcProcessor : IPlcProcessor
    {
       public string TemplateSheetName { get; }
 
-      public KamstrupPlcProcessor(UnitOfWork uow) : base(uow)
+      public KamstrupPlcProcessor()
       {
-         TemplateSheetName = MeterSheet;
+         TemplateSheetName = PlcHandlerHelper.MeterSheet;
       }
 
-      public async Task FillDataAsync(ExcelWorksheets sheets, DateOnly date, ITypeProcessor typeProcessor, CancellationToken cancellationToken)
+      public async Task FillDataAsync(UnitOfWork uow, ExcelWorksheets sheets, DateOnly date, ITypeProcessor typeProcessor, CancellationToken cancellationToken)
       {
          Tuple<DateTime, DateTime> range = typeProcessor.GetRange(date);
 
-         IReadOnlyDictionary<int, KamstrupReportDto[]> plcData = await GetPlcDataAsync(_uow.Kamstrup, range, typeProcessor, KamstrupMappings.ToKamstrupReportDto, cancellationToken);
+         IReadOnlyDictionary<int, KamstrupReportDto[]> plcData = await PlcHandlerHelper.GetPlcDataAsync(uow.Kamstrup, range, typeProcessor, KamstrupMappings.ToKamstrupReportDto, cancellationToken);
          foreach (KeyValuePair<int, KamstrupReportDto[]> plc in plcData)
          {
-            KamstrupDto before = await GetBeforeDataAsync(plc.Key, range.Item1, cancellationToken);
+            KamstrupDto before = await GetBeforeDataAsync(uow, plc.Key, range.Item1, cancellationToken);
             FillData(sheets[plc.Key.ToString()], before, plc.Value, typeProcessor);
          }
       }
@@ -86,9 +87,9 @@ namespace Phoenix.Services.Reports.Plcs
          sheet.Cells[sheet.Dimension.Rows, 14].Value = plcData.Max(x => x.EnergySummaryMax) - before.EnergySummary;
       }
 
-      private async Task<KamstrupDto> GetBeforeDataAsync(int deviceId, DateTime date, CancellationToken cancellationToken)
+      private async Task<KamstrupDto> GetBeforeDataAsync(UnitOfWork uow, int deviceId, DateTime date, CancellationToken cancellationToken)
       {
-         KamstrupDto? before = await _uow.Kamstrup
+         KamstrupDto? before = await uow.Kamstrup
             .AsNoTracking()
             .Include(x => x.Device)
             .Where(x =>
@@ -104,7 +105,7 @@ namespace Phoenix.Services.Reports.Plcs
             return before;
          }
 
-         return await _uow.Kamstrup
+         return await uow.Kamstrup
             .AsNoTracking()
             .Include(x => x.Device)
             .Where(x =>

@@ -11,6 +11,7 @@ using Phoenix.Models.Devices.Dto;
 using Phoenix.Models.Reports.Queries;
 using Phoenix.Services.Extensions;
 using Phoenix.Services.Handlers.Base;
+using Phoenix.Services.Helpers;
 using Phoenix.Services.Mappings;
 using Phoenix.Services.Reports.Base;
 using Phoenix.Services.Repositories;
@@ -90,19 +91,21 @@ namespace Phoenix.Services.Handlers.Reports.Queries
 
       private async Task FillDataAsync(ExcelWorksheets sheets, IReadOnlyCollection<DeviceReportDto> devices, DateOnly date, ITypeProcessor typeProcessor, CancellationToken cancellationToken)
       {
-         IEnumerable<Task> plcTasks = devices
+         IEnumerable<PlcType> plcTypes = devices
             .Select(x => x.PlcType)
-            .Distinct()
-            .Select(x => _plcProcessors[x].FillDataAsync(sheets, date, typeProcessor, cancellationToken));
+            .Distinct();
 
-         await Task.WhenAll(plcTasks);
+         foreach (PlcType plcType in plcTypes)
+         {
+            await _plcProcessors[plcType].FillDataAsync(_uow, sheets, date, typeProcessor, cancellationToken);
+         };
       }
 
       private static void CreateResultSheets(ExcelWorksheets sheets, IReadOnlyCollection<DeviceReportDto> devices, DateOnly date, ITypeProcessor typeProcessor)
       {
          foreach (IGrouping<string, DeviceReportDto> group in devices.GroupBy(x => x.LocationName))
          {
-            ExcelWorksheet groupSheet = sheets.Copy(PlcProcessorBase.BaseSheet, group.Key);
+            ExcelWorksheet groupSheet = sheets.Copy(PlcHandlerHelper.BaseSheet, group.Key);
 
             foreach (DeviceReportDto device in group)
             {

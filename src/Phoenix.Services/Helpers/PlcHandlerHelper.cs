@@ -1,5 +1,7 @@
 using System;
+using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
@@ -8,7 +10,10 @@ using Phoenix.Entities.Clients;
 using Phoenix.Entities.Devices;
 using Phoenix.Entities.Users;
 using Phoenix.Models.Base.Commands;
+using Phoenix.Models.Base.Dto;
 using Phoenix.Models.Base.Queries;
+using Phoenix.Models.Plcs;
+using Phoenix.Services.Reports.Base;
 using Phoenix.Services.Repositories;
 using Phoenix.Shared.Extensions;
 using Phoenix.Shared.Results;
@@ -17,6 +22,10 @@ namespace Phoenix.Services.Helpers
 {
    internal static class PlcHandlerHelper
    {
+      public const string BaseSheet = "Base";
+      public const string MeterSheet = "Meter";
+      public const string PlcSheet = "Plc";
+
       public static async Task<Result> AddPlcAsync<T>(UnitOfWork uow, CreatePlcCommandBase request, T plc, DateTime serverDate, CancellationToken cancellationToken) where T : PlcBase
       {
          Client? client = await uow.Client
@@ -70,6 +79,27 @@ namespace Phoenix.Services.Helpers
                x.Date < dateTime.AddDays(1) &&
                x.DeviceId == request.DeviceId
             );
+      }
+
+      public static async Task<IReadOnlyDictionary<int, R[]>> GetPlcDataAsync<S, R>(DbSet<S> plc, Tuple<DateTime, DateTime> range, ITypeProcessor typeProcessor, Expression<Func<IGrouping<PlcGroupBy, S>, R>> selector, CancellationToken cancellationToken) where S : PlcBase where R : PlcReportDtoBase
+      {
+         IReadOnlyCollection<R> result = await plc
+            .AsNoTracking()
+            .Include(x => x.Device)
+            .ThenInclude(x => x.Location)
+            .Where(x =>
+               x.Date >= range.Item1 &&
+               x.Date < range.Item2 &&
+               x.Device.IncludeReport &&
+               x.Device.Location.IncludeReport
+            )
+            .GroupBy(typeProcessor.GetPlcGroup<S>())
+            .Select(selector)
+            .ToArrayAsync(cancellationToken);
+
+         return result
+            .GroupBy(x => x.DeviceId)
+            .ToDictionary(x => x.Key, x => x.OrderBy(x => x.Date).ToArray());
       }
 
       public static IQueryable<T> GetPlcLastQuery<T>(DbSet<T> plcs, GetPlcLastQueryBase request) where T : PlcBase

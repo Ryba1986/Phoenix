@@ -2,6 +2,7 @@ using System;
 using System.Threading;
 using System.Threading.Tasks;
 using OfficeOpenXml;
+using Phoenix.Services.Repositories;
 
 namespace Phoenix.Services.Reports.Base
 {
@@ -9,6 +10,6 @@ namespace Phoenix.Services.Reports.Base
    {
       string TemplateSheetName { get; }
 
-      Task FillDataAsync(ExcelWorksheets sheets, DateOnly date, ITypeProcessor typeProcessor, CancellationToken cancellationToken);
+      Task FillDataAsync(UnitOfWork uow, ExcelWorksheets sheets, DateOnly date, ITypeProcessor typeProcessor, CancellationToken cancellationToken);
    }
 }
