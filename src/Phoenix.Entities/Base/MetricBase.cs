@@ -1,15 +1,13 @@
-using System;
-
 namespace Phoenix.Entities.Base
 {
    public abstract class MetricBase : EntityBase
    {
       public bool IsActive { get; set; }
-      public byte[] Version { get; private set; }
+      public short Version { get; private set; }
 
-      public MetricBase()
+      public void Update(short value)
       {
-         Version = Array.Empty<byte>();
+         Version = value;
       }
    }
 }

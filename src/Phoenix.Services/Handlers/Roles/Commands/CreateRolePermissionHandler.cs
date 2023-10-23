@@ -2,7 +2,6 @@ using System.Threading;
 using System.Threading.Tasks;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
-using Phoenix.Entities.Roles;
 using Phoenix.Models.Roles.Commands;
 using Phoenix.Services.Handlers.Base;
 using Phoenix.Services.Repositories;
@@ -19,7 +18,7 @@ namespace Phoenix.Services.Handlers.Roles.Commands
 
       public async Task<Result> Handle(CreateRolePermissionCommand request, CancellationToken cancellationToken)
       {
-         if (!await IsActiveUserExistsAsync(request.CreatedById, cancellationToken))
+         if (!await IsActiveUserAsync(request.CreatedById, cancellationToken))
          {
             return Result.Error(Translations.User_Active_NotExists);
          }
@@ -45,15 +44,13 @@ namespace Phoenix.Services.Handlers.Roles.Commands
             return Result.Error(Translations.RolePermission_Exists);
          }
 
-         RolePermission newRolePermission = new()
+         _uow.RolePermission.Add(new()
          {
             RoleId = request.RoleId,
             Permission = request.Permission,
             AccessLevel = request.AccessLevel,
             IsActive = true,
-         };
-
-         _uow.RolePermission.Add(newRolePermission);
+         });
 
          await _uow.SaveChangesAsync(cancellationToken);
          return Result.Success();

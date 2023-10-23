@@ -1,13 +1,15 @@
-using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using Phoenix.Entities.Roles;
+using Phoenix.Services.Repositories.Configurations.Base;
 
 namespace Phoenix.Services.Repositories.Configurations.Roles
 {
-   internal sealed class RolePermissionConfiguration : IEntityTypeConfiguration<RolePermission>
+   internal sealed class RolePermissionConfiguration : MetricConfigurationBase<RolePermission>
    {
-      public void Configure(EntityTypeBuilder<RolePermission> builder)
+      public override void Configure(EntityTypeBuilder<RolePermission> builder)
       {
+         base.Configure(builder);
+
          builder.Property(x => x.RoleId)
             .IsRequired();
 
@@ -16,19 +18,6 @@ namespace Phoenix.Services.Repositories.Configurations.Roles
 
          builder.Property(x => x.AccessLevel)
             .IsRequired();
-
-         builder.Property(x => x.Id)
-            .IsRequired();
-
-         builder.Property(x => x.IsActive)
-            .IsRequired();
-
-         builder.Property(x => x.Version)
-            .IsRequired()
-            .IsRowVersion();
-
-         builder.HasKey(x => x.Id)
-            .IsClustered();
 
          builder.HasOne(x => x.Role)
             .WithMany(x => x.Permissions)

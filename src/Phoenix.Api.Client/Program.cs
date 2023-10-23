@@ -1,9 +1,6 @@
-﻿using System.Threading.Tasks;
-using Autofac;
-using Autofac.Extensions.DependencyInjection;
-using Microsoft.AspNetCore.Hosting;
+using System.Threading.Tasks;
 using Microsoft.Extensions.Hosting;
-using Phoenix.Services.Configuration;
+using Phoenix.Api.Shared.Configurations;
 
 namespace Phoenix.Api.Client
 {
@@ -20,21 +17,10 @@ namespace Phoenix.Api.Client
       {
          return Host
             .CreateDefaultBuilder(args)
-            .UseServiceProviderFactory(new AutofacServiceProviderFactory())
+            .ConfigureAutofacProvider()
             .UseSystemd()
-            .ConfigureWebHostDefaults(webBuilder =>
-            {
-               webBuilder
-                  .UseStartup<Startup>()
-                  .UseKestrel(options =>
-                  {
-                     options.AddServerHeader = false;
-                  });
-            })
-            .ConfigureContainer<ContainerBuilder>((context, builder) =>
-            {
-               builder.RegisterModule(new PhoenixModule(context.Configuration));
-            });
+            .ConfigureHostDefaults<Startup>()
+            .ConfigurePhoenixModule();
       }
    }
 }

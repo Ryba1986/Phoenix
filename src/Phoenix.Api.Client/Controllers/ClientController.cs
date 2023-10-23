@@ -2,7 +2,7 @@ using System.Threading.Tasks;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Phoenix.Api.Client.Controllers.Base;
+using Phoenix.Api.Shared.Controllers;
 using Phoenix.Models.Clients.Commands;
 using Phoenix.Models.Clients.Queries;
 

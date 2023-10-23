@@ -36,7 +36,11 @@ namespace Phoenix.Client.Workers
                isInfoUpdated = await UpdateInfoAsync(cancellationToken);
             }
 
-            await Task.Delay(TimeSpan.FromMinutes(1), cancellationToken);
+            TimeSpan delay = isAuthorized
+               ? TimeSpan.FromMinutes(1)
+               : TimeSpan.FromSeconds(10);
+
+            await Task.Delay(delay, cancellationToken);
          }
       }
 

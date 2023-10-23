@@ -6,3 +6,9 @@ end_of_line = lf
 indent_style = space
 indent_size = 3
 insert_final_newline = true
+trim_trailing_whitespace = true
+
+[*.cs]
+dotnet_diagnostic.IDE0290.severity = none
+dotnet_diagnostic.IDE0301.severity = none
+dotnet_sort_system_directives_first = true

@@ -1,9 +1,8 @@
 using System;
 using System.Linq.Expressions;
 using Phoenix.Entities.Base;
-using Phoenix.Models.Utilities;
+using Phoenix.Models.Plcs;
 using Phoenix.Services.Reports.Base;
-using Phoenix.Shared.Enums.Reports;
 using Phoenix.Shared.Languages;
 
 namespace Phoenix.Services.Reports.Types
@@ -11,12 +10,10 @@ namespace Phoenix.Services.Reports.Types
    internal sealed class DayTypeProcessor : TypeProcessorBase, ITypeProcessor
    {
       public ushort RemoveTemplateRowCount { get; }
-      public ReportType Type { get; }
 
       public DayTypeProcessor()
       {
          RemoveTemplateRowCount = 342;
-         Type = ReportType.Day;
       }
 
       public int GetDatePart(DateTime date)
@@ -43,20 +40,16 @@ namespace Phoenix.Services.Reports.Types
       {
          return x => new()
          {
+            DeviceId = x.Device.Id,
+            DeviceType = x.Device.DeviceType,
             DatePart = x.Date.Hour,
-            DeviceId = x.DeviceId,
          };
       }
 
-      public DateRange GetRange(DateOnly date)
+      public Tuple<DateTime, DateTime> GetRange(DateOnly date)
       {
          DateTime dateTime = date.ToDateTime(TimeOnly.MinValue);
-
-         return new()
-         {
-            Start = dateTime,
-            End = dateTime.AddDays(1),
-         };
+         return new(dateTime, dateTime.AddDays(1));
       }
    }
 }

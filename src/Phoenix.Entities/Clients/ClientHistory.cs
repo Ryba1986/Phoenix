@@ -12,11 +12,15 @@ namespace Phoenix.Entities.Clients
       public Location? Location { get; init; }
 
       public string MacAddress { get; init; }
+      public string Hostname { get; init; }
+      public string ClientVersion { get; init; }
 
       public ClientHistory()
       {
          Client = null!;
          MacAddress = string.Empty;
+         Hostname = string.Empty;
+         ClientVersion = string.Empty;
       }
    }
 }

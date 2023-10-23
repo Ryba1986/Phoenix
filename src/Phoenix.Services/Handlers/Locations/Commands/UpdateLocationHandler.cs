@@ -1,4 +1,3 @@
-using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using MediatR;
@@ -25,7 +24,7 @@ namespace Phoenix.Services.Handlers.Locations.Commands
 
       public async Task<Result> Handle(UpdateLocationCommand request, CancellationToken cancellationToken)
       {
-         if (!await IsActiveUserExistsAsync(request.ModifiedById, cancellationToken))
+         if (!await IsActiveUserAsync(request.ModifiedById, cancellationToken))
          {
             return Result.Error(Translations.User_Active_NotExists);
          }
@@ -51,7 +50,7 @@ namespace Phoenix.Services.Handlers.Locations.Commands
          {
             return Result.Error(Translations.Location_Active_Limit);
          }
-         if (!location.Version.SequenceEqual(request.Version))
+         if (location.Version != request.Version)
          {
             return Result.Error(Translations.Validator_Version_Invalid);
          }
@@ -68,7 +67,7 @@ namespace Phoenix.Services.Handlers.Locations.Commands
             IncludeReport = request.IncludeReport,
             IsActive = request.IsActive,
             CreatedById = request.ModifiedById,
-            CreateDate = await GetServerDateAsync(),
+            CreateDate = GetServerDate(),
          });
 
          location.Name = request.Name;

@@ -30,12 +30,9 @@ namespace Phoenix.Services.Handlers.Clients.Queries
                x.IsActive
             , cancellationToken);
 
-         if (client is null)
-         {
-            return new();
-         }
-
-         return JwtHandlerHelper.CreateClient(client.Id, _settings);
+         return client is null
+            ? new()
+            : JwtHandlerHelper.CreateClient(client.Id, _settings);
       }
    }
 }

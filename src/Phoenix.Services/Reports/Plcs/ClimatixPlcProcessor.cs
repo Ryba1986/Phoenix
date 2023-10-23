@@ -3,11 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
-using AutoMapper;
 using OfficeOpenXml;
-using Phoenix.Entities.Plcs.Climatixs;
-using Phoenix.Models.Devices.Dto;
 using Phoenix.Models.Plcs.Climatixs.Dto;
+using Phoenix.Services.Mappings;
 using Phoenix.Services.Reports.Base;
 using Phoenix.Services.Repositories;
 using Phoenix.Shared.Enums.Devices;
@@ -17,31 +15,26 @@ namespace Phoenix.Services.Reports.Plcs
 {
    internal sealed class ClimatixPlcProcessor : PlcProcessorBase, IPlcProcessor
    {
-      public ClimatixPlcProcessor(UnitOfWork uow, IMapper mapper) : base(uow, mapper)
+      public string TemplateSheetName { get; }
+
+      public ClimatixPlcProcessor(UnitOfWork uow) : base(uow)
       {
+         TemplateSheetName = PlcSheet;
       }
 
-      public async Task FillDataAsync(ExcelWorksheets sheets, DateOnly date, IReadOnlyCollection<DeviceReportDto> devices, ITypeProcessor typeProcessor, CancellationToken cancellationToken)
+      public async Task FillDataAsync(ExcelWorksheets sheets, DateOnly date, ITypeProcessor typeProcessor, CancellationToken cancellationToken)
       {
-         IReadOnlyDictionary<int, ClimatixReportDto[]> plcData = await GetPlcDataAsync<Climatix, ClimatixReportDto>(_uow.Climatix, date, typeProcessor, cancellationToken);
-         foreach (DeviceReportDto device in devices)
-         {
-            plcData.TryGetValue(device.Id, out ClimatixReportDto[]? deviceData);
+         Tuple<DateTime, DateTime> range = typeProcessor.GetRange(date);
 
-            ExcelWorksheet sheet = sheets.Copy(PlcSheet, device.Id.ToString());
-            FillData(sheet, device, deviceData, typeProcessor);
+         IReadOnlyDictionary<int, ClimatixReportDto[]> plcData = await GetPlcDataAsync(_uow.Climatix, range, typeProcessor, ClimatixMappings.ToClimatixReportDto, cancellationToken);
+         foreach (KeyValuePair<int, ClimatixReportDto[]> plc in plcData)
+         {
+            FillData(sheets[plc.Key.ToString()], plc.Value, typeProcessor);
          }
       }
 
-      private static void FillData(ExcelWorksheet sheet, DeviceReportDto device, IReadOnlyCollection<ClimatixReportDto>? plcData, ITypeProcessor typeProcessor)
+      private static void FillData(ExcelWorksheet sheet, IReadOnlyCollection<ClimatixReportDto> plcData, ITypeProcessor typeProcessor)
       {
-         sheet.Cells[typeProcessor.DeviceNameRow, 1].Value = device.Name;
-
-         if (plcData is null)
-         {
-            return;
-         }
-
          foreach (ClimatixReportDto climatix in plcData)
          {
             int rowIndex = typeProcessor.StartingRow + typeProcessor.GetDatePart(climatix.Date);
@@ -70,7 +63,7 @@ namespace Phoenix.Services.Reports.Plcs
             sheet.Cells[rowIndex, 17].Value = climatix.Ch1LowOutletPresureMin;
             sheet.Cells[rowIndex, 18].Value = climatix.Ch1LowOutletPresureMax;
 
-            if (device.DeviceType == DeviceType.DoubleHeating)
+            if (climatix.DeviceType == DeviceType.DoubleHeating)
             {
                sheet.Cells[rowIndex, 19].Value = climatix.Ch2LowInletTempAvg.Round();
                sheet.Cells[rowIndex, 20].Value = climatix.Ch2LowInletTempMin;
@@ -85,7 +78,7 @@ namespace Phoenix.Services.Reports.Plcs
                sheet.Cells[rowIndex, 27].Value = climatix.Ch2LowOutletPresureMax;
             }
 
-            if (device.DeviceType == DeviceType.HeatingDomestic)
+            if (climatix.DeviceType == DeviceType.HeatingDomestic)
             {
                sheet.Cells[rowIndex, 28].Value = climatix.DhwTempAvg.Round();
                sheet.Cells[rowIndex, 29].Value = climatix.DhwTempMin;
@@ -117,7 +110,9 @@ namespace Phoenix.Services.Reports.Plcs
          sheet.Cells[sheet.Dimension.Rows, 17].Value = plcData.Min(x => x.Ch1LowOutletPresureMin);
          sheet.Cells[sheet.Dimension.Rows, 18].Value = plcData.Max(x => x.Ch1LowOutletPresureMax);
 
-         if (device.DeviceType == DeviceType.DoubleHeating)
+         DeviceType deviceType = plcData.First().DeviceType;
+
+         if (deviceType == DeviceType.DoubleHeating)
          {
             sheet.Cells[sheet.Dimension.Rows, 19].Value = plcData.Average(x => x.Ch2LowInletTempAvg).Round();
             sheet.Cells[sheet.Dimension.Rows, 20].Value = plcData.Min(x => x.Ch2LowInletTempMin);
@@ -132,7 +127,7 @@ namespace Phoenix.Services.Reports.Plcs
             sheet.Cells[sheet.Dimension.Rows, 27].Value = plcData.Max(x => x.Ch2LowOutletPresureMax);
          }
 
-         if (device.DeviceType == DeviceType.HeatingDomestic)
+         if (deviceType == DeviceType.HeatingDomestic)
          {
             sheet.Cells[sheet.Dimension.Rows, 28].Value = plcData.Average(x => x.DhwTempAvg).Round();
             sheet.Cells[sheet.Dimension.Rows, 29].Value = plcData.Min(x => x.DhwTempMin);

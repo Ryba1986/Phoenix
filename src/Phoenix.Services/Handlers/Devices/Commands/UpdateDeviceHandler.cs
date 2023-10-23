@@ -1,4 +1,3 @@
-using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using MediatR;
@@ -30,7 +29,7 @@ namespace Phoenix.Services.Handlers.Devices.Commands
             return Result.Error(Translations.Device_DeviceType_Invalid);
          }
 
-         if (!await IsActiveUserExistsAsync(request.ModifiedById, cancellationToken))
+         if (!await IsActiveUserAsync(request.ModifiedById, cancellationToken))
          {
             return Result.Error(Translations.User_Active_NotExists);
          }
@@ -62,11 +61,11 @@ namespace Phoenix.Services.Handlers.Devices.Commands
          {
             return Result.Error(Translations.Device_NotExists);
          }
-         if (!device.Version.SequenceEqual(request.Version))
+         if (device.Version != request.Version)
          {
             return Result.Error(Translations.Validator_Version_Invalid);
          }
-         if (device.LocationId == request.LocationId && device.Name == request.Name && device.DeviceType == request.DeviceType && device.PlcType == request.PlcType && device.ModbusId == request.ModbusId && device.BoundRate == request.BoundRate && device.DataBits == request.DataBits && device.Parity == request.Parity && device.StopBits == request.StopBits && device.IncludeReport == request.IncludeReport && device.ReportSequence == request.ReportSequence && device.IsActive == request.IsActive)
+         if (device.LocationId == request.LocationId && device.Name == request.Name && device.DeviceType == request.DeviceType && device.PlcType == request.PlcType && device.ModbusId == request.ModbusId && device.BoundRate == request.BoundRate && device.DataBits == request.DataBits && device.Parity == request.Parity && device.StopBits == request.StopBits && device.ReportSequence == request.ReportSequence && device.IncludeReport == request.IncludeReport && device.IsActive == request.IsActive)
          {
             return Result.Success();
          }
@@ -83,11 +82,11 @@ namespace Phoenix.Services.Handlers.Devices.Commands
             DataBits = device.DataBits != request.DataBits ? request.DataBits : null,
             Parity = device.Parity != request.Parity ? request.Parity : null,
             StopBits = device.StopBits != request.StopBits ? request.StopBits : null,
-            IncludeReport = request.IncludeReport,
             ReportSequence = device.ReportSequence != request.ReportSequence ? request.ReportSequence : null,
+            IncludeReport = request.IncludeReport,
             IsActive = request.IsActive,
             CreatedById = request.ModifiedById,
-            CreateDate = await GetServerDateAsync(),
+            CreateDate = GetServerDate(),
          });
 
          device.LocationId = request.LocationId;
@@ -99,8 +98,8 @@ namespace Phoenix.Services.Handlers.Devices.Commands
          device.DataBits = request.DataBits;
          device.Parity = request.Parity;
          device.StopBits = request.StopBits;
-         device.IncludeReport = request.IncludeReport;
          device.ReportSequence = request.ReportSequence;
+         device.IncludeReport = request.IncludeReport;
          device.IsActive = request.IsActive;
 
          await _uow.SaveChangesAsync(cancellationToken);

@@ -8,10 +8,7 @@ namespace Phoenix.Shared.Extensions
    {
       public static string CreatePassword(this string value)
       {
-         ReadOnlySpan<byte> byteArray = Encoding.UTF8.GetBytes(value ?? string.Empty);
-         ReadOnlySpan<byte> hash = SHA256.HashData(byteArray);
-
-         return Convert.ToHexString(hash);
+         return Convert.ToHexString(SHA256.HashData(Encoding.UTF8.GetBytes(value ?? string.Empty)));
       }
    }
 }

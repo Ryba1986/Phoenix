@@ -1,13 +1,16 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using Phoenix.Entities.Clients;
+using Phoenix.Services.Repositories.Configurations.Base;
 
 namespace Phoenix.Services.Repositories.Configurations.Clients
 {
-   internal sealed class ClientConfiguration : IEntityTypeConfiguration<Client>
+   internal sealed class ClientConfiguration : MetricConfigurationBase<Client>
    {
-      public void Configure(EntityTypeBuilder<Client> builder)
+      public override void Configure(EntityTypeBuilder<Client> builder)
       {
+         base.Configure(builder);
+
          builder.Property(x => x.LocationId)
             .IsRequired();
 
@@ -23,19 +26,6 @@ namespace Phoenix.Services.Repositories.Configurations.Clients
          builder.Property(x => x.ClientVersion)
             .HasMaxLength(20)
             .IsRequired();
-
-         builder.Property(x => x.Id)
-            .IsRequired();
-
-         builder.Property(x => x.IsActive)
-            .IsRequired();
-
-         builder.Property(x => x.Version)
-            .IsRequired()
-            .IsRowVersion();
-
-         builder.HasKey(x => x.Id)
-            .IsClustered();
 
          builder.HasOne(x => x.Location)
             .WithMany()

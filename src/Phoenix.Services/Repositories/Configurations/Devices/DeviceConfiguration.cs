@@ -1,13 +1,15 @@
-using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using Phoenix.Entities.Devices;
+using Phoenix.Services.Repositories.Configurations.Base;
 
 namespace Phoenix.Services.Repositories.Configurations.Devices
 {
-   internal sealed class DeviceConfiguration : IEntityTypeConfiguration<Device>
+   internal sealed class DeviceConfiguration : MetricConfigurationBase<Device>
    {
-      public void Configure(EntityTypeBuilder<Device> builder)
+      public override void Configure(EntityTypeBuilder<Device> builder)
       {
+         base.Configure(builder);
+
          builder.Property(x => x.LocationId)
             .IsRequired();
 
@@ -40,24 +42,11 @@ namespace Phoenix.Services.Repositories.Configurations.Devices
          .HasMaxLength(30)
          .IsRequired();
 
-         builder.Property(x => x.IncludeReport)
-            .IsRequired();
-
          builder.Property(x => x.ReportSequence)
             .IsRequired();
 
-         builder.Property(x => x.Id)
+         builder.Property(x => x.IncludeReport)
             .IsRequired();
-
-         builder.Property(x => x.IsActive)
-            .IsRequired();
-
-         builder.Property(x => x.Version)
-            .IsRequired()
-            .IsRowVersion();
-
-         builder.HasKey(x => x.Id)
-            .IsClustered();
 
          builder.HasOne(x => x.Location)
             .WithMany()

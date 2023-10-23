@@ -2,21 +2,20 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
-using AutoMapper;
-using AutoMapper.QueryableExtensions;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 using Phoenix.Entities.Devices;
 using Phoenix.Models.Devices.Dto;
 using Phoenix.Models.Devices.Queries;
 using Phoenix.Services.Handlers.Base;
+using Phoenix.Services.Mappings;
 using Phoenix.Services.Repositories;
 
 namespace Phoenix.Services.Handlers.Devices.Queries
 {
-   internal sealed class GetDevicesByClientHandler : QueryHandlerBase, IRequestHandler<GetDevicesByClientQuery, IReadOnlyCollection<DeviceDto>>
+   internal sealed class GetDevicesByClientHandler : HandlerBase, IRequestHandler<GetDevicesByClientQuery, IReadOnlyCollection<DeviceDto>>
    {
-      public GetDevicesByClientHandler(UnitOfWork uow, IMapper mapper) : base(uow, mapper)
+      public GetDevicesByClientHandler(UnitOfWork uow) : base(uow)
       {
       }
 
@@ -35,7 +34,7 @@ namespace Phoenix.Services.Handlers.Devices.Queries
 
          return await query
             .AsNoTracking()
-            .ProjectTo<DeviceDto>(_mapper.ConfigurationProvider)
+            .Select(x => x.ToDeviceDto())
             .ToArrayAsync(cancellationToken);
       }
    }

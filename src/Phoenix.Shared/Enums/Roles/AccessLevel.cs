@@ -9,9 +9,9 @@ namespace Phoenix.Shared.Enums.Roles
       None = 0,
 
       [Localization(nameof(Translations.RoleAccessLevel_Read))]
-      Read = 10,
+      Read = 50,
 
       [Localization(nameof(Translations.RoleAccessLevel_Write))]
-      Write = 20,
+      Write = 100,
    }
 }

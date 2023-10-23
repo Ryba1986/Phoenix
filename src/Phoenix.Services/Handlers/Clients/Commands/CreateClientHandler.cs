@@ -19,7 +19,7 @@ namespace Phoenix.Services.Handlers.Clients.Commands
 
       public async Task<Result> Handle(CreateClientCommand request, CancellationToken cancellationToken)
       {
-         if (!await IsActiveUserExistsAsync(request.CreatedById, cancellationToken))
+         if (!await IsActiveUserAsync(request.CreatedById, cancellationToken))
          {
             return Result.Error(Translations.User_Active_NotExists);
          }
@@ -42,15 +42,6 @@ namespace Phoenix.Services.Handlers.Clients.Commands
             return Result.Error(Translations.Client_Exists);
          }
 
-         bool clientLocationExists = await _uow.Client
-            .AsNoTracking()
-            .AnyAsync(x => x.LocationId == request.LocationId, cancellationToken);
-
-         if (clientLocationExists)
-         {
-            return Result.Error(Translations.Client_Exists);
-         }
-
          Client newClient = new()
          {
             LocationId = request.LocationId,
@@ -66,7 +57,7 @@ namespace Phoenix.Services.Handlers.Clients.Commands
             MacAddress = request.MacAddress,
             IsActive = request.IsActive,
             CreatedById = request.CreatedById,
-            CreateDate = await GetServerDateAsync(),
+            CreateDate = GetServerDate(),
          });
 
          await _uow.SaveChangesAsync(cancellationToken);

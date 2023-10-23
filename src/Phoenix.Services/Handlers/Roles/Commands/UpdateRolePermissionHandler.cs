@@ -1,4 +1,3 @@
-using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using MediatR;
@@ -20,7 +19,7 @@ namespace Phoenix.Services.Handlers.Roles.Commands
 
       public async Task<Result> Handle(UpdateRolePermissionCommand request, CancellationToken cancellationToken)
       {
-         if (!await IsActiveUserExistsAsync(request.ModifiedById, cancellationToken))
+         if (!await IsActiveUserAsync(request.ModifiedById, cancellationToken))
          {
             return Result.Error(Translations.User_Active_NotExists);
          }
@@ -30,7 +29,7 @@ namespace Phoenix.Services.Handlers.Roles.Commands
          {
             return Result.Error(Translations.RolePermission_NotExists);
          }
-         if (!rolePermission.Version.SequenceEqual(request.Version))
+         if (rolePermission.Version != request.Version)
          {
             return Result.Error(Translations.Validator_Version_Invalid);
          }

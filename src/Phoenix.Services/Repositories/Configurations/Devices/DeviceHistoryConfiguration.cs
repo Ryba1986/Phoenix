@@ -1,13 +1,15 @@
-using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using Phoenix.Entities.Devices;
+using Phoenix.Services.Repositories.Configurations.Base;
 
 namespace Phoenix.Services.Repositories.Configurations.Devices
 {
-   internal sealed class DeviceHistoryConfiguration : IEntityTypeConfiguration<DeviceHistory>
+   internal sealed class DeviceHistoryConfiguration : HistoryConfigurationBase<DeviceHistory>
    {
-      public void Configure(EntityTypeBuilder<DeviceHistory> builder)
+      public override void Configure(EntityTypeBuilder<DeviceHistory> builder)
       {
+         base.Configure(builder);
+
          builder.Property(x => x.DeviceId)
             .IsRequired();
 
@@ -31,25 +33,14 @@ namespace Phoenix.Services.Repositories.Configurations.Devices
 
          builder.Property(x => x.StopBits);
 
-         builder.Property(x => x.IncludeReport)
+         builder.Property(x => x.SerialNumber)
+            .HasMaxLength(20)
             .IsRequired();
 
          builder.Property(x => x.ReportSequence);
 
-         builder.Property(x => x.Id)
+         builder.Property(x => x.IncludeReport)
             .IsRequired();
-
-         builder.Property(x => x.IsActive)
-           .IsRequired();
-
-         builder.Property(x => x.CreatedById)
-            .IsRequired();
-
-         builder.Property(x => x.CreateDate)
-            .IsRequired();
-
-         builder.HasKey(x => x.Id)
-            .IsClustered();
 
          builder.HasOne(x => x.Device)
             .WithMany()
@@ -58,10 +49,6 @@ namespace Phoenix.Services.Repositories.Configurations.Devices
          builder.HasOne(x => x.Location)
             .WithMany()
             .HasForeignKey(x => x.LocationId);
-
-         builder.HasOne(x => x.CreatedBy)
-            .WithMany()
-            .HasForeignKey(x => x.CreatedById);
       }
    }
 }

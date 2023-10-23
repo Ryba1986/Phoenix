@@ -19,13 +19,12 @@ namespace Phoenix.Services.Helpers
 
          if (user.Role.IsAdmin)
          {
-            return JwtHandlerHelper.CreateWeb(
-               user,
-               Enum
-                  .GetValues<Permission>()
-                  .Select(x => new KeyValuePair<Permission, AccessLevel>(x, AccessLevel.Write)),
-               settings
-            );
+            IReadOnlyCollection<KeyValuePair<Permission, AccessLevel>> permissionDictionary = Enum
+               .GetValues<Permission>()
+               .Select(x => new KeyValuePair<Permission, AccessLevel>(x, AccessLevel.Write))
+               .ToArray();
+
+            return JwtHandlerHelper.CreateWeb(user, permissionDictionary, settings);
          }
 
          if (user.Role.Permissions.Count == 0)
@@ -33,13 +32,12 @@ namespace Phoenix.Services.Helpers
             return new();
          }
 
-         return JwtHandlerHelper.CreateWeb(
-            user,
-            user.Role.Permissions
-               .Where(x => x.IsActive)
-               .Select(x => new KeyValuePair<Permission, AccessLevel>(x.Permission, x.AccessLevel)),
-            settings
-         );
+         IReadOnlyCollection<KeyValuePair<Permission, AccessLevel>> permissions = user.Role.Permissions
+            .Where(x => x.IsActive)
+            .Select(x => new KeyValuePair<Permission, AccessLevel>(x.Permission, x.AccessLevel))
+            .ToArray();
+
+         return JwtHandlerHelper.CreateWeb(user, permissions, settings);
       }
    }
 }

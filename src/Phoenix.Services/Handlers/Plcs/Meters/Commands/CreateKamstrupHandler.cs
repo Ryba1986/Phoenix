@@ -19,15 +19,15 @@ namespace Phoenix.Services.Handlers.Plcs.Meters.Commands
 
       public async Task<Result> Handle(CreateKamstrupCommand request, CancellationToken cancellationToken)
       {
-         if (await IsPlcExistAsync(_uow.Kamstrup, request, cancellationToken))
+         if (await PlcHandlerHelper.IsPlcExistAsync(_uow.Kamstrup, request, cancellationToken))
          {
             return Result.Success();
          }
 
          Kamstrup newKamstrup = new()
          {
-            DeviceId = request.DeviceId,
             Date = request.Date.RoundToSecond(),
+            DeviceId = request.DeviceId,
 
             InletTemp = request.InletTemp,
             OutletTemp = request.OutletTemp,
@@ -39,7 +39,7 @@ namespace Phoenix.Services.Handlers.Plcs.Meters.Commands
             ErrorCode = request.ErrorCode,
          };
 
-         return await PlcHandlerHelper.AddPlcAsync(_uow, request, newKamstrup, cancellationToken);
+         return await PlcHandlerHelper.AddPlcAsync(_uow, request, newKamstrup, GetServerDate(), cancellationToken);
       }
    }
 }

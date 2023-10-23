@@ -1,4 +1,4 @@
-﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+<Project Sdk="Microsoft.NET.Sdk.Web">
 
    <PropertyGroup>
       <TargetFramework>net8.0</TargetFramework>
@@ -24,22 +24,13 @@
       <PublishReadyToRun>false</PublishReadyToRun>
       <PublishSingleFile>true</PublishSingleFile>
       <PublishTrimmed>false</PublishTrimmed>
-      <RuntimeIdentifier>linux-x64</RuntimeIdentifier>
       <SelfContained>true</SelfContained>
       <TrimMode>partial</TrimMode>
       <TrimmerRemoveSymbols>true</TrimmerRemoveSymbols>
    </PropertyGroup>
 
    <ItemGroup>
-      <PackageReference Include="Autofac.Extensions.DependencyInjection" Version="8.0.0" />
-      <PackageReference Include="FluentValidation.AspNetCore" Version="11.3.0" />
-      <PackageReference Include="FluentValidation.DependencyInjectionExtensions" Version="11.7.1" />
-      <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="8.0.0-rc.1.23421.29" />
-      <PackageReference Include="Microsoft.Extensions.Hosting.Systemd" Version="8.0.0-rc.1.23419.4" />
-   </ItemGroup>
-
-   <ItemGroup>
-      <ProjectReference Include="..\Phoenix.Services\Phoenix.Services.csproj" />
+      <ProjectReference Include="..\Phoenix.Api.Shared\Phoenix.Api.Shared.csproj" />
       <ProjectReference Include="..\Phoenix.Validators\Phoenix.Validators.csproj" />
    </ItemGroup>
 

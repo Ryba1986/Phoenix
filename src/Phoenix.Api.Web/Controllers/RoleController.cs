@@ -1,8 +1,8 @@
 using System.Threading.Tasks;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
+using Phoenix.Api.Shared.Controllers;
 using Phoenix.Api.Web.Attributes;
-using Phoenix.Api.Web.Controllers.Base;
 using Phoenix.Models.Roles.Commands;
 using Phoenix.Models.Roles.Queries;
 using Phoenix.Shared.Enums.Roles;
@@ -17,9 +17,9 @@ namespace Phoenix.Api.Web.Controllers
 
       [Authorization(Permission.Role, AccessLevel.Read)]
       [HttpGet]
-      public async Task<IActionResult> GetRoles()
+      public async Task<IActionResult> GetRoles([FromQuery] GetRolesQuery request)
       {
-         return await HandleAsync(new GetRolesQuery());
+         return await HandleAsync(request);
       }
 
       [Authorization(Permission.Role, AccessLevel.Read)]

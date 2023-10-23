@@ -19,7 +19,7 @@ namespace Phoenix.Shared.Extensions
 
       public static Claim CreateIdClaim(this int value)
       {
-         return new(_id, value.ToString(), ClaimValueTypes.Integer32);
+         return new(_id, value.ToString(), ClaimValueTypes.Integer);
       }
 
       public static Claim CreateNameClaim(this string value)

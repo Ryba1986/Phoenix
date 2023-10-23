@@ -29,10 +29,8 @@ namespace Phoenix.Shared.Helpers
             return string.Empty;
          }
 
-         string content = await File.ReadAllTextAsync(filePath, cancellationToken);
-         content = content.Replace(".onion", string.Empty);
-
-         return string.Concat(content.Where(char.IsLetterOrDigit));
+         string fileContent = await File.ReadAllTextAsync(filePath, cancellationToken);
+         return new(fileContent.TakeWhile(char.IsLetterOrDigit).ToArray());
       }
    }
 }

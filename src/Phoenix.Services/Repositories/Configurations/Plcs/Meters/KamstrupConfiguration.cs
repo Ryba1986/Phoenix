@@ -1,13 +1,15 @@
-using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using Phoenix.Entities.Plcs.Meters;
+using Phoenix.Services.Repositories.Configurations.Base;
 
 namespace Phoenix.Services.Repositories.Configurations.Plcs.Meters
 {
-   internal sealed class KamstrupConfiguration : IEntityTypeConfiguration<Kamstrup>
+   internal sealed class KamstrupConfiguration : PlcConfigurationBase<Kamstrup>
    {
-      public void Configure(EntityTypeBuilder<Kamstrup> builder)
+      public override void Configure(EntityTypeBuilder<Kamstrup> builder)
       {
+         base.Configure(builder);
+
          builder.Property(x => x.InletTemp)
             .IsRequired();
 
@@ -31,19 +33,6 @@ namespace Phoenix.Services.Repositories.Configurations.Plcs.Meters
 
          builder.Property(x => x.ErrorCode)
             .IsRequired();
-
-         builder.Property(x => x.Date)
-            .IsRequired();
-
-         builder.Property(x => x.DeviceId)
-            .IsRequired();
-
-         builder.HasKey(x => new { x.Date, x.DeviceId })
-            .IsClustered();
-
-         builder.HasOne(x => x.Device)
-            .WithMany()
-            .HasForeignKey(x => x.DeviceId);
       }
    }
 }

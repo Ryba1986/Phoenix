@@ -1,4 +1,10 @@
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading;
+using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.ChangeTracking;
+using Phoenix.Entities.Base;
 using Phoenix.Entities.Clients;
 using Phoenix.Entities.Devices;
 using Phoenix.Entities.Locations;
@@ -7,6 +13,7 @@ using Phoenix.Entities.Plcs.Meters;
 using Phoenix.Entities.Plcs.Rvds;
 using Phoenix.Entities.Roles;
 using Phoenix.Entities.Users;
+using Phoenix.Shared.Helpers;
 
 namespace Phoenix.Services.Repositories
 {
@@ -23,7 +30,6 @@ namespace Phoenix.Services.Repositories
 
       public readonly DbSet<Role> Role;
       public readonly DbSet<RoleHistory> RoleHistory;
-
       public readonly DbSet<RolePermission> RolePermission;
 
       public readonly DbSet<User> User;
@@ -46,7 +52,6 @@ namespace Phoenix.Services.Repositories
 
          Role = Set<Role>();
          RoleHistory = Set<RoleHistory>();
-
          RolePermission = Set<RolePermission>();
 
          User = Set<User>();
@@ -57,9 +62,28 @@ namespace Phoenix.Services.Repositories
          Rvd145 = Set<Rvd145>();
       }
 
+      public override async Task<int> SaveChangesAsync(CancellationToken cancellationToken = default)
+      {
+         UpdateMetricVersion();
+         return await base.SaveChangesAsync(cancellationToken);
+      }
+
       protected override void OnModelCreating(ModelBuilder modelBuilder)
       {
          modelBuilder.ApplyConfigurationsFromAssembly(GetType().Assembly);
+      }
+
+      private void UpdateMetricVersion()
+      {
+         IEnumerable<MetricBase> updatedMetrics = ChangeTracker
+            .Entries<MetricBase>()
+            .Where(x => x.State == EntityState.Modified)
+            .Select(x => x.Entity);
+
+         foreach (MetricBase metric in updatedMetrics)
+         {
+            metric.Update(RandomHelper.GetShort());
+         }
       }
    }
 }

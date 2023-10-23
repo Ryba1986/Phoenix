@@ -7,11 +7,11 @@ namespace Phoenix.Validators.Plcs.Meters
    {
       public CreateKamstrupValidator()
       {
-         RuleFor(x => x.DeviceId).NotEmpty();
-
          RuleFor(x => x.Date).NotEmpty();
 
-         RuleFor(x => x.SerialNumber).NotEmpty();
+         RuleFor(x => x.DeviceId).NotEmpty();
+
+         RuleFor(x => x.SerialNumber).NotNull();
       }
    }
 }

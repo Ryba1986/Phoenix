@@ -14,8 +14,8 @@ namespace Phoenix.Models.Devices.Commands
       public SerialDataBits DataBits { get; init; }
       public SerialParity Parity { get; init; }
       public SerialStopBits StopBits { get; init; }
-      public bool IncludeReport { get; init; }
       public byte ReportSequence { get; init; }
+      public bool IncludeReport { get; init; }
 
       public CreateDeviceCommand()
       {

@@ -1,13 +1,15 @@
-using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using Phoenix.Entities.Users;
+using Phoenix.Services.Repositories.Configurations.Base;
 
 namespace Phoenix.Services.Repositories.Configurations.Users
 {
-   internal sealed class UserHistoryConfiguration : IEntityTypeConfiguration<UserHistory>
+   internal sealed class UserHistoryConfiguration : HistoryConfigurationBase<UserHistory>
    {
-      public void Configure(EntityTypeBuilder<UserHistory> builder)
+      public override void Configure(EntityTypeBuilder<UserHistory> builder)
       {
+         base.Configure(builder);
+
          builder.Property(x => x.UserId)
             .IsRequired();
 
@@ -21,28 +23,13 @@ namespace Phoenix.Services.Repositories.Configurations.Users
             .HasMaxLength(50)
             .IsRequired();
 
-         builder.Property(x => x.Id)
-            .IsRequired();
-
-         builder.Property(x => x.IsActive)
-           .IsRequired();
-
-         builder.Property(x => x.CreatedById)
-            .IsRequired();
-
-         builder.Property(x => x.CreateDate)
-            .IsRequired();
-
-         builder.HasKey(x => x.Id)
-            .IsClustered();
-
          builder.HasOne(x => x.User)
             .WithMany()
             .HasForeignKey(x => x.UserId);
 
-         builder.HasOne(x => x.CreatedBy)
+         builder.HasOne(x => x.Role)
             .WithMany()
-            .HasForeignKey(x => x.CreatedById);
+            .HasForeignKey(x => x.RoleId);
       }
    }
 }

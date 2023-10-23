@@ -1,19 +1,5 @@
 {
-   "[csharp]": { "editor.defaultFormatter": "ms-dotnettools.csharp" },
-   "diffEditor.diffAlgorithm": "advanced",
-   "diffEditor.ignoreTrimWhitespace": false,
-   "dotnetAcquisitionExtension.enableTelemetry": false,
-   "dotnet.completion.showCompletionItemsFromUnimportedNamespaces": true,
    "dotnet.defaultSolution": "Phoenix.sln",
-   "dotnet.preferRuntimeFromSDK": true,
-   "editor.bracketPairColorization.enabled": true,
-   "editor.defaultFormatter": "esbenp.prettier-vscode",
-   "editor.detectIndentation": false,
-   "editor.formatOnSave": true,
-   "editor.insertSpaces": true,
-   "editor.renderWhitespace": "boundary",
-   "editor.tabSize": 3,
-   "explorer.compactFolders": false,
    "files.exclude": {
       "**/bin": true,
       "**/dist": true,
@@ -24,13 +10,4 @@
       "**/yarn.lock": true,
       "**/PhoenixClientDb*.db": true
    },
-   "files.insertFinalNewline": true,
-   "git.enableSmartCommit": true,
-   "gitlens.telemetry.enabled": false,
-   "prettier.printWidth": 160,
-   "prettier.tabWidth": 3,
-   "prettier.trailingComma": "all",
-   "prettier.useTabs": false,
-   "sundial.autoLocale": true,
-   "workbench.iconTheme": "vscode-icons"
 }

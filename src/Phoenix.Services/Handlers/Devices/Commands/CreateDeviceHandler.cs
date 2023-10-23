@@ -29,7 +29,7 @@ namespace Phoenix.Services.Handlers.Devices.Commands
             return Result.Error(Translations.Device_DeviceType_Invalid);
          }
 
-         if (!await IsActiveUserExistsAsync(request.CreatedById, cancellationToken))
+         if (!await IsActiveUserAsync(request.CreatedById, cancellationToken))
          {
             return Result.Error(Translations.User_Active_NotExists);
          }
@@ -66,8 +66,8 @@ namespace Phoenix.Services.Handlers.Devices.Commands
             DataBits = request.DataBits,
             Parity = request.Parity,
             StopBits = request.StopBits,
-            IncludeReport = request.IncludeReport,
             ReportSequence = request.ReportSequence,
+            IncludeReport = request.IncludeReport,
             IsActive = request.IsActive,
          };
 
@@ -84,11 +84,11 @@ namespace Phoenix.Services.Handlers.Devices.Commands
             DataBits = request.DataBits,
             Parity = request.Parity,
             StopBits = request.StopBits,
-            IncludeReport = request.IncludeReport,
             ReportSequence = request.ReportSequence,
+            IncludeReport = request.IncludeReport,
             IsActive = request.IsActive,
             CreatedById = request.CreatedById,
-            CreateDate = await GetServerDateAsync(),
+            CreateDate = GetServerDate(),
          });
 
          await _uow.SaveChangesAsync(cancellationToken);

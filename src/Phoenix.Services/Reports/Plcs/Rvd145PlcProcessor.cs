@@ -3,45 +3,39 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
-using AutoMapper;
 using OfficeOpenXml;
-using Phoenix.Entities.Plcs.Rvds;
-using Phoenix.Models.Devices.Dto;
 using Phoenix.Models.Plcs.Rvds.Dto;
+using Phoenix.Services.Mappings;
 using Phoenix.Services.Reports.Base;
 using Phoenix.Services.Repositories;
 using Phoenix.Shared.Enums.Devices;
 using Phoenix.Shared.Extensions;
 
+
 namespace Phoenix.Services.Reports.Plcs
 {
    internal sealed class Rvd145PlcProcessor : PlcProcessorBase, IPlcProcessor
    {
-      public Rvd145PlcProcessor(UnitOfWork uow, IMapper mapper) : base(uow, mapper)
+      public string TemplateSheetName { get; }
+
+      public Rvd145PlcProcessor(UnitOfWork uow) : base(uow)
       {
+         TemplateSheetName = PlcSheet;
       }
 
-      public async Task FillDataAsync(ExcelWorksheets sheets, DateOnly date, IReadOnlyCollection<DeviceReportDto> devices, ITypeProcessor typeProcessor, CancellationToken cancellationToken)
+      public async Task FillDataAsync(ExcelWorksheets sheets, DateOnly date, ITypeProcessor typeProcessor, CancellationToken cancellationToken)
       {
-         IReadOnlyDictionary<int, Rvd145ReportDto[]> plcData = await GetPlcDataAsync<Rvd145, Rvd145ReportDto>(_uow.Rvd145, date, typeProcessor, cancellationToken);
-         foreach (DeviceReportDto device in devices)
-         {
-            plcData.TryGetValue(device.Id, out Rvd145ReportDto[]? deviceData);
+         Tuple<DateTime, DateTime> range = typeProcessor.GetRange(date);
 
-            ExcelWorksheet sheet = sheets.Copy(PlcSheet, device.Id.ToString());
-            FillData(sheet, device, deviceData, typeProcessor);
+         IReadOnlyDictionary<int, Rvd145ReportDto[]> plcData = await GetPlcDataAsync(_uow.Rvd145, range, typeProcessor, Rvd145Mappings.ToRvd145ReportDto, cancellationToken);
+         foreach (KeyValuePair<int, Rvd145ReportDto[]> plc in plcData)
+         {
+            FillData(sheets[plc.Key.ToString()], plc.Value, typeProcessor);
          }
       }
 
-      private static void FillData(ExcelWorksheet sheet, DeviceReportDto device, IReadOnlyCollection<Rvd145ReportDto>? plcData, ITypeProcessor typeProcessor)
+      private static void FillData(ExcelWorksheet sheet, IReadOnlyCollection<Rvd145ReportDto> plcData, ITypeProcessor typeProcessor)
       {
-         sheet.Cells[typeProcessor.DeviceNameRow, 1].Value = device.Name;
-
-         if (plcData is null)
-         {
-            return;
-         }
-
          foreach (Rvd145ReportDto rvd in plcData)
          {
             int rowIndex = typeProcessor.StartingRow + typeProcessor.GetDatePart(rvd.Date);
@@ -62,7 +56,7 @@ namespace Phoenix.Services.Reports.Plcs
             sheet.Cells[rowIndex, 17].Value = rvd.Ch1LowOutletPresureMin;
             sheet.Cells[rowIndex, 18].Value = rvd.Ch1LowOutletPresureMax;
 
-            if (device.DeviceType == DeviceType.HeatingDomestic)
+            if (rvd.DeviceType == DeviceType.HeatingDomestic)
             {
                sheet.Cells[rowIndex, 28].Value = rvd.DhwTempAvg.Round();
                sheet.Cells[rowIndex, 29].Value = rvd.DhwTempMin;
@@ -90,7 +84,7 @@ namespace Phoenix.Services.Reports.Plcs
          sheet.Cells[sheet.Dimension.Rows, 17].Value = plcData.Min(x => x.Ch1LowOutletPresureMin);
          sheet.Cells[sheet.Dimension.Rows, 18].Value = plcData.Max(x => x.Ch1LowOutletPresureMax);
 
-         if (device.DeviceType == DeviceType.HeatingDomestic)
+         if (plcData.First().DeviceType == DeviceType.HeatingDomestic)
          {
             sheet.Cells[sheet.Dimension.Rows, 28].Value = plcData.Average(x => x.DhwTempAvg).Round();
             sheet.Cells[sheet.Dimension.Rows, 29].Value = plcData.Min(x => x.DhwTempMin);

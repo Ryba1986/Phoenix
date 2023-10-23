@@ -20,7 +20,6 @@ namespace Phoenix.Services.Handlers.Locations.Queries
       {
          return await _uow.Location
             .AsNoTracking()
-            .OrderBy(x => x.Name)
             .Select(x => new KeyValuePair<int, string>(x.Id, x.Name))
             .ToArrayAsync(cancellationToken);
       }

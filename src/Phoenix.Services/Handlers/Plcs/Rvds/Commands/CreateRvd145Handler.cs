@@ -19,15 +19,15 @@ namespace Phoenix.Services.Handlers.Plcs.Rvds.Commands
 
       public async Task<Result> Handle(CreateRvd145Command request, CancellationToken cancellationToken)
       {
-         if (await IsPlcExistAsync(_uow.Kamstrup, request, cancellationToken))
+         if (await PlcHandlerHelper.IsPlcExistAsync(_uow.Rvd145, request, cancellationToken))
          {
             return Result.Success();
          }
 
          Rvd145 newRvd145 = new()
          {
-            DeviceId = request.DeviceId,
             Date = request.Date.RoundToSecond(),
+            DeviceId = request.DeviceId,
 
             OutsideTemp = request.OutsideTemp,
             ChHighInletPresure = request.ChHighInletPresure,
@@ -47,7 +47,7 @@ namespace Phoenix.Services.Handlers.Plcs.Rvds.Commands
             DhwStatus = request.DhwStatus,
          };
 
-         return await PlcHandlerHelper.AddPlcAsync(_uow, request, newRvd145, cancellationToken);
+         return await PlcHandlerHelper.AddPlcAsync(_uow, request, newRvd145, GetServerDate(), cancellationToken);
       }
    }
 }

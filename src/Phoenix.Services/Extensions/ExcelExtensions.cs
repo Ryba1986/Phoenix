@@ -12,19 +12,18 @@ namespace Phoenix.Services.Extensions
       public static ExcelPackage GetReportTemplate()
       {
          string templatePath = Path.Combine(AppContext.BaseDirectory, "Reports", "Templates", $"PlcReport_{CultureInfo.CurrentCulture.Name}.xlsx");
-
          return new ExcelPackage(new(templatePath), true);
       }
 
-      public static void RemoveSheets(this ExcelWorksheets sheets, IEnumerable<string> sheetNames)
+      public static void RemoveSheets(this ExcelWorksheets sheets, IReadOnlyCollection<string> sheetNames)
       {
+         if (sheets.Count == sheetNames.Count)
+         {
+            sheets.Add("NO DATA");
+         }
          foreach (string name in sheetNames)
          {
             sheets.Delete(name);
-         }
-         if (sheets.Count == 0)
-         {
-            sheets.Add("NO DATA");
          }
 
          sheets.First().Select();
@@ -39,7 +38,13 @@ namespace Phoenix.Services.Extensions
 
          foreach (ExcelWorksheet sheet in sheets)
          {
-            sheet.DeleteRow(sheet.Dimension.Rows - rowCount, rowCount);
+            int rows = sheet.Dimension.Rows;
+            if (rowCount >= rows)
+            {
+               continue;
+            }
+
+            sheet.DeleteRow(rows - rowCount, rowCount);
          }
       }
    }

@@ -1,7 +1,7 @@
 using System.Threading.Tasks;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
-using Phoenix.Api.Client.Controllers.Base;
+using Phoenix.Api.Shared.Controllers;
 using Phoenix.Models.Devices.Queries;
 
 namespace Phoenix.Api.Client.Controllers

@@ -1,4 +1,4 @@
-﻿namespace Phoenix.Shared.Results
+namespace Phoenix.Shared.Results
 {
    public readonly struct TokenResult
    {

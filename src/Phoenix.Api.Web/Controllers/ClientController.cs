@@ -1,8 +1,8 @@
 using System.Threading.Tasks;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
+using Phoenix.Api.Shared.Controllers;
 using Phoenix.Api.Web.Attributes;
-using Phoenix.Api.Web.Controllers.Base;
 using Phoenix.Models.Clients.Commands;
 using Phoenix.Models.Clients.Queries;
 using Phoenix.Shared.Enums.Roles;
@@ -17,9 +17,9 @@ namespace Phoenix.Api.Web.Controllers
 
       [Authorization(Permission.Client, AccessLevel.Read)]
       [HttpGet]
-      public async Task<IActionResult> GetClients()
+      public async Task<IActionResult> GetClients([FromQuery] GetClientsQuery request)
       {
-         return await HandleAsync(new GetClientsQuery());
+         return await HandleAsync(request);
       }
 
       [Authorization(Permission.Client, AccessLevel.Read)]

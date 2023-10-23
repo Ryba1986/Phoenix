@@ -12,7 +12,7 @@ namespace Phoenix.Services.Configuration.Modules
       protected override void Load(ContainerBuilder builder)
       {
          RegisterPlcProcessors(builder);
-         RegisterTypeProcessors(builder);
+         RegisterPlcTypeProcessors(builder);
       }
 
       private static void RegisterPlcProcessors(ContainerBuilder builder)
@@ -30,23 +30,23 @@ namespace Phoenix.Services.Configuration.Modules
             .Keyed<IPlcProcessor>(PlcType.Rvd145);
       }
 
-      private static void RegisterTypeProcessors(ContainerBuilder builder)
+      private static void RegisterPlcTypeProcessors(ContainerBuilder builder)
       {
          builder
             .RegisterType<DayTypeProcessor>()
-            .Keyed<ITypeProcessor>(ReportType.Day);
+            .Keyed<ITypeProcessor>(PlcReportType.Day);
 
          builder
             .RegisterType<MonthTypeProcessor>()
-            .Keyed<ITypeProcessor>(ReportType.Month);
+            .Keyed<ITypeProcessor>(PlcReportType.Month);
 
          builder
             .RegisterType<YearTypeProcessor>()
-            .Keyed<ITypeProcessor>(ReportType.Year);
+            .Keyed<ITypeProcessor>(PlcReportType.Year);
 
          builder
-            .RegisterType<YearByDayProcessor>()
-            .Keyed<ITypeProcessor>(ReportType.YearByDay);
+            .RegisterType<YearByDayTypeProcessor>()
+            .Keyed<ITypeProcessor>(PlcReportType.YearByDay);
       }
    }
 }

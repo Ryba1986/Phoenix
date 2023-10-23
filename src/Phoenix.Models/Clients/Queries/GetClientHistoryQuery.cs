@@ -9,4 +9,3 @@ namespace Phoenix.Models.Clients.Queries
       public int ClientId { get; init; }
    }
 }
-

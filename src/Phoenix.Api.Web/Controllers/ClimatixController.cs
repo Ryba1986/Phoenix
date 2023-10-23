@@ -1,8 +1,8 @@
 using System.Threading.Tasks;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
+using Phoenix.Api.Shared.Controllers;
 using Phoenix.Api.Web.Attributes;
-using Phoenix.Api.Web.Controllers.Base;
 using Phoenix.Models.Plcs.Climatixs.Queries;
 using Phoenix.Shared.Enums.Roles;
 

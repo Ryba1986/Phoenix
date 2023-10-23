@@ -1,8 +1,8 @@
 using System.Threading.Tasks;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
+using Phoenix.Api.Shared.Controllers;
 using Phoenix.Api.Web.Attributes;
-using Phoenix.Api.Web.Controllers.Base;
 using Phoenix.Models.Reports.Queries;
 using Phoenix.Shared.Enums.Roles;
 
@@ -15,14 +15,14 @@ namespace Phoenix.Api.Web.Controllers
       }
 
       [HttpGet]
-      public async Task<IActionResult> GetReportTypeDictionary()
+      public async Task<IActionResult> GetPlcReportTypeDictionary()
       {
-         return await HandleAsync(new GetReportTypeDictionaryQuery());
+         return await HandleAsync(new GetPlcReportTypeDictionaryQuery());
       }
 
       [Authorization(Permission.Report, AccessLevel.Read)]
       [HttpGet]
-      public async Task<IActionResult> GetReport([FromQuery] GetReportQuery request)
+      public async Task<IActionResult> GetPlcReport([FromQuery] GetPlcReportQuery request)
       {
          return await HandleAsync(request);
       }

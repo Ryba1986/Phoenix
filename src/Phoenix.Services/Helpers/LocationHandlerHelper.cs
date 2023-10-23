@@ -7,7 +7,7 @@ namespace Phoenix.Services.Helpers
 {
    internal static class LocationHandlerHelper
    {
-      public static async Task<bool> IsLimitActiveLocationsAsync(UnitOfWork uow, int locationLimitCount, CancellationToken cancellationToken)
+      public static async Task<bool> IsLimitActiveLocationsAsync(UnitOfWork uow, ushort locationLimitCount, CancellationToken cancellationToken)
       {
          int result = await uow.Location
             .AsNoTracking()

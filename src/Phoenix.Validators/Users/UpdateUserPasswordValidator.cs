@@ -9,17 +9,14 @@ namespace Phoenix.Validators.Users
       public UpdateUserPasswordValidator()
       {
          RuleFor(x => x.CurrentPassword)
-            .Length(10, 30).WithMessage(Translations.Validator_CurrentPassword_Invalid);
+            .Length(10, 30).WithMessage(Translations.Validator_Password_Invalid);
 
          RuleFor(x => x.NewPassword)
-            .Length(10, 30).WithMessage(Translations.Validator_NewPassword_Invalid)
-            .Equal(x => x.CurrentPassword).WithMessage(Translations.Validator_NewPassword_Invalid);
+            .Length(10, 30).WithMessage(Translations.Validator_Password_Invalid)
+            .Equal(x => x.CurrentPassword).WithMessage(Translations.Validator_Password_Invalid);
 
          RuleFor(x => x.ConfirmNewPassword)
-            .NotEqual(x => x.NewPassword).WithMessage(Translations.Validator_ConfirmNewPassword_Invalid);
-
-         RuleFor(x => x.UserId)
-            .NotEmpty().WithMessage(Translations.Validator_UserId_Invalid);
+            .NotEqual(x => x.NewPassword).WithMessage(Translations.Validator_Password_Invalid);
       }
    }
 }

@@ -1,4 +1,3 @@
-using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using MediatR;
@@ -20,7 +19,7 @@ namespace Phoenix.Services.Handlers.Clients.Commands
 
       public async Task<Result> Handle(UpdateClientCommand request, CancellationToken cancellationToken)
       {
-         if (!await IsActiveUserExistsAsync(request.ModifiedById, cancellationToken))
+         if (!await IsActiveUserAsync(request.ModifiedById, cancellationToken))
          {
             return Result.Error(Translations.User_Active_NotExists);
          }
@@ -46,24 +45,12 @@ namespace Phoenix.Services.Handlers.Clients.Commands
             return Result.Error(Translations.Client_Exists);
          }
 
-         bool clientLocationExists = await _uow.Client
-            .AsNoTracking()
-            .AnyAsync(x =>
-               x.LocationId == request.LocationId &&
-               x.Id != request.Id
-            , cancellationToken);
-
-         if (clientLocationExists)
-         {
-            return Result.Error(Translations.Client_Exists);
-         }
-
          Client? client = await _uow.Client.FirstOrDefaultAsync(x => x.Id == request.Id, cancellationToken);
          if (client is null)
          {
             return Result.Error(Translations.Client_NotExists);
          }
-         if (!client.Version.SequenceEqual(request.Version))
+         if (client.Version != request.Version)
          {
             return Result.Error(Translations.Validator_Version_Invalid);
          }
@@ -79,7 +66,7 @@ namespace Phoenix.Services.Handlers.Clients.Commands
             MacAddress = client.MacAddress != request.MacAddress ? request.MacAddress : string.Empty,
             IsActive = request.IsActive,
             CreatedById = request.ModifiedById,
-            CreateDate = await GetServerDateAsync(),
+            CreateDate = GetServerDate(),
          });
 
          client.LocationId = request.LocationId;

@@ -7,6 +7,7 @@ using Phoenix.Models.Devices.Queries;
 using Phoenix.Shared.Enums.Devices;
 using Phoenix.Shared.Extensions;
 
+
 namespace Phoenix.Services.Handlers.Devices.Queries
 {
    internal sealed class GetDeviceTypeDictionaryHandler : IRequestHandler<GetDeviceTypeDictionaryQuery, IReadOnlyCollection<KeyValuePair<int, string>>>

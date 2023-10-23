@@ -19,7 +19,7 @@ namespace Phoenix.Services.Handlers.Plcs.Climatixs.Commands
 
       public async Task<Result> Handle(CreateClimatixCommand request, CancellationToken cancellationToken)
       {
-         if (await IsPlcExistAsync(_uow.Kamstrup, request, cancellationToken))
+         if (await PlcHandlerHelper.IsPlcExistAsync(_uow.Rvd145, request, cancellationToken))
          {
             return Result.Success();
          }
@@ -60,7 +60,7 @@ namespace Phoenix.Services.Handlers.Plcs.Climatixs.Commands
             DhwStatus = request.DhwStatus,
          };
 
-         return await PlcHandlerHelper.AddPlcAsync(_uow, request, newClimatix, cancellationToken);
+         return await PlcHandlerHelper.AddPlcAsync(_uow, request, newClimatix, GetServerDate(), cancellationToken);
       }
    }
 }

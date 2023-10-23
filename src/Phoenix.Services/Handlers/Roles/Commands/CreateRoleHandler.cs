@@ -19,7 +19,7 @@ namespace Phoenix.Services.Handlers.Roles.Commands
 
       public async Task<Result> Handle(CreateRoleCommand request, CancellationToken cancellationToken)
       {
-         if (!await IsActiveUserExistsAsync(request.CreatedById, cancellationToken))
+         if (!await IsActiveUserAsync(request.CreatedById, cancellationToken))
          {
             return Result.Error(Translations.User_Active_NotExists);
          }
@@ -48,7 +48,7 @@ namespace Phoenix.Services.Handlers.Roles.Commands
             IsAdmin = request.IsAdmin,
             IsActive = request.IsActive,
             CreatedById = request.CreatedById,
-            CreateDate = await GetServerDateAsync(),
+            CreateDate = GetServerDate(),
          });
 
          await _uow.SaveChangesAsync(cancellationToken);

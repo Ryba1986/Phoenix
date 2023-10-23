@@ -20,7 +20,7 @@ namespace Phoenix.Services.Handlers.Users.Commands
 
       public async Task<Result> Handle(CreateUserCommand request, CancellationToken cancellationToken)
       {
-         if (!await IsActiveUserExistsAsync(request.CreatedById, cancellationToken))
+         if (!await IsActiveUserAsync(request.CreatedById, cancellationToken))
          {
             return Result.Error(Translations.User_Active_NotExists);
          }
@@ -46,10 +46,10 @@ namespace Phoenix.Services.Handlers.Users.Commands
          // TODO: generate random password and send an email
          User newUser = new()
          {
+            RoleId = request.RoleId,
             Name = request.Name,
             Email = request.Email,
             Password = request.Email.CreatePassword(),
-            RoleId = request.RoleId,
             IsActive = request.IsActive,
          };
 
@@ -62,7 +62,7 @@ namespace Phoenix.Services.Handlers.Users.Commands
             Email = request.Email,
             IsActive = request.IsActive,
             CreatedById = request.CreatedById,
-            CreateDate = await GetServerDateAsync(),
+            CreateDate = GetServerDate(),
          });
 
          await _uow.SaveChangesAsync(cancellationToken);

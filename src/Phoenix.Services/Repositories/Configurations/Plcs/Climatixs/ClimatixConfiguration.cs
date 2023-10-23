@@ -1,13 +1,15 @@
-using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using Phoenix.Entities.Plcs.Climatixs;
+using Phoenix.Services.Repositories.Configurations.Base;
 
 namespace Phoenix.Services.Repositories.Configurations.Plcs.Climatixs
 {
-   internal sealed class ClimatixConfiguration : IEntityTypeConfiguration<Climatix>
+   internal sealed class ClimatixConfiguration : PlcConfigurationBase<Climatix>
    {
-      public void Configure(EntityTypeBuilder<Climatix> builder)
+      public override void Configure(EntityTypeBuilder<Climatix> builder)
       {
+         base.Configure(builder);
+
          builder.Property(x => x.OutsideTemp)
             .IsRequired();
 
@@ -85,19 +87,6 @@ namespace Phoenix.Services.Repositories.Configurations.Plcs.Climatixs
 
          builder.Property(x => x.DhwStatus)
             .IsRequired();
-
-         builder.Property(x => x.Date)
-            .IsRequired();
-
-         builder.Property(x => x.DeviceId)
-            .IsRequired();
-
-         builder.HasKey(x => new { x.Date, x.DeviceId })
-            .IsClustered();
-
-         builder.HasOne(x => x.Device)
-            .WithMany()
-            .HasForeignKey(x => x.DeviceId);
       }
    }
 }

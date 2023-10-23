@@ -1,6 +1,5 @@
 using Autofac;
 using Microsoft.Extensions.Configuration;
-using Phoenix.Services.Configuration.Mappers;
 using Phoenix.Services.Configuration.Modules;
 
 namespace Phoenix.Services.Configuration
@@ -16,22 +15,14 @@ namespace Phoenix.Services.Configuration
 
       protected override void Load(ContainerBuilder builder)
       {
-         RegisterMappers(builder);
          RegisterModules(builder);
-      }
-
-      private static void RegisterMappers(ContainerBuilder builder)
-      {
-         builder
-            .RegisterInstance(AutoMapperConfig.Initialize())
-            .SingleInstance();
       }
 
       private void RegisterModules(ContainerBuilder builder)
       {
          builder.RegisterModule<RepositoryModule>();
-         builder.RegisterModule<MediatorModule>();
          builder.RegisterModule<ReportModule>();
+         builder.RegisterModule<MediatorModule>();
          builder.RegisterModule(new SettingsModule(_configuration));
       }
    }

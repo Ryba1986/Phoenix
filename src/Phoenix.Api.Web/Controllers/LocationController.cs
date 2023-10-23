@@ -1,8 +1,8 @@
 using System.Threading.Tasks;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
+using Phoenix.Api.Shared.Controllers;
 using Phoenix.Api.Web.Attributes;
-using Phoenix.Api.Web.Controllers.Base;
 using Phoenix.Models.Locations.Commands;
 using Phoenix.Models.Locations.Queries;
 using Phoenix.Shared.Enums.Roles;
@@ -17,9 +17,9 @@ namespace Phoenix.Api.Web.Controllers
 
       [Authorization(Permission.Location, AccessLevel.Read)]
       [HttpGet]
-      public async Task<IActionResult> GetLocations()
+      public async Task<IActionResult> GetLocations([FromQuery] GetLocationsQuery request)
       {
-         return await HandleAsync(new GetLocationsQuery());
+         return await HandleAsync(request);
       }
 
       [Authorization(Permission.Location, AccessLevel.Read)]
@@ -30,9 +30,9 @@ namespace Phoenix.Api.Web.Controllers
       }
 
       [HttpGet]
-      public async Task<IActionResult> GetLocationDictionary()
+      public async Task<IActionResult> GetLocationDictionary([FromQuery] GetLocationDictionaryQuery request)
       {
-         return await HandleAsync(new GetLocationDictionaryQuery());
+         return await HandleAsync(request);
       }
 
       [Authorization(Permission.Location, AccessLevel.Write)]

@@ -13,9 +13,6 @@ namespace Phoenix.Validators.Roles
 
          RuleFor(x => x.Name)
             .Length(3, 50).WithMessage(Translations.Validator_Name_Invalid);
-
-         RuleFor(x => x.Version)
-            .NotEmpty().WithMessage(Translations.Validator_Version_Invalid);
       }
    }
 }

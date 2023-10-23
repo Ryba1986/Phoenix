@@ -1,4 +1,3 @@
-using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using MediatR;
@@ -20,7 +19,7 @@ namespace Phoenix.Services.Handlers.Roles.Commands
 
       public async Task<Result> Handle(UpdateRoleCommand request, CancellationToken cancellationToken)
       {
-         if (!await IsActiveUserExistsAsync(request.ModifiedById, cancellationToken))
+         if (!await IsActiveUserAsync(request.ModifiedById, cancellationToken))
          {
             return Result.Error(Translations.User_Active_NotExists);
          }
@@ -42,7 +41,7 @@ namespace Phoenix.Services.Handlers.Roles.Commands
          {
             return Result.Error(Translations.Role_NotExists);
          }
-         if (!role.Version.SequenceEqual(request.Version))
+         if (role.Version != request.Version)
          {
             return Result.Error(Translations.Validator_Version_Invalid);
          }
@@ -58,7 +57,7 @@ namespace Phoenix.Services.Handlers.Roles.Commands
             IsAdmin = request.IsAdmin,
             IsActive = request.IsActive,
             CreatedById = request.ModifiedById,
-            CreateDate = await GetServerDateAsync(),
+            CreateDate = GetServerDate(),
          });
 
          role.Name = request.Name;

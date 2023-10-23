@@ -7,10 +7,9 @@ namespace Phoenix.Shared.Extensions
       public static T GetSettings<T>(this IConfiguration configuration, string suffix = "Settings") where T : class, new()
       {
          T value = new();
-         string section = typeof(T).Name.Replace(suffix, string.Empty);
 
          configuration
-            .GetSection(section)
+            .GetSection(typeof(T).Name.Replace(suffix, string.Empty))
             .Bind(value);
 
          return value;

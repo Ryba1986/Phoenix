@@ -1,32 +1,21 @@
-using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using Phoenix.Entities.Roles;
+using Phoenix.Services.Repositories.Configurations.Base;
 
 namespace Phoenix.Services.Repositories.Configurations.Roles
 {
-   internal sealed class RoleConfiguration : IEntityTypeConfiguration<Role>
+   internal sealed class RoleConfiguration : MetricConfigurationBase<Role>
    {
-      public void Configure(EntityTypeBuilder<Role> builder)
+      public override void Configure(EntityTypeBuilder<Role> builder)
       {
+         base.Configure(builder);
+
          builder.Property(x => x.Name)
             .HasMaxLength(50)
             .IsRequired();
 
          builder.Property(x => x.IsAdmin)
             .IsRequired();
-
-         builder.Property(x => x.Id)
-            .IsRequired();
-
-         builder.Property(x => x.IsActive)
-            .IsRequired();
-
-         builder.Property(x => x.Version)
-            .IsRequired()
-            .IsRowVersion();
-
-         builder.HasKey(x => x.Id)
-            .IsClustered();
       }
    }
 }

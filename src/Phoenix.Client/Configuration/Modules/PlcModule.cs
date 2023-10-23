@@ -1,8 +1,6 @@
 using Autofac;
+using Phoenix.Client.Plcs;
 using Phoenix.Client.Plcs.Base;
-using Phoenix.Client.Plcs.Climatixs;
-using Phoenix.Client.Plcs.Meters;
-using Phoenix.Client.Plcs.Rvds;
 using Phoenix.Shared.Enums.Devices;
 
 namespace Phoenix.Client.Configuration.Modules

@@ -2,20 +2,19 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
-using AutoMapper;
-using AutoMapper.QueryableExtensions;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 using Phoenix.Models.Clients.Dto;
 using Phoenix.Models.Clients.Queries;
 using Phoenix.Services.Handlers.Base;
+using Phoenix.Services.Mappings;
 using Phoenix.Services.Repositories;
 
 namespace Phoenix.Services.Handlers.Clients.Queries
 {
-   internal sealed class GetClientsHandler : QueryHandlerBase, IRequestHandler<GetClientsQuery, IReadOnlyCollection<ClientDto>>
+   internal sealed class GetClientsHandler : HandlerBase, IRequestHandler<GetClientsQuery, IReadOnlyCollection<ClientDto>>
    {
-      public GetClientsHandler(UnitOfWork uow, IMapper mapper) : base(uow, mapper)
+      public GetClientsHandler(UnitOfWork uow) : base(uow)
       {
       }
 
@@ -23,10 +22,7 @@ namespace Phoenix.Services.Handlers.Clients.Queries
       {
          return await _uow.Client
             .AsNoTracking()
-            .Include(x => x.Location)
-            .OrderByDescending(x => x.IsActive)
-            .ThenBy(x => x.Location.Name)
-            .ProjectTo<ClientDto>(_mapper.ConfigurationProvider)
+            .Select(x => x.ToClientDto())
             .ToArrayAsync(cancellationToken);
       }
    }

@@ -26,7 +26,7 @@ namespace Phoenix.Client
             .ConfigureServices(services =>
             {
                services.AddHostedService<ClientWorker>();
-               services.AddHostedService<PlcReaderWorker>();
+               services.AddHostedService<PlcWorker>();
             })
             .ConfigureContainer<ContainerBuilder>((ctx, builder) =>
             {

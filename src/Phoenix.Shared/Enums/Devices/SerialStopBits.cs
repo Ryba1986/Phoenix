@@ -5,7 +5,7 @@ namespace Phoenix.Shared.Enums.Devices
    public enum SerialStopBits : byte
    {
       [Description("0")]
-      Zero = 0,
+      None = 0,
 
       [Description("1")]
       One = 1,

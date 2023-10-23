@@ -1,4 +1,3 @@
-using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using MediatR;
@@ -20,7 +19,7 @@ namespace Phoenix.Services.Handlers.Users.Commands
 
       public async Task<Result> Handle(UpdateUserCommand request, CancellationToken cancellationToken)
       {
-         if (!await IsActiveUserExistsAsync(request.ModifiedById, cancellationToken))
+         if (!await IsActiveUserAsync(request.ModifiedById, cancellationToken))
          {
             return Result.Error(Translations.User_Active_NotExists);
          }
@@ -51,7 +50,7 @@ namespace Phoenix.Services.Handlers.Users.Commands
          {
             return Result.Error(Translations.User_NotExists);
          }
-         if (!user.Version.SequenceEqual(request.Version))
+         if (user.Version != request.Version)
          {
             return Result.Error(Translations.Validator_Version_Invalid);
          }
@@ -63,17 +62,17 @@ namespace Phoenix.Services.Handlers.Users.Commands
          _uow.UserHistory.Add(new()
          {
             UserId = request.Id,
+            RoleId = user.RoleId != request.RoleId ? request.RoleId : null,
             Name = user.Name != request.Name ? request.Name : string.Empty,
             Email = user.Email != request.Email ? request.Email : string.Empty,
-            RoleId = user.RoleId != request.RoleId ? request.RoleId : null,
             IsActive = request.IsActive,
             CreatedById = request.ModifiedById,
-            CreateDate = await GetServerDateAsync(),
+            CreateDate = GetServerDate(),
          });
 
+         user.RoleId = request.RoleId;
          user.Name = request.Name;
          user.Email = request.Email;
-         user.RoleId = request.RoleId;
          user.IsActive = request.IsActive;
 
          await _uow.SaveChangesAsync(cancellationToken);

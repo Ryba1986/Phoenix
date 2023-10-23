@@ -7,9 +7,11 @@ namespace Phoenix.Validators.Plcs.Climatixs
    {
       public CreateClimatixValidator()
       {
+         RuleFor(x => x.Date).NotEmpty();
+
          RuleFor(x => x.DeviceId).NotEmpty();
 
-         RuleFor(x => x.Date).NotEmpty();
+         RuleFor(x => x.SerialNumber).NotNull();
       }
    }
 }

@@ -1,9 +1,8 @@
 using System;
 using System.Linq.Expressions;
 using Phoenix.Entities.Base;
-using Phoenix.Models.Utilities;
+using Phoenix.Models.Plcs;
 using Phoenix.Services.Reports.Base;
-using Phoenix.Shared.Enums.Reports;
 using Phoenix.Shared.Languages;
 
 namespace Phoenix.Services.Reports.Types
@@ -11,12 +10,10 @@ namespace Phoenix.Services.Reports.Types
    internal sealed class YearTypeProcessor : TypeProcessorBase, ITypeProcessor
    {
       public ushort RemoveTemplateRowCount { get; }
-      public ReportType Type { get; }
 
       public YearTypeProcessor()
       {
          RemoveTemplateRowCount = 354;
-         Type = ReportType.Year;
       }
 
       public int GetDatePart(DateTime date)
@@ -43,20 +40,16 @@ namespace Phoenix.Services.Reports.Types
       {
          return x => new()
          {
+            DeviceId = x.Device.Id,
+            DeviceType = x.Device.DeviceType,
             DatePart = x.Date.Month,
-            DeviceId = x.DeviceId,
          };
       }
 
-      public DateRange GetRange(DateOnly date)
+      public Tuple<DateTime, DateTime> GetRange(DateOnly date)
       {
          DateTime dateTime = new(date.Year, 1, 1);
-
-         return new()
-         {
-            Start = dateTime,
-            End = dateTime.AddYears(1),
-         };
+         return new(dateTime, dateTime.AddYears(1));
       }
    }
 }

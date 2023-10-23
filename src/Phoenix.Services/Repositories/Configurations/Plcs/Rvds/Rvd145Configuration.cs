@@ -1,13 +1,15 @@
-using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using Phoenix.Entities.Plcs.Rvds;
+using Phoenix.Services.Repositories.Configurations.Base;
 
 namespace Phoenix.Services.Repositories.Configurations.Plcs.Rvds
 {
-   internal sealed class Rvd145Configuration : IEntityTypeConfiguration<Rvd145>
+   internal sealed class Rvd145Configuration : PlcConfigurationBase<Rvd145>
    {
-      public void Configure(EntityTypeBuilder<Rvd145> builder)
+      public override void Configure(EntityTypeBuilder<Rvd145> builder)
       {
+         base.Configure(builder);
+
          builder.Property(x => x.OutsideTemp)
             .IsRequired();
 
@@ -49,19 +51,6 @@ namespace Phoenix.Services.Repositories.Configurations.Plcs.Rvds
 
          builder.Property(x => x.DhwStatus)
             .IsRequired();
-
-         builder.Property(x => x.Date)
-            .IsRequired();
-
-         builder.Property(x => x.DeviceId)
-            .IsRequired();
-
-         builder.HasKey(x => new { x.Date, x.DeviceId })
-            .IsClustered();
-
-         builder.HasOne(x => x.Device)
-            .WithMany()
-            .HasForeignKey(x => x.DeviceId);
       }
    }
 }

@@ -2,8 +2,6 @@ using System;
 using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
-using Phoenix.Entities.Base;
-using Phoenix.Models.Base.Commands;
 using Phoenix.Services.Repositories;
 using Phoenix.Shared.Extensions;
 
@@ -18,22 +16,12 @@ namespace Phoenix.Services.Handlers.Base
          _uow = uow;
       }
 
-      protected static Task<DateTime> GetServerDateAsync()
+      protected static DateTime GetServerDate()
       {
-         return Task.FromResult(DateTime.Now.RoundToSecond());
+         return DateTime.Now.RoundToSecond();
       }
 
-      protected static Task<bool> IsPlcExistAsync<T>(DbSet<T> plcs, CreatePlcCommandBase request, CancellationToken cancellationToken) where T : PlcBase
-      {
-         return plcs
-            .AsNoTracking()
-            .AnyAsync(x =>
-               x.Date == request.Date.RoundToSecond() &&
-               x.DeviceId == request.DeviceId
-            , cancellationToken);
-      }
-
-      protected Task<bool> IsActiveUserExistsAsync(int userId, CancellationToken cancellationToken)
+      protected Task<bool> IsActiveUserAsync(int userId, CancellationToken cancellationToken)
       {
          return _uow.User
             .AsNoTracking()

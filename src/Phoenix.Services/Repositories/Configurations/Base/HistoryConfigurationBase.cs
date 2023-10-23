@@ -1,0 +1,27 @@
+using Microsoft.EntityFrameworkCore.Metadata.Builders;
+using Phoenix.Entities.Base;
+
+namespace Phoenix.Services.Repositories.Configurations.Base
+{
+   internal abstract class HistoryConfigurationBase<T> : EntityConfigurationBase<T> where T : HistoryBase
+   {
+      public override void Configure(EntityTypeBuilder<T> builder)
+      {
+         base.Configure(builder);
+
+         builder.Property(x => x.CreatedById)
+            .IsRequired();
+
+         builder.Property(x => x.IsActive)
+            .IsRequired();
+
+         builder.Property(x => x.CreateDate)
+            .HasPrecision(0)
+            .IsRequired();
+
+         builder.HasOne(x => x.CreatedBy)
+            .WithMany()
+            .HasForeignKey(x => x.CreatedById);
+      }
+   }
+}

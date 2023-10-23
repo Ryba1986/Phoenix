@@ -19,29 +19,24 @@ namespace Phoenix.Services.Helpers
       public static TokenResult CreateClient(int locationId, JwtSettings settings)
       {
          (DateTime StartDate, DateTime EndDate) range = GetTokenRange(settings.ExpireMinutes);
-         Claim[] claims = new[]
-         {
-            locationId.CreateIdClaim()
-         };
+         Claim[] claims = [locationId.CreateIdClaim()];
 
          return CreateToken(range, claims, JwtIssuer.Client, settings.Key);
       }
 
-      public static TokenResult CreateWeb(User user, IEnumerable<KeyValuePair<Permission, AccessLevel>> rolePermissions, JwtSettings settings)
+      public static TokenResult CreateWeb(User user, IReadOnlyCollection<KeyValuePair<Permission, AccessLevel>> rolePermissions, JwtSettings settings)
       {
          (DateTime StartDate, DateTime EndDate) range = GetTokenRange(settings.ExpireMinutes);
 
-         List<Claim> claims = new()
-         {
+         Claim[] claims =
+         [
             user.Id.CreateIdClaim(),
             user.Name.CreateNameClaim(),
-         };
-
-         claims.AddRange(rolePermissions.Select(x => x.CreateRoleClaim()));
+            .. rolePermissions.Select(x => x.CreateRoleClaim()),
+         ];
 
          return CreateToken(range, claims, JwtIssuer.Web, settings.Key);
       }
-
       private static (DateTime StartDate, DateTime EndDate) GetTokenRange(ushort expireMinutes)
       {
          DateTime createDate = DateTime.UtcNow;

@@ -24,7 +24,7 @@ namespace Phoenix.Services.Handlers.Locations.Commands
 
       public async Task<Result> Handle(CreateLocationCommand request, CancellationToken cancellationToken)
       {
-         if (!await IsActiveUserExistsAsync(request.CreatedById, cancellationToken))
+         if (!await IsActiveUserAsync(request.CreatedById, cancellationToken))
          {
             return Result.Error(Translations.User_Active_NotExists);
          }
@@ -57,7 +57,7 @@ namespace Phoenix.Services.Handlers.Locations.Commands
             IncludeReport = request.IncludeReport,
             IsActive = request.IsActive,
             CreatedById = request.CreatedById,
-            CreateDate = await GetServerDateAsync(),
+            CreateDate = GetServerDate(),
          });
 
          await _uow.SaveChangesAsync(cancellationToken);

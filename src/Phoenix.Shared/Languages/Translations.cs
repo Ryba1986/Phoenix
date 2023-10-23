@@ -18,16 +18,11 @@ namespace Phoenix.Shared.Languages
       public static string Location_Exists => Get(eng: "Location exists.", pol: "Lokalizacja już istnieje.");
       public static string Location_NotExists => Get(eng: "Location not exists.", pol: "Lokalizacja nie istnieje.");
 
-      public static string ReportType_Day => Get(eng: "Day", pol: "Dobowy");
-      public static string ReportType_Month => Get(eng: "Month", pol: "Miesięczny");
-      public static string ReportType_Year => Get(eng: "Year", pol: "Roczny");
-      public static string ReportType_YearByDay => Get(eng: "Day of year", pol: "Dobowy roczny");
+      public static string Role_Exists => Get(eng: "Role exists.", pol: "Rola już istnieje.");
+      public static string Role_NotExists => Get(eng: "Role not exists.", pol: "Rola nie istnieje.");
 
       public static string RolePermission_Exists => Get(eng: "Permission exists.", pol: "Uprawnienie już istnieje.");
       public static string RolePermission_NotExists => Get(eng: "Permission not exists.", pol: "Uprawnienie nie istnieje.");
-
-      public static string Role_Exists => Get(eng: "Role exists.", pol: "Rola już istnieje.");
-      public static string Role_NotExists => Get(eng: "Role not exists.", pol: "Rola nie istnieje.");
 
       public static string User_Active_NotExists => Get(eng: "Cannot find an active user.", pol: "Nie można znaleźć aktywnego użytkownika.");
       public static string User_Exists => Get(eng: "User exists.", pol: "Użytkownik już istnieje.");
@@ -39,6 +34,11 @@ namespace Phoenix.Shared.Languages
       public static string DeviceType_Heating => Get(eng: "Heating", pol: "CO");
       public static string DeviceType_DoubleHeating => Get(eng: "Double heating", pol: "CO & CO");
       public static string DeviceType_HeatingDomestic => Get(eng: "Heating & domestic water", pol: "CO & CWU");
+
+      public static string PlcReportType_Day => Get(eng: "Day", pol: "Dobowy");
+      public static string PlcReportType_Month => Get(eng: "Month", pol: "Miesięczny");
+      public static string PlcReportType_Year => Get(eng: "Year", pol: "Roczny");
+      public static string PlcReportType_YearByDay => Get(eng: "Day of year", pol: "Dobowy roczny");
 
       public static string RoleAccessLevel_None => Get(eng: "None", pol: "Brak");
       public static string RoleAccessLevel_Read => Get(eng: "Read", pol: "Odczyt");
@@ -75,8 +75,6 @@ namespace Phoenix.Shared.Languages
       public static string Validator_AccessLevel_Invalid => Get(eng: "Access level is invaild.", pol: "Poziom dostępu jest nieprawidłowy.");
       public static string Validator_BoundRate_Invalid => Get(eng: "Boundrate is invaild.", pol: "Prędkość jest nieprawidłowa.");
       public static string Validator_ClientVersion_Invalid => Get(eng: "Client version is invaild.", pol: "Wersja klienta jest nieprawidłowa.");
-      public static string Validator_ConfirmNewPassword_Invalid => Get(eng: "Confirmation password is invaild.", pol: "Potwierdzenie nowego hasła jest nieprawidłowe.");
-      public static string Validator_CurrentPassword_Invalid => Get(eng: "Current password is invaild.", pol: "Aktualne hasło jest nieprawidłowe.");
       public static string Validator_DataBits_Invalid => Get(eng: "Data bit is invaild.", pol: "Data bit jest nieprawidłowe.");
       public static string Validator_DeviceType_Invalid => Get(eng: "Device type is invaild.", pol: "Typ urządzenia jest nieprawidłowe.");
       public static string Validator_Email_Invalid => Get(eng: "Email is invaild.", pol: "Email jest nieprawidłowy.");
@@ -85,8 +83,8 @@ namespace Phoenix.Shared.Languages
       public static string Validator_LocationId_Invalid => Get(eng: "Location is invaild.", pol: "Lokalizacja jest nieprawidłowa.");
       public static string Validator_MacAddress_Invalid => Get(eng: "MAC address is invaild.", pol: "Adres MAC jest nieprawidłowy.");
       public static string Validator_Name_Invalid => Get(eng: "Name is invaild.", pol: "Nazwa jest nieprawidłowa.");
-      public static string Validator_NewPassword_Invalid => Get(eng: "New password is invaild.", pol: "Nowe hasło jest nieprawidłowe.");
       public static string Validator_Parity_Invalid => Get(eng: "Parity is invaild.", pol: "Parzystość jest nieprawidłowa.");
+      public static string Validator_Password_Invalid => Get(eng: "Password is invaild.", pol: "Hasło jest nieprawidłowe.");
       public static string Validator_Permission_Invalid => Get(eng: "Permission is invaild.", pol: "Uprawnienie jest nieprawidłowe.");
       public static string Validator_PlcType_Invalid => Get(eng: "Plc type is invaild.", pol: "Typ plc jest nieprawidłowy.");
       public static string Validator_ReportSequence_Invalid => Get(eng: "Sequence number is invaild.", pol: "Numer sekwencyjny jest nieprawidłowy.");
@@ -102,7 +100,7 @@ namespace Phoenix.Shared.Languages
          return new(English);
       }
 
-      public static IReadOnlyCollection<CultureInfo> GetSupportedCultures()
+      public static IReadOnlyCollection<CultureInfo> GetCultures()
       {
          return new CultureInfo[]{
             GetDefaultCulture(),

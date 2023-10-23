@@ -1,13 +1,15 @@
-using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using Phoenix.Entities.Roles;
+using Phoenix.Services.Repositories.Configurations.Base;
 
 namespace Phoenix.Services.Repositories.Configurations.Roles
 {
-   internal sealed class RoleHistoryConfiguration : IEntityTypeConfiguration<RoleHistory>
+   internal sealed class RoleHistoryConfiguration : HistoryConfigurationBase<RoleHistory>
    {
-      public void Configure(EntityTypeBuilder<RoleHistory> builder)
+      public override void Configure(EntityTypeBuilder<RoleHistory> builder)
       {
+         base.Configure(builder);
+
          builder.Property(x => x.RoleId)
             .IsRequired();
 
@@ -16,24 +18,11 @@ namespace Phoenix.Services.Repositories.Configurations.Roles
             .IsRequired();
 
          builder.Property(x => x.IsAdmin)
-         .IsRequired();
-
-         builder.Property(x => x.Id)
             .IsRequired();
-
-         builder.Property(x => x.IsActive)
-            .IsRequired();
-
-         builder.HasKey(x => x.Id)
-            .IsClustered();
 
          builder.HasOne(x => x.Role)
             .WithMany()
             .HasForeignKey(x => x.RoleId);
-
-         builder.HasOne(x => x.CreatedBy)
-            .WithMany()
-            .HasForeignKey(x => x.CreatedById);
       }
    }
 }

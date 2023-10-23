@@ -1,8 +1,8 @@
 using System.Threading.Tasks;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
+using Phoenix.Api.Shared.Controllers;
 using Phoenix.Api.Web.Attributes;
-using Phoenix.Api.Web.Controllers.Base;
 using Phoenix.Models.Devices.Commands;
 using Phoenix.Models.Devices.Queries;
 using Phoenix.Shared.Enums.Roles;
@@ -17,9 +17,9 @@ namespace Phoenix.Api.Web.Controllers
 
       [Authorization(Permission.Device, AccessLevel.Read)]
       [HttpGet]
-      public async Task<IActionResult> GetDevices()
+      public async Task<IActionResult> GetDevices([FromQuery] GetDevicesQuery request)
       {
-         return await HandleAsync(new GetDevicesQuery());
+         return await HandleAsync(request);
       }
 
       [Authorization(Permission.Device, AccessLevel.Read)]

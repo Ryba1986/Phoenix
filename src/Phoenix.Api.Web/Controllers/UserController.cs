@@ -2,8 +2,8 @@ using System.Threading.Tasks;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Phoenix.Api.Shared.Controllers;
 using Phoenix.Api.Web.Attributes;
-using Phoenix.Api.Web.Controllers.Base;
 using Phoenix.Models.Users.Commands;
 using Phoenix.Models.Users.Queries;
 using Phoenix.Shared.Enums.Roles;
@@ -18,9 +18,9 @@ namespace Phoenix.Api.Web.Controllers
 
       [Authorization(Permission.User, AccessLevel.Read)]
       [HttpGet]
-      public async Task<IActionResult> GetUsers()
+      public async Task<IActionResult> GetUsers([FromQuery] GetUsersQuery request)
       {
-         return await HandleAsync(new GetUsersQuery());
+         return await HandleAsync(request);
       }
 
       [Authorization(Permission.User, AccessLevel.Read)]
@@ -31,9 +31,9 @@ namespace Phoenix.Api.Web.Controllers
       }
 
       [HttpGet]
-      public async Task<IActionResult> GetUserDictionary()
+      public async Task<IActionResult> GetUserDictionary(GetUserDictionaryQuery request)
       {
-         return await HandleAsync(new GetUserDictionaryQuery());
+         return await HandleAsync(request);
       }
 
       [AllowAnonymous]
