@@ -12,3 +12,6 @@ trim_trailing_whitespace = true
 dotnet_diagnostic.IDE0290.severity = none
 dotnet_diagnostic.IDE0301.severity = none
 dotnet_sort_system_directives_first = true
+
+[*.yml]
+indent_size = 2
