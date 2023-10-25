@@ -25,6 +25,10 @@ namespace Phoenix.Services.Configuration.Modules
             .SingleInstance();
 
          builder
+            .RegisterInstance(_configuration.GetSettings<SmtpSettings>())
+            .SingleInstance();
+
+         builder
             .RegisterInstance(_configuration.GetSettings<SqlSettings>())
             .SingleInstance();
       }
