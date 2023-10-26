@@ -8,6 +8,7 @@ namespace Phoenix.Services.Reports.Base
    internal interface ITypeProcessor
    {
       ushort DeviceNameRow { get; }
+      ushort LegendRow { get; }
       ushort RemoveTemplateRowCount { get; }
       ushort StartingRow { get; }
 

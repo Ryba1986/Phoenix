@@ -125,7 +125,7 @@ namespace Phoenix.Services.Handlers.Reports.Queries
       private static void SetResultSheetHeaders(ExcelWorksheet sheet, DateOnly date, string locationName, ITypeProcessor typeProcessor)
       {
          sheet.Cells[1, 1, 1, sheet.Dimension.Columns].Merge = true;
-         sheet.Cells[3, 1].Value = typeProcessor.GetLegend();
+         sheet.Cells[typeProcessor.LegendRow, 1].Value = typeProcessor.GetLegend();
 
          ExcelRange headerCell = sheet.Cells[1, 1];
          headerCell.Value = typeProcessor.GetHeader(locationName, date);
