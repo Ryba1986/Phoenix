@@ -1,9 +1,12 @@
+using System.Net.Mail;
+using System.Security.Cryptography;
 using System.Threading;
 using System.Threading.Tasks;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 using Phoenix.Entities.Users;
 using Phoenix.Models.Users.Commands;
+using Phoenix.Services.Extensions;
 using Phoenix.Services.Handlers.Base;
 using Phoenix.Services.Repositories;
 using Phoenix.Shared.Extensions;
@@ -14,8 +17,11 @@ namespace Phoenix.Services.Handlers.Users.Commands
 {
    internal sealed class CreateUserHandler : HandlerBase, IRequestHandler<CreateUserCommand, Result>
    {
-      public CreateUserHandler(UnitOfWork uow) : base(uow)
+      private readonly SmtpClient _smtpClient;
+
+      public CreateUserHandler(UnitOfWork uow, SmtpClient smtpClient) : base(uow)
       {
+         _smtpClient = smtpClient;
       }
 
       public async Task<Result> Handle(CreateUserCommand request, CancellationToken cancellationToken)
@@ -43,13 +49,14 @@ namespace Phoenix.Services.Handlers.Users.Commands
             return Result.Error(Translations.Role_NotExists);
          }
 
-         // TODO: generate random password and send an email
+         string password = $"{RandomNumberGenerator.GetHexString(12)}!@#";
+
          User newUser = new()
          {
             RoleId = request.RoleId,
             Name = request.Name,
             Email = request.Email,
-            Password = request.Email.CreatePassword(),
+            Password = password.CreatePassword(),
             IsActive = request.IsActive,
          };
 
@@ -64,6 +71,8 @@ namespace Phoenix.Services.Handlers.Users.Commands
             CreatedById = request.CreatedById,
             CreateDate = GetServerDate(),
          });
+
+         await _smtpClient.SendAsync(newUser.Email, Translations.Mail_CreateAccount_Subject, string.Format(Translations.Mail_CreateAccount_Body, newUser.Email, password), cancellationToken);
 
          await _uow.SaveChangesAsync(cancellationToken);
          return Result.Success();
