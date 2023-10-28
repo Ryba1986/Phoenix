@@ -1,4 +1,4 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
 
    <PropertyGroup>
       <TargetFramework>net8.0</TargetFramework>
@@ -22,7 +22,7 @@
 
    <ItemGroup>
       <PackageReference Include="Autofac" Version="7.1.0" />
-      <PackageReference Include="EPPlus" Version="7.0.0-rc1" />
+      <PackageReference Include="EPPlus" Version="7.0.0" />
       <PackageReference Include="MediatR" Version="12.1.1" />
       <PackageReference Include="MediatR.Extensions.Autofac.DependencyInjection" Version="11.2.0" />
       <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="8.0.0-rc.2" />
