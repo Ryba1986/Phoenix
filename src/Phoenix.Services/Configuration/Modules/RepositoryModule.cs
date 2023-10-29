@@ -25,7 +25,9 @@ namespace Phoenix.Services.Configuration.Modules
                   Password = settings.Password,
                   CommandTimeout = settings.CommandTimeout,
                   Pooling = true,
-                  SslMode = SslMode.Allow,
+                  SslMode = settings.EnableSsl
+                     ? SslMode.Prefer
+                     : SslMode.Allow,
                };
 
                DbContextOptions<UnitOfWork> contextOptions = new DbContextOptionsBuilder<UnitOfWork>()
