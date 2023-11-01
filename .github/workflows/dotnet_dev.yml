@@ -1,20 +1,20 @@
 name: .NET DEV
 
 on:
-   push:
-      branches: ["dev"]
-   pull_request:
-      branches: ["dev"]
+  push:
+    branches: ["dev"]
+  pull_request:
+    branches: ["dev"]
 
 jobs:
-   build:
-      runs-on: ubuntu-latest
+  build:
+    runs-on: ubuntu-latest
 
-      steps:
-         - uses: actions/checkout@v3
-         - name: Setup .NET
-           uses: actions/setup-dotnet@v3
-           with:
-              dotnet-version: 8.0.x
-         - name: Build
-           run: dotnet build
+    steps:
+      - uses: actions/checkout@v3
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v3
+        with:
+          dotnet-version: 8.0.x
+      - name: Build
+        run: dotnet build
