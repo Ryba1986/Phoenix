@@ -8,7 +8,6 @@ using Phoenix.Services.Handlers.Base;
 using Phoenix.Services.Helpers;
 using Phoenix.Services.Repositories;
 using Phoenix.Services.Settings;
-using Phoenix.Shared.Extensions;
 using Phoenix.Shared.Results;
 
 namespace Phoenix.Services.Handlers.Users.Queries

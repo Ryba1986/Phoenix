@@ -23,6 +23,7 @@ namespace Phoenix.Services.Handlers.Roles.Queries
          return await _uow.RolePermission
             .AsNoTracking()
             .Where(x => x.RoleId == request.RoleId)
+            .OrderBy(x => x.Permission)
             .Select(x => x.ToRolePermissionDto())
             .ToArrayAsync(cancellationToken);
       }

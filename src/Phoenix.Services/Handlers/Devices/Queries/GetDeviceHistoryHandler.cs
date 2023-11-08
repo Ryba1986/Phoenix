@@ -25,6 +25,7 @@ namespace Phoenix.Services.Handlers.Devices.Queries
             .Include(x => x.Location)
             .Include(x => x.CreatedBy)
             .Where(x => x.DeviceId == request.DeviceId)
+            .OrderByDescending(x => x.CreateDate)
             .Select(x => x.ToDeviceHistoryDto())
             .ToArrayAsync(cancellationToken);
       }

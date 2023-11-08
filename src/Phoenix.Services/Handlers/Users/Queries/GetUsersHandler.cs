@@ -22,6 +22,7 @@ namespace Phoenix.Services.Handlers.Users.Queries
       {
          return await _uow.User
             .AsNoTracking()
+            .OrderBy(x => x.Name)
             .Select(x => x.ToUserDto())
             .ToArrayAsync(cancellationToken);
       }

@@ -22,6 +22,9 @@ namespace Phoenix.Services.Handlers.Clients.Queries
       {
          return await _uow.Client
             .AsNoTracking()
+            .Include(x => x.Location)
+            .OrderBy(x => x.Location.Name)
+            .ThenBy(x => x.MacAddress)
             .Select(x => x.ToClientDto())
             .ToArrayAsync(cancellationToken);
       }

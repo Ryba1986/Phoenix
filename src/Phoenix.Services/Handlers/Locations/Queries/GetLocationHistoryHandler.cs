@@ -24,6 +24,7 @@ namespace Phoenix.Services.Handlers.Locations.Queries
             .AsNoTracking()
             .Include(x => x.CreatedBy)
             .Where(x => x.LocationId == request.LocationId)
+            .OrderByDescending(x => x.CreateDate)
             .Select(x => x.ToLocationHistoryDto())
             .ToArrayAsync(cancellationToken);
       }

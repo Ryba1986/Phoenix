@@ -23,6 +23,8 @@ namespace Phoenix.Services.Handlers.Devices.Queries
          return await _uow.Device
             .AsNoTracking()
             .Include(x => x.Location)
+            .OrderBy(x => x.Location.Name)
+            .ThenBy(x => x.Name)
             .Select(x => x.ToDeviceDto())
             .ToArrayAsync(cancellationToken);
       }

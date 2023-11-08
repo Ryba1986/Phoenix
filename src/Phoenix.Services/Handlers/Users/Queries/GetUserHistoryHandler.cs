@@ -25,6 +25,7 @@ namespace Phoenix.Services.Handlers.Users.Queries
             .Include(x => x.Role)
             .Include(x => x.CreatedBy)
             .Where(x => x.UserId == request.UserId)
+            .OrderByDescending(x => x.CreateDate)
             .Select(x => x.ToUserHistoryDto())
             .ToArrayAsync(cancellationToken);
       }

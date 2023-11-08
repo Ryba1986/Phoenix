@@ -24,6 +24,7 @@ namespace Phoenix.Services.Handlers.Roles.Queries
             .AsNoTracking()
             .Include(x => x.CreatedBy)
             .Where(x => x.RoleId == request.RoleId)
+            .OrderByDescending(x => x.CreateDate)
             .Select(x => x.ToRoleHistoryDto())
             .ToArrayAsync(cancellationToken);
       }

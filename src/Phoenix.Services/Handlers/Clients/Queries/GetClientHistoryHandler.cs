@@ -25,6 +25,7 @@ namespace Phoenix.Services.Handlers.Clients.Queries
             .Include(x => x.Location)
             .Include(x => x.CreatedBy)
             .Where(x => x.ClientId == request.ClientId)
+            .OrderByDescending(x => x.CreateDate)
             .Select(x => x.ToClientHistoryDto())
             .ToArrayAsync(cancellationToken);
       }
