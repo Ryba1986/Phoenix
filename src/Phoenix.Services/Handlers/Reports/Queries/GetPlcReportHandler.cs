@@ -52,7 +52,7 @@ namespace Phoenix.Services.Handlers.Reports.Queries
          {
             Name = typeProcessor.GetFileName(request.Date),
             Type = "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
-            Data = await ep.GetAsByteArrayAsync(cancellationToken),
+            Data = ep.GetAsByteArray(),
          };
       }
 
