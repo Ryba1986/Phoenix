@@ -77,7 +77,6 @@ namespace Phoenix.Services.Mappings
       public static Expression<Func<IGrouping<PlcGroupBy, Climatix>, ClimatixReportDto>> ToClimatixReportDto = group => new()
       {
          DeviceId = group.Key.DeviceId,
-         DeviceType = group.Key.DeviceType,
          Date = group.Min(x => x.Date),
 
          OutsideTempAvg = group.Average(x => x.OutsideTemp),
@@ -92,6 +91,8 @@ namespace Phoenix.Services.Mappings
          ChHighOutletPresureMin = group.Min(x => x.ChHighOutletPresure),
          ChHighOutletPresureMax = group.Max(x => x.ChHighOutletPresure),
 
+         Ch1Status = group.Max(x => x.Ch1Status),
+
          Ch1LowInletTempAvg = group.Average(x => x.Ch1LowInletTemp),
          Ch1LowInletTempMin = group.Min(x => x.Ch1LowInletTemp),
          Ch1LowInletTempMax = group.Max(x => x.Ch1LowInletTemp),
@@ -104,6 +105,8 @@ namespace Phoenix.Services.Mappings
          Ch1LowOutletPresureMin = group.Min(x => x.Ch1LowOutletPresure),
          Ch1LowOutletPresureMax = group.Max(x => x.Ch1LowOutletPresure),
 
+         Ch2Status = group.Max(x => x.Ch2Status),
+
          Ch2LowInletTempAvg = group.Average(x => x.Ch2LowInletTemp),
          Ch2LowInletTempMin = group.Min(x => x.Ch2LowInletTemp),
          Ch2LowInletTempMax = group.Max(x => x.Ch2LowInletTemp),
@@ -115,6 +118,8 @@ namespace Phoenix.Services.Mappings
          Ch2LowOutletPresureAvg = group.Average(x => x.Ch2LowOutletPresure),
          Ch2LowOutletPresureMin = group.Min(x => x.Ch2LowOutletPresure),
          Ch2LowOutletPresureMax = group.Max(x => x.Ch2LowOutletPresure),
+
+         DhwStatus = group.Max(x => x.DhwStatus),
 
          DhwTempAvg = group.Average(x => x.DhwTemp),
          DhwTempMin = group.Min(x => x.DhwTemp),

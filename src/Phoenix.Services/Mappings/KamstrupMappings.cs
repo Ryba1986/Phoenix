@@ -44,7 +44,6 @@ namespace Phoenix.Services.Mappings
       public static Expression<Func<IGrouping<PlcGroupBy, Kamstrup>, KamstrupReportDto>> ToKamstrupReportDto = group => new()
       {
          DeviceId = group.Key.DeviceId,
-         DeviceType = group.Key.DeviceType,
          Date = group.Min(x => x.Date),
 
          InletTempAvg = group.Average(x => x.InletTemp),

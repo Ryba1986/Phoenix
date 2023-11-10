@@ -85,7 +85,6 @@ namespace Phoenix.Services.Helpers
       {
          IReadOnlyCollection<R> result = await plc
             .AsNoTracking()
-            .Include(x => x.Device)
             .Where(x =>
                x.Date >= range.Item1 &&
                x.Date < range.Item2

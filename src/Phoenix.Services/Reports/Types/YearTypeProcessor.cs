@@ -40,8 +40,7 @@ namespace Phoenix.Services.Reports.Types
       {
          return x => new()
          {
-            DeviceId = x.Device.Id,
-            DeviceType = x.Device.DeviceType,
+            DeviceId = x.DeviceId,
             DatePart = x.Date.Month,
          };
       }

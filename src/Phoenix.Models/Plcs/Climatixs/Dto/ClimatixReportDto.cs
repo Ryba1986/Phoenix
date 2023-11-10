@@ -16,6 +16,8 @@ namespace Phoenix.Models.Plcs.Climatixs.Dto
       public float ChHighOutletPresureMin { get; init; }
       public float ChHighOutletPresureMax { get; init; }
 
+      public bool Ch1Status { get; init; }
+
       public float Ch1LowInletTempAvg { get; init; }
       public float Ch1LowInletTempMin { get; init; }
       public float Ch1LowInletTempMax { get; init; }
@@ -28,6 +30,8 @@ namespace Phoenix.Models.Plcs.Climatixs.Dto
       public float Ch1LowOutletPresureMin { get; init; }
       public float Ch1LowOutletPresureMax { get; init; }
 
+      public bool Ch2Status { get; init; }
+
       public float Ch2LowInletTempAvg { get; init; }
       public float Ch2LowInletTempMin { get; init; }
       public float Ch2LowInletTempMax { get; init; }
@@ -39,6 +43,8 @@ namespace Phoenix.Models.Plcs.Climatixs.Dto
       public float Ch2LowOutletPresureAvg { get; init; }
       public float Ch2LowOutletPresureMin { get; init; }
       public float Ch2LowOutletPresureMax { get; init; }
+
+      public bool DhwStatus { get; init; }
 
       public float DhwTempAvg { get; init; }
       public float DhwTempMin { get; init; }

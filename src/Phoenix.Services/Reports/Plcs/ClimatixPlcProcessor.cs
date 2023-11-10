@@ -9,7 +9,6 @@ using Phoenix.Services.Helpers;
 using Phoenix.Services.Mappings;
 using Phoenix.Services.Reports.Base;
 using Phoenix.Services.Repositories;
-using Phoenix.Shared.Enums.Devices;
 using Phoenix.Shared.Extensions;
 
 namespace Phoenix.Services.Reports.Plcs
@@ -58,19 +57,22 @@ namespace Phoenix.Services.Reports.Plcs
             sheet.Cells[rowIndex, 8].Value = climatix.ChHighOutletPresureMin;
             sheet.Cells[rowIndex, 9].Value = climatix.ChHighOutletPresureMax;
 
-            sheet.Cells[rowIndex, 10].Value = climatix.Ch1LowInletTempAvg.Round();
-            sheet.Cells[rowIndex, 11].Value = climatix.Ch1LowInletTempMin;
-            sheet.Cells[rowIndex, 12].Value = climatix.Ch1LowInletTempMax;
+            if (climatix.Ch1Status)
+            {
+               sheet.Cells[rowIndex, 10].Value = climatix.Ch1LowInletTempAvg.Round();
+               sheet.Cells[rowIndex, 11].Value = climatix.Ch1LowInletTempMin;
+               sheet.Cells[rowIndex, 12].Value = climatix.Ch1LowInletTempMax;
 
-            sheet.Cells[rowIndex, 13].Value = climatix.Ch1LowOutletTempAvg.Round();
-            sheet.Cells[rowIndex, 14].Value = climatix.Ch1LowOutletTempMin;
-            sheet.Cells[rowIndex, 15].Value = climatix.Ch1LowOutletTempMax;
+               sheet.Cells[rowIndex, 13].Value = climatix.Ch1LowOutletTempAvg.Round();
+               sheet.Cells[rowIndex, 14].Value = climatix.Ch1LowOutletTempMin;
+               sheet.Cells[rowIndex, 15].Value = climatix.Ch1LowOutletTempMax;
 
-            sheet.Cells[rowIndex, 16].Value = climatix.Ch1LowOutletPresureAvg.Round();
-            sheet.Cells[rowIndex, 17].Value = climatix.Ch1LowOutletPresureMin;
-            sheet.Cells[rowIndex, 18].Value = climatix.Ch1LowOutletPresureMax;
+               sheet.Cells[rowIndex, 16].Value = climatix.Ch1LowOutletPresureAvg.Round();
+               sheet.Cells[rowIndex, 17].Value = climatix.Ch1LowOutletPresureMin;
+               sheet.Cells[rowIndex, 18].Value = climatix.Ch1LowOutletPresureMax;
+            }
 
-            if (climatix.DeviceType == DeviceType.DoubleHeating)
+            if (climatix.Ch2Status)
             {
                sheet.Cells[rowIndex, 19].Value = climatix.Ch2LowInletTempAvg.Round();
                sheet.Cells[rowIndex, 20].Value = climatix.Ch2LowInletTempMin;
@@ -85,7 +87,7 @@ namespace Phoenix.Services.Reports.Plcs
                sheet.Cells[rowIndex, 27].Value = climatix.Ch2LowOutletPresureMax;
             }
 
-            if (climatix.DeviceType == DeviceType.HeatingDomestic)
+            if (climatix.DhwStatus)
             {
                sheet.Cells[rowIndex, 28].Value = climatix.DhwTempAvg.Round();
                sheet.Cells[rowIndex, 29].Value = climatix.DhwTempMin;
@@ -105,21 +107,22 @@ namespace Phoenix.Services.Reports.Plcs
          sheet.Cells[sheet.Dimension.Rows, 8].Value = plcData.Min(x => x.ChHighOutletPresureMin);
          sheet.Cells[sheet.Dimension.Rows, 9].Value = plcData.Max(x => x.ChHighOutletPresureMax);
 
-         sheet.Cells[sheet.Dimension.Rows, 10].Value = plcData.Average(x => x.Ch1LowInletTempAvg).Round();
-         sheet.Cells[sheet.Dimension.Rows, 11].Value = plcData.Min(x => x.Ch1LowInletTempMin);
-         sheet.Cells[sheet.Dimension.Rows, 12].Value = plcData.Max(x => x.Ch1LowInletTempMax);
+         if (plcData.Max(x => x.Ch1Status))
+         {
+            sheet.Cells[sheet.Dimension.Rows, 10].Value = plcData.Average(x => x.Ch1LowInletTempAvg).Round();
+            sheet.Cells[sheet.Dimension.Rows, 11].Value = plcData.Min(x => x.Ch1LowInletTempMin);
+            sheet.Cells[sheet.Dimension.Rows, 12].Value = plcData.Max(x => x.Ch1LowInletTempMax);
 
-         sheet.Cells[sheet.Dimension.Rows, 13].Value = plcData.Average(x => x.Ch1LowOutletTempAvg).Round();
-         sheet.Cells[sheet.Dimension.Rows, 14].Value = plcData.Min(x => x.Ch1LowOutletTempMin);
-         sheet.Cells[sheet.Dimension.Rows, 15].Value = plcData.Max(x => x.Ch1LowOutletTempMax);
+            sheet.Cells[sheet.Dimension.Rows, 13].Value = plcData.Average(x => x.Ch1LowOutletTempAvg).Round();
+            sheet.Cells[sheet.Dimension.Rows, 14].Value = plcData.Min(x => x.Ch1LowOutletTempMin);
+            sheet.Cells[sheet.Dimension.Rows, 15].Value = plcData.Max(x => x.Ch1LowOutletTempMax);
 
-         sheet.Cells[sheet.Dimension.Rows, 16].Value = plcData.Average(x => x.Ch1LowOutletPresureAvg).Round();
-         sheet.Cells[sheet.Dimension.Rows, 17].Value = plcData.Min(x => x.Ch1LowOutletPresureMin);
-         sheet.Cells[sheet.Dimension.Rows, 18].Value = plcData.Max(x => x.Ch1LowOutletPresureMax);
+            sheet.Cells[sheet.Dimension.Rows, 16].Value = plcData.Average(x => x.Ch1LowOutletPresureAvg).Round();
+            sheet.Cells[sheet.Dimension.Rows, 17].Value = plcData.Min(x => x.Ch1LowOutletPresureMin);
+            sheet.Cells[sheet.Dimension.Rows, 18].Value = plcData.Max(x => x.Ch1LowOutletPresureMax);
+         }
 
-         DeviceType deviceType = plcData.First().DeviceType;
-
-         if (deviceType == DeviceType.DoubleHeating)
+         if (plcData.Max(x => x.Ch2Status))
          {
             sheet.Cells[sheet.Dimension.Rows, 19].Value = plcData.Average(x => x.Ch2LowInletTempAvg).Round();
             sheet.Cells[sheet.Dimension.Rows, 20].Value = plcData.Min(x => x.Ch2LowInletTempMin);
@@ -134,7 +137,7 @@ namespace Phoenix.Services.Reports.Plcs
             sheet.Cells[sheet.Dimension.Rows, 27].Value = plcData.Max(x => x.Ch2LowOutletPresureMax);
          }
 
-         if (deviceType == DeviceType.HeatingDomestic)
+         if (plcData.Max(x => x.DhwStatus))
          {
             sheet.Cells[sheet.Dimension.Rows, 28].Value = plcData.Average(x => x.DhwTempAvg).Round();
             sheet.Cells[sheet.Dimension.Rows, 29].Value = plcData.Min(x => x.DhwTempMin);

@@ -9,7 +9,6 @@ using Phoenix.Services.Helpers;
 using Phoenix.Services.Mappings;
 using Phoenix.Services.Reports.Base;
 using Phoenix.Services.Repositories;
-using Phoenix.Shared.Enums.Devices;
 using Phoenix.Shared.Extensions;
 
 
@@ -55,15 +54,18 @@ namespace Phoenix.Services.Reports.Plcs
             sheet.Cells[rowIndex, 5].Value = rvd.ChHighInletPresureMin;
             sheet.Cells[rowIndex, 6].Value = rvd.ChHighInletPresureMax;
 
-            sheet.Cells[rowIndex, 10].Value = rvd.Ch1LowInletTempAvg.Round();
-            sheet.Cells[rowIndex, 11].Value = rvd.Ch1LowInletTempMin;
-            sheet.Cells[rowIndex, 12].Value = rvd.Ch1LowInletTempMax;
+            if (rvd.Ch1Status)
+            {
+               sheet.Cells[rowIndex, 10].Value = rvd.Ch1LowInletTempAvg.Round();
+               sheet.Cells[rowIndex, 11].Value = rvd.Ch1LowInletTempMin;
+               sheet.Cells[rowIndex, 12].Value = rvd.Ch1LowInletTempMax;
 
-            sheet.Cells[rowIndex, 16].Value = rvd.Ch1LowOutletPresureAvg.Round();
-            sheet.Cells[rowIndex, 17].Value = rvd.Ch1LowOutletPresureMin;
-            sheet.Cells[rowIndex, 18].Value = rvd.Ch1LowOutletPresureMax;
+               sheet.Cells[rowIndex, 16].Value = rvd.Ch1LowOutletPresureAvg.Round();
+               sheet.Cells[rowIndex, 17].Value = rvd.Ch1LowOutletPresureMin;
+               sheet.Cells[rowIndex, 18].Value = rvd.Ch1LowOutletPresureMax;
+            }
 
-            if (rvd.DeviceType == DeviceType.HeatingDomestic)
+            if (rvd.DhwStatus)
             {
                sheet.Cells[rowIndex, 28].Value = rvd.DhwTempAvg.Round();
                sheet.Cells[rowIndex, 29].Value = rvd.DhwTempMin;
@@ -83,15 +85,18 @@ namespace Phoenix.Services.Reports.Plcs
          sheet.Cells[sheet.Dimension.Rows, 5].Value = plcData.Min(x => x.ChHighInletPresureMin);
          sheet.Cells[sheet.Dimension.Rows, 6].Value = plcData.Max(x => x.ChHighInletPresureMax);
 
-         sheet.Cells[sheet.Dimension.Rows, 10].Value = plcData.Average(x => x.Ch1LowInletTempAvg).Round();
-         sheet.Cells[sheet.Dimension.Rows, 11].Value = plcData.Min(x => x.Ch1LowInletTempMin);
-         sheet.Cells[sheet.Dimension.Rows, 12].Value = plcData.Max(x => x.Ch1LowInletTempMax);
+         if (plcData.Max(x => x.Ch1Status))
+         {
+            sheet.Cells[sheet.Dimension.Rows, 10].Value = plcData.Average(x => x.Ch1LowInletTempAvg).Round();
+            sheet.Cells[sheet.Dimension.Rows, 11].Value = plcData.Min(x => x.Ch1LowInletTempMin);
+            sheet.Cells[sheet.Dimension.Rows, 12].Value = plcData.Max(x => x.Ch1LowInletTempMax);
 
-         sheet.Cells[sheet.Dimension.Rows, 16].Value = plcData.Average(x => x.Ch1LowOutletPresureAvg).Round();
-         sheet.Cells[sheet.Dimension.Rows, 17].Value = plcData.Min(x => x.Ch1LowOutletPresureMin);
-         sheet.Cells[sheet.Dimension.Rows, 18].Value = plcData.Max(x => x.Ch1LowOutletPresureMax);
+            sheet.Cells[sheet.Dimension.Rows, 16].Value = plcData.Average(x => x.Ch1LowOutletPresureAvg).Round();
+            sheet.Cells[sheet.Dimension.Rows, 17].Value = plcData.Min(x => x.Ch1LowOutletPresureMin);
+            sheet.Cells[sheet.Dimension.Rows, 18].Value = plcData.Max(x => x.Ch1LowOutletPresureMax);
+         }
 
-         if (plcData.First().DeviceType == DeviceType.HeatingDomestic)
+         if (plcData.Max(x => x.DhwStatus))
          {
             sheet.Cells[sheet.Dimension.Rows, 28].Value = plcData.Average(x => x.DhwTempAvg).Round();
             sheet.Cells[sheet.Dimension.Rows, 29].Value = plcData.Min(x => x.DhwTempMin);
