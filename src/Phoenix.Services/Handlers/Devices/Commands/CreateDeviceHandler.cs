@@ -47,7 +47,7 @@ namespace Phoenix.Services.Handlers.Devices.Commands
             .AsNoTracking()
             .AnyAsync(x =>
                x.LocationId == request.LocationId &&
-               (x.Name == request.Name || x.ModbusId == request.ModbusId)
+               (x.Name == request.Name || x.ModbusId == request.ModbusId || x.ReportSequence == request.ReportSequence)
             , cancellationToken);
 
          if (deviceExists)

@@ -38,6 +38,7 @@ namespace Phoenix.Services.Repositories.Migrations
                table.ForeignKey($"FK_{nameof(Device)}_{nameof(Device.Location)}", x => x.LocationId, principalTable: nameof(Location), principalColumn: nameof(Location.Id));
                table.UniqueConstraint($"UK_{nameof(Device)}_{nameof(Device.Location)}_{nameof(Device.Name)}", x => new { x.LocationId, x.Name });
                table.UniqueConstraint($"UK_{nameof(Device)}_{nameof(Device.Location)}_{nameof(Device.ModbusId)}", x => new { x.LocationId, x.ModbusId });
+               table.UniqueConstraint($"UK_{nameof(Device)}_{nameof(Device.Location)}_{nameof(Device.ReportSequence)}", x => new { x.LocationId, x.ReportSequence });
             }
          );
       }
