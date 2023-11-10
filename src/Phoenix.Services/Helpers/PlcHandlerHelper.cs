@@ -86,12 +86,9 @@ namespace Phoenix.Services.Helpers
          IReadOnlyCollection<R> result = await plc
             .AsNoTracking()
             .Include(x => x.Device)
-            .ThenInclude(x => x.Location)
             .Where(x =>
                x.Date >= range.Item1 &&
-               x.Date < range.Item2 &&
-               x.Device.IncludeReport &&
-               x.Device.Location.IncludeReport
+               x.Date < range.Item2
             )
             .GroupBy(typeProcessor.GetPlcGroup<S>())
             .Select(selector)
