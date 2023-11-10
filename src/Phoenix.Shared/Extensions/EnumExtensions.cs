@@ -34,7 +34,7 @@ namespace Phoenix.Shared.Extensions
             query = query.Where(x => x.Key != default);
          }
 
-         return query.OrderBy(x => x.Value);
+         return query;
       }
    }
 }
