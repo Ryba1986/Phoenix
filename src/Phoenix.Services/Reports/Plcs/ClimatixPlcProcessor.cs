@@ -30,7 +30,13 @@ namespace Phoenix.Services.Reports.Plcs
          IReadOnlyDictionary<int, ClimatixReportDto[]> plcData = await PlcHandlerHelper.GetPlcDataAsync(uow.Climatix, range, typeProcessor, ClimatixMappings.ToClimatixReportDto, cancellationToken);
          foreach (KeyValuePair<int, ClimatixReportDto[]> plc in plcData)
          {
-            FillData(sheets[plc.Key.ToString()], plc.Value, typeProcessor);
+            ExcelWorksheet? sheet = sheets.FirstOrDefault(x => x.Name == plc.Key.ToString());
+            if (sheet is null)
+            {
+               continue;
+            }
+
+            FillData(sheet, plc.Value, typeProcessor);
          }
       }
 

@@ -31,7 +31,13 @@ namespace Phoenix.Services.Reports.Plcs
          IReadOnlyDictionary<int, Rvd145ReportDto[]> plcData = await PlcHandlerHelper.GetPlcDataAsync(uow.Rvd145, range, typeProcessor, Rvd145Mappings.ToRvd145ReportDto, cancellationToken);
          foreach (KeyValuePair<int, Rvd145ReportDto[]> plc in plcData)
          {
-            FillData(sheets[plc.Key.ToString()], plc.Value, typeProcessor);
+            ExcelWorksheet? sheet = sheets.FirstOrDefault(x => x.Name == plc.Key.ToString());
+            if (sheet is null)
+            {
+               continue;
+            }
+
+            FillData(sheet, plc.Value, typeProcessor);
          }
       }
 

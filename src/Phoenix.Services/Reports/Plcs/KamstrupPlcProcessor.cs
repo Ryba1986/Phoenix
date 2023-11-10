@@ -30,8 +30,14 @@ namespace Phoenix.Services.Reports.Plcs
          IReadOnlyDictionary<int, KamstrupReportDto[]> plcData = await PlcHandlerHelper.GetPlcDataAsync(uow.Kamstrup, range, typeProcessor, KamstrupMappings.ToKamstrupReportDto, cancellationToken);
          foreach (KeyValuePair<int, KamstrupReportDto[]> plc in plcData)
          {
+            ExcelWorksheet? sheet = sheets.FirstOrDefault(x => x.Name == plc.Key.ToString());
+            if (sheet is null)
+            {
+               continue;
+            }
+
             KamstrupDto before = await GetBeforeDataAsync(uow, plc.Key, range.Item1, cancellationToken);
-            FillData(sheets[plc.Key.ToString()], before, plc.Value, typeProcessor);
+            FillData(sheet, before, plc.Value, typeProcessor);
          }
       }
 
