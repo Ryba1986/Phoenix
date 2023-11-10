@@ -10,7 +10,7 @@ namespace Phoenix.Shared.Languages
       public static string PlcReportType_Day => Get(eng: "Day", pol: "Dobowy");
       public static string PlcReportType_Month => Get(eng: "Month", pol: "Miesięczny");
       public static string PlcReportType_Year => Get(eng: "Year", pol: "Roczny");
-      public static string PlcReportType_YearByDay => Get(eng: "Day of year", pol: "Dobowy roczny");
+      public static string PlcReportType_YearByDay => Get(eng: "Year by day", pol: "Roczny dobowy");
 
       public static string RoleAccessLevel_None => Get(eng: "None", pol: "Brak");
       public static string RoleAccessLevel_Read => Get(eng: "Read", pol: "Odczyt");
