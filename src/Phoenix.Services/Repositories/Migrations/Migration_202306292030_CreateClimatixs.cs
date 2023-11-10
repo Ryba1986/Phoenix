@@ -30,7 +30,7 @@ namespace Phoenix.Services.Repositories.Migrations
                Ch1PumpAlarm = table.Column<bool>(name: nameof(Climatix.Ch1PumpAlarm), defaultValue: default(bool)),
                Ch1PumpStatus = table.Column<bool>(name: nameof(Climatix.Ch1PumpStatus), defaultValue: default(bool)),
                Ch1ValvePosition = table.Column<byte>(name: nameof(Climatix.Ch1ValvePosition), defaultValue: default(byte)),
-               Ch1Status = table.Column<bool>(name: nameof(Climatix.Ch1Status), defaultValue: default(bool)),
+               Ch1Status = table.Column<byte>(name: nameof(Climatix.Ch1Status), defaultValue: default(byte)),
 
                Ch2LowInletTemp = table.Column<float>(name: nameof(Climatix.Ch2LowInletTemp), defaultValue: default(float)),
                Ch2LowOutletTemp = table.Column<float>(name: nameof(Climatix.Ch2LowOutletTemp), defaultValue: default(float)),
@@ -39,14 +39,14 @@ namespace Phoenix.Services.Repositories.Migrations
                Ch2PumpAlarm = table.Column<bool>(name: nameof(Climatix.Ch2PumpAlarm), defaultValue: default(bool)),
                Ch2PumpStatus = table.Column<bool>(name: nameof(Climatix.Ch2PumpStatus), defaultValue: default(bool)),
                Ch2ValvePosition = table.Column<byte>(name: nameof(Climatix.Ch2ValvePosition), defaultValue: default(byte)),
-               Ch2Status = table.Column<bool>(name: nameof(Climatix.Ch2Status), defaultValue: default(bool)),
+               Ch2Status = table.Column<byte>(name: nameof(Climatix.Ch2Status), defaultValue: default(byte)),
 
                DhwTemp = table.Column<float>(name: nameof(Climatix.DhwTemp), defaultValue: default(float)),
                DhwTempSet = table.Column<float>(name: nameof(Climatix.DhwTempSet), defaultValue: default(float)),
                DhwPumpAlarm = table.Column<bool>(name: nameof(Climatix.DhwPumpAlarm), defaultValue: default(bool)),
                DhwPumpStatus = table.Column<bool>(name: nameof(Climatix.DhwPumpStatus), defaultValue: default(bool)),
                DhwValvePosition = table.Column<byte>(name: nameof(Climatix.DhwValvePosition), defaultValue: default(byte)),
-               DhwStatus = table.Column<bool>(name: nameof(Climatix.DhwStatus), defaultValue: default(bool)),
+               DhwStatus = table.Column<byte>(name: nameof(Climatix.DhwStatus), defaultValue: default(byte)),
             },
             constraints: table =>
             {

@@ -54,7 +54,7 @@ namespace Phoenix.Client.Plcs
             Ch1PumpAlarm = device.DeviceType == DeviceType.Heating && inputStates[430 - 1],
             Ch1PumpStatus = device.DeviceType == DeviceType.Heating && inputStates[492 - 1],
             Ch1ValvePosition = device.DeviceType == DeviceType.Heating ? (byte)inputRegisters4[90 - 1] : default,
-            Ch1Status = device.DeviceType == DeviceType.Heating && inputRegisters4[1 - 1] != 0,
+            Ch1Status = Convert.ToByte(device.DeviceType == DeviceType.Heating && inputRegisters4[1 - 1] != 0),
 
             Ch2LowInletTemp = device.DeviceType == DeviceType.DoubleHeating ? inputRegisters5[50 - 1] / 10f : default,
             Ch2LowOutletTemp = device.DeviceType == DeviceType.DoubleHeating ? inputRegisters5[52 - 1] / 10f : default,
@@ -63,14 +63,14 @@ namespace Phoenix.Client.Plcs
             Ch2PumpAlarm = device.DeviceType == DeviceType.DoubleHeating && inputStates[530 - 1],
             Ch2PumpStatus = device.DeviceType == DeviceType.DoubleHeating && inputStates[592 - 1],
             Ch2ValvePosition = device.DeviceType == DeviceType.DoubleHeating ? (byte)inputRegisters5[90 - 1] : default,
-            Ch2Status = device.DeviceType == DeviceType.DoubleHeating && inputRegisters5[1 - 1] != 0,
+            Ch2Status = Convert.ToByte(device.DeviceType == DeviceType.DoubleHeating && inputRegisters5[1 - 1] != 0),
 
             DhwTemp = device.DeviceType == DeviceType.HeatingDomestic ? inputRegisters8[50 - 1] / 10f : default,
             DhwTempSet = device.DeviceType == DeviceType.HeatingDomestic ? holdingRegisters[20 - 1] / 10f : default,
             DhwPumpAlarm = device.DeviceType == DeviceType.HeatingDomestic && inputStates[830 - 1],
             DhwPumpStatus = device.DeviceType == DeviceType.HeatingDomestic && inputStates[891 - 1],
             DhwValvePosition = device.DeviceType == DeviceType.HeatingDomestic ? (byte)inputRegisters8[90 - 1] : default,
-            DhwStatus = device.DeviceType == DeviceType.HeatingDomestic && inputRegisters8[1 - 1] != 0,
+            DhwStatus = Convert.ToByte(device.DeviceType == DeviceType.HeatingDomestic && inputRegisters8[1 - 1] != 0),
          };
       }
    }

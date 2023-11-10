@@ -16,7 +16,7 @@ namespace Phoenix.Entities.Plcs.Climatixs
       public bool Ch1PumpAlarm { get; init; }
       public bool Ch1PumpStatus { get; init; }
       public byte Ch1ValvePosition { get; init; }
-      public bool Ch1Status { get; init; }
+      public byte Ch1Status { get; init; }
 
       public float Ch2LowInletTemp { get; init; }
       public float Ch2LowOutletTemp { get; init; }
@@ -25,13 +25,13 @@ namespace Phoenix.Entities.Plcs.Climatixs
       public bool Ch2PumpAlarm { get; init; }
       public bool Ch2PumpStatus { get; init; }
       public byte Ch2ValvePosition { get; init; }
-      public bool Ch2Status { get; init; }
+      public byte Ch2Status { get; init; }
 
       public float DhwTemp { get; init; }
       public float DhwTempSet { get; init; }
       public bool DhwPumpAlarm { get; init; }
       public bool DhwPumpStatus { get; init; }
       public byte DhwValvePosition { get; init; }
-      public bool DhwStatus { get; init; }
+      public byte DhwStatus { get; init; }
    }
 }

@@ -27,13 +27,13 @@ namespace Phoenix.Services.Repositories.Migrations
                Ch1LowOutletPresure = table.Column<float>(name: nameof(Rvd145.Ch1LowOutletPresure), defaultValue: default(float)),
                Ch1HeatCurveTemp = table.Column<float>(name: nameof(Rvd145.Ch1HeatCurveTemp), defaultValue: default(float)),
                Ch1PumpStatus = table.Column<bool>(name: nameof(Rvd145.Ch1PumpStatus), defaultValue: default(bool)),
-               Ch1Status = table.Column<bool>(name: nameof(Rvd145.Ch1Status), defaultValue: default(bool)),
+               Ch1Status = table.Column<byte>(name: nameof(Rvd145.Ch1Status), defaultValue: default(byte)),
 
                DhwTemp = table.Column<float>(name: nameof(Rvd145.DhwTemp), defaultValue: default(float)),
                DhwTempSet = table.Column<float>(name: nameof(Rvd145.DhwTempSet), defaultValue: default(float)),
                DhwCirculationTemp = table.Column<float>(name: nameof(Rvd145.DhwCirculationTemp), defaultValue: default(float)),
                DhwPumpStatus = table.Column<bool>(name: nameof(Rvd145.DhwPumpStatus), defaultValue: default(bool)),
-               DhwStatus = table.Column<bool>(name: nameof(Rvd145.DhwStatus), defaultValue: default(bool)),
+               DhwStatus = table.Column<byte>(name: nameof(Rvd145.DhwStatus), defaultValue: default(byte)),
             },
             constraints: table =>
             {

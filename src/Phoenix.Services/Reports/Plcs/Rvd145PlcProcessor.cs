@@ -54,7 +54,7 @@ namespace Phoenix.Services.Reports.Plcs
             sheet.Cells[rowIndex, 5].Value = rvd.ChHighInletPresureMin;
             sheet.Cells[rowIndex, 6].Value = rvd.ChHighInletPresureMax;
 
-            if (rvd.Ch1Status)
+            if (rvd.Ch1Status > 0)
             {
                sheet.Cells[rowIndex, 10].Value = rvd.Ch1LowInletTempAvg.Round();
                sheet.Cells[rowIndex, 11].Value = rvd.Ch1LowInletTempMin;
@@ -65,7 +65,7 @@ namespace Phoenix.Services.Reports.Plcs
                sheet.Cells[rowIndex, 18].Value = rvd.Ch1LowOutletPresureMax;
             }
 
-            if (rvd.DhwStatus)
+            if (rvd.DhwStatus > 0)
             {
                sheet.Cells[rowIndex, 28].Value = rvd.DhwTempAvg.Round();
                sheet.Cells[rowIndex, 29].Value = rvd.DhwTempMin;
@@ -85,7 +85,7 @@ namespace Phoenix.Services.Reports.Plcs
          sheet.Cells[sheet.Dimension.Rows, 5].Value = plcData.Min(x => x.ChHighInletPresureMin);
          sheet.Cells[sheet.Dimension.Rows, 6].Value = plcData.Max(x => x.ChHighInletPresureMax);
 
-         if (plcData.Max(x => x.Ch1Status))
+         if (plcData.Max(x => x.Ch1Status) > 0)
          {
             sheet.Cells[sheet.Dimension.Rows, 10].Value = plcData.Average(x => x.Ch1LowInletTempAvg).Round();
             sheet.Cells[sheet.Dimension.Rows, 11].Value = plcData.Min(x => x.Ch1LowInletTempMin);
@@ -96,7 +96,7 @@ namespace Phoenix.Services.Reports.Plcs
             sheet.Cells[sheet.Dimension.Rows, 18].Value = plcData.Max(x => x.Ch1LowOutletPresureMax);
          }
 
-         if (plcData.Max(x => x.DhwStatus))
+         if (plcData.Max(x => x.DhwStatus) > 0)
          {
             sheet.Cells[sheet.Dimension.Rows, 28].Value = plcData.Average(x => x.DhwTempAvg).Round();
             sheet.Cells[sheet.Dimension.Rows, 29].Value = plcData.Min(x => x.DhwTempMin);

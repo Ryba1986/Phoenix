@@ -12,7 +12,7 @@ namespace Phoenix.Models.Plcs.Rvds.Dto
       public float ChHighInletPresureMin { get; init; }
       public float ChHighInletPresureMax { get; init; }
 
-      public bool Ch1Status { get; init; }
+      public byte Ch1Status { get; init; }
 
       public float Ch1LowInletTempAvg { get; init; }
       public float Ch1LowInletTempMin { get; init; }
@@ -22,7 +22,7 @@ namespace Phoenix.Models.Plcs.Rvds.Dto
       public float Ch1LowOutletPresureMin { get; init; }
       public float Ch1LowOutletPresureMax { get; init; }
 
-      public bool DhwStatus { get; init; }
+      public byte DhwStatus { get; init; }
 
       public float DhwTempAvg { get; init; }
       public float DhwTempMin { get; init; }

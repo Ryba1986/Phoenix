@@ -45,13 +45,13 @@ namespace Phoenix.Client.Plcs
             Ch1LowOutletPresure = device.DeviceType == DeviceType.Heating ? (short)holdingRegisters1[52] / 50f : default,
             Ch1HeatCurveTemp = device.DeviceType == DeviceType.Heating ? (short)holdingRegisters1[66] / 64f : default,
             Ch1PumpStatus = device.DeviceType == DeviceType.Heating && (short)holdingRegisters1[36] != 0,
-            Ch1Status = device.DeviceType == DeviceType.Heating && (short)holdingRegisters2[10] == 1,
+            Ch1Status = Convert.ToByte(device.DeviceType == DeviceType.Heating && (short)holdingRegisters2[10] == 1),
 
             DhwTemp = device.DeviceType == DeviceType.HeatingDomestic ? (short)holdingRegisters1[46] / 64f : default,
             DhwTempSet = device.DeviceType == DeviceType.HeatingDomestic ? (short)holdingRegisters1[58] / 64f : default,
             DhwCirculationTemp = device.DeviceType == DeviceType.HeatingDomestic ? (short)holdingRegisters1[49] / 64f : default,
             DhwPumpStatus = device.DeviceType == DeviceType.HeatingDomestic && (short)holdingRegisters1[40] != 0,
-            DhwStatus = device.DeviceType == DeviceType.HeatingDomestic && (short)holdingRegisters2[41] == 1,
+            DhwStatus = Convert.ToByte(device.DeviceType == DeviceType.HeatingDomestic && (short)holdingRegisters2[41] == 1),
          };
       }
    }
