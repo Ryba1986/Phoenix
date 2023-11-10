@@ -68,7 +68,7 @@ namespace Phoenix.Services.Mappings
          ChHighInletPresureMin = group.Min(x => x.ChHighInletPresure),
          ChHighInletPresureMax = group.Max(x => x.ChHighInletPresure),
 
-         Ch1Status = group.Any(x => x.Ch1Status),
+         Ch1Status = group.Max(x => x.Ch1Status),
 
          Ch1LowInletTempAvg = group.Average(x => x.Ch1LowInletTemp),
          Ch1LowInletTempMin = group.Min(x => x.Ch1LowInletTemp),
@@ -78,7 +78,7 @@ namespace Phoenix.Services.Mappings
          Ch1LowOutletPresureMin = group.Min(x => x.Ch1LowOutletPresure),
          Ch1LowOutletPresureMax = group.Max(x => x.Ch1LowOutletPresure),
 
-         DhwStatus = group.Any(x => x.DhwStatus),
+         DhwStatus = group.Max(x => x.DhwStatus),
 
          DhwTempAvg = group.Average(x => x.DhwTemp),
          DhwTempMin = group.Min(x => x.DhwTemp),
