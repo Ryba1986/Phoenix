@@ -7,7 +7,6 @@ namespace Phoenix.Shared.Languages
 
       public static string Device_Exists => Get(eng: "Device exists.", pol: "Urządzenie już istnieje.");
       public static string Device_NotExists => Get(eng: "Device not exists.", pol: "Urządzenie nie istnieje.");
-      public static string Device_DeviceType_Invalid => Get(eng: "Device type is invalid.", pol: "Typ urządzenia jest nieprawidłowy.");
 
       public static string Location_Active_Limit => Get(eng: "The limit of active locations has been exceeded.", pol: "Limit aktywnych lokalizacji został przekroczony.");
       public static string Location_Exists => Get(eng: "Location exists.", pol: "Lokalizacja już istnieje.");

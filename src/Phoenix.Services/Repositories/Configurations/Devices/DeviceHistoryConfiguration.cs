@@ -19,8 +19,6 @@ namespace Phoenix.Services.Repositories.Configurations.Devices
             .HasMaxLength(30)
             .IsRequired();
 
-         builder.Property(x => x.DeviceType);
-
          builder.Property(x => x.PlcType);
 
          builder.Property(x => x.ModbusId);

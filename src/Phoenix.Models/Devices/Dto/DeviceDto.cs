@@ -7,7 +7,6 @@ namespace Phoenix.Models.Devices.Dto
    {
       public int LocationId { get; init; }
       public string Name { get; init; }
-      public DeviceType DeviceType { get; init; }
       public PlcType PlcType { get; init; }
       public byte ModbusId { get; init; }
       public SerialBoundRate BoundRate { get; init; }

@@ -17,9 +17,6 @@ namespace Phoenix.Services.Repositories.Configurations.Devices
             .HasMaxLength(30)
             .IsRequired();
 
-         builder.Property(x => x.DeviceType)
-            .IsRequired();
-
          builder.Property(x => x.PlcType)
             .IsRequired();
 

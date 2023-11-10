@@ -6,7 +6,6 @@ using Phoenix.Entities.Devices;
 using Phoenix.Models.Devices.Commands;
 using Phoenix.Services.Handlers.Base;
 using Phoenix.Services.Repositories;
-using Phoenix.Shared.Enums.Devices;
 using Phoenix.Shared.Languages;
 using Phoenix.Shared.Results;
 
@@ -20,15 +19,6 @@ namespace Phoenix.Services.Handlers.Devices.Commands
 
       public async Task<Result> Handle(CreateDeviceCommand request, CancellationToken cancellationToken)
       {
-         if (request.DeviceType == DeviceType.Meter && request.PlcType != PlcType.Kamstrup)
-         {
-            return Result.Error(Translations.Device_DeviceType_Invalid);
-         }
-         if (request.DeviceType != DeviceType.Meter && request.PlcType == PlcType.Kamstrup)
-         {
-            return Result.Error(Translations.Device_DeviceType_Invalid);
-         }
-
          if (!await IsActiveUserAsync(request.CreatedById, cancellationToken))
          {
             return Result.Error(Translations.User_Active_NotExists);
@@ -59,7 +49,6 @@ namespace Phoenix.Services.Handlers.Devices.Commands
          {
             LocationId = request.LocationId,
             Name = request.Name,
-            DeviceType = request.DeviceType,
             PlcType = request.PlcType,
             ModbusId = request.ModbusId,
             BoundRate = request.BoundRate,
@@ -77,7 +66,6 @@ namespace Phoenix.Services.Handlers.Devices.Commands
             Device = newDevice,
             LocationId = request.LocationId,
             Name = request.Name,
-            DeviceType = request.DeviceType,
             PlcType = request.PlcType,
             ModbusId = request.ModbusId,
             BoundRate = request.BoundRate,

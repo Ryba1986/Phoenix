@@ -14,7 +14,6 @@ namespace Phoenix.Services.Mappings
          return new()
          {
             Date = rvd.Date,
-            DeviceType = rvd.Device.DeviceType,
             DeviceName = rvd.Device.Name,
 
             OutsideTemp = rvd.OutsideTemp,

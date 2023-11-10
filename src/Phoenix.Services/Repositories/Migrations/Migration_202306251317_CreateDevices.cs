@@ -19,7 +19,6 @@ namespace Phoenix.Services.Repositories.Migrations
                Id = table.Column<int>(name: nameof(Device.Id)).AddIdentity(),
                LocationId = table.Column<int>(name: nameof(Device.LocationId)),
                Name = table.Column<string>(name: nameof(Device.Name), maxLength: 30, defaultValue: string.Empty),
-               DeviceType = table.Column<DeviceType>(name: nameof(Device.DeviceType)),
                PlcType = table.Column<PlcType>(name: nameof(Device.PlcType)),
                ModbusId = table.Column<byte>(name: nameof(Device.ModbusId), defaultValue: default(byte)),
                BoundRate = table.Column<SerialBoundRate>(name: nameof(Device.BoundRate)),

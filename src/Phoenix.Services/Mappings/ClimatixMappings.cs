@@ -14,7 +14,6 @@ namespace Phoenix.Services.Mappings
          return new()
          {
             Date = climatix.Date,
-            DeviceType = climatix.Device.DeviceType,
             DeviceName = climatix.Device.Name,
 
             OutsideTemp = climatix.OutsideTemp,

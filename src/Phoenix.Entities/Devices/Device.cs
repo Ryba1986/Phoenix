@@ -10,7 +10,6 @@ namespace Phoenix.Entities.Devices
       public Location Location { get; set; }
 
       public string Name { get; set; }
-      public DeviceType DeviceType { get; set; }
       public PlcType PlcType { get; set; }
       public byte ModbusId { get; set; }
       public SerialBoundRate BoundRate { get; set; }

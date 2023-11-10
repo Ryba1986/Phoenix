@@ -14,7 +14,6 @@ namespace Phoenix.Services.Mappings
          return new()
          {
             Date = kamstrup.Date,
-            DeviceType = kamstrup.Device.DeviceType,
             DeviceName = kamstrup.Device.Name,
 
             InletTemp = kamstrup.InletTemp,

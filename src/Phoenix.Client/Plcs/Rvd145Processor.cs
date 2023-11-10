@@ -10,7 +10,6 @@ using Phoenix.Client.Settings;
 using Phoenix.Models.Base.Commands;
 using Phoenix.Models.Devices.Dto;
 using Phoenix.Models.Plcs.Rvds.Commands;
-using Phoenix.Shared.Enums.Devices;
 using Phoenix.Shared.Extensions;
 
 namespace Phoenix.Client.Plcs
@@ -31,6 +30,9 @@ namespace Phoenix.Client.Plcs
          IReadOnlyList<ushort> holdingRegisters1 = await master.ReadHoldingRegistersAsync(device.ModbusId, 1000, 70);
          IReadOnlyList<ushort> holdingRegisters2 = await master.ReadHoldingRegistersAsync(device.ModbusId, 200, 45);
 
+         bool ch1Status = holdingRegisters2[10] == 1;
+         bool dhwStatus = holdingRegisters2[41] == 1;
+
          return new CreateRvd145Command()
          {
             Date = DateTime.Now.RoundToSecond(),
@@ -40,18 +42,18 @@ namespace Phoenix.Client.Plcs
             ChHighInletPresure = (short)holdingRegisters1[53] / 50f,
             Alarm = (short)holdingRegisters1[31],
 
-            Ch1HighOutletTemp = device.DeviceType == DeviceType.Heating ? (short)holdingRegisters1[48] / 64f : default,
-            Ch1LowInletTemp = device.DeviceType == DeviceType.Heating ? (short)holdingRegisters1[45] / 64f : default,
-            Ch1LowOutletPresure = device.DeviceType == DeviceType.Heating ? (short)holdingRegisters1[52] / 50f : default,
-            Ch1HeatCurveTemp = device.DeviceType == DeviceType.Heating ? (short)holdingRegisters1[66] / 64f : default,
-            Ch1PumpStatus = device.DeviceType == DeviceType.Heating && (short)holdingRegisters1[36] != 0,
-            Ch1Status = Convert.ToByte(device.DeviceType == DeviceType.Heating && (short)holdingRegisters2[10] == 1),
+            Ch1HighOutletTemp = ch1Status ? (short)holdingRegisters1[48] / 64f : default,
+            Ch1LowInletTemp = ch1Status ? (short)holdingRegisters1[45] / 64f : default,
+            Ch1LowOutletPresure = ch1Status ? (short)holdingRegisters1[52] / 50f : default,
+            Ch1HeatCurveTemp = ch1Status ? (short)holdingRegisters1[66] / 64f : default,
+            Ch1PumpStatus = ch1Status && (short)holdingRegisters1[36] != 0,
+            Ch1Status = Convert.ToByte(ch1Status),
 
-            DhwTemp = device.DeviceType == DeviceType.HeatingDomestic ? (short)holdingRegisters1[46] / 64f : default,
-            DhwTempSet = device.DeviceType == DeviceType.HeatingDomestic ? (short)holdingRegisters1[58] / 64f : default,
-            DhwCirculationTemp = device.DeviceType == DeviceType.HeatingDomestic ? (short)holdingRegisters1[49] / 64f : default,
-            DhwPumpStatus = device.DeviceType == DeviceType.HeatingDomestic && (short)holdingRegisters1[40] != 0,
-            DhwStatus = Convert.ToByte(device.DeviceType == DeviceType.HeatingDomestic && (short)holdingRegisters2[41] == 1),
+            DhwTemp = dhwStatus ? (short)holdingRegisters1[46] / 64f : default,
+            DhwTempSet = dhwStatus ? (short)holdingRegisters1[58] / 64f : default,
+            DhwCirculationTemp = dhwStatus ? (short)holdingRegisters1[49] / 64f : default,
+            DhwPumpStatus = dhwStatus && (short)holdingRegisters1[40] != 0,
+            DhwStatus = Convert.ToByte(dhwStatus),
          };
       }
    }

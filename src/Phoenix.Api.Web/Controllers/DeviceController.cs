@@ -37,12 +37,6 @@ namespace Phoenix.Api.Web.Controllers
       }
 
       [HttpGet]
-      public async Task<IActionResult> GetDeviceTypeDictionary()
-      {
-         return await HandleAsync(new GetDeviceTypeDictionaryQuery());
-      }
-
-      [HttpGet]
       public async Task<IActionResult> GetDevicePlcTypeDictionary()
       {
          return await HandleAsync(new GetDevicePlcTypeDictionaryQuery());

@@ -2,11 +2,6 @@ namespace Phoenix.Shared.Languages
 {
    public static partial class Translations
    {
-      public static string DeviceType_Meter => Get(eng: "Meter", pol: "Licznik ciepła");
-      public static string DeviceType_Heating => Get(eng: "Heating", pol: "CO");
-      public static string DeviceType_DoubleHeating => Get(eng: "Double heating", pol: "CO & CO");
-      public static string DeviceType_HeatingDomestic => Get(eng: "Heating & domestic water", pol: "CO & CWU");
-
       public static string PlcReportType_Day => Get(eng: "Day", pol: "Dobowy");
       public static string PlcReportType_Month => Get(eng: "Month", pol: "Miesięczny");
       public static string PlcReportType_Year => Get(eng: "Year", pol: "Roczny");

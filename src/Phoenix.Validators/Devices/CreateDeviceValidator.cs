@@ -15,9 +15,6 @@ namespace Phoenix.Validators.Devices
             .NotEmpty().WithMessage(Translations.Validator_Name_Invalid)
             .Length(3, 30).WithMessage(Translations.Validator_Name_Invalid);
 
-         RuleFor(x => x.DeviceType)
-            .IsInEnum().WithMessage(Translations.Validator_DeviceType_Invalid);
-
          RuleFor(x => x.PlcType)
             .IsInEnum().WithMessage(Translations.Validator_PlcType_Invalid);
 

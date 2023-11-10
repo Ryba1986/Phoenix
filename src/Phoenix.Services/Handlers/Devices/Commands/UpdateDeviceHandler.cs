@@ -6,7 +6,6 @@ using Phoenix.Entities.Devices;
 using Phoenix.Models.Devices.Commands;
 using Phoenix.Services.Handlers.Base;
 using Phoenix.Services.Repositories;
-using Phoenix.Shared.Enums.Devices;
 using Phoenix.Shared.Languages;
 using Phoenix.Shared.Results;
 
@@ -20,15 +19,6 @@ namespace Phoenix.Services.Handlers.Devices.Commands
 
       public async Task<Result> Handle(UpdateDeviceCommand request, CancellationToken cancellationToken)
       {
-         if (request.DeviceType == DeviceType.Meter && request.PlcType != PlcType.Kamstrup)
-         {
-            return Result.Error(Translations.Device_DeviceType_Invalid);
-         }
-         if (request.DeviceType != DeviceType.Meter && request.PlcType == PlcType.Kamstrup)
-         {
-            return Result.Error(Translations.Device_DeviceType_Invalid);
-         }
-
          if (!await IsActiveUserAsync(request.ModifiedById, cancellationToken))
          {
             return Result.Error(Translations.User_Active_NotExists);
@@ -65,7 +55,7 @@ namespace Phoenix.Services.Handlers.Devices.Commands
          {
             return Result.Error(Translations.Validator_Version_Invalid);
          }
-         if (device.LocationId == request.LocationId && device.Name == request.Name && device.DeviceType == request.DeviceType && device.PlcType == request.PlcType && device.ModbusId == request.ModbusId && device.BoundRate == request.BoundRate && device.DataBits == request.DataBits && device.Parity == request.Parity && device.StopBits == request.StopBits && device.ReportSequence == request.ReportSequence && device.IncludeReport == request.IncludeReport && device.IsActive == request.IsActive)
+         if (device.LocationId == request.LocationId && device.Name == request.Name && device.PlcType == request.PlcType && device.ModbusId == request.ModbusId && device.BoundRate == request.BoundRate && device.DataBits == request.DataBits && device.Parity == request.Parity && device.StopBits == request.StopBits && device.ReportSequence == request.ReportSequence && device.IncludeReport == request.IncludeReport && device.IsActive == request.IsActive)
          {
             return Result.Success();
          }
@@ -75,7 +65,6 @@ namespace Phoenix.Services.Handlers.Devices.Commands
             DeviceId = request.Id,
             LocationId = device.LocationId != request.LocationId ? request.LocationId : null,
             Name = device.Name != request.Name ? request.Name : string.Empty,
-            DeviceType = device.DeviceType != request.DeviceType ? request.DeviceType : null,
             PlcType = device.PlcType != request.PlcType ? request.PlcType : null,
             ModbusId = device.ModbusId != request.ModbusId ? request.ModbusId : null,
             BoundRate = device.BoundRate != request.BoundRate ? request.BoundRate : null,
@@ -91,7 +80,6 @@ namespace Phoenix.Services.Handlers.Devices.Commands
 
          device.LocationId = request.LocationId;
          device.Name = request.Name;
-         device.DeviceType = request.DeviceType;
          device.PlcType = request.PlcType;
          device.ModbusId = request.ModbusId;
          device.BoundRate = request.BoundRate;
