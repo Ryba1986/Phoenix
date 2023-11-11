@@ -95,7 +95,7 @@ const deviceHistoryStore = (deviceId: number) => {
                   <DxRangeRule :ignore-empty-value="false" :message="t('views.device.grid.validators.stopBits.range')" :min="0" />
                </DxGridColumn>
                <DxGridColumn :caption="t('views.device.grid.columns.sequence')" alignment="left" data-field="sequence" data-type="number" :width="100">
-                  <DxRangeRule :ignore-empty-value="false" :message="t('views.device.grid.validators.dataBits.sequence')" :min="0" />
+                  <DxRangeRule :ignore-empty-value="false" :message="t('views.device.grid.validators.sequence.range')" :min="0" />
                </DxGridColumn>
                <DxGridColumn :caption="t('views.device.grid.columns.includeReport')" :value="false" :width="80" data-field="includeReport" data-type="boolean" />
             </template>
