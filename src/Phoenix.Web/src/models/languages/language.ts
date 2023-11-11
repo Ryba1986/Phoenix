@@ -1,45 +1,13 @@
-import { DefineLocaleMessage } from "vue-i18n";
+import { DefineLocaleMessage } from 'vue-i18n';
 
 export interface Language extends DefineLocaleMessage {
    components: {
-      climatix: {
-         circulation: string;
-         ch: string;
-         ch1Short: string;
-         ch2Short: string;
-         dhwShort: string;
-         ch1HeatCurveTemp: string;
-         ch1LowInletTemp: string;
-         ch1LowOutletTemp: string;
-         ch1LowOutletPresure: string;
-         ch2HeatCurveTemp: string;
-         ch2LowInletTemp: string;
-         ch2LowOutletTemp: string;
-         ch2LowOutletPresure: string;
-         chHighInletPresure: string;
-         chHighOutletPresure: string;
-         dhwTemp: string;
-         dhwTempSet: string;
-         network: string;
-         outsideTemp: string;
-         waterCold: string;
-         waterWarm: string;
-      };
       dataGrid: {
          columns: {
             createdBy: string;
             createDate: string;
             isActive: string;
          };
-      };
-      kamstrup: {
-         energySummary: string;
-         hourCount: string;
-         inletTemp: string;
-         outletTemp: string;
-         power: string;
-         volume: string;
-         volumeSummary: string;
       };
       loadPanel: {
          message: string;
@@ -57,24 +25,6 @@ export interface Language extends DefineLocaleMessage {
          signIn: string;
          signOut: string;
          user: string;
-      };
-      rvd145: {
-         circulation: string;
-         ch: string;
-         chShort: string;
-         dhwShort: string;
-         ch1HeatCurveTemp: string;
-         ch1HighOutletTemp: string;
-         ch1LowInletTemp: string;
-         ch1LowOutletPresure: string;
-         chHighInletPresure: string;
-         dhwCirculationTemp: string;
-         dhwTemp: string;
-         dhwTempSet: string;
-         network: string;
-         outsideTemp: string;
-         waterCold: string;
-         waterWarm: string;
       };
    };
    requests: {
@@ -103,22 +53,6 @@ export interface Language extends DefineLocaleMessage {
             };
          };
       };
-      dashboard: {
-         emptyData: string;
-      };
-      location: {
-         grid: {
-            columns: {
-               name: string;
-               includeReport: string;
-            };
-            validators: {
-               name: {
-                  length: string;
-               };
-            };
-         };
-      };
       device: {
          grid: {
             columns: {
@@ -130,8 +64,8 @@ export interface Language extends DefineLocaleMessage {
                location: string;
                modbusId: string;
                name: string;
-               deviceType: string;
                plcType: string;
+               reportSequence: string;
             };
             validators: {
                boundRate: {
@@ -155,11 +89,24 @@ export interface Language extends DefineLocaleMessage {
                name: {
                   length: string;
                };
-               deviceType: {
-                  range: string;
-               };
                plcType: {
                   range: string;
+               };
+               reportSequence: {
+                  range: string;
+               };
+            };
+         };
+      };
+      location: {
+         grid: {
+            columns: {
+               name: string;
+               includeReport: string;
+            };
+            validators: {
+               name: {
+                  length: string;
                };
             };
          };

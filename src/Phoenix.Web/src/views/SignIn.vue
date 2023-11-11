@@ -1,21 +1,21 @@
 <script setup lang="ts">
-import { Ref, ref } from "vue";
-import { useI18n } from "vue-i18n";
-import { ClickEvent } from "devextreme/ui/button";
-import { getUserTokenAsync } from "../api/userApi";
-import { displayError } from "../helpers/toastHelper";
-import { GetUserTokenQuery } from "../models/api/users/queries/getUserTokenQuery";
+import { Ref, ref } from 'vue';
+import { useI18n } from 'vue-i18n';
+import { ClickEvent } from 'devextreme/ui/button';
+import { getUserTokenAsync } from '../api/userApi';
+import { displayError } from '../helpers/toastHelper';
+import { GetUserTokenQuery } from '../models/api/users/queries/getUserTokenQuery';
 
 const { t } = useI18n();
 
 const isLoading: Ref<boolean> = ref(false);
 const toastIsVisible: Ref<boolean> = ref(false);
 const request: Ref<GetUserTokenQuery> = ref({
-   email: "",
-   password: "",
+   email: '',
+   password: '',
 });
 
-async function userLoginClicAsync(e: ClickEvent): Promise<void> {
+async function userLoginClickAsync(e: ClickEvent): Promise<void> {
    try {
       isLoading.value = true;
 
@@ -32,7 +32,7 @@ async function userLoginClicAsync(e: ClickEvent): Promise<void> {
          },
          () => {
             toastIsVisible.value = false;
-         },
+         }
       );
    } finally {
       isLoading.value = false;
@@ -54,12 +54,7 @@ async function userLoginClicAsync(e: ClickEvent): Promise<void> {
                <div class="col-12">
                   <DxValidationGroup>
                      <div class="dx-field">
-                        <DxTextBox
-                           :disabled="isLoading || toastIsVisible"
-                           :placeholder="t('views.signIn.email.placeHolder')"
-                           v-model="request.email"
-                           width="100%"
-                        >
+                        <DxTextBox :disabled="isLoading || toastIsVisible" :placeholder="t('views.signIn.email.placeHolder')" v-model="request.email" width="100%">
                            <DxValidator>
                               <DxEmailRule :ignore-empty-value="false" :message="t('views.signIn.email.emailValidator')" />
                               <DxStringLengthRule :ignore-empty-value="false" :max="50" :message="t('views.signIn.email.lengthValidator')" />
@@ -67,13 +62,7 @@ async function userLoginClicAsync(e: ClickEvent): Promise<void> {
                         </DxTextBox>
                      </div>
                      <div class="dx-field pt-2">
-                        <DxTextBox
-                           :disabled="isLoading || toastIsVisible"
-                           :placeholder="t('views.signIn.password.placeHolder')"
-                           mode="password"
-                           v-model="request.password"
-                           width="100%"
-                        >
+                        <DxTextBox :disabled="isLoading || toastIsVisible" :placeholder="t('views.signIn.password.placeHolder')" mode="password" v-model="request.password" width="100%">
                            <DxValidator>
                               <DxStringLengthRule :ignore-empty-value="false" :min="10" :max="30" :message="t('views.signIn.password.lengthValidator')" />
                            </DxValidator>
@@ -88,7 +77,7 @@ async function userLoginClicAsync(e: ClickEvent): Promise<void> {
                            type="default"
                            styling-mode="outfilled"
                            width="100%"
-                           @click="userLoginClicAsync"
+                           @click="userLoginClickAsync"
                         />
                      </div>
                   </DxValidationGroup>

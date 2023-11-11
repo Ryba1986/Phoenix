@@ -1,4 +1,4 @@
-import { PlcDtoBase } from "../../../base/dto/plcDtoBase";
+import { PlcDtoBase } from '../../../base/dto/plcDtoBase';
 
 export interface KamstrupDto extends PlcDtoBase {
    inletTemp: number;

@@ -1,10 +1,10 @@
 <script setup lang="ts">
-import { PropType, Ref, ref } from "vue";
-import { useI18n } from "vue-i18n";
-import { DxDataGrid } from "devextreme-vue/data-grid";
-import CustomStore from "devextreme/data/custom_store";
-import { RowExpandingEvent, RowUpdatingEvent } from "devextreme/ui/data_grid";
-import { dateTimeFormat } from "../config";
+import { PropType, Ref, ref } from 'vue';
+import { useI18n } from 'vue-i18n';
+import CustomStore from 'devextreme/data/custom_store';
+import { RowExpandingEvent, RowUpdatingEvent } from 'devextreme/ui/data_grid';
+import DxDataGrid from 'devextreme-vue/data-grid';
+import { dateTimeFormat } from '../config';
 
 const props = defineProps({
    dataStore: {
@@ -30,30 +30,31 @@ const props = defineProps({
    },
    showMetrics: {
       type: Boolean,
-      default: true,
+      default: false,
    },
 });
 
+const { t } = useI18n();
 const grid: Ref<DxDataGrid> = ref({});
 
-const { t } = useI18n();
+function gridRefresh(): void {
+   if (!grid.value.instance) {
+      return;
+   }
 
-function refreshEvent(): void {
-   const instance = grid.value.instance!;
-
-   instance.cancelEditData();
-   instance.clearSelection();
-   instance.collapseAll(-1);
-   instance.clearFilter();
-   instance.pageIndex(0);
-   instance.refresh();
+   grid.value.instance.cancelEditData();
+   grid.value.instance.clearSelection();
+   grid.value.instance.collapseAll(-1);
+   grid.value.instance.clearFilter();
+   grid.value.instance.pageIndex(0);
+   grid.value.instance.refresh();
 }
 
-function rowExpandingEvent(e: RowExpandingEvent): void {
+function gridRowExpanding(e: RowExpandingEvent): void {
    e.component.collapseAll(-1);
 }
 
-function rowUpdatingEvent(e: RowUpdatingEvent): void {
+function gridRowUpdating(e: RowUpdatingEvent): void {
    e.newData = Object.assign({}, e.oldData, e.newData);
 }
 </script>
@@ -68,11 +69,17 @@ function rowUpdatingEvent(e: RowUpdatingEvent): void {
       :show-borders="true"
       :show-row-lines="true"
       ref="grid"
-      @row-expanding="rowExpandingEvent"
-      @row-updating="rowUpdatingEvent"
+      @row-expanding="gridRowExpanding"
+      @row-updating="gridRowUpdating"
    >
       <DxGridEditing :allow-adding="props.allowAdding" :allow-updating="props.allowUpdating" :allow-deleting="false" mode="row" />
       <DxGridFilterRow :visible="true" apply-filter="auto" />
+      <DxGridMasterDetail :enabled="props.enableDetail" template="detailTemplate" />
+      <template #detailTemplate="{ data }">
+         <div class="p-3 bg-white border">
+            <slot name="detail" :key="data.key" />
+         </div>
+      </template>
       <DxGridPager :show-info="false" :show-page-size-selector="false" :show-navigation-buttons="true" :visible="true" display-mode="full" />
       <DxGridPaging :page-size="props.enableDetail ? 17 : 5" />
       <DxGridSorting mode="single" />
@@ -81,37 +88,11 @@ function rowUpdatingEvent(e: RowUpdatingEvent): void {
          <DxGridItem location="after" name="addRowButton" />
       </DxGridToolbar>
       <template #gridRefresh>
-         <DxButton icon="refresh" @click="refreshEvent" />
+         <DxButton icon="refresh" @click="gridRefresh" />
       </template>
       <slot name="columns" />
-      <DxGridColumn
-         v-if="props.showIsActive"
-         :caption="t('components.dataGrid.columns.isActive')"
-         :value="false"
-         :width="80"
-         data-field="isActive"
-         data-type="boolean"
-      />
-      <DxGridColumn
-         v-if="!props.enableDetail && props.showMetrics"
-         :caption="t('components.dataGrid.columns.createdBy')"
-         :width="150"
-         data-field="createdByName"
-         data-type="string"
-      />
-      <DxGridColumn
-         v-if="!props.enableDetail && props.showMetrics"
-         :caption="t('components.dataGrid.columns.createDate')"
-         :format="dateTimeFormat"
-         :width="150"
-         data-field="createDate"
-         data-type="date"
-      />
-      <DxGridMasterDetail :enabled="props.enableDetail" template="detailTemplate" />
-      <template #detailTemplate="{ data }">
-         <div class="p-3 bg-white border">
-            <slot name="detailView" :key="data.key" />
-         </div>
-      </template>
+      <DxGridColumn v-if="props.showIsActive" :caption="t('components.dataGrid.columns.isActive')" :value="false" :width="80" data-field="isActive" data-type="boolean" />
+      <DxGridColumn v-if="props.showMetrics" :caption="t('components.dataGrid.columns.createdBy')" :width="150" data-field="createdByName" data-type="string" />
+      <DxGridColumn v-if="props.showMetrics" :caption="t('components.dataGrid.columns.createDate')" :format="dateTimeFormat" :width="150" data-field="createDate" data-type="date" />
    </DxDataGrid>
 </template>

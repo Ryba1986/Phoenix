@@ -1,4 +1,4 @@
-import { PlcChartDtoBase } from "../../../base/dto/plcChartDtoBase";
+import { PlcChartDtoBase } from '../../../base/dto/plcChartDtoBase';
 
 export interface Rvd145ChartDto extends PlcChartDtoBase {
    outsideTemp: number;

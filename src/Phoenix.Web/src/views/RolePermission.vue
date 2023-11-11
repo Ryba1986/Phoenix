@@ -1,16 +1,10 @@
 <script setup lang="ts">
-import { Ref, ref } from "vue";
-import { useI18n } from "vue-i18n";
-import CustomStore from "devextreme/data/custom_store";
-import { getRoleDictionaryAsync } from "../api/roleApi";
-import {
-   createRolePermissionAsync,
-   getAccessLevelDictionaryAsync,
-   getPermissionDictionaryAsync,
-   getRolePermissionsAsync,
-   updateRolePermissionAsync,
-} from "../api/rolePermissionApi";
-import { DictionaryItem } from "../models/api/base/dto/dictionaryItem";
+import { Ref, ref } from 'vue';
+import { useI18n } from 'vue-i18n';
+import CustomStore from 'devextreme/data/custom_store';
+import { getRoleDictionaryAsync } from '../api/roleApi';
+import { createRolePermissionAsync, getAccessLevelDictionaryAsync, getPermissionDictionaryAsync, getRolePermissionsAsync, updateRolePermissionAsync } from '../api/rolePermissionApi';
+import { DictionaryItem } from '../models/api/base/dto/dictionaryItem';
 
 const { t } = useI18n();
 
@@ -19,7 +13,7 @@ const accessLevels: Ref<Array<DictionaryItem>> = ref([]);
 const permissions: Ref<Array<DictionaryItem>> = ref([]);
 
 const rolePermissionStore = new CustomStore<any, any>({
-   key: "id",
+   key: 'id',
    load: async () => {
       const result = await Promise.all([getRoleDictionaryAsync(), getAccessLevelDictionaryAsync(), getPermissionDictionaryAsync(), getRolePermissionsAsync()]);
 
@@ -37,7 +31,7 @@ const rolePermissionStore = new CustomStore<any, any>({
 <template>
    <Card :show-header="false">
       <template #body>
-         <DataGrid :data-store="rolePermissionStore" :enable-detail="false" :show-is-active="false" :show-metrics="false">
+         <DataGrid :data-store="rolePermissionStore" :show-is-active="false">
             <template #columns>
                <DxGridColumn :caption="t('views.rolePermission.grid.columns.role')" alignment="left" data-field="roleId" data-type="number">
                   <DxGridLookup :data-source="roles" display-expr="value" value-expr="key" />

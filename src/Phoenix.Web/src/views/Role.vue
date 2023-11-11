@@ -1,12 +1,12 @@
 <script setup lang="ts">
-import { useI18n } from "vue-i18n";
-import CustomStore from "devextreme/data/custom_store";
-import { createRoleAsync, getRoleHistoryAsync, getRolesAsync, updateRoleAsync } from "../api/roleApi";
+import { useI18n } from 'vue-i18n';
+import CustomStore from 'devextreme/data/custom_store';
+import { createRoleAsync, getRoleHistoryAsync, getRolesAsync, updateRoleAsync } from '../api/roleApi';
 
 const { t } = useI18n();
 
 const roleStore = new CustomStore<any, any>({
-   key: "id",
+   key: 'id',
    load: () => getRolesAsync(),
    insert: (value) => createRoleAsync(value),
    update: (_key, value) => updateRoleAsync(value),
@@ -30,8 +30,8 @@ const roleHistoryStore = (roleId: number) => {
                </DxGridColumn>
                <DxGridColumn :caption="t('views.role.grid.columns.isAdmin')" :value="false" :width="100" data-field="isAdmin" data-type="boolean" />
             </template>
-            <template #detailView="detailProps">
-               <DataGrid :data-store="roleHistoryStore(detailProps.key)" :allow-adding="false" :allow-updating="false" :enable-detail="false">
+            <template #detail="detailProps">
+               <DataGrid :data-store="roleHistoryStore(detailProps.key)" :allow-adding="false" :allow-updating="false" :show-metrics="true">
                   <template #columns>
                      <DxGridColumn :caption="t('views.role.grid.columns.name')" data-field="name" data-type="string" />
                      <DxGridColumn :caption="t('views.role.grid.columns.isAdmin')" :width="100" data-field="isAdmin" data-type="boolean" />

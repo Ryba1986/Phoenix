@@ -1,4 +1,4 @@
-import { PlcChartDtoBase } from "../../../base/dto/plcChartDtoBase";
+import { PlcChartDtoBase } from '../../../base/dto/plcChartDtoBase';
 
 export interface ClimatixChartDto extends PlcChartDtoBase {
    outsideTemp: number;

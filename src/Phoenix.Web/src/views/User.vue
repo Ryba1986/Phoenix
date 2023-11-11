@@ -1,17 +1,17 @@
 <script setup lang="ts">
-import { Ref, ref } from "vue";
-import { useI18n } from "vue-i18n";
-import CustomStore from "devextreme/data/custom_store";
-import { getRoleDictionaryAsync } from "../api/roleApi";
-import { getUsersAsync, createUserAsync, updateUserAsync, getUserHistoryAsync } from "../api/userApi";
-import { DictionaryItem } from "../models/api/base/dto/dictionaryItem";
+import { Ref, ref } from 'vue';
+import { useI18n } from 'vue-i18n';
+import CustomStore from 'devextreme/data/custom_store';
+import { getRoleDictionaryAsync } from '../api/roleApi';
+import { createUserAsync, getUserHistoryAsync, getUsersAsync, updateUserAsync } from '../api/userApi';
+import { DictionaryItem } from '../models/api/base/dto/dictionaryItem';
 
 const { t } = useI18n();
 
 const roles: Ref<Array<DictionaryItem>> = ref([]);
 
 const userStore = new CustomStore<any, any>({
-   key: "id",
+   key: 'id',
    load: async () => {
       const result = await Promise.all([getRoleDictionaryAsync(), getUsersAsync()]);
 
@@ -47,8 +47,8 @@ const userHistoryStore = (userId: number) => {
                   <DxRangeRule :ignore-empty-value="false" :message="t('views.user.grid.validators.role.range')" :min="1" alignment="left" />
                </DxGridColumn>
             </template>
-            <template #detailView="detailProps">
-               <DataGrid :data-store="userHistoryStore(detailProps.key)" :allow-adding="false" :allow-updating="false" :enable-detail="false">
+            <template #detail="detailProps">
+               <DataGrid :data-store="userHistoryStore(detailProps.key)" :allow-adding="false" :allow-updating="false" :show-metrics="true">
                   <template #columns>
                      <DxGridColumn :caption="t('views.user.grid.columns.name')" data-field="name" data-type="string" />
                      <DxGridColumn :caption="t('views.user.grid.columns.email')" data-field="email" data-type="string" />

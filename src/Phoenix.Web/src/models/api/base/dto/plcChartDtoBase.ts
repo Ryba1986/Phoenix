@@ -1,3 +1,3 @@
 export interface PlcChartDtoBase {
-   date: Date;
+   date: string;
 }

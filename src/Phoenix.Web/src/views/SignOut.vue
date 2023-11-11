@@ -1,7 +1,8 @@
 <script setup lang="ts">
-import { authStore } from "../stores/authStore";
+import { apiTokenEmptyValue } from '../config';
+import { authStore } from '../stores/authStore';
 
-authStore().removeToken();
+authStore().setToken(apiTokenEmptyValue);
 </script>
 
 <template>Sign out</template>

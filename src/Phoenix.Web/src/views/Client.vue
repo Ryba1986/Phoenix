@@ -1,17 +1,17 @@
 <script setup lang="ts">
-import { Ref, ref } from "vue";
-import { useI18n } from "vue-i18n";
-import CustomStore from "devextreme/data/custom_store";
-import { createClientAsync, getClientHistoryAsync, getClientsAsync, updateClientAsync } from "../api/clientApi";
-import { getLocationDictionaryAsync } from "../api/locationApi";
-import { DictionaryItem } from "../models/api/base/dto/dictionaryItem";
+import { Ref, ref } from 'vue';
+import { useI18n } from 'vue-i18n';
+import CustomStore from 'devextreme/data/custom_store';
+import { createClientAsync, getClientHistoryAsync, getClientsAsync, updateClientAsync } from '../api/clientApi';
+import { getLocationDictionaryAsync } from '../api/locationApi';
+import { DictionaryItem } from '../models/api/base/dto/dictionaryItem';
 
 const { t } = useI18n();
 
 const locations: Ref<Array<DictionaryItem>> = ref([]);
 
 const clientStore = new CustomStore<any, any>({
-   key: "id",
+   key: 'id',
    load: async () => {
       const result = await Promise.all([getLocationDictionaryAsync(), getClientsAsync()]);
 
@@ -42,14 +42,16 @@ const clientHistoryStore = (clientId: number) => {
                <DxGridColumn :caption="t('views.client.grid.columns.macAddress')" data-field="macAddress" data-type="string">
                   <DxPatternRule :ignore-empty-value="false" :message="t('views.client.grid.validators.macAddress.pattern')" pattern="^[0-9A-F]{12}$" />
                </DxGridColumn>
-               <DxGridColumn :allow-editing="false" :caption="t('views.client.grid.columns.hostname')" :width="450" data-field="hostname" data-type="string" />
+               <DxGridColumn :allow-editing="false" :caption="t('views.client.grid.columns.hostname')" data-field="hostname" data-type="string" />
                <DxGridColumn :allow-editing="false" :caption="t('views.client.grid.columns.clientVersion')" data-field="clientVersion" data-type="string" />
             </template>
-            <template #detailView="detailProps">
-               <DataGrid :data-store="clientHistoryStore(detailProps.key)" :allow-adding="false" :allow-updating="false" :enable-detail="false">
+            <template #detail="detailProps">
+               <DataGrid :data-store="clientHistoryStore(detailProps.key)" :allow-adding="false" :allow-updating="false" :show-metrics="true">
                   <template #columns>
                      <DxGridColumn :caption="t('views.client.grid.columns.location')" data-field="locationName" data-type="string" />
                      <DxGridColumn :caption="t('views.client.grid.columns.macAddress')" data-field="macAddress" data-type="string" />
+                     <DxGridColumn :caption="t('views.client.grid.columns.hostname')" data-field="hostname" data-type="string" />
+                     <DxGridColumn :caption="t('views.client.grid.columns.clientVersion')" data-field="clientVersion" data-type="string" />
                   </template>
                </DataGrid>
             </template>

@@ -1,14 +1,14 @@
 export interface Routes {
    default: string;
-   dashboard: string;
-   report: string;
-   location: string;
-   device: string;
+   anonymous: Array<string>;
    client: string;
+   dashboard: string;
+   device: string;
+   location: string;
+   report: string;
    role: string;
    rolePermission: string;
-   user: string;
    signIn: string;
    signOut: string;
-   anonymous: Array<string>;
+   user: string;
 }

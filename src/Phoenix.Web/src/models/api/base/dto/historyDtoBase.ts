@@ -1,7 +1,7 @@
-import { DtoBase } from "./dtoBase";
+import { DtoBase } from './dtoBase';
 
 export interface HistoryDtoBase extends DtoBase {
    isActive: boolean;
    createdByName: string;
-   createDate: Date;
+   createDate: string;
 }

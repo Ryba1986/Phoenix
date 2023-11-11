@@ -1,23 +1,19 @@
 <script setup lang="ts">
-import { ComputedRef, computed } from "vue";
-import { useI18n } from "vue-i18n";
-import { useRoute } from "vue-router";
-import { ValueChangedEvent } from "devextreme/ui/select_box";
-import { routerRoutes } from "../config";
-import { collapseNavBar } from "../helpers/bootstrapHelper";
-import { DictionaryItem } from "../models/api/base/dto/dictionaryItem";
-import { authStore } from "../stores/authStore";
-import { dashboardStore } from "../stores/dashboardStore";
+import { ComputedRef, computed } from 'vue';
+import { useI18n } from 'vue-i18n';
+import { useRoute } from 'vue-router';
+import { ValueChangedEvent } from 'devextreme/ui/select_box';
+import { routerRoutes } from '../config';
+import { collapseNavBar } from '../helpers/bootstrapHelper';
+import { authStore } from '../stores/authStore';
+import { dashboardStore } from '../stores/dashboardStore';
 
 const aStore = authStore();
 const dStore = dashboardStore();
 const { t } = useI18n();
 const route = useRoute();
 
-const isLogged: ComputedRef<boolean> = computed((): boolean => aStore.isLogged);
-const isDashboardView: ComputedRef<boolean> = computed((): boolean => isLogged.value && dStore.locations.length > 0 && route.path == routerRoutes.dashboard);
-const locationId: ComputedRef<number> = computed((): number => dStore.locationId);
-const locations: ComputedRef<Array<DictionaryItem>> = computed((): Array<DictionaryItem> => dStore.locations);
+const isDashboardView: ComputedRef<boolean> = computed((): boolean => aStore.isLogged && dStore.nonEmptyLocations && route.path == routerRoutes.dashboard);
 
 function changeLocationEvent(e: ValueChangedEvent): void {
    e.component.blur();
@@ -34,14 +30,7 @@ function changeLocationEvent(e: ValueChangedEvent): void {
          </router-link>
          <ul v-show="isDashboardView" class="navbar-nav me-auto">
             <li class="nav-item">
-               <DxSelectBox
-                  :data-source="locations"
-                  :search-enabled="false"
-                  :value="locationId"
-                  display-expr="value"
-                  value-expr="key"
-                  @value-changed="changeLocationEvent"
-               />
+               <DxSelectBox :data-source="dStore.locations" :search-enabled="false" :value="dStore.locationId" display-expr="value" value-expr="key" @value-changed="changeLocationEvent" />
             </li>
          </ul>
          <button
@@ -57,53 +46,53 @@ function changeLocationEvent(e: ValueChangedEvent): void {
          </button>
          <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav ms-auto my-2 my-md-0">
-               <li v-show="isLogged" class="nav-item mx-1">
-                  <router-link :to="routerRoutes.dashboard" class="nav-link" @click="collapseNavBar">{{ t("components.navbar.dashboard") }}</router-link>
+               <li v-show="aStore.isLogged" class="nav-item mx-1">
+                  <router-link :to="routerRoutes.dashboard" class="nav-link" @click="collapseNavBar">{{ t('components.navbar.dashboard') }}</router-link>
                </li>
-               <li v-show="isLogged" class="nav-item mx-1">
-                  <router-link :to="routerRoutes.report" class="nav-link" @click="collapseNavBar">{{ t("components.navbar.report") }}</router-link>
+               <li v-show="aStore.isLogged" class="nav-item mx-1">
+                  <router-link :to="routerRoutes.report" class="nav-link" @click="collapseNavBar">{{ t('components.navbar.report') }}</router-link>
                </li>
-               <li v-show="isLogged" class="nav-item dropdown mx-1">
+               <li v-show="aStore.isLogged" class="nav-item dropdown mx-1">
                   <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                     {{ t("components.navbar.masterdata") }}
+                     {{ t('components.navbar.masterdata') }}
                   </a>
                   <ul class="dropdown-menu">
                      <li class="dropdown-item">
-                        <router-link :to="routerRoutes.location" class="nav-link" @click="collapseNavBar">{{ t("components.navbar.location") }}</router-link>
+                        <router-link :to="routerRoutes.location" class="nav-link" @click="collapseNavBar">{{ t('components.navbar.location') }}</router-link>
                      </li>
                      <li class="dropdown-item">
-                        <router-link :to="routerRoutes.device" class="nav-link" @click="collapseNavBar">{{ t("components.navbar.device") }}</router-link>
+                        <router-link :to="routerRoutes.device" class="nav-link" @click="collapseNavBar">{{ t('components.navbar.device') }}</router-link>
                      </li>
                      <li><hr class="dropdown-divider" /></li>
                      <li class="dropdown-item">
-                        <router-link :to="routerRoutes.client" class="nav-link" @click="collapseNavBar">{{ t("components.navbar.client") }}</router-link>
+                        <router-link :to="routerRoutes.client" class="nav-link" @click="collapseNavBar">{{ t('components.navbar.client') }}</router-link>
                      </li>
                   </ul>
                </li>
-               <li v-show="isLogged" class="nav-item dropdown mx-1">
+               <li v-show="aStore.isLogged" class="nav-item dropdown mx-1">
                   <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                     {{ t("components.navbar.administration") }}
+                     {{ t('components.navbar.administration') }}
                   </a>
                   <ul class="dropdown-menu">
                      <li class="dropdown-item">
-                        <router-link :to="routerRoutes.role" class="nav-link" @click="collapseNavBar">{{ t("components.navbar.role") }}</router-link>
+                        <router-link :to="routerRoutes.role" class="nav-link" @click="collapseNavBar">{{ t('components.navbar.role') }}</router-link>
                      </li>
                      <li class="dropdown-item">
                         <router-link :to="routerRoutes.rolePermission" class="nav-link" @click="collapseNavBar">
-                           {{ t("components.navbar.rolePermission") }}
+                           {{ t('components.navbar.rolePermission') }}
                         </router-link>
                      </li>
                      <li><hr class="dropdown-divider" /></li>
                      <li class="dropdown-item">
-                        <router-link :to="routerRoutes.user" class="nav-link" @click="collapseNavBar">{{ t("components.navbar.user") }}</router-link>
+                        <router-link :to="routerRoutes.user" class="nav-link" @click="collapseNavBar">{{ t('components.navbar.user') }}</router-link>
                      </li>
                   </ul>
                </li>
-               <li v-show="!isLogged" class="nav-item mx-1">
-                  <router-link :to="routerRoutes.signIn" class="nav-link" @click="collapseNavBar">{{ t("components.navbar.signIn") }}</router-link>
+               <li v-show="!aStore.isLogged" class="nav-item mx-1">
+                  <router-link :to="routerRoutes.signIn" class="nav-link" @click="collapseNavBar">{{ t('components.navbar.signIn') }}</router-link>
                </li>
-               <li v-show="isLogged" class="nav-item mx-1">
-                  <router-link :to="routerRoutes.signOut" class="nav-link" @click="collapseNavBar">{{ t("components.navbar.signOut") }}</router-link>
+               <li v-show="aStore.isLogged" class="nav-item mx-1">
+                  <router-link :to="routerRoutes.signOut" class="nav-link" @click="collapseNavBar">{{ t('components.navbar.signOut') }}</router-link>
                </li>
             </ul>
          </div>

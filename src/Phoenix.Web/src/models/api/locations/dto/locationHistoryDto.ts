@@ -1,4 +1,4 @@
-import { HistoryDtoBase } from "../../base/dto/historyDtoBase";
+import { HistoryDtoBase } from '../../base/dto/historyDtoBase';
 
 export interface LocationHistoryDto extends HistoryDtoBase {
    name: string;

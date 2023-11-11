@@ -1,7 +1,8 @@
 <script setup lang="ts">
-import { Ref, ref } from "vue";
-import { useI18n } from "vue-i18n";
-import CustomStore from "devextreme/data/custom_store";
+import { Ref, ref } from 'vue';
+import { useI18n } from 'vue-i18n';
+import CustomStore from 'devextreme/data/custom_store';
+import { DictionaryItem } from '../models/api/base/dto/dictionaryItem';
 import {
    createDeviceAsync,
    getDeviceBoundRateDictionaryAsync,
@@ -10,31 +11,27 @@ import {
    getDeviceParityDictionaryAsync,
    getDevicePlcTypeDictionaryAsync,
    getDeviceStopBitDictionaryAsync,
-   getDeviceTypeDictionaryAsync,
    getDevicesAsync,
    updateDeviceAsync,
-} from "../api/deviceApi";
-import { getLocationDictionaryAsync } from "../api/locationApi";
-import { DictionaryItem } from "../models/api/base/dto/dictionaryItem";
+} from '../api/deviceApi';
+import { getLocationDictionaryAsync } from '../api/locationApi';
 
 const { t } = useI18n();
 
 const locations: Ref<Array<DictionaryItem>> = ref([]);
 const boundRates: Ref<Array<DictionaryItem>> = ref([]);
 const dataBits: Ref<Array<DictionaryItem>> = ref([]);
-const deviceTypes: Ref<Array<DictionaryItem>> = ref([]);
 const parities: Ref<Array<DictionaryItem>> = ref([]);
 const plcTypes: Ref<Array<DictionaryItem>> = ref([]);
 const stopBits: Ref<Array<DictionaryItem>> = ref([]);
 
 const deviceStore = new CustomStore<any, any>({
-   key: "id",
+   key: 'id',
    load: async () => {
       const result = await Promise.all([
          getLocationDictionaryAsync(),
          getDeviceBoundRateDictionaryAsync(),
          getDeviceDataBitDictionaryAsync(),
-         getDeviceTypeDictionaryAsync(),
          getDeviceParityDictionaryAsync(),
          getDevicePlcTypeDictionaryAsync(),
          getDeviceStopBitDictionaryAsync(),
@@ -44,12 +41,11 @@ const deviceStore = new CustomStore<any, any>({
       locations.value = result[0];
       boundRates.value = result[1];
       dataBits.value = result[2];
-      deviceTypes.value = result[3];
-      parities.value = result[4];
-      plcTypes.value = result[5];
-      stopBits.value = result[6];
+      parities.value = result[3];
+      plcTypes.value = result[4];
+      stopBits.value = result[5];
 
-      return result[7];
+      return result[6];
    },
    insert: (value) => createDeviceAsync(value),
    update: (_key, value) => updateDeviceAsync(value),
@@ -75,20 +71,9 @@ const deviceHistoryStore = (deviceId: number) => {
                <DxGridColumn :caption="t('views.device.grid.columns.name')" data-field="name" data-type="string">
                   <DxStringLengthRule :ignore-empty-value="false" :message="t('views.device.grid.validators.name.length')" :min="3" :max="50" />
                </DxGridColumn>
-               <DxGridColumn
-                  :allow-grouping="false"
-                  :caption="t('views.device.grid.columns.plcType')"
-                  alignment="left"
-                  data-field="plcType"
-                  data-type="number"
-                  :width="120"
-               >
+               <DxGridColumn :allow-grouping="false" :caption="t('views.device.grid.columns.plcType')" alignment="left" data-field="plcType" data-type="number" :width="120">
                   <DxGridLookup :data-source="plcTypes" display-expr="value" value-expr="key" />
                   <DxRangeRule :ignore-empty-value="false" :message="t('views.device.grid.validators.plcType.range')" :min="1" />
-               </DxGridColumn>
-               <DxGridColumn :caption="t('views.device.grid.columns.deviceType')" alignment="left" data-field="deviceType" data-type="number" :width="120">
-                  <DxGridLookup :data-source="deviceTypes" display-expr="value" value-expr="key" />
-                  <DxRangeRule :ignore-empty-value="false" :message="t('views.device.grid.validators.deviceType.range')" :min="1" />
                </DxGridColumn>
                <DxGridColumn :caption="t('views.device.grid.columns.modbusId')" alignment="left" data-field="modbusId" data-type="number" :width="100">
                   <DxRangeRule :ignore-empty-value="false" :message="t('views.device.grid.validators.modbusId.range')" :min="0" :max="254" />
@@ -101,14 +86,7 @@ const deviceHistoryStore = (deviceId: number) => {
                   <DxGridLookup :data-source="dataBits" display-expr="value" value-expr="key" />
                   <DxRangeRule :ignore-empty-value="false" :message="t('views.device.grid.validators.dataBits.range')" :min="1" />
                </DxGridColumn>
-               <DxGridColumn
-                  :allow-grouping="false"
-                  :caption="t('views.device.grid.columns.parity')"
-                  alignment="left"
-                  data-field="parity"
-                  data-type="number"
-                  :width="100"
-               >
+               <DxGridColumn :allow-grouping="false" :caption="t('views.device.grid.columns.parity')" alignment="left" data-field="parity" data-type="number" :width="100">
                   <DxGridLookup :data-source="parities" display-expr="value" value-expr="key" />
                   <DxRangeRule :ignore-empty-value="false" :message="t('views.device.grid.validators.parity.range')" :min="0" />
                </DxGridColumn>
@@ -116,26 +94,23 @@ const deviceHistoryStore = (deviceId: number) => {
                   <DxGridLookup :data-source="stopBits" display-expr="value" value-expr="key" />
                   <DxRangeRule :ignore-empty-value="false" :message="t('views.device.grid.validators.stopBits.range')" :min="0" />
                </DxGridColumn>
-               <DxGridColumn
-                  :caption="t('views.device.grid.columns.includeReport')"
-                  :value="false"
-                  :width="80"
-                  data-field="includeReport"
-                  data-type="boolean"
-               />
+               <DxGridColumn :caption="t('views.device.grid.columns.reportSequence')" alignment="left" data-field="reportSequence" data-type="number" :width="100">
+                  <DxRangeRule :ignore-empty-value="false" :message="t('views.device.grid.validators.dataBits.reportSequence')" :min="0" />
+               </DxGridColumn>
+               <DxGridColumn :caption="t('views.device.grid.columns.includeReport')" :value="false" :width="80" data-field="includeReport" data-type="boolean" />
             </template>
-            <template #detailView="detailProps">
-               <DataGrid :data-store="deviceHistoryStore(detailProps.key)" :allow-adding="false" :allow-updating="false" :enable-detail="false">
+            <template #detail="detailProps">
+               <DataGrid :data-store="deviceHistoryStore(detailProps.key)" :allow-adding="false" :allow-updating="false" :show-metrics="true">
                   <template #columns>
                      <DxGridColumn :caption="t('views.device.grid.columns.location')" data-field="locationName" data-type="string" />
                      <DxGridColumn :caption="t('views.device.grid.columns.name')" data-field="name" data-type="string" />
                      <DxGridColumn :caption="t('views.device.grid.columns.plcType')" data-field="plcType" data-type="string" />
-                     <DxGridColumn :caption="t('views.device.grid.columns.deviceType')" data-field="deviceType" data-type="string" />
                      <DxGridColumn :caption="t('views.device.grid.columns.modbusId')" data-field="modbusId" data-type="string" />
                      <DxGridColumn :caption="t('views.device.grid.columns.boundRate')" data-field="boundRate" data-type="string" />
                      <DxGridColumn :caption="t('views.device.grid.columns.dataBits')" data-field="dataBits" data-type="string" />
                      <DxGridColumn :caption="t('views.device.grid.columns.parity')" data-field="parity" data-type="string" />
                      <DxGridColumn :caption="t('views.device.grid.columns.stopBits')" data-field="stopBits" data-type="string" />
+                     <DxGridColumn :caption="t('views.device.grid.columns.reportSequence')" data-field="reportSequence" data-type="string" />
                      <DxGridColumn :caption="t('views.device.grid.columns.includeReport')" :width="80" data-field="includeReport" data-type="boolean" />
                   </template>
                </DataGrid>

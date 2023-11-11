@@ -1,12 +1,12 @@
-import { getAsync, getFileAsync } from "../helpers/requestHelper";
-import { DictionaryItem } from "../models/api/base/dto/dictionaryItem";
-import { GetReportQuery } from "../models/api/reports/queries/getReportQuery";
-import { FileResult } from "../models/requests/fileResult";
+import { getAsync, getFileAsync } from '../helpers/requestHelper';
+import { DictionaryItem } from '../models/api/base/dto/dictionaryItem';
+import { GetPlcReportQuery } from '../models/api/reports/queries/getPlcReportQuery';
+import { FileResult } from '../models/requests/fileResult';
 
-export function getReportTypeDictionaryAsync(): Promise<Array<DictionaryItem>> {
-   return getAsync<Array<DictionaryItem>>("report/getReportTypeDictionary");
+export function getPlcReportTypeDictionaryAsync(): Promise<Array<DictionaryItem>> {
+   return getAsync<Array<DictionaryItem>>('report/getPlcReportTypeDictionary');
 }
 
-export function getReportAsync(request: GetReportQuery): Promise<FileResult> {
-   return getFileAsync("report/getReport", request);
+export function getPlcReportAsync(request: GetPlcReportQuery): Promise<FileResult> {
+   return getFileAsync('report/getPlcReport', request);
 }

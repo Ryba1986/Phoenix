@@ -1,4 +1,4 @@
-import { MetricDtoBase } from "../../base/dto/metricDtoBase";
+import { MetricDtoBase } from '../../base/dto/metricDtoBase';
 
 export interface RolePermissionDto extends MetricDtoBase {
    roleId: number;

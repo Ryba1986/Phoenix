@@ -1,4 +1,4 @@
-import { CommandBase } from "../../base/commands/commandBase";
+import { CommandBase } from '../../base/commands/commandBase';
 
 export interface UpdateUserPasswordCommand extends CommandBase {
    currentPassword: string;

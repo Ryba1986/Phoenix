@@ -1,7 +1,7 @@
-import { CommandBase } from "./commandBase";
+import { CommandBase } from './commandBase';
 
 export interface UpdateCommandBase extends CommandBase {
    id: number;
    isActive: boolean;
-   version: string;
+   version: number;
 }

@@ -1,4 +1,4 @@
-import { CreateCommandBase } from "../../base/commands/createCommandBase";
+import { CreateCommandBase } from '../../base/commands/createCommandBase';
 
 export interface CreateRolePermissionCommand extends CreateCommandBase {
    roleId: number;

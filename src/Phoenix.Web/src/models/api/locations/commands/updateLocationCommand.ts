@@ -1,4 +1,4 @@
-import { UpdateCommandBase } from "../../base/commands/updateCommandBase";
+import { UpdateCommandBase } from '../../base/commands/updateCommandBase';
 
 export interface UpdateLocationCommand extends UpdateCommandBase {
    name: string;
