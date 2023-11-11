@@ -3,11 +3,11 @@ updates:
   - package-ecosystem: "npm"
     directory: "/src/Phoenix.Web"
     schedule:
-      interval: "weekly"
+      interval: "daily"
       time: "14:00"
 
   - package-ecosystem: "nuget"
     directory: "/"
     schedule:
-      interval: "weekly"
+      interval: "daily"
       time: "14:00"
