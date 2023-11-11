@@ -1,5 +1,11 @@
 version: 2
 updates:
+  - package-ecosystem: "npm"
+    directory: "/src/Phoenix.Web"
+    schedule:
+      interval: "weekly"
+      time: "14:00"
+
   - package-ecosystem: "nuget"
     directory: "/"
     schedule:
