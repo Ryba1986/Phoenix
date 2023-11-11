@@ -5,7 +5,7 @@ export default defineConfig({
    build: {
       chunkSizeWarningLimit: 4096,
       emptyOutDir: true,
-      outDir: '../../dist/Phoenix.Web',
+      outDir: '../../dist/web',
       reportCompressedSize: false,
    },
    plugins: [vue()],
