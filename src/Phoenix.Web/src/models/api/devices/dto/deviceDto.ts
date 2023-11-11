@@ -10,6 +10,6 @@ export interface DeviceDto extends MetricDtoBase {
    parity: number;
    stopBits: number;
    serialNumber: string;
-   reportSequence: number;
+   sequence: number;
    includeReport: boolean;
 }

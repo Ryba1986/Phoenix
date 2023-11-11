@@ -65,7 +65,7 @@ export const en: Language = {
                modbusId: 'Modbus ID',
                name: 'Name',
                plcType: 'Plc type',
-               reportSequence: 'Sequence',
+               sequence: 'Sequence',
             },
             validators: {
                boundRate: {
@@ -92,7 +92,7 @@ export const en: Language = {
                plcType: {
                   range: 'Plc type is required.',
                },
-               reportSequence: {
+               sequence: {
                   range: 'Sequence is required.',
                },
             },

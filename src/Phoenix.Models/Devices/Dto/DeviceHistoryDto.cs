@@ -13,7 +13,7 @@ namespace Phoenix.Models.Devices.Dto
       public string Parity { get; init; }
       public string StopBits { get; init; }
       public string SerialNumber { get; init; }
-      public string ReportSequence { get; init; }
+      public string Sequence { get; init; }
       public bool IncludeReport { get; init; }
 
       public DeviceHistoryDto()
@@ -27,7 +27,7 @@ namespace Phoenix.Models.Devices.Dto
          Parity = string.Empty;
          StopBits = string.Empty;
          SerialNumber = string.Empty;
-         ReportSequence = string.Empty;
+         Sequence = string.Empty;
       }
    }
 }

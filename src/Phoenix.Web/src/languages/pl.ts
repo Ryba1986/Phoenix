@@ -65,7 +65,7 @@ export const pl: Language = {
                modbusId: 'Modbus ID',
                name: 'Nazwa',
                plcType: 'Typ sterownika',
-               reportSequence: 'Kolejność',
+               sequence: 'Kolejność',
             },
             validators: {
                boundRate: {
@@ -92,7 +92,7 @@ export const pl: Language = {
                plcType: {
                   range: 'Typ sterownika jest wymagany.',
                },
-               reportSequence: {
+               sequence: {
                   range: 'Kolejność jest wymagana.',
                },
             },

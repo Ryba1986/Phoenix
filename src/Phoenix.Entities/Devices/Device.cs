@@ -17,7 +17,7 @@ namespace Phoenix.Entities.Devices
       public SerialParity Parity { get; set; }
       public SerialStopBits StopBits { get; set; }
       public string SerialNumber { get; set; }
-      public byte ReportSequence { get; set; }
+      public byte Sequence { get; set; }
       public bool IncludeReport { get; set; }
 
       public Device()

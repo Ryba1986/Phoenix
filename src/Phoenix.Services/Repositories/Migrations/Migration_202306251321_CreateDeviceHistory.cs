@@ -29,7 +29,7 @@ namespace Phoenix.Services.Repositories.Migrations
                Parity = table.Column<SerialParity>(name: nameof(DeviceHistory.Parity), nullable: true),
                StopBits = table.Column<SerialStopBits>(name: nameof(DeviceHistory.StopBits), nullable: true),
                SerialNumber = table.Column<string>(name: nameof(DeviceHistory.SerialNumber), maxLength: 20, defaultValue: string.Empty),
-               ReportSequence = table.Column<byte>(name: nameof(Device.ReportSequence), nullable: true),
+               Sequence = table.Column<byte>(name: nameof(Device.Sequence), nullable: true),
                IncludeReport = table.Column<bool>(name: nameof(DeviceHistory.IncludeReport), defaultValue: default(bool)),
                IsActive = table.Column<bool>(name: nameof(DeviceHistory.IsActive), defaultValue: default(bool)),
                CreatedById = table.Column<int>(name: nameof(DeviceHistory.CreatedById)),

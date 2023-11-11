@@ -39,7 +39,7 @@ namespace Phoenix.Services.Repositories.Configurations.Devices
          .HasMaxLength(30)
          .IsRequired();
 
-         builder.Property(x => x.ReportSequence)
+         builder.Property(x => x.Sequence)
             .IsRequired();
 
          builder.Property(x => x.IncludeReport)

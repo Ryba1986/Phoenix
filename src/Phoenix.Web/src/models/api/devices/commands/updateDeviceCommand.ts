@@ -9,6 +9,6 @@ export interface UpdateDeviceCommand extends UpdateCommandBase {
    dataBits: number;
    parity: number;
    stopBits: number;
-   reportSequence: number;
+   sequence: number;
    includeReport: boolean;
 }

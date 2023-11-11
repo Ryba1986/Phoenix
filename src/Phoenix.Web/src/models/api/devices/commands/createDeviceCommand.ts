@@ -9,6 +9,6 @@ export interface CreateDeviceCommand extends CreateCommandBase {
    dataBits: number;
    parity: number;
    stopBits: number;
-   reportSequence: number;
+   sequence: number;
    includeReport: boolean;
 }

@@ -9,6 +9,6 @@ export interface DeviceHistoryDto extends HistoryDtoBase {
    dataBits: number;
    parity: number;
    stopBits: number;
-   reportSequence: string;
+   sequence: string;
    includeReport: boolean;
 }

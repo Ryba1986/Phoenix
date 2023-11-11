@@ -37,7 +37,7 @@ namespace Phoenix.Services.Handlers.Devices.Commands
             .AsNoTracking()
             .AnyAsync(x =>
                x.LocationId == request.LocationId &&
-               (x.Name == request.Name || x.ModbusId == request.ModbusId || x.ReportSequence == request.ReportSequence) &&
+               (x.Name == request.Name || x.ModbusId == request.ModbusId || x.Sequence == request.Sequence) &&
                x.Id != request.Id
             , cancellationToken);
 
@@ -55,7 +55,7 @@ namespace Phoenix.Services.Handlers.Devices.Commands
          {
             return Result.Error(Translations.Validator_Version_Invalid);
          }
-         if (device.LocationId == request.LocationId && device.Name == request.Name && device.PlcType == request.PlcType && device.ModbusId == request.ModbusId && device.BoundRate == request.BoundRate && device.DataBits == request.DataBits && device.Parity == request.Parity && device.StopBits == request.StopBits && device.ReportSequence == request.ReportSequence && device.IncludeReport == request.IncludeReport && device.IsActive == request.IsActive)
+         if (device.LocationId == request.LocationId && device.Name == request.Name && device.PlcType == request.PlcType && device.ModbusId == request.ModbusId && device.BoundRate == request.BoundRate && device.DataBits == request.DataBits && device.Parity == request.Parity && device.StopBits == request.StopBits && device.Sequence == request.Sequence && device.IncludeReport == request.IncludeReport && device.IsActive == request.IsActive)
          {
             return Result.Success();
          }
@@ -71,7 +71,7 @@ namespace Phoenix.Services.Handlers.Devices.Commands
             DataBits = device.DataBits != request.DataBits ? request.DataBits : null,
             Parity = device.Parity != request.Parity ? request.Parity : null,
             StopBits = device.StopBits != request.StopBits ? request.StopBits : null,
-            ReportSequence = device.ReportSequence != request.ReportSequence ? request.ReportSequence : null,
+            Sequence = device.Sequence != request.Sequence ? request.Sequence : null,
             IncludeReport = request.IncludeReport,
             IsActive = request.IsActive,
             CreatedById = request.ModifiedById,
@@ -86,7 +86,7 @@ namespace Phoenix.Services.Handlers.Devices.Commands
          device.DataBits = request.DataBits;
          device.Parity = request.Parity;
          device.StopBits = request.StopBits;
-         device.ReportSequence = request.ReportSequence;
+         device.Sequence = request.Sequence;
          device.IncludeReport = request.IncludeReport;
          device.IsActive = request.IsActive;
 

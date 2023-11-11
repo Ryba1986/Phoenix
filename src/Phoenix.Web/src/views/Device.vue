@@ -94,8 +94,8 @@ const deviceHistoryStore = (deviceId: number) => {
                   <DxGridLookup :data-source="stopBits" display-expr="value" value-expr="key" />
                   <DxRangeRule :ignore-empty-value="false" :message="t('views.device.grid.validators.stopBits.range')" :min="0" />
                </DxGridColumn>
-               <DxGridColumn :caption="t('views.device.grid.columns.reportSequence')" alignment="left" data-field="reportSequence" data-type="number" :width="100">
-                  <DxRangeRule :ignore-empty-value="false" :message="t('views.device.grid.validators.dataBits.reportSequence')" :min="0" />
+               <DxGridColumn :caption="t('views.device.grid.columns.sequence')" alignment="left" data-field="sequence" data-type="number" :width="100">
+                  <DxRangeRule :ignore-empty-value="false" :message="t('views.device.grid.validators.dataBits.sequence')" :min="0" />
                </DxGridColumn>
                <DxGridColumn :caption="t('views.device.grid.columns.includeReport')" :value="false" :width="80" data-field="includeReport" data-type="boolean" />
             </template>
@@ -110,7 +110,7 @@ const deviceHistoryStore = (deviceId: number) => {
                      <DxGridColumn :caption="t('views.device.grid.columns.dataBits')" data-field="dataBits" data-type="string" />
                      <DxGridColumn :caption="t('views.device.grid.columns.parity')" data-field="parity" data-type="string" />
                      <DxGridColumn :caption="t('views.device.grid.columns.stopBits')" data-field="stopBits" data-type="string" />
-                     <DxGridColumn :caption="t('views.device.grid.columns.reportSequence')" data-field="reportSequence" data-type="string" />
+                     <DxGridColumn :caption="t('views.device.grid.columns.sequence')" data-field="sequence" data-type="string" />
                      <DxGridColumn :caption="t('views.device.grid.columns.includeReport')" :width="80" data-field="includeReport" data-type="boolean" />
                   </template>
                </DataGrid>

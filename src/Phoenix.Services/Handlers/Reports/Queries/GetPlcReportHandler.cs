@@ -66,7 +66,7 @@ namespace Phoenix.Services.Handlers.Reports.Queries
                x.Location.IncludeReport
             )
             .OrderBy(x => x.Location.Name)
-            .ThenBy(x => x.ReportSequence)
+            .ThenBy(x => x.Sequence)
             .Select(x => x.ToDeviceReportDto())
             .ToArrayAsync(cancellationToken);
 

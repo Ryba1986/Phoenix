@@ -37,7 +37,7 @@ namespace Phoenix.Services.Handlers.Devices.Commands
             .AsNoTracking()
             .AnyAsync(x =>
                x.LocationId == request.LocationId &&
-               (x.Name == request.Name || x.ModbusId == request.ModbusId || x.ReportSequence == request.ReportSequence)
+               (x.Name == request.Name || x.ModbusId == request.ModbusId || x.Sequence == request.Sequence)
             , cancellationToken);
 
          if (deviceExists)
@@ -55,7 +55,7 @@ namespace Phoenix.Services.Handlers.Devices.Commands
             DataBits = request.DataBits,
             Parity = request.Parity,
             StopBits = request.StopBits,
-            ReportSequence = request.ReportSequence,
+            Sequence = request.Sequence,
             IncludeReport = request.IncludeReport,
             IsActive = request.IsActive,
          };
@@ -72,7 +72,7 @@ namespace Phoenix.Services.Handlers.Devices.Commands
             DataBits = request.DataBits,
             Parity = request.Parity,
             StopBits = request.StopBits,
-            ReportSequence = request.ReportSequence,
+            Sequence = request.Sequence,
             IncludeReport = request.IncludeReport,
             IsActive = request.IsActive,
             CreatedById = request.CreatedById,

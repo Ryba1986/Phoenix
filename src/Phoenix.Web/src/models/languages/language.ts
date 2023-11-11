@@ -65,7 +65,7 @@ export interface Language extends DefineLocaleMessage {
                modbusId: string;
                name: string;
                plcType: string;
-               reportSequence: string;
+               sequence: string;
             };
             validators: {
                boundRate: {
@@ -92,7 +92,7 @@ export interface Language extends DefineLocaleMessage {
                plcType: {
                   range: string;
                };
-               reportSequence: {
+               sequence: {
                   range: string;
                };
             };

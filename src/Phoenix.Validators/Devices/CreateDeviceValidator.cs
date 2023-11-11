@@ -30,8 +30,8 @@ namespace Phoenix.Validators.Devices
          RuleFor(x => x.StopBits)
             .IsInEnum().WithMessage(Translations.Validator_StopBits_Invalid);
 
-         RuleFor(x => x.ReportSequence)
-            .NotNull().WithMessage(Translations.Validator_ReportSequence_Invalid);
+         RuleFor(x => x.Sequence)
+            .NotNull().WithMessage(Translations.Validator_Sequence_Invalid);
       }
    }
 }

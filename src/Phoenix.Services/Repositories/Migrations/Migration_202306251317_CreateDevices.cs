@@ -26,7 +26,7 @@ namespace Phoenix.Services.Repositories.Migrations
                Parity = table.Column<SerialParity>(name: nameof(Device.Parity)),
                StopBits = table.Column<SerialStopBits>(name: nameof(Device.StopBits)),
                SerialNumber = table.Column<string>(name: nameof(Device.SerialNumber), maxLength: 30, defaultValue: string.Empty),
-               ReportSequence = table.Column<byte>(name: nameof(Device.ReportSequence), defaultValue: default(byte)),
+               Sequence = table.Column<byte>(name: nameof(Device.Sequence), defaultValue: default(byte)),
                IncludeReport = table.Column<bool>(name: nameof(Device.IncludeReport), defaultValue: default(bool)),
                IsActive = table.Column<bool>(name: nameof(Device.IsActive), defaultValue: default(bool)),
                Version = table.Column<short>(name: nameof(Device.Version), defaultValue: default(short)),
@@ -37,7 +37,7 @@ namespace Phoenix.Services.Repositories.Migrations
                table.ForeignKey($"FK_{nameof(Device)}_{nameof(Device.Location)}", x => x.LocationId, principalTable: nameof(Location), principalColumn: nameof(Location.Id));
                table.UniqueConstraint($"UK_{nameof(Device)}_{nameof(Device.Location)}_{nameof(Device.Name)}", x => new { x.LocationId, x.Name });
                table.UniqueConstraint($"UK_{nameof(Device)}_{nameof(Device.Location)}_{nameof(Device.ModbusId)}", x => new { x.LocationId, x.ModbusId });
-               table.UniqueConstraint($"UK_{nameof(Device)}_{nameof(Device.Location)}_{nameof(Device.ReportSequence)}", x => new { x.LocationId, x.ReportSequence });
+               table.UniqueConstraint($"UK_{nameof(Device)}_{nameof(Device.Location)}_{nameof(Device.Sequence)}", x => new { x.LocationId, x.Sequence });
             }
          );
       }

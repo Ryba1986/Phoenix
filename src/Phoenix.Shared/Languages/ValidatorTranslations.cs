@@ -16,7 +16,7 @@ namespace Phoenix.Shared.Languages
       public static string Validator_Password_Invalid => Get(eng: "Password is invaild.", pol: "Hasło jest nieprawidłowe.");
       public static string Validator_Permission_Invalid => Get(eng: "Permission is invaild.", pol: "Uprawnienie jest nieprawidłowe.");
       public static string Validator_PlcType_Invalid => Get(eng: "Plc type is invaild.", pol: "Typ plc jest nieprawidłowy.");
-      public static string Validator_ReportSequence_Invalid => Get(eng: "Sequence number is invaild.", pol: "Numer sekwencyjny jest nieprawidłowy.");
+      public static string Validator_Sequence_Invalid => Get(eng: "Sequence is invaild.", pol: "Kolejność jest nieprawidłowa.");
       public static string Validator_RoleId_Invalid => Get(eng: "Role is invaild.", pol: "Rola jest nieprawidłowa.");
       public static string Validator_StopBits_Invalid => Get(eng: "Stop bits is invaild.", pol: "Stop bit jest nieprawidłowy.");
       public static string Validator_Version_Invalid => Get(eng: "The object has been modified.", pol: "Obiekt został zmodyfikowany.");
