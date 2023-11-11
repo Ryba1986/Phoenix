@@ -4,12 +4,12 @@ updates:
     directory: "/src/Phoenix.Web"
     target-branch: "dev"
     schedule:
-      interval: "daily"
+      interval: "weekly"
       time: "14:00"
 
   - package-ecosystem: "nuget"
     directory: "/"
     target-branch: "dev"
     schedule:
-      interval: "daily"
+      interval: "weekly"
       time: "14:00"
