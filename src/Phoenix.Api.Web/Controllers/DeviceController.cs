@@ -24,6 +24,13 @@ namespace Phoenix.Api.Web.Controllers
 
       [Authorization(Permission.Device, AccessLevel.Read)]
       [HttpGet]
+      public async Task<IActionResult> GetDevicesByLocation([FromQuery] GetDevicesByLocationQuery request)
+      {
+         return await HandleAsync(request);
+      }
+
+      [Authorization(Permission.Device, AccessLevel.Read)]
+      [HttpGet]
       public async Task<IActionResult> GetDeviceHistory([FromQuery] GetDeviceHistoryQuery request)
       {
          return await HandleAsync(request);

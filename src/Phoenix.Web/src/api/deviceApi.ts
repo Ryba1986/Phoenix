@@ -5,10 +5,15 @@ import { UpdateDeviceCommand } from '../models/api/devices/commands/updateDevice
 import { DeviceDto } from '../models/api/devices/dto/deviceDto';
 import { DeviceHistoryDto } from '../models/api/devices/dto/deviceHistoryDto';
 import { GetDeviceHistoryQuery } from '../models/api/devices/queries/getDeviceHistoryQuery';
+import { GetDevicesByLocationQuery } from '../models/api/devices/queries/getDevicesByLocationQuery';
 import { Result } from '../models/requests/result';
 
 export function getDevicesAsync(): Promise<Array<DeviceDto>> {
    return getAsync<Array<DeviceDto>>('device/getDevices');
+}
+
+export function getDevicesByLocationAsync(request: GetDevicesByLocationQuery): Promise<Array<DeviceDto>> {
+   return getAsync<Array<DeviceDto>>('device/getDevicesByLocation', request);
 }
 
 export function getDeviceHistoryAsync(request: GetDeviceHistoryQuery): Promise<Array<DeviceHistoryDto>> {
