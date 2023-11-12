@@ -1,4 +1,5 @@
 import { from } from 'linq-to-typescript';
+import { getDateString } from './dateHelper';
 import { DeviceDto } from '../models/api/devices/dto/deviceDto';
 import { GetPlcChartQueryBase } from '../models/api/base/queries/getPlcChartQueryBase';
 import { GetPlcLastQueryBase } from '../models/api/base/queries/getPlcLastQueryBase';
@@ -17,7 +18,7 @@ export function getPlcChartFromLocationAsync<T>(devices: Array<DeviceDto>, plcTy
    return from(devices)
       .asParallel()
       .where((x) => x.plcType == plcType)
-      .selectAsync((x) => plcChartAsync({ deviceId: x.id, date: date.toISOString() }))
+      .selectAsync((x) => plcChartAsync({ deviceId: x.id, date: getDateString(date) }))
       .selectMany((x) => x)
       .toArray();
 }
