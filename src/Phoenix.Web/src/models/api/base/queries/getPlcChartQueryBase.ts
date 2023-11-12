@@ -1,6 +1,6 @@
 import { QueryBase } from './queryBase';
 
 export interface GetPlcChartQueryBase extends QueryBase {
-   date: string;
+   startDate: string;
    deviceId: number;
 }

@@ -70,13 +70,11 @@ namespace Phoenix.Services.Helpers
 
       public static IQueryable<T> GetPlcChartQuery<T>(DbSet<T> plcs, GetPlcChartQueryBase request) where T : PlcBase
       {
-         DateTime dateTime = request.Date.ToDateTime(TimeOnly.MinValue);
-
          return plcs
             .AsNoTracking()
             .Where(x =>
-               x.Date >= dateTime &&
-               x.Date < dateTime.AddDays(1) &&
+               x.Date >= request.StartDate &&
+               x.Date < request.StartDate.AddDays(1) &&
                x.DeviceId == request.DeviceId
             );
       }
