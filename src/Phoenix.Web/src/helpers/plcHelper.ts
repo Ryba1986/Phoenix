@@ -13,11 +13,11 @@ export function getPlcFromLocationAsync<T>(devices: Array<DeviceDto>, plcType: n
       .toArray();
 }
 
-export function getPlcChartFromLocationAsync<T>(devices: Array<DeviceDto>, plcType: number, startDate: Date, plcChartAsync: (query: GetPlcChartQueryBase) => Promise<Array<T>>): Promise<Array<T>> {
+export function getPlcChartFromLocationAsync<T>(devices: Array<DeviceDto>, plcType: number, date: Date, plcChartAsync: (query: GetPlcChartQueryBase) => Promise<Array<T>>): Promise<Array<T>> {
    return from(devices)
       .asParallel()
       .where((x) => x.plcType == plcType)
-      .selectAsync((x) => plcChartAsync({ deviceId: x.id, date: startDate.toISOString() }))
+      .selectAsync((x) => plcChartAsync({ deviceId: x.id, date: date.toISOString() }))
       .selectMany((x) => x)
       .toArray();
 }
