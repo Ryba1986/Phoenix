@@ -2,21 +2,48 @@
 import { ComputedRef, Ref, computed, onMounted, onUnmounted, ref, watch } from 'vue';
 import { dashboardRefreshInterval } from '../config';
 import { dashboardStore } from '../stores/dashboardStore';
+import { getClimatixLastAsync } from '../api/climatixApi';
+import { getDevicesByLocationAsync } from '../api/deviceApi';
+import { getKamstrupLastAsync } from '../api/kamstrupApi';
 import { getLocationDictionaryAsync } from '../api/locationApi';
+import { getRvd145LastAsync } from '../api/rvd145Api';
+import { getPlcFromLocationAsync } from '../helpers/plcHelper';
 import { displayError } from '../helpers/toastHelper';
+import { DeviceDto } from '../models/api/devices/dto/deviceDto';
+import { ClimatixDto } from '../models/api/plcs/climatixs/dto/climatixDto';
+import { KamstrupDto } from '../models/api/plcs/kamstrups/dto/kamstrupDto';
+import { Rvd145Dto } from '../models/api/plcs/rvds/dto/rvd145Dto';
 
 const dStore = dashboardStore();
 
 const isLoading: Ref<boolean> = ref(false);
 const isPageLoaded: Ref<boolean> = ref(false);
+const locationId: ComputedRef<number> = computed((): number => dStore.locationId);
 const refreshLocationInterval: Ref<number> = ref(0);
 
-const locationId: ComputedRef<number> = computed((): number => dStore.locationId);
+const devices: Ref<Array<DeviceDto>> = ref([]);
+const climatixs: Ref<Array<ClimatixDto>> = ref([]);
+const kamstrups: Ref<Array<KamstrupDto>> = ref([]);
+const rvd145s: Ref<Array<Rvd145Dto>> = ref([]);
+
+async function getClimatixsAsync(): Promise<void> {
+   climatixs.value = await getPlcFromLocationAsync(devices.value, 2, getClimatixLastAsync);
+}
+
+async function getKamstrupsAsync(): Promise<void> {
+   kamstrups.value = await getPlcFromLocationAsync(devices.value, 1, getKamstrupLastAsync);
+}
+
+async function getRvd145sAsync(): Promise<void> {
+   rvd145s.value = await getPlcFromLocationAsync(devices.value, 3, getRvd145LastAsync);
+}
 
 async function refreshLocationAsync(): Promise<void> {
    try {
       isLoading.value = true;
       dStore.setLocations(await getLocationDictionaryAsync());
+      devices.value = await getDevicesByLocationAsync({ locationId: locationId.value });
+      await Promise.all([getClimatixsAsync(), getKamstrupsAsync(), getRvd145sAsync()]);
    } catch (error) {
       displayError(error);
    } finally {
@@ -51,4 +78,7 @@ onUnmounted((): void => {
 });
 </script>
 
-<template>Dashboard</template>
+<template>
+   <LoadPanel :visible="isLoading" />
+   Dashboard
+</template>
