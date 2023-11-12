@@ -4,8 +4,8 @@ namespace Phoenix.Models.Base.Commands
 {
    public abstract class CreatePlcCommandBase : CommandBase
    {
-      public DateTime Date { get; init; }
       public int DeviceId { get; init; }
+      public DateTime Date { get; init; }
       public string SerialNumber { get; init; }
       public int ClientId { get; private set; }
 

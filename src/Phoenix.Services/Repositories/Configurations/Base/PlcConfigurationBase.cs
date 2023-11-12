@@ -8,11 +8,11 @@ namespace Phoenix.Services.Repositories.Configurations.Base
    {
       public virtual void Configure(EntityTypeBuilder<T> builder)
       {
-         builder.Property(x => x.Date)
-            .HasPrecision(0)
+         builder.Property(x => x.DeviceId)
             .IsRequired();
 
-         builder.Property(x => x.DeviceId)
+         builder.Property(x => x.Date)
+            .HasPrecision(0)
             .IsRequired();
 
          builder.HasKey(x => new { x.Date, x.DeviceId });

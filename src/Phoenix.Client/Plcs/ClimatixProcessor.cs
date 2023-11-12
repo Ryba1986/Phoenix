@@ -10,7 +10,6 @@ using Phoenix.Client.Settings;
 using Phoenix.Models.Base.Commands;
 using Phoenix.Models.Devices.Dto;
 using Phoenix.Models.Plcs.Climatixs.Commands;
-using Phoenix.Shared.Extensions;
 
 namespace Phoenix.Client.Plcs
 {
@@ -42,8 +41,8 @@ namespace Phoenix.Client.Plcs
 
          return new CreateClimatixCommand()
          {
-            Date = DateTime.Now.RoundToSecond(),
             DeviceId = device.Id,
+            Date = DateTime.Now,
 
             OutsideTemp = inputRegisters0[50 - 1] / 10f,
             ChHighInletPresure = inputRegisters0[77 - 1] / 100f,

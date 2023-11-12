@@ -10,7 +10,6 @@ using Phoenix.Client.Settings;
 using Phoenix.Models.Base.Commands;
 using Phoenix.Models.Devices.Dto;
 using Phoenix.Models.Plcs.Rvds.Commands;
-using Phoenix.Shared.Extensions;
 
 namespace Phoenix.Client.Plcs
 {
@@ -35,8 +34,8 @@ namespace Phoenix.Client.Plcs
 
          return new CreateRvd145Command()
          {
-            Date = DateTime.Now.RoundToSecond(),
             DeviceId = device.Id,
+            Date = DateTime.Now,
 
             OutsideTemp = (short)holdingRegisters1[44] / 64f,
             ChHighInletPresure = (short)holdingRegisters1[53] / 50f,

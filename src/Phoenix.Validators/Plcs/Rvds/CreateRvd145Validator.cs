@@ -7,9 +7,9 @@ namespace Phoenix.Validators.Plcs.Rvds
    {
       public CreateRvd145Validator()
       {
-         RuleFor(x => x.Date).NotEmpty();
-
          RuleFor(x => x.DeviceId).NotEmpty();
+
+         RuleFor(x => x.Date).NotEmpty();
 
          RuleFor(x => x.SerialNumber).NotNull();
       }

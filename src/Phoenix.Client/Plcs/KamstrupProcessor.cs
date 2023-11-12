@@ -11,7 +11,6 @@ using Phoenix.Client.Settings;
 using Phoenix.Models.Base.Commands;
 using Phoenix.Models.Devices.Dto;
 using Phoenix.Models.Plcs.Meters.Commands;
-using Phoenix.Shared.Extensions;
 
 namespace Phoenix.Client.Plcs
 {
@@ -35,8 +34,8 @@ namespace Phoenix.Client.Plcs
 
          return new CreateKamstrupCommand()
          {
-            Date = DateTime.Now.RoundToSecond(),
             DeviceId = device.Id,
+            Date = DateTime.Now,
 
             InletTemp = ModbusUtility.GetSingle(inputRegisters0[9], inputRegisters0[8]),
             OutletTemp = ModbusUtility.GetSingle(inputRegisters0[11], inputRegisters0[10]),

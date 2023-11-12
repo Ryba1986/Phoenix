@@ -26,8 +26,8 @@ namespace Phoenix.Services.Handlers.Plcs.Rvds.Commands
 
          Rvd145 newRvd145 = new()
          {
-            Date = request.Date.RoundToSecond(),
             DeviceId = request.DeviceId,
+            Date = request.Date.RoundToSecond(),
 
             OutsideTemp = request.OutsideTemp,
             ChHighInletPresure = request.ChHighInletPresure,

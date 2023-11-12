@@ -26,8 +26,8 @@ namespace Phoenix.Services.Handlers.Plcs.Meters.Commands
 
          Kamstrup newKamstrup = new()
          {
-            Date = request.Date.RoundToSecond(),
             DeviceId = request.DeviceId,
+            Date = request.Date.RoundToSecond(),
 
             InletTemp = request.InletTemp,
             OutletTemp = request.OutletTemp,

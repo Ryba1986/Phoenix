@@ -13,8 +13,9 @@ namespace Phoenix.Services.Mappings
       {
          return new()
          {
-            Date = climatix.Date,
+            DeviceId = climatix.DeviceId,
             DeviceName = climatix.Device.Name,
+            Date = climatix.Date,
 
             OutsideTemp = climatix.OutsideTemp,
             ChHighInletPresure = climatix.ChHighInletPresure,
@@ -52,6 +53,7 @@ namespace Phoenix.Services.Mappings
       {
          return new()
          {
+            DeviceId = climatix.DeviceId,
             Date = climatix.Date,
 
             OutsideTemp = climatix.OutsideTemp,

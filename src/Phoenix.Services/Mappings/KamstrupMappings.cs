@@ -13,8 +13,9 @@ namespace Phoenix.Services.Mappings
       {
          return new()
          {
-            Date = kamstrup.Date,
+            DeviceId = kamstrup.DeviceId,
             DeviceName = kamstrup.Device.Name,
+            Date = kamstrup.Date,
 
             InletTemp = kamstrup.InletTemp,
             OutletTemp = kamstrup.OutletTemp,
@@ -31,6 +32,7 @@ namespace Phoenix.Services.Mappings
       {
          return new()
          {
+            DeviceId = kamstrup.DeviceId,
             Date = kamstrup.Date,
 
             InletTemp = kamstrup.InletTemp,
