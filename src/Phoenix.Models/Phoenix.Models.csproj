@@ -9,6 +9,7 @@
       <Nullable>enable</Nullable>
       <PlatformTarget>AnyCPU</PlatformTarget>
       <RootNamespace>Phoenix.Models</RootNamespace>
+      <WarningsAsErrors>Nullable</WarningsAsErrors>
       <Version>1.0.0</Version>
    </PropertyGroup>
 
