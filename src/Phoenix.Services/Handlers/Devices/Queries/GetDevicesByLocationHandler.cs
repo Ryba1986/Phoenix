@@ -26,7 +26,7 @@ namespace Phoenix.Services.Handlers.Devices.Queries
                x.LocationId == request.LocationId &&
                x.IsActive
             )
-            .OrderBy(x => x.Name)
+            .OrderBy(x => x.Sequence)
             .Select(x => x.ToDeviceDto())
             .ToArrayAsync(cancellationToken);
       }
