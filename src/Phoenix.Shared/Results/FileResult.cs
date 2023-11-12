@@ -1,5 +1,3 @@
-using System;
-
 namespace Phoenix.Shared.Results
 {
    public readonly struct FileResult
@@ -12,7 +10,7 @@ namespace Phoenix.Shared.Results
       {
          Name = string.Empty;
          Type = string.Empty;
-         Data = Array.Empty<byte>();
+         Data = [];
       }
    }
 }
