@@ -17,7 +17,7 @@ export function getPlcChartFromLocationAsync<T>(devices: Array<DeviceDto>, plcTy
    return from(devices)
       .asParallel()
       .where((x) => x.plcType == plcType)
-      .selectAsync((x) => plcChartAsync({ deviceId: x.id, startDate: startDate.toISOString() }))
+      .selectAsync((x) => plcChartAsync({ deviceId: x.id, date: startDate.toISOString() }))
       .selectMany((x) => x)
       .toArray();
 }
