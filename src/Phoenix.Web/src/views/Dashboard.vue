@@ -1,7 +1,6 @@
 <script setup lang="ts">
 import { ComputedRef, Ref, computed, onMounted, onUnmounted, ref, watch } from 'vue';
 import { dashboardRefreshInterval } from '../config';
-import { dashboardStore } from '../stores/dashboardStore';
 import { getClimatixLastAsync } from '../api/climatixApi';
 import { getDevicesByLocationAsync } from '../api/deviceApi';
 import { getKamstrupLastAsync } from '../api/kamstrupApi';
@@ -13,6 +12,7 @@ import { DeviceDto } from '../models/api/devices/dto/deviceDto';
 import { ClimatixDto } from '../models/api/plcs/climatixs/dto/climatixDto';
 import { KamstrupDto } from '../models/api/plcs/kamstrups/dto/kamstrupDto';
 import { Rvd145Dto } from '../models/api/plcs/rvds/dto/rvd145Dto';
+import { dashboardStore } from '../stores/dashboardStore';
 
 const dStore = dashboardStore();
 
