@@ -1,8 +1,6 @@
-using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using MediatR;
-using Microsoft.EntityFrameworkCore;
 using Phoenix.Models.Plcs.Meters.Dto;
 using Phoenix.Models.Plcs.Meters.Queries;
 using Phoenix.Services.Handlers.Base;
@@ -20,10 +18,7 @@ namespace Phoenix.Services.Handlers.Plcs.Meters.Queries
 
       public Task<KamstrupDto?> Handle(GetKamstrupLastQuery request, CancellationToken cancellationToken)
       {
-         return PlcHandlerHelper
-            .GetPlcLastQuery(_uow.Kamstrup, request)
-            .Select(x => x.ToKamstrupDto())
-            .FirstOrDefaultAsync(cancellationToken);
+         return PlcHandlerHelper.GetPlcLastAsync(_uow.Kamstrup, request.DeviceId, x => x.ToKamstrupDto(), cancellationToken);
       }
    }
 }

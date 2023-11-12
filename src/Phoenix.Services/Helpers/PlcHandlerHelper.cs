@@ -11,7 +11,6 @@ using Phoenix.Entities.Devices;
 using Phoenix.Entities.Users;
 using Phoenix.Models.Base.Commands;
 using Phoenix.Models.Base.Dto;
-using Phoenix.Models.Base.Queries;
 using Phoenix.Models.Plcs;
 using Phoenix.Services.Reports.Base;
 using Phoenix.Services.Repositories;
@@ -68,15 +67,17 @@ namespace Phoenix.Services.Helpers
          return Result.Success();
       }
 
-      public static IQueryable<T> GetPlcChartQuery<T>(DbSet<T> plcs, GetPlcChartQueryBase request) where T : PlcBase
+      public static async Task<IReadOnlyCollection<R>> GetPlcChartAsync<S, R>(DbSet<S> plcs, int deviceId, DateTime startDate, Expression<Func<S, R>> selector, CancellationToken cancellationToken) where S : PlcBase where R : PlcChartDtoBase
       {
-         return plcs
+         return await plcs
             .AsNoTracking()
             .Where(x =>
-               x.Date >= request.StartDate &&
-               x.Date < request.StartDate.AddDays(1) &&
-               x.DeviceId == request.DeviceId
-            );
+               x.Date >= startDate &&
+               x.Date < startDate.AddDays(1) &&
+               x.DeviceId == deviceId
+            )
+            .Select(selector)
+            .ToArrayAsync(cancellationToken);
       }
 
       public static async Task<IReadOnlyDictionary<int, R[]>> GetPlcDataAsync<S, R>(DbSet<S> plc, Tuple<DateTime, DateTime> range, ITypeProcessor typeProcessor, Expression<Func<IGrouping<PlcGroupBy, S>, R>> selector, CancellationToken cancellationToken) where S : PlcBase where R : PlcReportDtoBase
@@ -96,13 +97,15 @@ namespace Phoenix.Services.Helpers
             .ToDictionary(x => x.Key, x => x.OrderBy(x => x.Date).ToArray());
       }
 
-      public static IQueryable<T> GetPlcLastQuery<T>(DbSet<T> plcs, GetPlcLastQueryBase request) where T : PlcBase
+      public static Task<R?> GetPlcLastAsync<S, R>(DbSet<S> plcs, int deviceId, Expression<Func<S, R>> selector, CancellationToken cancellationToken) where S : PlcBase where R : PlcDtoBase
       {
          return plcs
             .AsNoTracking()
             .Include(x => x.Device)
-            .Where(x => x.DeviceId == request.DeviceId)
-            .OrderByDescending(x => x.Date);
+            .Where(x => x.DeviceId == deviceId)
+            .OrderByDescending(x => x.Date)
+            .Select(selector)
+            .FirstOrDefaultAsync(cancellationToken);
       }
 
       public static Task<bool> IsPlcExistAsync<T>(DbSet<T> plcs, CreatePlcCommandBase request, CancellationToken cancellationToken) where T : PlcBase

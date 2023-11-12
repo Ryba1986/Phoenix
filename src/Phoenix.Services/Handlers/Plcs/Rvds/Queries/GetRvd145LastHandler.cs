@@ -1,8 +1,6 @@
-using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using MediatR;
-using Microsoft.EntityFrameworkCore;
 using Phoenix.Models.Plcs.Rvds.Dto;
 using Phoenix.Models.Plcs.Rvds.Queries;
 using Phoenix.Services.Handlers.Base;
@@ -20,10 +18,7 @@ namespace Phoenix.Services.Handlers.Plcs.Rvds.Queries
 
       public Task<Rvd145Dto?> Handle(GetRvd145LastQuery request, CancellationToken cancellationToken)
       {
-         return PlcHandlerHelper
-            .GetPlcLastQuery(_uow.Rvd145, request)
-            .Select(x => x.ToRvd145Dto())
-            .FirstOrDefaultAsync(cancellationToken);
+         return PlcHandlerHelper.GetPlcLastAsync(_uow.Rvd145, request.DeviceId, x => x.ToRvd145Dto(), cancellationToken);
       }
    }
 }

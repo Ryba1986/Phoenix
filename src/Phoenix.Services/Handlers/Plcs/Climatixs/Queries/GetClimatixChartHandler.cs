@@ -1,9 +1,7 @@
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using MediatR;
-using Microsoft.EntityFrameworkCore;
 using Phoenix.Models.Plcs.Climatixs.Dto;
 using Phoenix.Models.Plcs.Climatixs.Queries;
 using Phoenix.Services.Handlers.Base;
@@ -19,12 +17,9 @@ namespace Phoenix.Services.Handlers.Plcs.Climatixs.Queries
       {
       }
 
-      public async Task<IReadOnlyCollection<ClimatixChartDto>> Handle(GetClimatixChartQuery request, CancellationToken cancellationToken)
+      public Task<IReadOnlyCollection<ClimatixChartDto>> Handle(GetClimatixChartQuery request, CancellationToken cancellationToken)
       {
-         return await PlcHandlerHelper
-            .GetPlcChartQuery(_uow.Climatix, request)
-            .Select(x => x.ToClimatixChartDto())
-            .ToArrayAsync(cancellationToken);
+         return PlcHandlerHelper.GetPlcChartAsync(_uow.Climatix, request.DeviceId, request.StartDate, x => x.ToClimatixChartDto(), cancellationToken);
       }
    }
 }

@@ -1,9 +1,7 @@
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using MediatR;
-using Microsoft.EntityFrameworkCore;
 using Phoenix.Models.Plcs.Rvds.Dto;
 using Phoenix.Models.Plcs.Rvds.Queries;
 using Phoenix.Services.Handlers.Base;
@@ -19,12 +17,9 @@ namespace Phoenix.Services.Handlers.Plcs.Rvds.Queries
       {
       }
 
-      public async Task<IReadOnlyCollection<Rvd145ChartDto>> Handle(GetRvd145ChartQuery request, CancellationToken cancellationToken)
+      public Task<IReadOnlyCollection<Rvd145ChartDto>> Handle(GetRvd145ChartQuery request, CancellationToken cancellationToken)
       {
-         return await PlcHandlerHelper
-            .GetPlcChartQuery(_uow.Rvd145, request)
-            .Select(x => x.ToRvd145ChartDto())
-            .ToArrayAsync(cancellationToken);
+         return PlcHandlerHelper.GetPlcChartAsync(_uow.Rvd145, request.DeviceId, request.StartDate, x => x.ToRvd145ChartDto(), cancellationToken);
       }
    }
 }

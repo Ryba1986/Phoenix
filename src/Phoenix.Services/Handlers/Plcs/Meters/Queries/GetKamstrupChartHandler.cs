@@ -1,9 +1,7 @@
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using MediatR;
-using Microsoft.EntityFrameworkCore;
 using Phoenix.Models.Plcs.Meters.Dto;
 using Phoenix.Models.Plcs.Meters.Queries;
 using Phoenix.Services.Handlers.Base;
@@ -19,12 +17,9 @@ namespace Phoenix.Services.Handlers.Plcs.Meters.Queries
       {
       }
 
-      public async Task<IReadOnlyCollection<KamstrupChartDto>> Handle(GetKamstrupChartQuery request, CancellationToken cancellationToken)
+      public Task<IReadOnlyCollection<KamstrupChartDto>> Handle(GetKamstrupChartQuery request, CancellationToken cancellationToken)
       {
-         return await PlcHandlerHelper
-            .GetPlcChartQuery(_uow.Kamstrup, request)
-            .Select(x => x.ToKamstrupChartDto())
-            .ToArrayAsync(cancellationToken);
+         return PlcHandlerHelper.GetPlcChartAsync(_uow.Kamstrup, request.DeviceId, request.StartDate, x => x.ToKamstrupChartDto(), cancellationToken);
       }
    }
 }

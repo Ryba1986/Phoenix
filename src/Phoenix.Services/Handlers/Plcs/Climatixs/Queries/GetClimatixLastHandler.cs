@@ -1,8 +1,6 @@
-using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using MediatR;
-using Microsoft.EntityFrameworkCore;
 using Phoenix.Models.Plcs.Climatixs.Dto;
 using Phoenix.Models.Plcs.Climatixs.Queries;
 using Phoenix.Services.Handlers.Base;
@@ -20,10 +18,7 @@ namespace Phoenix.Services.Handlers.Plcs.Climatixs.Queries
 
       public Task<ClimatixDto?> Handle(GetClimatixLastQuery request, CancellationToken cancellationToken)
       {
-         return PlcHandlerHelper
-            .GetPlcLastQuery(_uow.Climatix, request)
-            .Select(x => x.ToClimatixDto())
-            .FirstOrDefaultAsync(cancellationToken);
+         return PlcHandlerHelper.GetPlcLastAsync(_uow.Climatix, request.DeviceId, x => x.ToClimatixDto(), cancellationToken);
       }
    }
 }
