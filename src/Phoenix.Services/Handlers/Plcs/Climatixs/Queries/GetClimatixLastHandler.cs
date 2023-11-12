@@ -18,7 +18,7 @@ namespace Phoenix.Services.Handlers.Plcs.Climatixs.Queries
 
       public Task<ClimatixDto?> Handle(GetClimatixLastQuery request, CancellationToken cancellationToken)
       {
-         return PlcHandlerHelper.GetPlcLastAsync(_uow.Climatix, request.DeviceId, x => x.ToClimatixDto(), cancellationToken);
+         return PlcHandlerHelper.GetPlcLastAsync(_uow.Climatix, request, x => x.ToClimatixDto(), cancellationToken);
       }
    }
 }

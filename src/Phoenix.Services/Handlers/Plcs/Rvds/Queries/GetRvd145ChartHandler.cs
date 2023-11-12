@@ -19,7 +19,7 @@ namespace Phoenix.Services.Handlers.Plcs.Rvds.Queries
 
       public Task<IReadOnlyCollection<Rvd145ChartDto>> Handle(GetRvd145ChartQuery request, CancellationToken cancellationToken)
       {
-         return PlcHandlerHelper.GetPlcChartAsync(_uow.Rvd145, request.DeviceId, request.StartDate, x => x.ToRvd145ChartDto(), cancellationToken);
+         return PlcHandlerHelper.GetPlcChartAsync(_uow.Rvd145, request, x => x.ToRvd145ChartDto(), cancellationToken);
       }
    }
 }

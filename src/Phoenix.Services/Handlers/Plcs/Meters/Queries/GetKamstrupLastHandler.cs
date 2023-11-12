@@ -18,7 +18,7 @@ namespace Phoenix.Services.Handlers.Plcs.Meters.Queries
 
       public Task<KamstrupDto?> Handle(GetKamstrupLastQuery request, CancellationToken cancellationToken)
       {
-         return PlcHandlerHelper.GetPlcLastAsync(_uow.Kamstrup, request.DeviceId, x => x.ToKamstrupDto(), cancellationToken);
+         return PlcHandlerHelper.GetPlcLastAsync(_uow.Kamstrup, request, x => x.ToKamstrupDto(), cancellationToken);
       }
    }
 }

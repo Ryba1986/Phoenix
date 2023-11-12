@@ -18,7 +18,7 @@ namespace Phoenix.Services.Handlers.Plcs.Rvds.Queries
 
       public Task<Rvd145Dto?> Handle(GetRvd145LastQuery request, CancellationToken cancellationToken)
       {
-         return PlcHandlerHelper.GetPlcLastAsync(_uow.Rvd145, request.DeviceId, x => x.ToRvd145Dto(), cancellationToken);
+         return PlcHandlerHelper.GetPlcLastAsync(_uow.Rvd145, request, x => x.ToRvd145Dto(), cancellationToken);
       }
    }
 }

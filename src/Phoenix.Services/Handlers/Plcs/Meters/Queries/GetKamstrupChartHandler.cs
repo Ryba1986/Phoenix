@@ -19,7 +19,7 @@ namespace Phoenix.Services.Handlers.Plcs.Meters.Queries
 
       public Task<IReadOnlyCollection<KamstrupChartDto>> Handle(GetKamstrupChartQuery request, CancellationToken cancellationToken)
       {
-         return PlcHandlerHelper.GetPlcChartAsync(_uow.Kamstrup, request.DeviceId, request.StartDate, x => x.ToKamstrupChartDto(), cancellationToken);
+         return PlcHandlerHelper.GetPlcChartAsync(_uow.Kamstrup, request, x => x.ToKamstrupChartDto(), cancellationToken);
       }
    }
 }

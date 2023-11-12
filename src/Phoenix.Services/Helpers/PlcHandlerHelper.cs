@@ -11,6 +11,7 @@ using Phoenix.Entities.Devices;
 using Phoenix.Entities.Users;
 using Phoenix.Models.Base.Commands;
 using Phoenix.Models.Base.Dto;
+using Phoenix.Models.Base.Queries;
 using Phoenix.Models.Plcs;
 using Phoenix.Services.Reports.Base;
 using Phoenix.Services.Repositories;
@@ -67,14 +68,16 @@ namespace Phoenix.Services.Helpers
          return Result.Success();
       }
 
-      public static async Task<IReadOnlyCollection<R>> GetPlcChartAsync<S, R>(DbSet<S> plcs, int deviceId, DateTime startDate, Expression<Func<S, R>> selector, CancellationToken cancellationToken) where S : PlcBase where R : PlcChartDtoBase
+      public static async Task<IReadOnlyCollection<R>> GetPlcChartAsync<S, R>(DbSet<S> plcs, GetPlcChartQueryBase request, Expression<Func<S, R>> selector, CancellationToken cancellationToken) where S : PlcBase where R : PlcChartDtoBase
       {
+         DateTime date = request.Date.ToDateTime(TimeOnly.MinValue);
+
          return await plcs
             .AsNoTracking()
             .Where(x =>
-               x.Date >= startDate &&
-               x.Date < startDate.AddDays(1) &&
-               x.DeviceId == deviceId
+               x.Date >= date &&
+               x.Date < date.AddDays(1) &&
+               x.DeviceId == request.DeviceId
             )
             .Select(selector)
             .ToArrayAsync(cancellationToken);
@@ -97,12 +100,12 @@ namespace Phoenix.Services.Helpers
             .ToDictionary(x => x.Key, x => x.OrderBy(x => x.Date).ToArray());
       }
 
-      public static Task<R?> GetPlcLastAsync<S, R>(DbSet<S> plcs, int deviceId, Expression<Func<S, R>> selector, CancellationToken cancellationToken) where S : PlcBase where R : PlcDtoBase
+      public static Task<R?> GetPlcLastAsync<S, R>(DbSet<S> plcs, GetPlcLastQueryBase request, Expression<Func<S, R>> selector, CancellationToken cancellationToken) where S : PlcBase where R : PlcDtoBase
       {
          return plcs
             .AsNoTracking()
             .Include(x => x.Device)
-            .Where(x => x.DeviceId == deviceId)
+            .Where(x => x.DeviceId == request.DeviceId)
             .OrderByDescending(x => x.Date)
             .Select(selector)
             .FirstOrDefaultAsync(cancellationToken);
