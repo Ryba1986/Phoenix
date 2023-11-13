@@ -1,6 +1,10 @@
 import { apiRequestContentType, apiTokenEmptyValue, apiUrlBase } from '../config';
 import { i18n } from '../languages';
 import { CommandBase } from '../models/api/base/commands/commandBase';
+import { DictionaryItem } from '../models/api/base/dto/dictionaryItem';
+import { DtoBase } from '../models/api/base/dto/dtoBase';
+import { PlcChartDtoBase } from '../models/api/base/dto/plcChartDtoBase';
+import { PlcDtoBase } from '../models/api/base/dto/plcDtoBase';
 import { QueryBase } from '../models/api/base/queries/queryBase';
 import { GetUserTokenQuery } from '../models/api/users/queries/getUserTokenQuery';
 import { FileResult } from '../models/requests/fileResult';
@@ -10,7 +14,10 @@ import { authStore } from '../stores/authStore';
 
 const { locale, t } = i18n.global;
 
-export async function getAsync<T>(url: string, request?: QueryBase): Promise<T> {
+export async function getAsync<T extends DictionaryItem | DtoBase | PlcDtoBase | PlcChartDtoBase | Array<DictionaryItem> | Array<DtoBase> | Array<PlcDtoBase> | Array<PlcChartDtoBase>>(
+   url: string,
+   request?: QueryBase
+): Promise<T> {
    if (request) {
       url = toQueryString(url, request);
    }
