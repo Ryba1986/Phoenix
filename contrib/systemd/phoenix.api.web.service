@@ -3,19 +3,19 @@ Description=Phoenix Api Web
 After=network.target
 
 [Service]
-WorkingDirectory=/var/www/Phoenix.Api.Web
-ExecStart=/var/www/Phoenix.Api.Web/Phoenix.Api.Web --urls "http://localhost:5002"
+WorkingDirectory=/var/www/phoenix.api.web
+ExecStart=/var/www/phoenix.api.web/phoenix.api.web --urls "http://localhost:5002"
 
 Restart=always
 RestartSec=10
 Type=notify
 KillSignal=SIGINT
 
-SyslogIdentifier=Phoenix.Api.Web
+SyslogIdentifier=phoenix.api.web
 User=www-data
 Environment=ASPNETCORE_ENVIRONMENT=Production
 Environment=DOTNET_PRINT_TELEMETRY_MESSAGE=false
-Environment=DOTNET_BUNDLE_EXTRACT_BASE_DIR=/tmp/.net/Phoenix.Api.Web
+Environment=DOTNET_BUNDLE_EXTRACT_BASE_DIR=/tmp/.net/phoenix.api.web
 
 [Install]
 WantedBy=multi-user.target

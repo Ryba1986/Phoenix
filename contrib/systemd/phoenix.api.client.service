@@ -3,19 +3,19 @@ Description=Phoenix Api Client
 After=network.target
 
 [Service]
-WorkingDirectory=/var/www/Phoenix.Api.Client
-ExecStart=/var/www/Phoenix.Api.Client/Phoenix.Api.Client --urls "http://localhost:5001"
+WorkingDirectory=/var/www/phoenix.api.client
+ExecStart=/var/www/phoenix.api.client/phoenix.api.client --urls "http://localhost:5001"
 
 Restart=always
 RestartSec=10
 Type=notify
 KillSignal=SIGINT
 
-SyslogIdentifier=Phoenix.Api.Client
+SyslogIdentifier=phoenix.api.client
 User=www-data
 Environment=ASPNETCORE_ENVIRONMENT=Production
 Environment=DOTNET_PRINT_TELEMETRY_MESSAGE=false
-Environment=DOTNET_BUNDLE_EXTRACT_BASE_DIR=/tmp/.net/Phoenix.Api.Client
+Environment=DOTNET_BUNDLE_EXTRACT_BASE_DIR=/tmp/.net/phoenix.api.client
 
 [Install]
 WantedBy=multi-user.target
