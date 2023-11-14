@@ -9,6 +9,7 @@ import { getRvd145ChartAsync, getRvd145LastAsync } from '../api/rvd145Api';
 import { PlcChartGroup, getPlcChartItemsAsync } from '../helpers/plcHelper';
 import { displayError } from '../helpers/toastHelper';
 import { DeviceDto } from '../models/api/devices/dto/deviceDto';
+import { PlcType } from '../models/api/devices/enums/plcType';
 import { ClimatixDto } from '../models/api/plcs/climatixs/dto/climatixDto';
 import { ClimatixChartDto } from '../models/api/plcs/climatixs/dto/climatixChartDto';
 import { KamstrupDto } from '../models/api/plcs/kamstrups/dto/kamstrupDto';
@@ -30,15 +31,15 @@ const kamstrups: Ref<Array<PlcChartGroup<KamstrupDto, KamstrupChartDto>>> = ref(
 const rvd145s: Ref<Array<PlcChartGroup<Rvd145Dto, Rvd145ChartDto>>> = ref([]);
 
 async function getClimatixsAsync(date: Date): Promise<void> {
-   climatixs.value = await getPlcChartItemsAsync(devices.value, 2, date, getClimatixLastAsync, getClimatixChartAsync);
+   climatixs.value = await getPlcChartItemsAsync(devices.value, PlcType.Climatix, date, getClimatixLastAsync, getClimatixChartAsync);
 }
 
 async function getKamstrupsAsync(date: Date): Promise<void> {
-   kamstrups.value = await getPlcChartItemsAsync(devices.value, 1, date, getKamstrupLastAsync, getKamstrupChartAsync);
+   kamstrups.value = await getPlcChartItemsAsync(devices.value, PlcType.Kamstrup, date, getKamstrupLastAsync, getKamstrupChartAsync);
 }
 
 async function getRvd145sAsync(date: Date): Promise<void> {
-   rvd145s.value = await getPlcChartItemsAsync(devices.value, 3, date, getRvd145LastAsync, getRvd145ChartAsync);
+   rvd145s.value = await getPlcChartItemsAsync(devices.value, PlcType.Rvd145, date, getRvd145LastAsync, getRvd145ChartAsync);
 }
 
 async function refreshLocationAsync(): Promise<void> {

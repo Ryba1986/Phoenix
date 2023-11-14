@@ -2,6 +2,7 @@ import { from } from 'linq-to-typescript';
 import { getDateString } from './dateHelper';
 import { PlcChartDtoBase } from '../models/api/base/dto/plcChartDtoBase';
 import { PlcDtoBase } from '../models/api/base/dto/plcDtoBase';
+import { PlcType } from '../models/api/devices/enums/plcType';
 import { GetPlcChartQueryBase } from '../models/api/base/queries/getPlcChartQueryBase';
 import { GetPlcLastQueryBase } from '../models/api/base/queries/getPlcLastQueryBase';
 import { DeviceDto } from '../models/api/devices/dto/deviceDto';
@@ -14,7 +15,7 @@ export interface PlcChartGroup<P extends PlcDtoBase, C extends PlcChartDtoBase> 
 
 export function getPlcChartItemsAsync<P extends PlcDtoBase, C extends PlcChartDtoBase>(
    devices: Array<DeviceDto>,
-   plcType: number,
+   plcType: PlcType,
    date: Date,
    plcLast: (plcRequest: GetPlcLastQueryBase) => Promise<P>,
    plcChart: (chartRequest: GetPlcChartQueryBase) => Promise<Array<C>>
