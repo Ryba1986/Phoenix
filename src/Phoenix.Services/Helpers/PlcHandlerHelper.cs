@@ -104,7 +104,6 @@ namespace Phoenix.Services.Helpers
       {
          return plcs
             .AsNoTracking()
-            .Include(x => x.Device)
             .Where(x => x.DeviceId == request.DeviceId)
             .OrderByDescending(x => x.Date)
             .Select(selector)

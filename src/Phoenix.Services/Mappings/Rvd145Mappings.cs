@@ -13,8 +13,6 @@ namespace Phoenix.Services.Mappings
       {
          return new()
          {
-            DeviceId = rvd.DeviceId,
-            DeviceName = rvd.Device.Name,
             Date = rvd.Date,
 
             OutsideTemp = rvd.OutsideTemp,
@@ -40,7 +38,6 @@ namespace Phoenix.Services.Mappings
       {
          return new()
          {
-            DeviceId = rvd.DeviceId,
             Date = rvd.Date,
 
             OutsideTemp = rvd.OutsideTemp,
