@@ -6,9 +6,8 @@ import { getDevicesByLocationAsync } from '../api/deviceApi';
 import { getKamstrupChartAsync, getKamstrupLastAsync } from '../api/kamstrupApi';
 import { getLocationDictionaryAsync } from '../api/locationApi';
 import { getRvd145ChartAsync, getRvd145LastAsync } from '../api/rvd145Api';
-import { getPlcChartItemsAsync } from '../helpers/plcHelper';
+import { PlcChartGroup, getPlcChartItemsAsync } from '../helpers/plcHelper';
 import { displayError } from '../helpers/toastHelper';
-import { Tuple } from '../models/api/base/tuple';
 import { DeviceDto } from '../models/api/devices/dto/deviceDto';
 import { ClimatixDto } from '../models/api/plcs/climatixs/dto/climatixDto';
 import { ClimatixChartDto } from '../models/api/plcs/climatixs/dto/climatixChartDto';
@@ -26,9 +25,9 @@ const locationId: ComputedRef<number> = computed((): number => dStore.locationId
 const refreshLocationInterval: Ref<number> = ref(0);
 
 const devices: Ref<Array<DeviceDto>> = ref([]);
-const climatixs: Ref<Array<Tuple<ClimatixDto, Array<ClimatixChartDto>>>> = ref([]);
-const kamstrups: Ref<Array<Tuple<KamstrupDto, Array<KamstrupChartDto>>>> = ref([]);
-const rvd145s: Ref<Array<Tuple<Rvd145Dto, Array<Rvd145ChartDto>>>> = ref([]);
+const climatixs: Ref<Array<PlcChartGroup<ClimatixDto, ClimatixChartDto>>> = ref([]);
+const kamstrups: Ref<Array<PlcChartGroup<KamstrupDto, KamstrupChartDto>>> = ref([]);
+const rvd145s: Ref<Array<PlcChartGroup<Rvd145Dto, Rvd145ChartDto>>> = ref([]);
 
 async function getClimatixsAsync(date: Date): Promise<void> {
    climatixs.value = await getPlcChartItemsAsync(devices.value, 2, date, getClimatixLastAsync, getClimatixChartAsync);
