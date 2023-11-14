@@ -5,6 +5,7 @@
    "[jsonc]": { "editor.defaultFormatter": "esbenp.prettier-vscode" },
    "[typescript]": { "editor.defaultFormatter": "esbenp.prettier-vscode" },
    "[vue]": { "editor.defaultFormatter": "esbenp.prettier-vscode" },
+   "[yaml]": { "editor.defaultFormatter": "redhat.vscode-yaml" },
    "dotnet.defaultSolution": "Phoenix.sln",
    "files.exclude": {
       "**/bin": true,
