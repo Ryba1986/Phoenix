@@ -1,9 +1,8 @@
 import { from } from 'linq-to-typescript';
-import { getDateString } from './dateHelper';
 import { PlcChartDtoBase } from '../models/api/base/dto/plcChartDtoBase';
 import { PlcDtoBase } from '../models/api/base/dto/plcDtoBase';
 import { PlcType } from '../models/api/devices/enums/plcType';
-import { GetPlcChartQueryBase } from '../models/api/base/queries/getPlcChartQueryBase';
+import { GetPlcChartDayQueryBase } from '../models/api/base/queries/getPlcChartDayQueryBase';
 import { GetPlcLastQueryBase } from '../models/api/base/queries/getPlcLastQueryBase';
 import { DeviceDto } from '../models/api/devices/dto/deviceDto';
 
@@ -13,26 +12,25 @@ export interface PlcChartGroup<P extends PlcDtoBase, C extends PlcChartDtoBase> 
    charts: Array<C>;
 }
 
-export function getPlcChartItemsAsync<P extends PlcDtoBase, C extends PlcChartDtoBase>(
+export function getPlcChartDayItemsAsync<P extends PlcDtoBase, C extends PlcChartDtoBase>(
    devices: Array<DeviceDto>,
    plcType: PlcType,
-   date: Date,
    plcLast: (plcRequest: GetPlcLastQueryBase) => Promise<P>,
-   plcChart: (chartRequest: GetPlcChartQueryBase) => Promise<Array<C>>
+   plcChart: (chartRequest: GetPlcChartDayQueryBase) => Promise<Array<C>>
 ): Promise<Array<PlcChartGroup<P, C>>> {
    return from(devices)
       .asParallel()
       .where((x) => x.plcType == plcType)
-      .selectAsync((x) => getPlcChartItemAsync(x, date, plcLast, plcChart))
+      .selectAsync((x) => getPlcChartDayItemAsync(x, plcLast, plcChart))
       .toArray();
 }
 
-async function getPlcChartItemAsync<P extends PlcDtoBase, C extends PlcChartDtoBase>(
+async function getPlcChartDayItemAsync<P extends PlcDtoBase, C extends PlcChartDtoBase>(
    device: DeviceDto,
-   date: Date,
    plcLast: (plcRequest: GetPlcLastQueryBase) => Promise<P>,
-   plcChart: (chartRequest: GetPlcChartQueryBase) => Promise<Array<C>>
+   plcChart: (chartRequest: GetPlcChartDayQueryBase) => Promise<Array<C>>
 ): Promise<PlcChartGroup<P, C>> {
-   const result = await Promise.all([plcLast({ deviceId: device.id }), plcChart({ deviceId: device.id, date: getDateString(date) })]);
-   return { device: device, plc: result[0], charts: result[1] };
+   const last = await plcLast({ deviceId: device.id });
+   const charts = await plcChart({ deviceId: device.id, endDate: last.date });
+   return { device: device, plc: last, charts: charts };
 }

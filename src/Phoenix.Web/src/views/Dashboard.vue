@@ -1,12 +1,12 @@
 <script setup lang="ts">
 import { ComputedRef, Ref, computed, onMounted, onUnmounted, ref, watch } from 'vue';
 import { dashboardRefreshInterval } from '../config';
-import { getClimatixChartAsync, getClimatixLastAsync } from '../api/climatixApi';
+import { getClimatixChartDayAsync, getClimatixLastAsync } from '../api/climatixApi';
 import { getDevicesByLocationAsync } from '../api/deviceApi';
-import { getKamstrupChartAsync, getKamstrupLastAsync } from '../api/kamstrupApi';
+import { getKamstrupChartDayAsync, getKamstrupLastAsync } from '../api/kamstrupApi';
 import { getLocationDictionaryAsync } from '../api/locationApi';
-import { getRvd145ChartAsync, getRvd145LastAsync } from '../api/rvd145Api';
-import { PlcChartGroup, getPlcChartItemsAsync } from '../helpers/plcHelper';
+import { getRvd145ChartDayAsync, getRvd145LastAsync } from '../api/rvd145Api';
+import { PlcChartGroup, getPlcChartDayItemsAsync } from '../helpers/plcHelper';
 import { displayError } from '../helpers/toastHelper';
 import { DeviceDto } from '../models/api/devices/dto/deviceDto';
 import { PlcType } from '../models/api/devices/enums/plcType';
@@ -30,27 +30,26 @@ const climatixs: Ref<Array<PlcChartGroup<ClimatixDto, ClimatixChartDto>>> = ref(
 const kamstrups: Ref<Array<PlcChartGroup<KamstrupDto, KamstrupChartDto>>> = ref([]);
 const rvd145s: Ref<Array<PlcChartGroup<Rvd145Dto, Rvd145ChartDto>>> = ref([]);
 
-async function getClimatixsAsync(date: Date): Promise<void> {
-   climatixs.value = await getPlcChartItemsAsync(devices.value, PlcType.Climatix, date, getClimatixLastAsync, getClimatixChartAsync);
+async function getClimatixsAsync(): Promise<void> {
+   climatixs.value = await getPlcChartDayItemsAsync(devices.value, PlcType.Climatix, getClimatixLastAsync, getClimatixChartDayAsync);
 }
 
-async function getKamstrupsAsync(date: Date): Promise<void> {
-   kamstrups.value = await getPlcChartItemsAsync(devices.value, PlcType.Kamstrup, date, getKamstrupLastAsync, getKamstrupChartAsync);
+async function getKamstrupsAsync(): Promise<void> {
+   kamstrups.value = await getPlcChartDayItemsAsync(devices.value, PlcType.Kamstrup, getKamstrupLastAsync, getKamstrupChartDayAsync);
 }
 
-async function getRvd145sAsync(date: Date): Promise<void> {
-   rvd145s.value = await getPlcChartItemsAsync(devices.value, PlcType.Rvd145, date, getRvd145LastAsync, getRvd145ChartAsync);
+async function getRvd145sAsync(): Promise<void> {
+   rvd145s.value = await getPlcChartDayItemsAsync(devices.value, PlcType.Rvd145, getRvd145LastAsync, getRvd145ChartDayAsync);
 }
 
 async function refreshLocationAsync(): Promise<void> {
    try {
       isLoading.value = true;
-      const chartDate: Date = new Date();
 
       dStore.setLocations(await getLocationDictionaryAsync());
       devices.value = await getDevicesByLocationAsync({ locationId: locationId.value });
 
-      await Promise.all([getClimatixsAsync(chartDate), getKamstrupsAsync(chartDate), getRvd145sAsync(chartDate)]);
+      await Promise.all([getClimatixsAsync(), getKamstrupsAsync(), getRvd145sAsync()]);
    } catch (error) {
       displayError(error);
    } finally {
