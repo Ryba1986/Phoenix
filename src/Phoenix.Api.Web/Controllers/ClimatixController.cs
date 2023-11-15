@@ -16,7 +16,7 @@ namespace Phoenix.Api.Web.Controllers
 
       [Authorization(Permission.Plc, AccessLevel.Read)]
       [HttpGet]
-      public async Task<IActionResult> GetClimatixChart([FromQuery] GetClimatixChartQuery request)
+      public async Task<IActionResult> GetClimatixChartDay([FromQuery] GetClimatixChartDayQuery request)
       {
          return await HandleAsync(request);
       }
