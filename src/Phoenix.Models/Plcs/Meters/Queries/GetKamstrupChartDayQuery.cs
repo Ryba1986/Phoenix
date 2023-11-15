@@ -5,7 +5,7 @@ using Phoenix.Models.Plcs.Meters.Dto;
 
 namespace Phoenix.Models.Plcs.Meters.Queries
 {
-   public sealed class GetKamstrupChartQuery : GetPlcChartQueryBase, IRequest<IReadOnlyCollection<KamstrupChartDto>>
+   public sealed class GetKamstrupChartDayQuery : GetPlcChartDayQueryBase, IRequest<IReadOnlyCollection<KamstrupChartDto>>
    {
    }
 }
