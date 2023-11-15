@@ -24,6 +24,7 @@ namespace Phoenix.Services.Configuration.Modules
                   Username = settings.Username,
                   Password = settings.Password,
                   CommandTimeout = settings.CommandTimeout,
+                  MaxAutoPrepare = 10,
                   Pooling = true,
                   SslMode = settings.EnableSsl
                      ? SslMode.Require
