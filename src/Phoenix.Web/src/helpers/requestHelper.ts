@@ -14,7 +14,7 @@ import { authStore } from '../stores/authStore';
 
 const { locale, t } = i18n.global;
 
-export async function getAsync<T extends DictionaryItem | DtoBase | PlcDtoBase | PlcChartDtoBase | Array<DictionaryItem> | Array<DtoBase> | Array<PlcDtoBase> | Array<PlcChartDtoBase>>(
+export async function getAsync<T extends DictionaryItem | DtoBase | PlcDtoBase | PlcChartDtoBase | Array<DictionaryItem> | Array<DtoBase> | Array<PlcDtoBase> | Array<PlcChartDtoBase> | null>(
    url: string,
    request?: QueryBase
 ): Promise<T> {

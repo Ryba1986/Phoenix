@@ -8,6 +8,6 @@ export function getRvd145ChartDayAsync(request: GetRvd145ChartDayQuery): Promise
    return getAsync<Array<Rvd145ChartDto>>('rvd145/getRvd145ChartDay', request);
 }
 
-export function getRvd145LastAsync(request: GetRvd145LastQuery): Promise<Rvd145Dto> {
-   return getAsync<Rvd145Dto>('rvd145/getRvd145Last', request);
+export function getRvd145LastAsync(request: GetRvd145LastQuery): Promise<Rvd145Dto | null> {
+   return getAsync<Rvd145Dto | null>('rvd145/getRvd145Last', request);
 }

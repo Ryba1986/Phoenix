@@ -8,6 +8,6 @@ export function getKamstrupChartDayAsync(request: GetKamstrupChartDayQuery): Pro
    return getAsync<Array<KamstrupChartDto>>('kamstrup/getKamstrupChartDay', request);
 }
 
-export function getKamstrupLastAsync(request: GetKamstrupLastQuery): Promise<KamstrupDto> {
-   return getAsync<KamstrupDto>('kamstrup/getKamstrupLast', request);
+export function getKamstrupLastAsync(request: GetKamstrupLastQuery): Promise<KamstrupDto | null> {
+   return getAsync<KamstrupDto | null>('kamstrup/getKamstrupLast', request);
 }

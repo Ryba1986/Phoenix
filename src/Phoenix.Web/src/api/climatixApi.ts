@@ -8,6 +8,6 @@ export function getClimatixChartDayAsync(request: GetClimatixChartDayQuery): Pro
    return getAsync<Array<ClimatixChartDto>>('climatix/getClimatixChartDay', request);
 }
 
-export function getClimatixLastAsync(request: GetClimatixLastQuery): Promise<ClimatixDto> {
-   return getAsync<ClimatixDto>('climatix/getClimatixLast', request);
+export function getClimatixLastAsync(request: GetClimatixLastQuery): Promise<ClimatixDto | null> {
+   return getAsync<ClimatixDto | null>('climatix/getClimatixLast', request);
 }
