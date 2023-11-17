@@ -7,7 +7,7 @@ import { GetPlcLastQueryBase } from '../models/api/base/queries/getPlcLastQueryB
 import { DeviceDto } from '../models/api/devices/dto/deviceDto';
 
 export interface PlcChartGroup<P extends PlcDtoBase, C extends PlcChartDtoBase> {
-   deviceId: number;
+   device: DeviceDto;
    plc: P | null;
    charts: Array<C>;
 }
@@ -21,20 +21,20 @@ export function getPlcChartDayItemsAsync<P extends PlcDtoBase, C extends PlcChar
    return from(devices)
       .asParallel()
       .where((x) => x.plcType == plcType)
-      .selectAsync((x) => getPlcChartDayItemAsync(x.id, plcLast, plcChart))
+      .selectAsync((x) => getPlcChartDayItemAsync(x, plcLast, plcChart))
       .toArray();
 }
 
 async function getPlcChartDayItemAsync<P extends PlcDtoBase, C extends PlcChartDtoBase>(
-   deviceId: number,
+   device: DeviceDto,
    plcLast: (plcRequest: GetPlcLastQueryBase) => Promise<P | null>,
    plcChart: (chartRequest: GetPlcChartDayQueryBase) => Promise<Array<C>>
 ): Promise<PlcChartGroup<P, C>> {
-   const last = await plcLast({ deviceId: deviceId });
+   const last = await plcLast({ deviceId: device.id });
    if (!last) {
-      return { deviceId: deviceId, plc: null, charts: [] };
+      return { device: device, plc: null, charts: [] };
    }
 
-   const charts = await plcChart({ deviceId: deviceId, endDate: last.date });
-   return { deviceId: deviceId, plc: last, charts: charts };
+   const charts = await plcChart({ deviceId: device.id, endDate: last.date });
+   return { device: device, plc: last, charts: charts };
 }
