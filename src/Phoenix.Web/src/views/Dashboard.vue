@@ -66,17 +66,6 @@ async function setRefreshIntervalAsync(): Promise<void> {
    }, dashboardRefreshInterval);
 }
 
-function getColumnStyle(count: number): string {
-   switch (count) {
-      case 1:
-         return 'col-12';
-      case 2:
-         return 'col-12 col-xl-6';
-      default:
-         return 'col-12 col-lg-6 col-xxl-4';
-   }
-}
-
 watch(locationId, async (): Promise<void> => {
    if (!isPageLoaded.value) {
       return;
@@ -98,10 +87,10 @@ onUnmounted((): void => {
 <template>
    <LoadPanel :visible="isLoading" />
    <div class="row">
-      <div v-for="device in devices" :class="getColumnStyle(devices.length)">
-         <Climatix v-if="device.plcType == PlcType.Climatix" :data="climatixs.find((x) => x.device.id == device.id)" />
-         <Kamstrup v-if="device.plcType == PlcType.Kamstrup" :data="kamstrups.find((x) => x.device.id == device.id)" />
-         <Rvd145 v-if="device.plcType == PlcType.Rvd145" :data="rvd145s.find((x) => x.device.id == device.id)" />
+      <div v-for="device in devices" :class="devices.length > 1 ? 'col-12 col-xl-6' : 'col-12'">
+         <Climatix :data="climatixs.find((x) => x.device.id == device.id)" />
+         <Kamstrup :data="kamstrups.find((x) => x.device.id == device.id)" />
+         <Rvd145 :data="rvd145s.find((x) => x.device.id == device.id)" />
       </div>
    </div>
 </template>
