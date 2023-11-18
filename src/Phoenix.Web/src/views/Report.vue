@@ -4,7 +4,7 @@ import { useI18n } from 'vue-i18n';
 import { ClickEvent } from 'devextreme/ui/button';
 import { getPlcReportAsync, getPlcReportTypeDictionaryAsync } from '../api/reportApi';
 import { dateFormat } from '../config';
-import { getDateString } from '../helpers/dateHelper';
+import { toDateString } from '../helpers/dateHelper';
 import { displayError } from '../helpers/toastHelper';
 import { DictionaryItem } from '../models/api/base/dto/dictionaryItem';
 import { GetPlcReportQuery } from '../models/api/reports/queries/getPlcReportQuery';
@@ -17,7 +17,7 @@ const reportTypes: Ref<Array<DictionaryItem>> = ref([]);
 const isLoading: Ref<boolean> = ref(false);
 const toastIsVisible: Ref<boolean> = ref(false);
 const request: Ref<GetPlcReportQuery> = ref({
-   date: getDateString(new Date()),
+   date: toDateString(new Date()),
    type: 1,
 });
 

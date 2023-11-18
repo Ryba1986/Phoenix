@@ -1,22 +1,18 @@
-import { addDays as fnsAddDays, format as fnsFormat, parseISO as fnsParseIso } from 'date-fns';
+import { format, parseISO } from 'date-fns';
 import { dateFormat, dateTimeFormat, dateTimeShortFormat } from '../config';
 
-export function addDays(date: Date, amount: number): Date {
-   return fnsAddDays(date, amount);
+export function toDateString(date: Date): string {
+   return format(date, dateFormat);
 }
 
-export function getDateString(date: Date): string {
-   return fnsFormat(date, dateFormat);
+export function toDateTimeString(date: Date): string {
+   return format(date, dateTimeFormat);
 }
 
-export function getDateTimeString(date: Date): string {
-   return fnsFormat(date, dateTimeFormat);
+export function toDateTimeShortString(date: Date): string {
+   return format(date, dateTimeShortFormat);
 }
 
-export function getDateTimeShortString(date: Date): string {
-   return fnsFormat(date, dateTimeShortFormat);
-}
-
-export function isoToDate(date: string): Date {
-   return fnsParseIso(date);
+export function toDate(date: string): Date {
+   return parseISO(date);
 }
