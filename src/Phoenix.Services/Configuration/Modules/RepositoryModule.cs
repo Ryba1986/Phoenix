@@ -1,4 +1,3 @@
-using System;
 using Autofac;
 using Microsoft.EntityFrameworkCore;
 using Npgsql;
@@ -11,8 +10,6 @@ namespace Phoenix.Services.Configuration.Modules
    {
       protected override void Load(ContainerBuilder builder)
       {
-         AppContext.SetSwitch("Npgsql.EnableLegacyTimestampBehavior", true);
-
          builder
             .Register((SqlSettings settings) =>
             {

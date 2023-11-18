@@ -1,5 +1,6 @@
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using Phoenix.Entities.Base;
+using Phoenix.Services.Repositories.Converters;
 
 namespace Phoenix.Services.Repositories.Configurations.Base
 {
@@ -17,7 +18,8 @@ namespace Phoenix.Services.Repositories.Configurations.Base
 
          builder.Property(x => x.CreateDate)
             .HasPrecision(0)
-            .IsRequired();
+            .IsRequired()
+            .HasConversion<DateTimeConverter>();
 
          builder.HasOne(x => x.CreatedBy)
             .WithMany()

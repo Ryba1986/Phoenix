@@ -1,6 +1,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using Phoenix.Entities.Base;
+using Phoenix.Services.Repositories.Converters;
 
 namespace Phoenix.Services.Repositories.Configurations.Base
 {
@@ -13,7 +14,8 @@ namespace Phoenix.Services.Repositories.Configurations.Base
 
          builder.Property(x => x.Date)
             .HasPrecision(0)
-            .IsRequired();
+            .IsRequired()
+            .HasConversion<DateTimeConverter>();
 
          builder.HasKey(x => new { x.Date, x.DeviceId });
 
