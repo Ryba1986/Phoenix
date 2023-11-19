@@ -7,6 +7,25 @@ import { DxSelectBox } from 'devextreme-vue/select-box';
 import { DxTextBox } from 'devextreme-vue/text-box';
 
 import {
+   DxAnimation as DxChartAnimation,
+   DxAggregation as DxChartAggregation,
+   DxArgumentAxis as DxChartArgumentAxis,
+   DxChart,
+   DxCommonSeriesSettings as DxChartCommonSeriesSettings,
+   DxCommonAxisSettings as DxChartCommonAxisSettings,
+   DxFont as DxChartFont,
+   DxGrid as DxChartGrid,
+   DxFormat as DxChartFormat,
+   DxLabel as DxChartLabel,
+   DxLegend as DxChartLegend,
+   DxLoadingIndicator as DxChartLoadingIndicator,
+   DxPoint as DxChartPoint,
+   DxSeries as DxChartSeries,
+   DxSize as DxChartSize,
+   DxTooltip as DxChartTooltip,
+} from 'devextreme-vue/chart';
+
+import {
    DxColumn as DxGridColumn,
    DxDataGrid,
    DxEditing as DxGridEditing,
@@ -32,6 +51,23 @@ export const devextremePlugin: Plugin = {
       app.component('DxLoadPanel', DxLoadPanel);
       app.component('DxSelectBox', DxSelectBox);
       app.component('DxTextBox', DxTextBox);
+
+      app.component('DxChartAnimation', DxChartAnimation);
+      app.component('DxChartAggregation', DxChartAggregation);
+      app.component('DxChartArgumentAxis', DxChartArgumentAxis);
+      app.component('DxChart', DxChart);
+      app.component('DxChartCommonSeriesSettings', DxChartCommonSeriesSettings);
+      app.component('DxChartCommonAxisSettings', DxChartCommonAxisSettings);
+      app.component('DxChartGrid', DxChartGrid);
+      app.component('DxChartFont', DxChartFont);
+      app.component('DxChartFormat', DxChartFormat);
+      app.component('DxChartLabel', DxChartLabel);
+      app.component('DxChartLegend', DxChartLegend);
+      app.component('DxChartLoadingIndicator', DxChartLoadingIndicator);
+      app.component('DxChartPoint', DxChartPoint);
+      app.component('DxChartSeries', DxChartSeries);
+      app.component('DxChartSize', DxChartSize);
+      app.component('DxChartTooltip', DxChartTooltip);
 
       app.component('DxGridColumn', DxGridColumn);
       app.component('DxDataGrid', DxDataGrid);
