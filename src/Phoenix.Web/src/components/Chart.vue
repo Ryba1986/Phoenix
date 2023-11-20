@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { LegendClickEvent } from 'devextreme/viz/chart';
-import { chartPaletteName, dateTimeFormat } from '../config';
+import { chartPaletteName, dateMonthDayTimeFormat } from '../config';
 import { toDateTimeString } from '../helpers/dateHelper';
 import { PlcChartDtoBase } from '../models/api/base/dto/plcChartDtoBase';
 
@@ -61,7 +61,7 @@ function legendClick(e: LegendClickEvent): void {
       <DxChartAnimation :enabled="false" />
       <DxChartArgumentAxis :aggregationGroupWidth="2" argumentType="datetime">
          <DxChartLabel>
-            <DxChartFormat :type="dateTimeFormat" />
+            <DxChartFormat :type="dateMonthDayTimeFormat" />
          </DxChartLabel>
       </DxChartArgumentAxis>
       <DxChartCommonAxisSettings>
@@ -73,7 +73,7 @@ function legendClick(e: LegendClickEvent): void {
       <DxChartLegend horizontal-alignment="center" vertical-alignment="bottom" />
       <DxChartLoadingIndicator :enabled="true" />
       <slot name="series" />
-      <DxChartSize :height="200" />
+      <DxChartSize :height="350" />
       <DxChartTooltip :customize-tooltip="customizeTooltip" :enabled="true" :shared="true">
          <DxChartFont :size="13" :weight="600" />
       </DxChartTooltip>
