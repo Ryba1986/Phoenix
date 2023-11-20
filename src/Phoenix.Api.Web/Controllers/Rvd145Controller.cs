@@ -16,7 +16,7 @@ namespace Phoenix.Api.Web.Controllers
 
       [Authorization(Permission.Plc, AccessLevel.Read)]
       [HttpGet]
-      public async Task<IActionResult> GetRvd145ChartDay([FromQuery] GetRvd145ChartDayQuery request)
+      public async Task<IActionResult> GetRvd145Chart([FromQuery] GetRvd145ChartQuery request)
       {
          return await HandleAsync(request);
       }

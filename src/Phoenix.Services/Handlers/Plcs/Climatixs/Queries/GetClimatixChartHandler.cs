@@ -11,13 +11,13 @@ using Phoenix.Services.Repositories;
 
 namespace Phoenix.Services.Handlers.Plcs.Climatixs.Queries
 {
-   internal sealed class GetClimatixChartDayHandler : HandlerBase, IRequestHandler<GetClimatixChartDayQuery, IReadOnlyCollection<ClimatixChartDto>>
+   internal sealed class GetClimatixChartHandler : HandlerBase, IRequestHandler<GetClimatixChartQuery, IReadOnlyCollection<ClimatixChartDto>>
    {
-      public GetClimatixChartDayHandler(UnitOfWork uow) : base(uow)
+      public GetClimatixChartHandler(UnitOfWork uow) : base(uow)
       {
       }
 
-      public Task<IReadOnlyCollection<ClimatixChartDto>> Handle(GetClimatixChartDayQuery request, CancellationToken cancellationToken)
+      public Task<IReadOnlyCollection<ClimatixChartDto>> Handle(GetClimatixChartQuery request, CancellationToken cancellationToken)
       {
          return PlcHandlerHelper.GetPlcChartAsync(_uow.Climatix, request, x => x.ToClimatixChartDto(), cancellationToken);
       }

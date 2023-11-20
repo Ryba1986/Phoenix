@@ -16,7 +16,7 @@ namespace Phoenix.Api.Web.Controllers
 
       [Authorization(Permission.Plc, AccessLevel.Read)]
       [HttpGet]
-      public async Task<IActionResult> GetKamstrupChartDay([FromQuery] GetKamstrupChartDayQuery request)
+      public async Task<IActionResult> GetKamstrupChart([FromQuery] GetKamstrupChartQuery request)
       {
          return await HandleAsync(request);
       }

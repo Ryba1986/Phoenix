@@ -11,13 +11,13 @@ using Phoenix.Services.Repositories;
 
 namespace Phoenix.Services.Handlers.Plcs.Meters.Queries
 {
-   internal sealed class GetKamstrupChartDayHandler : HandlerBase, IRequestHandler<GetKamstrupChartDayQuery, IReadOnlyCollection<KamstrupChartDto>>
+   internal sealed class GetKamstrupChartHandler : HandlerBase, IRequestHandler<GetKamstrupChartQuery, IReadOnlyCollection<KamstrupChartDto>>
    {
-      public GetKamstrupChartDayHandler(UnitOfWork uow) : base(uow)
+      public GetKamstrupChartHandler(UnitOfWork uow) : base(uow)
       {
       }
 
-      public Task<IReadOnlyCollection<KamstrupChartDto>> Handle(GetKamstrupChartDayQuery request, CancellationToken cancellationToken)
+      public Task<IReadOnlyCollection<KamstrupChartDto>> Handle(GetKamstrupChartQuery request, CancellationToken cancellationToken)
       {
          return PlcHandlerHelper.GetPlcChartAsync(_uow.Kamstrup, request, x => x.ToKamstrupChartDto(), cancellationToken);
       }

@@ -5,7 +5,7 @@ using Phoenix.Models.Plcs.Climatixs.Dto;
 
 namespace Phoenix.Models.Plcs.Climatixs.Queries
 {
-   public sealed class GetClimatixChartDayQuery : GetPlcChartQueryBase, IRequest<IReadOnlyCollection<ClimatixChartDto>>
+   public sealed class GetClimatixChartQuery : GetPlcChartQueryBase, IRequest<IReadOnlyCollection<ClimatixChartDto>>
    {
    }
 }
