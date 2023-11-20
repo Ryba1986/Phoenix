@@ -68,14 +68,16 @@ namespace Phoenix.Services.Helpers
          return Result.Success();
       }
 
-      public static async Task<IReadOnlyCollection<R>> GetPlcChartAsync<S, R>(DbSet<S> plcs, int deviceId, DateTime startDate, DateTime endDate, Expression<Func<S, R>> selector, CancellationToken cancellationToken) where S : PlcBase where R : PlcChartDtoBase
+      public static async Task<IReadOnlyCollection<R>> GetPlcChartAsync<S, R>(DbSet<S> plcs, GetPlcChartQueryBase request, Expression<Func<S, R>> selector, CancellationToken cancellationToken) where S : PlcBase where R : PlcChartDtoBase
       {
+         DateTime startDate = request.Date.ToDateTime(TimeOnly.MinValue);
+
          return await plcs
             .AsNoTracking()
             .Where(x =>
                x.Date >= startDate &&
-               x.Date < endDate &&
-               x.DeviceId == deviceId
+               x.Date < startDate.AddDays(1) &&
+               x.DeviceId == request.DeviceId
             )
             .Select(selector)
             .ToArrayAsync(cancellationToken);

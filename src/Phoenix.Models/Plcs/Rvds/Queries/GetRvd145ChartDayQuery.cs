@@ -5,7 +5,7 @@ using Phoenix.Models.Plcs.Rvds.Dto;
 
 namespace Phoenix.Models.Plcs.Rvds.Queries
 {
-   public sealed class GetRvd145ChartDayQuery : GetPlcChartDayQueryBase, IRequest<IReadOnlyCollection<Rvd145ChartDto>>
+   public sealed class GetRvd145ChartDayQuery : GetPlcChartQueryBase, IRequest<IReadOnlyCollection<Rvd145ChartDto>>
    {
    }
 }

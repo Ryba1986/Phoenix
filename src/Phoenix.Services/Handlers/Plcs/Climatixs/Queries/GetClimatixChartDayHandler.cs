@@ -19,7 +19,7 @@ namespace Phoenix.Services.Handlers.Plcs.Climatixs.Queries
 
       public Task<IReadOnlyCollection<ClimatixChartDto>> Handle(GetClimatixChartDayQuery request, CancellationToken cancellationToken)
       {
-         return PlcHandlerHelper.GetPlcChartAsync(_uow.Climatix, request.DeviceId, request.EndDate.AddDays(-1), request.EndDate, x => x.ToClimatixChartDto(), cancellationToken);
+         return PlcHandlerHelper.GetPlcChartAsync(_uow.Climatix, request, x => x.ToClimatixChartDto(), cancellationToken);
       }
    }
 }
