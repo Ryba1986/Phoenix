@@ -11,13 +11,13 @@
    "dependencies": {
       "@popperjs/core": "^2.11.8",
       "bootstrap": "^5.3.2",
-      "date-fns": "^2.30.0",
+      "date-fns": "^3.0.5",
       "devextreme": "23.1-stable",
       "devextreme-vue": "23.1-stable",
       "jwt-decode": "^4.0.0",
       "linq-to-typescript": "^11.0.0",
       "pinia": "^2.1.7",
-      "vue": "^3.3.12",
+      "vue": "^3.3.13",
       "vue-i18n": "^9.8.0",
       "vue-router": "^4.2.5"
    },
