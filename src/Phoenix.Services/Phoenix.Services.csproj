@@ -23,7 +23,7 @@
 
    <ItemGroup>
       <PackageReference Include="Autofac" Version="7.1.0" />
-      <PackageReference Include="EPPlus" Version="7.0.4" />
+      <PackageReference Include="EPPlus" Version="7.0.5" />
       <PackageReference Include="MediatR" Version="12.2.0" />
       <PackageReference Include="MediatR.Extensions.Autofac.DependencyInjection" Version="11.3.0" />
       <PackageReference Include="Npgsql" Version="8.0.1" />
