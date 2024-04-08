@@ -40,7 +40,7 @@
       <PackageReference Include="Microsoft.Extensions.Hosting.Systemd" Version="8.0.0" />
       <PackageReference Include="NModbus" Version="3.0.81" />
       <PackageReference Include="NModbus.Serial" Version="3.0.81" />
-      <PackageReference Include="RestSharp" Version="110.2.1-alpha.0.16" />
+      <PackageReference Include="RestSharp" Version="110.2.1-alpha.0.20" />
       <PackageReference Include="System.IO.Ports" Version="8.0.0" />
    </ItemGroup>
 
