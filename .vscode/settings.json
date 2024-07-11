@@ -16,5 +16,6 @@
       "**/package-lock.json": true,
       "**/yarn.lock": true,
       "**/PhoenixClientDb*.db": true
-   }
+   },
+   "gitlens.telemetry.enabled": false
 }
