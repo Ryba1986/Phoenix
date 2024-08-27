@@ -28,7 +28,7 @@
       <PackageReference Include="MediatR.Extensions.Autofac.DependencyInjection" Version="12.1.0" />
       <PackageReference Include="Npgsql" Version="8.0.3" />
       <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="8.0.4" />
-      <PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="8.0.1" />
+      <PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="8.0.2" />
    </ItemGroup>
 
    <ItemGroup>
