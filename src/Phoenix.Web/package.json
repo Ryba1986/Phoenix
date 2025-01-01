@@ -18,7 +18,7 @@
       "linq-to-typescript": "^11.1.0",
       "pinia": "^2.1.7",
       "vue": "^3.4.31",
-      "vue-i18n": "^10.0.3",
+      "vue-i18n": "^11.0.1",
       "vue-router": "^4.4.0"
    },
    "devDependencies": {
