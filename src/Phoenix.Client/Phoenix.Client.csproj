@@ -38,7 +38,7 @@
       <PackageReference Include="MediatR" Version="12.4.1" />
       <PackageReference Include="Microsoft.Extensions.Configuration.Binder" Version="9.0.2" />
       <PackageReference Include="MediatR.Extensions.Autofac.DependencyInjection" Version="12.2.0" />
-      <PackageReference Include="Microsoft.Extensions.Hosting.Systemd" Version="9.0.1" />
+      <PackageReference Include="Microsoft.Extensions.Hosting.Systemd" Version="9.0.2" />
       <PackageReference Include="NModbus" Version="3.0.81" />
       <PackageReference Include="NModbus.Serial" Version="3.0.81" />
       <PackageReference Include="RestSharp" Version="112.1.0" />
