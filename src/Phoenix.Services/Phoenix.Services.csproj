@@ -22,13 +22,13 @@
    </PropertyGroup>
 
    <ItemGroup>
-      <PackageReference Include="Autofac" Version="8.2.1" />
-      <PackageReference Include="EPPlus" Version="8.0.1" />
-      <PackageReference Include="MediatR" Version="12.4.1" />
-      <PackageReference Include="MediatR.Extensions.Autofac.DependencyInjection" Version="12.2.0" />
+      <PackageReference Include="Autofac" Version="8.3.0" />
+      <PackageReference Include="EPPlus" Version="8.0.8" />
+      <PackageReference Include="MediatR" Version="13.0.0" />
+      <PackageReference Include="MediatR.Extensions.Autofac.DependencyInjection" Version="13.0.0" />
       <PackageReference Include="Npgsql" Version="9.0.3" />
       <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="9.0.4" />
-      <PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="8.9.0" />
+      <PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="8.13.0" />
    </ItemGroup>
 
    <ItemGroup>
